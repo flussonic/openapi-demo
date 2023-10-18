@@ -1,0 +1,172 @@
+get:
+  operationId: config_get
+  summary: Get server config
+  description: |
+    Method allows to fetch global server configuration and current runtime status.
+  parameters:
+  - name: Accept
+    description: |
+      Ask for `text/plain` or 'application/openmetrics-text' to get response with appropriate format.
+      By default it will be `application/json`.
+    in: header
+    schema:
+      type: string
+  - name: full
+    description: Whether to return full configuration.
+    in: query
+    schema:
+      type: boolean
+      default: false
+  - name: format
+    description: This parameter is used instead of the Accept header to select of non-JSON response content format.
+    in: query
+    required: false
+    schema:
+      type: string
+      oneOf:
+        - title: Openmetrics
+          const: openmetrics
+          description: The openmetrics-text content format will be used in response.
+      example: openmetrics
+  responses:
+    '200':
+      description: server config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/server_config'
+        text/plain:
+          schema:
+            type: string
+        application/openmetrics-text:
+          schema:
+            type: string
+            description: |
+              Responses content format used for Prometheus application.
+              Additional information about it can be found at:
+              - https://github.com/Prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md#openmetrics-text-format
+              - https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md
+            examples:
+              default:
+                summary: 'General example'
+                description: The example describes the rule how the response string forms. 
+                value: 'metric{label="value"} VALUE'
+              online streams:
+                value: 'server_online_streams{server_id="123e4567-e89b-12d3-a456-426614174000"} 420'
+              usage:
+                value: 'partition_usage{server_id="123e4567-e89b-12d3-a456-426614174000",disk="some_disk_path"} 10'
+    '400':
+      # FIXME: change this to error_response #23493
+      description: Invalid config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/config_error_status'
+  tags:
+  - config
+put:
+  operationId: config_save
+  summary: Save server config
+  description: |
+    Create or update global server configuration.
+  requestBody:
+    description: Partial or full server configuration
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/server_config'
+      text/plain:
+        schema:
+          type: string
+  responses:
+    '200':
+      description: Updated config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/server_config'
+    '400':
+      description: Invalid config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/config_error_status'
+  tags:
+  - config
+post:
+  operationId: config_validate
+  summary: Validate config
+  description: |
+    Just parse and validate config, nothing is saved.
+
+    Provide JSON structure or plain text.
+
+    Take a look at this example:
+    ```
+    curl -d 'http 80; stream mystream { input ""; }' \
+      -H 'Content-Type: text/plain' \
+      -sS http://login:pass@localhost:8080/streamer/api/v3/config | jq
+    {
+      "col": 34,
+      "config": {
+        "http": [
+          "80"
+        ],
+        "streams": [
+          {
+            "inputs": [
+              {
+                "url": ""
+              }
+            ],
+            "name": "mystream"
+          }
+        ]
+      },
+      "detail": "",
+      "error": "bad_url",
+      "line": 1,
+      "path": [
+        "streams",
+        0,
+        "inputs",
+        0,
+        "url",
+        "input_url"
+      ]
+    }
+    ```
+
+    You can see that it is possible to fix error on column 34 where bad, empty url was saved.
+
+  requestBody:
+    description: Partial or full server configuration
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/server_config'
+      text/plain:
+        schema:
+          type: string
+        example: |
+          http 80;
+
+          stream mystream {
+            input udp://239.0.0.1:1234;
+            transcoder vb=2048k ab=64k;
+          }
+  responses:
+    '200':
+      description: Updated config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/server_config'
+    '400':
+      description: Invalid config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/config_error_status'
+  tags:
+  - config

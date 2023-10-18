@@ -1,0 +1,25 @@
+get:
+  operationId: event_sinks_list
+  summary: List event sinks configs
+  x-api-deny:
+  - watcher-core
+  description: |
+    This method allows to get the list of all event sinks (former `notify`) configured in Flussonic.
+
+    Each event sink is an instruction for Flussonic to send events to some target. 
+    In particular, you can configure sending events to an event handler or writing them to a log file.
+
+    Event sink has its unique name just for management purposes,
+    event filtering instructions and target for sending events.
+  externalDocs:
+    description: Find more information here.
+    url: https://flussonic.com/doc/api/events-api/
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/event_sinks_list'
+      description: List of event sinks
+  tags:
+  - events

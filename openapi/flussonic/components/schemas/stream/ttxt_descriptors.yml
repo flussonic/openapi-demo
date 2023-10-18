@@ -1,0 +1,29 @@
+properties:
+  page:
+    # FIXME: for refactoring
+    description: |
+      Page number of the teletext received from an SDI card.
+      It is defined according to ETS 300 706 teletext specification.
+
+      The information about the pages is received from the stream provider.
+    type: integer
+    x-primary-key: true
+    example: 100
+  lang:
+    description: The language code of the teletext.
+    anyOf:
+    - $ref: '../../schemas.yml#/language_value'
+  type:
+    # FIXME: for refactoring
+    description: Teletext page type defined according to the Specification for Service Information (SI) in DVB systems, 6.2.32 Teletext descriptor in EN 300 468 Digital Video Broadcasting (DVB).
+    enum:
+    - initial
+    - subtitle
+    - impaired
+    type: string
+    example: initial
+required:
+- page
+- lang
+- type
+type: object

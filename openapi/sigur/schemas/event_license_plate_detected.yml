@@ -1,0 +1,26 @@
+type: object
+properties:
+  type:
+    type: string
+    const: '9183e0da-8ab7-4d86-a6d7-5745cb514032'
+    description: |
+      Событие распознавания гос номера
+  channelId:
+    type: string
+    example: '0ecc767e-e36b-4486-ad9d-13cad1f256e6'
+    description: |
+      ID канала на стороне СОТ
+  number:
+    type: string
+    example: 'A123AA12'
+    description: |
+      ГРЗ (государственный регистрационный знак)
+  direction:
+    nullable: true
+    description: |
+      Направление вертикального движения автомобиля в кадре
+    oneOf:
+    - const: up
+      title: Вверх
+    - const: down
+      title: Вниз

@@ -1,0 +1,36 @@
+post:
+  operationId: sessions_reauth
+  summary: Invalidate auth backend response cache for sessions of specified stream
+  description: |
+    Flussonic immediately re-call auth-backend and check if session is still authorized.
+    This will be done for all open sessions.
+  parameters:
+  - name: name
+    in: query
+    description: Media name
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      description: Stream sessions have been successfully marked for reauth
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/collection_response'
+          example:
+            estimated_count: 42
+    '404':
+      description: Stream is not found by the specified name.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          example:
+            errors:
+              - code: stream_not_found
+                status: '404'
+                title: Stream not found
+  tags:
+  - session

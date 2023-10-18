@@ -1,0 +1,18 @@
+post:
+  operationId: chassis_coder_boot
+  description: Turn on a specific coder module.
+  summary: Turn on coder module
+  parameters:
+  - description: coder number
+    in: path
+    name: coder
+    required: true
+    schema:
+      example: 1
+      type: integer
+    style: simple
+  responses:
+    '204':
+      description: Turned on
+  tags:
+  - chassis

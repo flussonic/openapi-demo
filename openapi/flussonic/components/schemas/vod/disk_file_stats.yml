@@ -1,0 +1,38 @@
+type: object
+properties:
+  worker_count:
+    description: Number of worker threads on the server executing the task of playing the file.
+    type: integer
+    nullable: true
+    example: 1
+  client_count:
+    description: Number of clients playing the file.
+    type: integer
+    format: client_count
+    nullable: true
+    examples:
+      default:
+        value: 2
+      bunny1:
+        value: 1
+      bunny2:
+        value: 10
+      bunny3:
+        value: 5
+  bytes_in:
+    description: Number of bytes read from the disk.
+    type: integer
+    format: bytes
+    nullable: true
+    example: 1700923231
+  bytes_out:
+    description: Number of bytes downloaded form the disk.
+    type: integer
+    format: bytes
+    nullable: true
+    example: 1700923231
+  media_info:
+    description: Technical information about the output media content.
+    allOf:
+    - $ref: '../../schemas.yml#/media_info'
+    nullable: true

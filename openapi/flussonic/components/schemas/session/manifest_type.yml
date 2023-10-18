@@ -1,0 +1,20 @@
+type: string
+oneOf:
+  - title: index
+    description: Simple live stream or file playlist
+    const: index
+  - title: archive
+    description: DVR playlist
+    const: archive
+  - title: event
+    description: Event playlist
+    const: event
+  - title: rewind
+    description: Playlist with a wide sliding window.
+    const: rewind
+  - title: timeshift_abs
+    description: DVR playlist using absolute timeshift
+    const: timeshiftAbs
+  - title: timeshift_rel
+    description: DVR playlist using relative timeshift
+    const: timeshiftRel

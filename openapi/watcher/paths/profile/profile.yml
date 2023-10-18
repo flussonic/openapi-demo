@@ -1,0 +1,38 @@
+get:
+  operationId: profile_get
+  summary: Get profile info
+  description: |
+    Get profile info.
+  responses:
+    '200':
+      description: |
+        Profile info.
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas.yml#/profile'
+  tags:
+  - profile
+
+put:
+  operationId: profile_save
+  summary: Update profile info
+  description: |
+    Update profile info.
+  requestBody:
+    description: |
+      Profile params.
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas.yml#/profile'
+  responses:
+    '200':
+      description: |
+        Profile info was updated.
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas.yml#/profile'
+  tags:
+  - profile

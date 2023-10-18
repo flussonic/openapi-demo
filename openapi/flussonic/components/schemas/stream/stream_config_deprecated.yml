@@ -1,0 +1,109 @@
+type: object
+properties:
+  aac_ab:
+    type: integer
+    description: Bitrate of the AAC audio track.
+    x-scope:
+      - flussonic
+  output_audio:
+    allOf:
+    - $ref: '../../schemas.yml#/output_audio'
+    description: Audio transcoding options.
+    x-scope:
+      - flussonic
+
+# WEBRTC fields
+  prefer_codec:
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_prefer_codec'
+    description: Preferred codec for WebRTC.
+    x-scope:
+      - flussonic
+  transport:
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_transport'
+    description: Transport protocol for WebRTC.
+    x-scope:
+      - flussonic
+  max_bitrate:
+    type: integer
+    format: speed
+    description: Maximum bitrate for WebRTC.
+    x-scope:
+      - flussonic
+  min_bitrate:
+    type: integer
+    description: Minimum bitrate for WebRTC.
+    x-scope:
+      - flussonic
+  frames_timeout:
+    type: integer
+    description: |
+      Specifies the period of time, in seconds, 
+      for which Flussonic Media Server waits for new frames to come from the data source 
+      before it generates the `frames_timed_out` event that informs you that the source might soon be lost. 
+      This period of time must be smaller than `source_timeout`. 
+      If frames come again from this source, before `source_timeout` has passed, Flussonic issues the `frames_restored` event.
+    x-scope:
+      - flussonic
+  abr_stepup:
+    type: integer
+    description: |
+      Increment step for raising the bitrate to the maximum, in percent. The default step is 30%. 
+      If the loss is less than `abr_loss_lower`, 
+      Flussonic makes the publisher to step up from the current bitrate to the maximum one with the rate of `abr_stepup percent`.
+    x-scope:
+      - flussonic
+  abr_correction:
+    type: integer
+    description: |
+      The correction between the target bitrate (Receiver Estimated Maximum Bitrate, calculated in Flussonic) and browser bitrate, in kbit/s.
+      Flussonic sends the target bitrate to the browser from which the publication is carried out so that the browser adjusts the bitrate of the publication by this value.
+      The default value is 300 kbit/s.
+    x-scope:
+      - flussonic
+  abr_loss_lower:
+    type: number
+    description: |
+      The lower limit of packet loss. When it is reached, Flussonic raises the bitrate. 
+      That is, if packet loss is less than `abr_loss_lower`, Flussonic makes the publisher to step up from the current bitrate to the maximum one with the rate of `abr_stepup` percent.
+    x-scope:
+      - flussonic
+  abr_loss_upper:
+    type: number
+    description: |
+      The upper limit of packet loss. When it is reached, Flussonic reduces the bitrate. 
+      That is, if packet loss is greater than `abr_loss_upper`, Flussonic makes the publisher to reduce the current bitrate in steps with the maximum rate of `abr_stepdown` percent.
+    x-scope:
+      - flussonic
+  abr_stepdown:
+    type: number
+    description: |
+      A step of reducing the bitrate to the minimum. 
+      If packet losses are greater than `abr_loss_upper`, Flussonic makes the publisher to reduce the current bitrate in steps with the maximum rate of `abr_stepdown` percent.
+    x-scope:
+      - flussonic
+  abr_mode:
+    type: integer
+    description: |
+      The algorithm for determining the need to change the bitrate of the published stream and for calculating the target bitrate. 
+      Two options are possible:
+
+      * `abr_mode=0` - This mode takes into account the packet losses, target bitrate, browser bitrate and the number of auto-adjustment cycles.
+      * `abr_mode=1` - This mode considers only packet losses and target bitrate.
+    x-scope:
+      - flussonic
+  abr_debug:
+    type: integer
+    description: Whether adaptive bitrate process is logged.
+    x-scope:
+      - flussonic
+  abr_cycles:
+    type: integer
+    description: |
+      The number of cycles of bitrate auto-adjustment.
+      After the specified number of auto-adjustment cycles passes, Flussonic considers the bitrate to be optimal, and it is no longer analyzed. 
+      By default, `abr_cycles`=5. 
+      If `abr_cycles`=0, the adjustment process takes place all the time while the publication lasts.
+    x-scope:
+      - flussonic

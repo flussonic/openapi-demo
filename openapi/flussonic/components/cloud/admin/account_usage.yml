@@ -1,0 +1,32 @@
+type: object
+properties:
+  datetime:
+    type: integer
+    format: unix-time
+    example: 1662386000
+    description: Datetime on which the usage is grouped by interval
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project id. Present only if `group_by` set to `project` or `stream`.
+  media:
+    type: string
+    example: 'abc-xyz'
+    description: Stream name. Present only if `group_by` set to `stream`.
+  title:
+    type: string
+    nullable: true
+    example: "Hockey channel"
+    description: |
+      Last known user provided title of the stream.
+
+      User provided title of the stream. Present only if `group_by` set to `stream`.
+  resources:
+    description: Resources in this report
+    allOf:
+    - $ref: '../../schemas.yml#/cloud_resources'
+  subtotal:
+    type: integer
+    example: 10000
+    description: Subtotal amount for current interval

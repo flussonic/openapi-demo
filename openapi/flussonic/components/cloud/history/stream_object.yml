@@ -1,0 +1,22 @@
+type: object
+required:
+- type
+- name
+- title
+properties:
+  type:
+    type: string
+    description: Object type
+    format: object_type
+    const: stream
+  name:
+    type: string
+    format: media_name
+    description: Globally unique stream name.
+    x-primary-key: true
+    example: "hockey1"
+  title:
+    type: string
+    nullable: true
+    example: "Hockey channel"
+    description: Last known user provided title of the stream.

@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    <h2>Intro</h2>
+
+    This API describes how Vision videoanalytics server fetches runtime stream configuration.
+
+  title: Vision Configuration Backend API
+  version: 23.05.0
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /streams:
+    $ref: './paths/config_external_streams.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Your local installation.
+  url: http://localhost:8080/streamer/api/v3
+tags:
+- name: stream

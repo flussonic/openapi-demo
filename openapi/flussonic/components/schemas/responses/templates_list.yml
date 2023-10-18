@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      templates:
+        items:
+          $ref: '../../schemas.yml#/template_config'
+        type: array
+        description: List of templates.

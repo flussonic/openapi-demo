@@ -1,0 +1,17 @@
+anyOf:
+- oneOf:
+  - title: Enabled
+    const: true
+    description: Deinterlacing enabled.
+  - title: Disabled
+    const: false
+    description: Deinterlacing disabled.
+  type: boolean
+- oneOf:
+  - title: Adaptive
+    const: adaptive
+    description: Use adaptive deinterlacing method.
+  - title: CUDA yadif
+    const: yadif
+    description: Use CUDA yadif deinterlacing method.
+  type: string

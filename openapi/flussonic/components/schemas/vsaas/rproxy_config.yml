@@ -1,0 +1,18 @@
+type: object
+properties:
+  streampoint_key:
+    description: The streamer ID key.
+    type: string
+    nullable: true
+  forward_ports:
+    description: Configuration of port handlers.
+    type: object
+    additionalProperties:
+      $ref: '../../schemas.yml#/forward_ports_config'
+    nullable: true
+    x-key-type: network_port
+  endpoint_auth:
+    description: Path to authorization backend on the endpoint to check if the Agents are allowed to connect.
+    type: string
+    nullable: true
+  

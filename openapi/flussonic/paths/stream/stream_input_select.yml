@@ -1,0 +1,50 @@
+post:
+  operationId: stream_input_select
+  summary: Select the stream input
+  x-private: true
+  description: Select the stream input by its index as current.
+  parameters:
+  - description: Stream name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - description: Index of the input.
+    in: path
+    name: index
+    required: true
+    schema:
+      example: 1
+      type: integer
+      minimum: 0
+    style: simple
+  responses:
+    '204':
+      description: Selected
+    '404':
+      description: Stream is not found by the specified name.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          example:
+            errors:
+              - code: stream_not_found
+                status: '404'
+                title: Stream not found
+    '400':
+      description: Input is not found by the specified index.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          example:
+            errors:
+              - code: input_not_found
+                status: '400'
+                title: Input not found
+  tags:
+  - stream

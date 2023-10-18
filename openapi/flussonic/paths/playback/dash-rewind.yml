@@ -1,0 +1,62 @@
+get:
+  operationId: dash_rewind_manifest
+  summary: DASH rewind manifest
+  description: |
+    Nice combination of live and DVR DASH playlists.
+
+    This request gives a playlist with a wide sliding window that allows you to rewind DASH streams and pause them for many hours.
+
+    For example, the playlist "rewind-7200.mpd" allows your clients to pause the stream for up to 2 hours or rewind to the start of a TV show without using catchup URLs.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: ago
+    in: path
+    description: |
+      DVR window size in seconds.
+      It is a duration of a DASH manifest in seconds, so your clients will be able to pause the stream up to this period or rewind it, for example, to the start of a TV show.
+    required: true
+    schema:
+      type: integer
+      example: 7200
+  - name: thumbnails
+    in: query
+    description: |
+      If this parameter is specified, the thumbnail playlist is added to the primary playlist.
+
+      Example of the thumbnail playlist:
+      ```
+       <AdaptationSet id="3" mimeType="image/jpeg" contentType="image">
+               <SegmentTemplate media="$RepresentationID$/dvr-1648098000-$Time$.m4v.jpg" duration="72"></SegmentTemplate>
+               <Representation bandwidth="10000" id="images-320x240" width="320" height="240">
+                  <EssentialProperty schemeIdUri="http://dashif.org/guidelines/thumbnail_tile" value="1x1"/>
+               </Representation>
+        </AdaptationSet>
+      ```
+
+      This value defines how many thumbnail links will be added to the thumbnail playlist to cover the
+      requested duration of the DVR window.
+      The player will add the thumbnail links to the progress bar at regular intervals.
+      The duration of the interval between thumbnails is the whole duration of the DVR window divided by this value.
+
+      NOTE: This option requires the parameters `thumbnails enabled=ondemand` and `size` included in the stream settings. 
+      For example, `thumbnails enabled=ondemand size=320x240;`.
+    schema:
+      type: integer
+      example: 100
+    required: false
+  responses:
+    '200':
+      content:
+        application/dash+xml:
+          schema:
+            type: string
+      description: DASH rewind manifest
+  tags:
+    - dash
+

@@ -1,0 +1,24 @@
+type: object
+properties:
+  utc:
+    type: integer
+    format: seconds
+    deprecated: true
+    x-delete-at: 23.10
+    description: |
+      The time of the event registration on the server. Should be replaced with utc_ms.
+    example: 1685450378
+  time:
+    type: string
+    deprecated: true
+    x-delete-at: 23.10
+    description: The time of the event registration on the server.
+    example: '2023-05-30T12:39:45.439462Z'
+  motion_id:
+    type: string
+    description: Uniq motion id.
+    example: 'b639b21f-3926-4a9f-812e-4eb57e283d59'
+  motion_data:
+    type: string
+    description: Non-structured data received from source.
+    example: '#{<<\"Message\">> => #{<<\"Topic\">> => <<\"tns1:VideoSource/MotionAlarm\">>}]'

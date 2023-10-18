@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      media_info_list:
+        description: The list of `media_info` for each program transmitted via the DVB card.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/media_info'

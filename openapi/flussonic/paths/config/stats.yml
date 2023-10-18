@@ -1,0 +1,14 @@
+get:
+  operationId: config_stats_get
+  summary: Get server stats
+  description: |
+    Method allows to fetch current runtime status.
+  responses:
+    '200':
+      description: server stats
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/server_stats'
+  tags:
+  - config

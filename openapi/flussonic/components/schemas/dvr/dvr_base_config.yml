@@ -1,0 +1,165 @@
+type: object
+properties:
+  storage_limit:
+    description: |
+      Maximum disk consumption in bytes. When this limit is reached, 
+      the oldest segment of the recording will be overridden by later data.
+
+      This option takes in consideration contigious recording and locked episodes.
+    type: integer
+    format: bytes
+    example: 400000000000
+  disk_usage_limit:
+    description: |
+      Maximum disk consumption in percents. When this limit is reached, 
+      the oldest segment of the recording will be overridden by later data.
+
+      It important to understand that this is not a "per-stream" option, this option means
+      that cleaning of this stream will be triggered if overall disk usage reaches this number.
+
+      If you have all streams with configuration 98% and one stream with 95%, it will be permanently
+      empty.
+      
+    type: integer
+    format: percents
+    example: 98
+    x-scope:
+    - flussonic
+  expiration:
+    description: |
+      Archive depth - a period (in seconds) back from the current moment during which the 
+      contigious part of archive is stored. 
+      As time goes, the parts of the recording which are older than the archive depth are deleted.
+
+      If you have option `episodes_expiration` enabled, then some parts of DVR that are 
+      locked by episode signalling mechanism may be kept more than this `expiration` depth.
+    type: integer
+    format: seconds
+    examples:
+      default:
+        value: 604800
+  episodes_expiration:
+    description: |
+      Partial episodes storage depth in seconds. Period back from the current moment
+      during which episodes will be kept.
+    type: integer
+    format: seconds
+    examples:
+      default:
+        value: 6048000
+    x-scope:
+    - flussonic
+    - config-external
+    - central
+    - watcher-core
+    - watcher
+  episodes_url:
+    description: |
+      External URL that will be triggered for fetching episodes list.
+      Take a look at config_external API for method `external_episodes_list`
+    type: string
+    examples:
+      default:
+        value: "http://central-host.local/config-external/episodes"
+    x-api-deny:
+    - watcher-core
+    - watcher
+  dvr_replicate:
+    description: |
+      Whether DVR replication is used. Replication means that a DVR archive is stored on two (or more) Flussonic servers.
+      It can be used for reliability or for broadcasting with a time shift. More information can be found [here](https://flussonic.com/doc/digital-video-recording-dvr/dvr-replication/).
+    type: boolean
+    example: true
+    x-scope:
+    - flussonic
+  replication_speed:
+    x-private: true
+    description: |
+      Replication speed limitation. 
+      The secondary server can limit the total speed of replication in order not to interrupt the live broadcast or reduce its quality. 
+    type: integer
+    format: speed
+    x-scope:
+    - flussonic
+  replication_port:
+    description: |
+      Replication port. 
+      By default, replication is enabled on the port specified when configuring the M4F source. 
+      You can specify a separate port for replication.
+    allOf:
+    - $ref: '../../schemas.yml#/network_port'
+    example: 8002
+    x-scope:
+    - flussonic
+  no_index:
+    x-private: true
+    description: Don't generate a file with the list of streams and their depths.
+    type: boolean
+    x-scope:
+    - flussonic
+  schedule:
+    description: |
+      One or several time intervals for recording by schedule.
+      The beginning and the end of each interval are set in "hhmm" format (without leading zeros ) according to UTC standard. 
+      For example, `2330` is for 23:30, `800` - for 08:00. The interval can go over midnight, e.g. 22:00-1:30. In this case it is set as follows: `[2200,130]`.
+
+      Scheduled recording can be useful for the channels with part-time broadcasting. 
+      It allows to save disk space significantly.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvr_schedule_range'
+    type: array
+    example: [[800,1600],[2200,130]]
+    x-api-deny:
+    - watcher
+  dvr_offline:
+    description: | 
+      If this option is enabled, Flussonic detects DVR at the start of the stream,
+      but does not start recording immediately and waits for external API request.
+    type: boolean
+    x-scope:
+    - flussonic
+  locked_write:
+    x-private: true
+    description: |
+      Whether the DVR recording will be locked. 
+      Locking can be useful for the nPVR (Network Personal Video Recorder) service or just for keeping important recordings.
+      Locked recordings are not overridden when disk usage limitations (in bytes or percents) are reached. See also 'keep_locks'.
+
+      Use `episodes_url` instead of this option.
+    type: boolean
+    example: false
+    deprecated: true
+    x-delete-at: 23.12
+    x-api-deny:
+    - watcher-core
+    - watcher
+    - central
+  copy:
+    description: |
+      The URL of another storage to copy the blobs (hours of the archive) into. 
+      Copying is done when a blob is complete (i.e., once an hour), and therefore helps significantly reduce the number of network requests to a cloud storage.
+    type: string
+    format: dvr_url
+    example: 's3://token@minio.mycompany.com/dvr-bucket' 
+    x-scope:
+    - flussonic
+  keep_locks:
+    description: |
+      Whether the locked DVR recordings will be kept when disk usage limit is reached (in bytes or percents).
+
+      This option will be now always enabled, consider managing your free space.
+
+      Switch to `episodes_url` mechanism instead.
+    type: boolean
+    example: false
+    deprecated: true
+    x-delete-at: 23.11
+    x-scope:
+    - flussonic
+    x-api-deny:
+    - watcher-core
+    - watcher
+    - central
+  
+

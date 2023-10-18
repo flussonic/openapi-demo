@@ -1,0 +1,366 @@
+type: object
+properties:
+  name:
+    description: DVB card name.
+    type: string
+    format: dvb_card_name
+    x-primary-key: true
+    openmetrics_label: name
+    example: a16
+  hw:
+    description: Adapter card hardware type.
+    type: string
+    enum:
+    - dvb
+    - dektec_asi
+    - v4l
+    - record_input
+    # названия модуляторов
+    - resi
+    - tbs6014
+    nullable: true
+    example: dvb
+  system:
+    description: Adapter type. Different systems are supported besides DVB, as the configuring is similar.
+    type: string
+    enum:
+    - dvbs
+    - dvbs2
+    - dvbt
+    - dvbt2
+    - dvbca
+    - dvbcb
+    - dvbcc
+    - atsc
+    - isdbt
+    nullable: true
+
+  adapter:
+    description: Adapter number.
+    type: integer
+    nullable: true
+    example: 16
+  device:
+    description: Modulator number in adapter.
+    # номер модулятора в адаптере
+    type: integer
+    nullable: true
+  frontend:
+    description: Frontend number.
+    type: integer
+    nullable: true
+  frequency:
+    description: The carrier frequency of the transponder for this channel, in Hz.
+    type: integer
+    nullable: true
+    example: 11606
+  symbol_rate:
+    description: |
+      The symbol rate of the transponder, in symbols per second.
+      A symbol is a pulse in digital baseband transmission.
+    type: integer
+    nullable: true
+    example: 27500
+  int_freq:
+    description: Base frequency, in MHz.
+    type: integer
+    nullable: true
+  high_band:
+    description: Whether high frequency band is used. 
+    type: boolean
+    nullable: true
+  polarization:
+    description: |
+      Polarization of the transponder for this channel. 
+      The supported values are: 
+
+       * `v`- vertical linear polarization, 
+       * `h` - horizontal linear polarization, 
+       * `r` - right-hand circular polarization, 
+       * `l` - left-hand circular polarization.
+    type: string
+    enum:
+    - v
+    - h
+    - r
+    - l
+    nullable: true
+    example: v
+  hierarchy:
+    description: |
+      Constellation ratio for hierarchical transmission.
+    externalDocs: 
+      description: Find more information here.
+      url: https://dvb.org/wp-content/uploads/2019/12/a012_dvb-t_june_2015.pdf
+    type: string
+    enum:
+    - '1'
+    - '2'
+    - '4'
+    - none
+    - auto
+    nullable: true
+  transmission_mode:
+    description: DVB transmission mode.
+    type: string
+    enum:
+    - '1k'
+    - '2k'
+    - '8k'
+    - '16k'
+    - '32k'
+    - 'c1'
+    - 'c3780'
+    nullable: true
+  guard_interval:
+    description: |
+      The mode of inserting a guard interval - a padding separating transmissions so that they do not interfere with each other.
+    type: string
+    enum:
+    - '1_128'
+    - '1_32'
+    - '1_16'
+    - '1_8'
+    - '1_4'
+    - '19_128'
+    - '19_256'
+    - 'pn420'
+    - 'pn595'
+    - 'pn945'
+    nullable: true
+    example: '1_16'
+  pilot:
+    description: |
+      Enable, disable, or autodetect pilot tones.
+    type: string
+    enum:
+    - auto
+    - on
+    - off
+    nullable: true
+    example: auto
+  rolloff:
+    description: |
+      Rolloff factor, in %.
+      It is used to estimate bandwidth, together with symbol rate.
+    type: string
+    enum:
+    - '35'
+    - '25'
+    - '20'
+    nullable: true
+  bandwidth:
+    description: Bandwidth, in Hz.
+    type: integer
+    enum:
+    - 1712000
+    - 5000000
+    - 6000000
+    - 7000000
+    - 8000000
+    - 10000000
+    nullable: true
+    example: 6000000
+  code_rate_lp:
+    description: Low priority stream code rate.
+    allOf:
+    - $ref: '../../schemas.yml#/dvb_fec'
+    nullable: true
+  code_rate_hp:
+    description: High priority stream code rate.
+    allOf:
+    - $ref: '../../schemas.yml#/dvb_fec'
+    nullable: true
+  modulation:
+    description: DVB-C modulation method.
+    type: string
+    enum:
+    - auto
+    - qpsk
+    - qam16
+    - qam32
+    - qam64
+    - qam128
+    - qam256
+    - qam_auto
+    - psk8
+    - apsk16
+    - apsk32
+    - vsb8
+    - vsb16
+    - dqpsk
+    - qam4nr
+    nullable: true
+    example: auto
+  disabled:
+    description: Whether this DVB card is disabled.
+    type: boolean
+    nullable: true
+    example: false
+  comment:
+    description: Any text comment.
+    type: string
+    nullable: true
+  stats:
+    description: Statistic information about the captured signal.
+    allOf:
+    - $ref: '../../schemas.yml#/dvb_card_stats'
+    nullable: true
+  serial:
+    description: Serial number of the card, used for capturing from DekTec ASI cards.
+    type: integer
+    nullable: true
+  port:
+    description: Port number, used for capturing from DekTec ASI cards.
+    type: integer
+    nullable: true
+  asi_annex:
+    description: The EN 50083-9 Annex followed by the DVB card.
+    x-private: true
+    type: string
+    oneOf:
+    - title: Annex A
+      const: a
+      description: Synchronous Serial Interface (SSI).
+    - title: Annex B
+      const: b
+      description: Asynchronous Serial Interface (ASI).
+    - title: Annex C
+      const: c
+      description: SSI clock and data recovery.
+    nullable: true
+  asi_isdbt_segments:
+    description: The number of segments in a stream.
+    x-private: true
+    type: string
+    enum:
+    - '1'
+    - '3'
+    - '13'
+    nullable: true
+  asi_isdbt_subchannel:
+    description: |
+      Sub channel of the center segment of the spectrum, which implicitly specifies the sub-channels of the 1-segment streams in the signal. 
+      The valid range is 0 … 41.
+    x-private: true
+    type: integer
+    nullable: true
+  asi_dvb2_streamid:
+    description: Stream-id for the generated T2-MI stream. The valid range is 0 … 7.
+    x-private: true
+    type: integer
+    nullable: true
+  asi_diseqcpg:
+    description: The last byte of DiSEqC switch port command.
+    x-private: true
+    type: string
+    enum:
+    - f0
+    - f1
+    - f2
+    - f3
+    - f4
+    - f5
+    - f6
+    - f7
+    - f8
+    - f9
+    - fa
+    - fb
+    - fc
+    - fd
+    - fe
+    - ff
+    nullable: true
+  asi_polarity:
+    description: Inversion of the DVB-ASI signal.
+    x-private: true
+    type: string
+    oneOf:
+    - title: Auto
+      const: auto
+      description: Automatically detect and correct the polarity.
+    - title: Normal
+      const: normal
+      description: Do not invert the DVB-ASI signal.
+    - title: Invert
+      const: invert
+      description: Invert DVB-ASI signal.
+    nullable: true
+  asi_iqdem:
+    description: Modulation type.
+    x-private: true
+    type: string
+    enum:
+    - qam
+    - ofdm
+    nullable: true
+  asi_iqbandwidth:
+    description: Channel raster of the network.
+    x-private: true
+    type: integer
+    nullable: true
+  asi_iqsamplerate:
+    description: I/Q sample rate in Hz.
+    x-private: true
+    type: integer
+    nullable: true
+  record_input:
+    description: Configuration of DVB input recording as-is.
+    allOf:
+    - $ref: '../../schemas.yml#/debug_stream_spec'
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.12
+    x-alias: debug_stream
+  debug_stream:
+    x-private: true
+    description: Configuration of recording the stream sessions data. Recommended for debugging needs **only**.
+    allOf:
+    - $ref: '../../schemas.yml#/debug_stream_spec'
+  compensate_time_drift_ppm:
+    description: Max source's internal clock drift to compensate, rounding to six decimal places.
+    type: integer
+    nullable : true
+  plp_stream_id:
+    description: PLP stream selector. Used in DVB-T2.
+    type: integer
+    nullable : true
+
+  # параметры модулятора
+  attenuator:
+    description: |
+      Attenuation of the signal level. Takes values from 0 to 10.
+    type: integer
+    nullable: true
+  interleave:
+    description: |
+      Use interleaver.
+      The interlaver disperses sequence of bits in bit stream to minimize effect of burst errors during transmission.
+    type: integer
+    minimum: 0
+    maximum: 15
+    nullable: true
+  gain:
+    description: Adjust the output gain to the specified value in dB.
+    # (5~120)
+    type: integer
+    nullable: true
+  input_bitrate:
+    description: Input bitrate, in Mbps.
+    # Mbps
+    type: integer
+    nullable: true
+
+  video_device:
+    description: |
+      The video device to capture video from Stream Labs SDI/ASI cards.
+      It is actually a path to a device file created on the disk by Video4Linux.
+    type: string
+    nullable: true
+    example: '/dev/video0'
+
+
+required:
+  - name
+

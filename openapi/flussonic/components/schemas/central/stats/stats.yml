@@ -1,0 +1,30 @@
+type: object
+description: Cluster stats
+properties:
+  server_version:
+    description: Package version of the server. Might be simple a number of release like 21.11 or
+      longer if you have a rolling release installed.
+    type: string
+    format: server_version
+    openmetrics_label: version
+    example: '23.10'
+  uptime:
+    description: The server uptime.
+    type: integer
+    format: seconds
+    example: 4325502
+  started_at:
+    description: Boot time of this instance.
+    type: integer
+    format: utc
+    example: 1639337825
+  id:
+    description: Unique runtime ID of this instance. Updated with the restart.
+    type: string
+    format: uuid
+    example: '61893b15-75b2-4fcb-b4cf-ae1dd0858ea2'
+  cluster_stats:
+    allOf:
+     - $ref: '../../schemas.yml#/central_cluster_stats'
+    description: Central Cluster stats
+    

@@ -1,0 +1,19 @@
+type: object
+properties:
+  channels:
+    description: The number of audio channels.
+    nullable: true
+    type: integer
+    example: 2
+  sample_rate:
+    description: |
+      Sample rate, in hertz -
+      the number of samples per second taken from a continuous signal to make a discrete or digital signal.
+    nullable: true
+    type: integer
+    example: 8000
+  language:
+    description: Language value of the track, if applicable.
+    nullable: true
+    type: string
+    example: eng

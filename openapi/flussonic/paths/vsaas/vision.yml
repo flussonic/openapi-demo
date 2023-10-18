@@ -1,0 +1,41 @@
+get:
+  operationId: vision_get
+  description: Get the video analytics configuration.
+  summary: Get vision
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vision_config'
+      description: Returns vision config
+  tags:
+  - vsaas
+put:
+  operationId: vision_save
+  description: Save the video analytics configuration.
+  summary: Save vision
+  responses:
+    '200':
+      description: Updated vision config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vision_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - vsaas
+delete:
+  operationId: vision_delete
+  description: Delete the video analytics configuration.
+  summary: Delete vision
+  responses:
+    '204':
+      description: Deleted vision config
+  tags:
+  - vsaas

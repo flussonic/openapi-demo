@@ -1,0 +1,185 @@
+type: object
+properties:
+  config_version:
+    description: |
+      Current runtime version of config. We do not declare exact structure, but we promise
+      that it will be always comparable and increasing (if server has proper NTP configuration, of course).
+      Right now it is a tuple of server start time and incrementing version of config.
+    allOf:
+    - $ref: '../../schemas.yml#/config_version'
+    nullable: true
+    example: [1636709231,4]
+  next_version:
+    description: Notification about a newer version in the repository.
+    type: string
+    format: server_version
+    nullable: true
+    example: '22.01'
+  streamer_status:
+    description: |
+      *Flussonic* will always try to start even if there are severe errors that do not
+      allow functioning.
+
+      `starting` status means you should wait for some time (not more than
+      a minute).
+
+      `running` status means all configuration was loaded. However, the status does not provide
+      an information about your streams and the quality of provided service.
+
+      All other statuses mean there are some severe problems on the server
+      that cannot be repaired by Flussonic itself.
+    type: string
+    oneOf:
+    - title: Config is missing
+      const: no_config
+      description: The configuration file is not found at `/etc/flussonic/flussonic.conf`.
+    - title: Config is broken
+      const: broken_config
+      description: |
+        There are some errors in the config file saved at `/etc/flussonic/flussonic.conf`.
+        Try checking logs and `text_alerts` for details.
+    - title: License is failing
+      const: license_failure
+      description: The license cannot be activated. Please contact the support team.
+    - title: License is missing
+      const: no_license
+      description: The license file is not found at `/etc/flussonic/license.txt`.
+    - title: Starting
+      const: starting
+      description: The server is starting.
+    - title: Running
+      const: running
+      description: Normal operation mode.
+    nullable: true
+    example: 'running'
+  hostname:
+    description: Hostname of your server. Please, use FQDN, do not leave your Linux misconfigured.
+    type: string
+    nullable: true
+    example: 'openapi.flussonic.com'
+  license_txt:
+    description: The code of the license applied on the server.
+    type: string
+    nullable: true
+    example: 'uO8v12HJhNXVj5gM'
+  license_type:
+    description: The license type.
+    allOf:
+    - $ref: '../../schemas.yml#/license_type'
+    nullable: true
+  id:
+    description: Unique runtime ID of this instance. Updated with the restart.
+    type: string
+    format: uuid
+    nullable: true
+    example: '61893b15-75b2-4fcb-b4cf-ae1dd0858ea2'
+  vsaas:
+    description: Shows if Flussonic Watcher is enabled in the license.
+    type: boolean
+    nullable: true
+  vsaas_branding:
+    description: Shows if Watcher branding is enabled in the license.
+    type: boolean
+    nullable: true
+  vsaas_running:
+    description: Shows if Watcher is currently running.
+    type: boolean
+    nullable: true
+  rproxy:
+    description: Shows if rproxy is configured.
+    type: boolean
+    nullable: true
+  rproxy_running:
+    description: Shows if rproxy is running.
+    type: boolean
+    nullable: true
+  transcoder:
+    description: |
+      Shows if the server's CPU can be used for transcoding 
+      (i.e. if the `flussonic-transcoder` package is installed on the server). 
+    type: boolean
+    nullable: true
+  bandwidth_usage:
+    description: Outbound bandwidth usage (load balancing in `usage` mode is based on this value).
+    type: integer
+    format: percents
+    nullable: true
+    example: 67
+  total_bandwidth:
+    description: Total server bandwidth.
+    type: integer
+    format: speed
+    nullable: true
+    deprecated: true
+    x-notice: duplicate of config total_bandwidth
+    x-deleted-at: 22.03
+  cpu_usage:
+    description: CPU usage on the server.
+    type: integer
+    format: percents
+    nullable: true
+    openmetrics_metric: server_cpu_usage
+    x-metric-type: gauge
+    example: 48
+  memory_usage:
+    description: Memory usage on the server.
+    type: integer
+    format: percents
+    nullable: true
+    openmetrics_metric: server_memory_usage
+    x-metric-type: gauge
+    example: 27
+  scheduler_load:
+    description: Erlang scheduler load.
+    type: integer
+    format: percents
+    nullable: true
+    openmetrics_metric: server_scheduler_load
+    x-metric-type: gauge
+    example: 40
+  uptime:
+    description: The server uptime.
+    type: integer
+    format: seconds
+    nullable: true
+    example: 4325502
+  partitions:
+    description: The list of disk partitions on the server.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/partition_stats'
+    nullable: true
+  transcoder_devices:
+    description: Statistics on the devices used for transcoding.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transcoder_device_stats'
+    nullable: true
+  video_devices:
+    x-private: true
+    description: List of DVB/ASI/ATSC/ISDB/SDI cards.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/video_adapter_device_stats'
+    x-api-deny:
+    - watcher-core
+  text_alerts:
+    description: |
+      Human-readable format of errors and alerts that need to be fixed. 
+      Provided by some *Flussonic* subsystems.
+    additionalProperties:
+      type: string
+    type: object
+    nullable: true
+  config_error:
+    description: Information about errors in the config file.
+    allOf:
+    - $ref: '../../schemas.yml#/config_error_status'
+    nullable: true
+  is_chassis:
+    description: |
+      The flag shows if Flussonic runs on Flussonic Coder.
+    type: boolean

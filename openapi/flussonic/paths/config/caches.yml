@@ -1,0 +1,13 @@
+get:
+  description: Fetch all caches
+  operationId: caches_list
+  summary: List of caches
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/caches_list'
+      description: Response
+  tags:
+  - cache

@@ -1,0 +1,60 @@
+get:
+  x-private: true
+  operationId: dash_thumbnail_get
+  summary: DASH jpeg thumbnail 
+  description: |
+    DASH thumbnail URL that players use to get jpeg thumbnail. 
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: dimensions
+    in: path
+    description: |
+      Width and Height of the thumbnail in pixels separated by 'x' symbol.
+      
+      It is an area in which original frame will be resized using 'FIT' method.
+
+      If area size is bigger than original frame one then jpeg with original frame size will be returned.
+    required: true
+    schema:
+      type: string
+      example: '320x240'
+  - name: from
+    in: path
+    description: Start time of period in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: offset
+    in: path
+    description: |
+      Offset relative to the `from` parameter.
+
+      The thumbnail closest to `from` + `offset` will be returned
+    required: true
+    schema:
+      type: integer
+      example: 20
+  responses:
+    '200':
+      content:
+        image/jpeg:
+          schema:
+            type: string
+            format: binary
+      description: JPEG file closest to requested UTC moment
+    '403':
+      content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas.yml#/error_response'
+      description: JPEG ondemand is forbidden.
+  tags:
+    - dash
+    - image

@@ -1,0 +1,225 @@
+get:
+  operationId: auth_request
+  summary: Request to auth backend
+  description: |
+    This method describes what Flussonic sends to an authorization backend and what it awaits as a response.
+  parameters:
+  - name: name
+    description: |
+      Stream or VOD file name for this session.
+    in: query
+    schema:
+      type: string
+    required: true
+    style: form
+    example: 'fake'
+  - name: proto
+    description: |
+      Protocol for this session.
+    in: query
+    schema:
+      type: string
+    required: true
+    style: form
+    example: 'hls'
+  - name: ip
+    description: |
+      IP address of the media client who initiated this session.
+    in: query
+    schema:
+      type: string
+    required: true
+    style: form
+    example: '10.77.0.150'
+  - name: request_type
+    description: |
+      Is it a request for a new session or an update request.
+
+      The value `new_session` is used for a start of a new session and `update_session` - for an existing session.
+    in: query
+    schema:
+      type: string
+      enum:
+      - new_session
+      - update_session
+    required: true
+    style: form
+    example: new_session
+  - name: request_number
+    description: |
+      Counter of auth requests for this session, starting from 0.
+    in: query
+    schema:
+      type: integer
+      format: bytes
+    required: true
+    style: form
+    example: 1
+  - name: session_id
+    description: |
+      Unique session id. It will be the same for one session.
+    in: query
+    schema:
+      type: string
+      format: uuid
+    required: true
+    style: form
+    example: '6217fd62-16da-4206-9da9-0173d7552a14'
+  - name: stream_clients
+    description: |
+      How many clients are currently watching this stream or VOD file.
+    in: query
+    schema:
+      type: integer
+    required: true
+    style: form
+    example: 1
+  - name: total_clients
+    description: |
+      How many clients are currently watching from this server.
+    in: query
+    schema:
+      type: integer
+    required: true
+    style: form
+    example: 2
+  - name: token
+    description: |
+      User provided authorization token.
+
+      The token is generated automatically or received from a website.
+    in: query
+    schema:
+      type: string
+    required: false
+    style: form
+    example: '60334b207baa'
+  - name: duration
+    description: |
+      If it is an update request, then it will be the duration of this session in seconds.
+    in: query
+    schema:
+      type: integer
+      format: seconds
+    required: false
+    style: form
+    example: 2
+  - name: bytes
+    description: |
+      How many bytes have been passed in this session.
+    in: query
+    schema:
+      type: integer
+      format: bytes
+    required: false
+    style: form
+    example: 12345
+  - name: qs
+    description: |
+      Here may go initial query string that was passed by client.
+      Use it for additional authorization.
+    in: query
+    schema:
+      type: string
+    required: false
+    style: form
+    example: 'token=60334b207baa'
+  - name: dvr
+    description: |
+      Is it a session for playing DVR archive.
+    in: query
+    schema:
+      type: boolean
+    required: false
+    style: form
+    example: true
+  - name: user_agent
+    description: |
+      Many protocols can signal a user agent. It will be provided in this field.
+    in: query
+    schema:
+      type: string
+    required: false
+    style: form
+    example: 'curl%2F7.68.0'
+  - name: referer
+    description: |
+      Referer HTTP header that identifies the address of the web page from which the request was made.
+    in: query
+    schema:
+      type: string
+    required: false
+    style: form
+    example: 'hey.com'
+  responses:
+    '200':
+      description: Access granted. Here you can pass additional session settings (like advertising).
+      headers:
+        'X-AuthDuration':
+          schema:
+            type: integer
+            format: seconds
+          description: |
+            During this amount of seconds this session will be considered alive
+            and no additional requests will be made.
+
+            If a session has been banned,
+            any attempt to reopen it within the period of `X-AuthDuration` will be rejected by Flussonic Media Server.
+
+          example: 3600
+        'X-Unique':
+          schema:
+            type: boolean
+          deprecated: true
+          x-delete-at: 23.09
+          description: |
+            Only one opened session is allowed with this user id. Analog for `X-Max-Sessions: 1`
+          x-scope:
+            - flussonic
+        'X-UserId':
+          schema:
+            type: string
+          description: |
+            Authorization backend can supply user id of this session.
+            It can be used for reporting statistics and for limiting simultaneous amount of
+            opened sessions.
+          example: 'some-user-id'
+        'X-Max-Sessions':
+          schema:
+            type: integer
+          description: |
+            How many opened sessions are allowed with this user id.
+
+            For example, if it is set to 2 and a user tries to view 3 streams simultaneously, one of them will be interrupted.
+          example: 2
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/auth_response_v1'
+          x-scope:
+            - flussonic
+    '403':
+      description: Permission denied
+      content:
+        application/json:
+          schema:
+              type: object
+              properties:
+                errors:
+                  description: List of structured errors
+                  type: array
+                  items:
+                    $ref: '../../components/schemas.yml#/error'
+    '302':
+      description: Redirect client to a different URL. e.g. a new stream path or backup clip.
+      content:
+        text/plain:
+          schema:
+            type: string
+      headers:
+        'Location':
+          schema:
+            type: string
+            description: The URL that the Player will open for playback.
+  tags:
+  - auth

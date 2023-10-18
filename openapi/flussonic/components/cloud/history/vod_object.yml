@@ -1,0 +1,17 @@
+type: object
+required:
+- type
+- prefix
+properties:
+  type:
+    type: string
+    description: Object type
+    format: object_type
+    const: vod
+  prefix:
+    type: string
+    description: |
+      The unique name of VOD location.
+      It is used as a prefix for playing VOD files in this location.
+    format: media_name
+    example: 'movies'

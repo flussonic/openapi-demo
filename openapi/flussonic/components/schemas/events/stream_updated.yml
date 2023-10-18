@@ -1,0 +1,40 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Stream updated.
+    reason:
+      description: Reason for updating the stream.
+      type: string
+      nullable: true
+      x-atom: true
+    sub_id:
+      description: Sub-stream ID.
+      type: string
+      format: uuid
+      nullable: true
+    sub_bytes:
+      description: The number of bytes sent in the sub-stream.
+      type: integer
+      format: bytes
+      nullable: true
+    sub_opened_at:
+      description: The time when the sub-stream was created.
+      type: integer
+      format: milliseconds
+      nullable: true
+    bytes_in:
+      description: The amount of stream data received. 
+      type: integer
+      format: bytes
+      nullable: true
+    bytes_out:
+      description: The amount of stream data sent to the clients.
+      type: integer
+      format: bytes
+      nullable: true
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

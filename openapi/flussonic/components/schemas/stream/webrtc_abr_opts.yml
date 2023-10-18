@@ -1,0 +1,54 @@
+type: object
+properties:
+  start_track:
+    description: |
+      Video track number from which playback starts. Possible values: `v1`, `v2`, `v3` and so on.
+
+      If not specified, or an audio track specified (`start_track=a3`), or a video track number does not exist, 
+      playback starts with the track number in the middle of the list (e.g. `v2` if you have tracks `v1`, `v2`, and `v3`) 
+      and then adjusts to the bandwidth availability.
+
+      If some tracks are excluded by the query parameter `?filter=tracks:...`, Flussonic searches for an available track with a lower number up to v0. 
+      If no track with a lower number was found, Flussonic searches for a closest track with a higher number.
+    nullable: true
+    type: string
+    example: v2
+  loss_count:
+    description: Number of recent packet loss events to consider when switching bitrate.
+    default: 2
+    type: integer
+    x-private: true
+  up_window:
+    description: Switch bitrate to a higher value if in the last `up_window` number of seconds there were less than `loss_count` lost packets.
+    default: 20
+    type: integer
+    x-private: true
+    example: 17
+  down_window:
+    description: Switch bitrate to a lower value if in the last `down_window` number of seconds there were more than `loss_count` lost packets.
+    default: 5
+    type: integer
+    x-private: true
+    example: 6
+  ignore_remb:
+    description: |
+      If `true`, Flussonic ignores REMB (Receiver Estimated Maximum Bitrate) reported by the client when switching bitrate to a higher value.
+      If false, the bitrate will not exceed the one sent by the client in the REMB.
+    default: true
+    type: boolean
+    x-private: true
+    example: true
+  bitrate_prober:
+    description: |
+      If `true`, Flussonic periodically sends `probe` packets to measure available bandwidth and switches bitrate to a higher value if it possible.
+    default: true
+    type: boolean
+    x-private: true
+    example: true
+  bitrate_probing_interval:
+    description: |
+      How often Flussonic sends `probe` packets in seconds
+    default: 5
+    type: integer
+    x-private: true
+    example: 6

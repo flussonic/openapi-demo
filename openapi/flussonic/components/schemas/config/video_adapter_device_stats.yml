@@ -1,0 +1,30 @@
+type: object
+properties:
+  hw:
+    description: The type of the device.
+    type: string
+    oneOf:
+    - const: dektec
+      title: DekTec card
+    - const: decklink
+      title: Blackmagic Decklink Card
+    - const: v4l
+      title: Video4Linux device detected on the server
+    - const: tbs
+      title: TBS product series include DVB-S2/S, DVB-C, DVB-T,ATSC digital TV Tuner PCI-e card
+    example: dektec
+  id:
+    type: string
+    description: |
+      The ID of the device. It could be serial number or any other ID.
+    examples:
+      default:
+        value: 'serial'
+      dektec:
+        value: '2174220024'
+      v4l:
+        value: '/dev/video1'
+  title:
+    type: string
+    description: The name/model of the device.
+    example: 'Decklink Quad 2'

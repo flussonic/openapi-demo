@@ -1,0 +1,25 @@
+parameters:
+- name: name
+  description: backup name
+  in: path
+  required: true
+  schema:
+    example: '20210915-231745'
+    type: string
+  style: simple
+
+post:
+  operationId: chassis_backup_restore
+  description: Restore the chassis from a specific backup.
+  summary: Restore this backup
+  responses:
+    '204':
+      description: Restored
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - chassis

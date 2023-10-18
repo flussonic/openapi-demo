@@ -1,0 +1,4 @@
+oneOf:
+  - $ref: ../../schemas.yml#/episode_generic
+  - $ref: ../../schemas.yml#/vision_episode_face
+  - $ref: ../../schemas.yml#/vision_episode_vehicle

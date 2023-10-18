@@ -1,0 +1,23 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Source started.
+    url:
+      description: The input (source) URL.
+      type: string
+      format: url
+      nullable: true
+    priority:
+      description: The input priority.
+      type: integer
+      nullable: true
+    dts:
+      description: First frame DTS (Decoding Time Stamp).
+      type: number
+      nullable: true
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'

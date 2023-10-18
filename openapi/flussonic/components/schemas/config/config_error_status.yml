@@ -1,0 +1,56 @@
+type: object
+properties:
+  error:
+    description: Short error description.
+    type: string
+    x-atom: true
+    example: bad_url
+  config:
+    description: Partial configuration that can be recovered if an error occurs.
+    type: object
+    nullable: true
+  line:
+    description: Line number pointing to where an error was detected.
+    type: integer
+    nullable: true
+    example: 15
+  first_error_line:
+    description: If an error takes up to several lines, it is the first line where the error was detected.
+    type: integer
+    nullable: true
+    example: 14
+  col:
+    description: The column number pointing to where the error was detected.
+    type: integer
+    nullable: true
+    example: 20
+  first_error_col:
+    description: Last column with something valid.
+    type: integer
+    nullable: true
+    example: 5
+  path:
+    description: Config path to the erroneous element.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/config_path_segment'
+    nullable: true
+    example: ["streams", 0, "inputs", 0, "url", "input_url"]
+  detail:
+    description: Some other details that may help to identify the error.
+    nullable: true
+    anyOf:
+    - type: string
+    - type: number
+    - type: object
+
+
+  errors:
+    description: List of structured errors. Just to conform with JSONAPI format
+    type: array
+    x-private: true
+    deprecated: true
+    x-delete-at: 23.09
+    items:
+      $ref: '../../schemas.yml#/error'
+    nullable: true

@@ -1,0 +1,28 @@
+variables:
+  GIT_DEPTH: 500
+
+stages:
+  - build
+  - test
+
+lint:
+  stage: build
+  script:
+    - make build
+    - make extract
+  artifacts:
+    when: always
+    name: "html"
+    expire_in: 1 week
+    paths:
+      - html
+
+jest:
+  stage: test
+  script:
+    - make jest
+
+test-mock-server:
+  stage: test
+  script:
+    - make test-mock-server

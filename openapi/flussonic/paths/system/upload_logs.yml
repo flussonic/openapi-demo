@@ -1,0 +1,21 @@
+post:
+  operationId: upload_logs
+  summary: Upload logs
+  description: |
+    Upload debug info to support storage
+  x-private: true
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/upload_logs_req'
+    description: Upload logs request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/upload_logs_res'
+      description: Upload logs response
+  tags:
+    - system

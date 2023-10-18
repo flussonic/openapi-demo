@@ -1,0 +1,29 @@
+type: object
+properties:
+  server_version:
+    description: Package version of the server. Might be simple a number of release like 21.11 or
+      longer if you have a rolling release installed.
+    type: string
+    format: server_version
+    nullable: true
+    openmetrics_label: version
+    example: '23.04'
+  build:
+    type: integer
+    nullable: true
+    description: |
+      Build version
+    openmetrics_label: build
+  now:
+    type: number
+    format: utc_ms
+    description: |
+      Current response time
+  started_at:
+    description: Boot time of this instance.
+    type: integer
+    format: utc
+    nullable: true
+    openmetrics_metric: server_started_at
+    x-metric-type: gauge
+    example: 1639337825

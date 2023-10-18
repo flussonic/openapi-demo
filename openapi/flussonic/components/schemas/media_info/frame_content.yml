@@ -1,0 +1,12 @@
+type: string
+oneOf:
+- title: Audio
+  const: audio
+- title: Video
+  const: video
+- title: Text
+  const: text
+- title: Metadata
+  const: metadata
+- title: Application
+  const: application

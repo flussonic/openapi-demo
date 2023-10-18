@@ -1,0 +1,12 @@
+type: object
+discriminator:
+  propertyName: command
+  mapping:
+    move_continuous: '#/components/schemas/ptz_move_continuous'
+    # move_abs: '#/components/schemas/ptz_move_abs'
+    # set_route: '#/components/schemas/ptz_set_route'
+
+oneOf:
+- $ref: ../../schemas.yml#/ptz_move_continuous
+# - $ref: '../schemas.yml#/ptz_move_abs'
+# - $ref: '../schemas.yml#/ptz_set_route'

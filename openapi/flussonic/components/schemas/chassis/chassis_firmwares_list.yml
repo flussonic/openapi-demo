@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      firmwares:
+        description: The list of firmwares stored on the device.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/chassis_firmware'

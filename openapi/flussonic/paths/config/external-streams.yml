@@ -1,0 +1,88 @@
+get:
+  operationId: streams_list
+  summary: Static streams
+  description: |
+    This API method will be called to fetch list of streams.
+
+    Your system must responce to this call to be able to dynamically configure streaming server
+    in runtime, add streams, reconfigure them or remove.
+
+  parameters:
+  - name: host
+    description: |
+      Hostname of the streamer server that is requesting the config.
+      This parameter is mandatory, because streamer will send it and you can rely on it,
+      but it is absolutely ok to create several paths for different servers and 
+      ignore this query string.
+    explode: false
+    required: true
+    in: query
+    schema:
+      example: streamer03.my.cdn
+      type: string
+    style: form
+  - name: name
+    description: |
+      Comma-separated exlpicitly passed list of stream names. Used to get configuration
+      for the streams that were not listed in previous request without `name` field
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: s01,s02,s03
+      type: string
+    style: form
+  - name: cursor
+    description: |
+      Properly encoded analog of offset, allowing to read next bunch of items. 
+      We do not offer common `offset` fields, use please cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/streams_list'
+      description: Response
+      headers:
+        X-Config-Server-Separate-Endpoints:
+          schema:
+            type: string
+            oneOf:
+            - const: "true"
+          description: |
+            If this header is sent, then streamer will enable following logic:
+
+            * a first request `streams_list` is sent to get list of static streams that should be running always, without any client request
+            * then second request `update_streams_list` will be called if there are any running streams, not included in the response to `streams_list`
+          
+            Later if any new unknown stream request comes to the streamer, will be called `dynamic_streams_list` request for newly started streams.
+
+            If this header is not sent, a default behaviour is enabled when streamer is making all these requests to `streams_list`
+
+        X-Config-Server-Dynamic-Streams:
+          schema:
+            type: string
+            oneOf:
+            - const: "false"
+          description: |
+            If this header is sent, then streamer will refuse to make `dynamic_streams_list` request.
+
+            It means that any request coming to new unknown streams will be immediately rejected without
+            accessing config server
+
+        X-Config-Server-Episodes:
+          schema:
+            type: string
+            oneOf:
+            - const: "true"
+          description: |
+            If this header is sent, then streamer will make calls to `external_episodes_list` to ask for
+            DVR episodes that should be kept on disk.
+  tags:
+  - stream

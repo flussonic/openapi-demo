@@ -1,0 +1,19 @@
+post:
+  operationId: chassis_ping
+  summary: Ping host
+  description: Perform synchronous ping request
+  tags:
+  - chassis
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/chassis_ping_request'
+    description: Request
+  responses:
+    '200':
+      description: Ping response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_ping_response'

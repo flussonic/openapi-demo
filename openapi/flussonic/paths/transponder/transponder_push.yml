@@ -1,0 +1,98 @@
+delete:
+  description: Delete the multiplexer push by its index.
+  operationId: transponder_push_delete
+  parameters:
+  - description: Multiplexer name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - description: push index
+    in: path
+    name: index
+    required: true
+    schema:
+      example: 1
+      type: integer
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  summary: Delete the multiplexer push
+  tags:
+  - multiplexer
+get:
+  description: Method allows to fetch single multiplexer push.
+  operationId: transponder_push_get
+  parameters:
+  - description: Multiplexer name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - description: push index
+    in: path
+    name: index
+    required: true
+    schema:
+      example: 1
+      type: integer
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/transponder_push'
+      description: Response
+  summary: Get the multiplexer push
+  tags:
+  - multiplexer
+put:
+  description: Create or update multiplexer push.
+  operationId: transponder_push_save
+  parameters:
+  - description: Multiplexer name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - description: push index
+    in: path
+    name: index
+    required: true
+    schema:
+      example: 1
+      type: integer
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/transponder_push'
+    description: Request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/transponder_push'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  summary: Save the multiplexer push
+  tags:
+  - multiplexer

@@ -1,0 +1,122 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    nullable: true
+    description: Unique identifier (or UUID) of the session.
+    example: '61942414-8c15-4809-8bb6-adf1ae846027'
+  type:
+    allOf:
+      - $ref: '../../schemas.yml#/session_type'
+    nullable: true
+    example: play
+    description: The type of the session.
+  source_id:
+    type: string
+    format: uuid
+    nullable: true
+    example: '61942420-1b2e-4614-8871-a4c6345da31f'
+    description: Unique ID of the session's source.
+  parent_id:
+    type: string
+    format: uuid
+    nullable: true
+    example: '61942426-2501-4962-bbab-a612fd619495'
+    description: ID of the parent session, used only for sessions with the stream/substream type
+  ip:
+    # allOf:
+    #   - $ref: '../../schemas.yml#/network_addr'
+    type: string
+    nullable: true
+    description: IP address of the connected peer.
+    example: '172.16.25.73'
+  bytes:
+    type: integer
+    format: bytes
+    default: 0
+    description: Number of bytes sent in the session.
+  proto:
+    allOf:
+      - $ref: '../../schemas.yml#/protocol'
+    nullable: true
+    description: Protocol used for the data transmission in the session.
+    example: 'dash'
+  opened_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: The time when this session was created.
+    example: 1637094994
+  started_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: The time when the frames transmission started in the session.
+    example: 1637095014
+  updated_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: The time when the session was last updated.
+    example: 1637098611
+  closed_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: The time when the session was closed.
+    example: 1637098821
+  segments_container:
+    allOf:
+      - $ref: '../../schemas.yml#/segments_container'
+    nullable: true
+    description: |
+      Media container used for this protocol.
+      For instance, HLS can go with MPEG-TS or fMP4 segments and DASH with big fMP4 or small CMAF segments.
+  ssl:
+    type: boolean
+    nullable: true
+    description: |
+      This flag indicates that TLS (SSL) was used to serve this session.
+      It may be either input (ingest, publish) or output (push, play) session, this flag will be
+      filled for any of them.
+  ssl_protocol:
+    allOf:
+      - $ref: '../../schemas.yml#/ssl_protocol'
+    nullable: true
+    description: SSL Protocol version.
+    example: 'tlsv1.2'
+  dvr:
+    type: boolean
+    nullable: true
+    description: |
+      This flag indicates that this session was using DVR.
+  first_byte_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: |
+      When the first byte was received on this session.
+    example: 1637098611
+    x-telemetry-mapping: "Session/fFirstByteAt"
+    x-private: true
+  manifest_type:
+    allOf:
+      - $ref: '../../schemas.yml#/manifest_type'
+    description: Type of requested manifest. Applicable for HLS, DASH and MSS.
+    example: 'rewind'
+  hls_separate_audio:
+    type: boolean
+    description: The flag shows if the HLS separate_audio mode is enabled for the session.
+  filter_tracks:
+    type: boolean
+    description: The flag shows if the track filtering is applied for the session.
+  named_by:
+    allOf:
+      - $ref: '../../schemas.yml#/named_by'
+    example: config
+    description: Where the media was configured
+  srt_port_resolve:
+    type: boolean
+    example: false
+    description: Stream name was resolved via srt_port_resolve call

@@ -1,0 +1,13 @@
+get:
+  operationId: templates_list
+  summary: List templates
+  description: This method allows to get the list of all templates in Flussonic with all their settings.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/templates_list'
+      description: Response
+  tags:
+  - template

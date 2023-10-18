@@ -1,0 +1,14 @@
+type: object
+properties:
+  country:
+    description: The country determined from the user's IP address. 
+    type: string
+    nullable: true
+  user_name: 
+    description: User-provided original stream/VOD name.
+    type: string
+    nullable: true
+  user_id:
+    description: User ID provided by the authorization backend like Middleware, your billing, or web portal.
+    type: string
+    nullable: true

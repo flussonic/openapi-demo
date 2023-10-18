@@ -1,0 +1,74 @@
+get:
+  description: Method allows to fetch single peer
+  operationId: peer_get
+  summary: Get the peer
+  parameters:
+  - description: peer name
+    in: path
+    name: hostname
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/peer_config'
+      description: Whole peer
+  tags:
+  - cluster
+put:
+  description: Create or update peer
+  operationId: peer_save
+  summary: Save the peer
+  parameters:
+  - description: peer name
+    in: path
+    name: hostname
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/peer_config'
+    description: Partial peer configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/peer_config'
+      description: Updated peer
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - cluster
+delete:
+  description: Delete the peer by its name
+  operationId: peer_delete
+  summary: Delete the peer
+  parameters:
+  - description: peer name
+    in: path
+    name: hostname
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - cluster

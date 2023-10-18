@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This API describes cloud Flussonic service.
+
+    Permanent [download link](https://flussonic.com/doc/api/cloud.json) to JSON schema file.
+
+  title: Cloud Flussonic API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: './components/schemas.yml'
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /projects:
+    $ref: './paths/cloud/projects.yml'
+  /projects/{project_id}:
+    $ref: './paths/cloud/project.yml'
+
+  /streams:
+    $ref: './paths/stream/streams.yml'
+  /streams/{name}:
+    $ref: './paths/stream/stream.yml'
+
+  /sessions:
+    $ref: './paths/auth/sessions.yml'
+
+  /event_sinks:
+    $ref: './paths/events/event_sinks.yml'
+  /event_sinks/{name}:
+    $ref: './paths/events/event_sink.yml'
+
+  /auth_backends:
+    $ref: './paths/auth/auth_backends.yml'
+  /auth_backends/{name}:
+    $ref: './paths/auth/auth_backend.yml'
+
+  /admin_view_token:
+    $ref: './paths/auth/admin_view_token.yml'
+
+  /dvrs:
+    $ref: './paths/cloud/dvrs.yml'
+
+  /usages:
+    $ref: './paths/cloud/usages.yml'
+
+  /api_calls:
+    $ref: './paths/cloud/api_calls.yml'
+
+  /api_keys:
+    $ref: './paths/cloud/api_keys.yml'
+  /api_keys/{key_id}:
+    $ref: './paths/cloud/api_key.yml'
+
+  /ui_settings:
+    $ref: './paths/config/ui_settings.yml'
+  /config/stats:
+    $ref: './paths/cloud/cloud_stats.yml'
+
+  /vods:
+    $ref: './paths/vod/vods.yml'
+  /vods/{prefix}:
+    $ref: './paths/vod/vod.yml'
+  /vods/{prefix}/storages/{storage_index}/files:
+    $ref: './paths/vod/disk_files.yml'
+  /vods/{prefix}/storages/{storage_index}/files/{subpath}:
+    $ref: './paths/vod/disk_file.yml'
+
+  /agents:
+    $ref: './paths/central/agents.yml'
+  /agents/{id}:
+    $ref: './paths/central/agent.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Public flussonic cloud
+  url: https://api.flussonic.cloud/streamer/api/v3
+tags:
+- name: projects
+- name: stream
+- name: history
+- name: session
+- name: events
+- name: dvr
+- name: auth
+- name: usage
+- name: config
+- name: keys
+- name: vod
+- name: agent

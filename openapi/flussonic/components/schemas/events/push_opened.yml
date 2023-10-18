@@ -1,0 +1,24 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Push opened.
+    url:
+      description: The push URL.
+      type: string
+      format: url
+      nullable: true
+    retry_count:
+      description: The number of attempts to start pushing.
+      type: integer
+      nullable: true
+    retry_limit:
+      description: The maximum number of attempts to push the stream.
+      type: integer
+      nullable: true
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

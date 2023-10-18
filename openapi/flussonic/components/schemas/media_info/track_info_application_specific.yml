@@ -1,0 +1,7 @@
+type: object
+properties:
+  language:
+    description: Language value of the track, if applicable.
+    nullable: true
+    type: string
+    example: eng

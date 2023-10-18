@@ -1,0 +1,7 @@
+type: object
+properties:
+  domains:
+    description: One or more domain names to issue the Let's Encrypt certificate for.
+    type: array
+    items:
+      type: string

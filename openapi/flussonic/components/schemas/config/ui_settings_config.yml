@@ -1,0 +1,494 @@
+type: object
+properties:
+  title:
+    description: The product title.
+    type: string
+    examples:
+      flussonic:
+        value: "Streamer"
+        x-scope:
+          - flussonic
+      central:
+        value: "Central"
+        x-scope:
+          - central
+      cloud:
+        value: "Cloud"
+        x-scope:
+          - cloud
+      client-area:
+        value: "Billing"
+        x-scope:
+          - client-area
+  brand:
+    description: The product brand.
+    type: string
+    examples:
+      flussonic:
+        value: "Streamer"
+        x-scope:
+          - flussonic
+      central:
+        value: "Central"
+        x-scope:
+          - central
+      cloud:
+        value: "Cloud"
+        x-scope:
+          - cloud
+  product:
+    description: The product type.
+    type: string
+    enum:
+    - streamer
+    - cloud
+    - central
+    - coder
+    examples:
+      flussonic:
+        value: "streamer"
+        x-scope:
+          - flussonic
+      central:
+        value: "central"
+        x-scope:
+          - central
+      cloud:
+        value: "cloud"
+        x-scope:
+          - cloud
+  fonts:
+    description: The fonts in the UI.
+    type: object
+    properties:
+      light:
+        description: The light font style.
+        type: string
+        x-private: true
+        example: "fira-sans-300.woff2"
+        format: byte
+        x-notice: file_base64
+      regular:
+        description: The regular font style.
+        type: string
+        x-private: true
+        example: "fira-sans-400.woff2"
+        format: byte
+        x-notice: file_base64
+      medium:
+        description: The medium font style.
+        type: string
+        x-private: true
+        example: "fira-sans-500.woff2"
+        format: byte
+        x-notice: file_base64
+  logo:
+    description: The logo in the header.
+    type: string
+    example: "logoHeader.png"
+    x-private: true
+    format: byte
+    x-notice: file_base64
+  logoAuth:
+    description: The logo on the login page.
+    type: string
+    example: "logoLogin.png"
+    x-private: true
+    format: byte
+    x-notice: file_base64
+  favicons:
+    description: The favicons of different sizes for different OSes and browsers.
+    type: object
+    properties:
+      '16':
+        description: 16x16 pixels favicon.
+        type: string
+        x-private: true
+        format: byte
+        example: "icons/favicon-16.png"
+      '32':
+        description: 32x32 pixels favicon.
+        type: string
+        x-private: true
+        example: "icons/favicon-32.png"
+        format: byte
+        x-notice: file_base64
+      '48':
+        description: 48x48 pixels favicon.
+        type: string
+        x-private: true
+        example: "icons/favicon-48.png"
+        format: byte
+        x-notice: file_base64
+      '64':
+        description: 64x64 pixels favicon.
+        type: string
+        x-private: true
+        example: "icons/favicon-64.png"
+        format: byte
+        x-notice: file_base64
+      '128':
+        description: 128x128 pixels favicon.
+        type: string
+        x-private: true
+        example: "icons/favicon-128.png"
+        format: byte
+        x-notice: file_base64
+
+  colors:
+    description: The interface colors.
+    type: object
+    properties:
+      primary:
+        description: Primary color for interface elements like selection in the main menu, info icons, buttons, etc.
+        type: string
+        examples:
+          flussonic:
+            value: "#002DAB"
+            x-scope:
+              - flussonic
+          central:
+            value: "#4549F2"
+            x-scope:
+              - central
+          cloud:
+            value: "#4549F2"
+            x-scope:
+              - cloud
+          client-area:
+            value: "#002DAB"
+            x-scope:
+              - client-area
+      secondary:
+        description: Secondary color for obsolete interface elements like active tab.
+        type: string
+        examples:
+          flussonic:
+            value: "#FF0D70"
+            x-scope:
+              - flussonic
+          central:
+            value: "#E91E63"
+            x-scope:
+              - central
+          cloud:
+            value: "#E91E63"
+            x-scope:
+              - cloud
+          client-area:
+            value: "#FF0D70"
+            x-scope:
+              - client-area
+      background:
+        description: The background color.
+        type: string
+        example: "#fff"
+  menu_items:
+    description: The list of the main menu items and Streams page tabs that are available on the server.
+    x-private: true
+    x-scope:
+    - flussonic
+    - cloud
+    - central
+    type: object
+    properties:
+      pulse:
+        description: The Pulse page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      streamer_config:
+        description: The Config page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      cluster:
+        description: The Cluster page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: true
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      ipcam:
+        description: The IP Cameras page (for Watcher DB settings).
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      audit_logs:
+        description: The Audit Logs page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: false
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: true
+            x-scope:
+              - cloud
+      iptv:
+        description: The IPTV page.
+        type: boolean
+        default: false
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      upload_logs:
+        description: The Support page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      streamer_upgrade:
+        description: Info about available upgrades for the server.
+        type: object
+        properties:
+          package_name:
+            description: The name of the upgrade package.
+            type: string
+            example: "streamer"
+        nullable: true
+      usages:
+        description: The Usages page.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: false
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: true
+            x-scope:
+              - cloud
+      chassis:
+        description: The Chassis page.
+        type: boolean
+        default: false
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_templates:
+        description: The Streams - Templates tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_transponders:
+        description: The Streams - Transponders tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_cluster_sources:
+        description: The Streams - Sources tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_vod_locations:
+        description: The Streams - VODs tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_dvb_cards:
+        description: The Streams - DVB cards tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: true
+            x-scope:
+              - flussonic
+          central:
+            value: false
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+      main_agents:
+        description: The Streams - Agents tab.
+        type: boolean
+        default: true
+        examples:
+          flussonic:
+            value: false
+            x-scope:
+              - flussonic
+          central:
+            value: true
+            x-scope:
+              - central
+          cloud:
+            value: false
+            x-scope:
+              - cloud
+  footer:
+    type: string
+    description: Footer text
+    x-scope:
+      - client-area
+  matomo_id:
+    type: integer
+    description: Site id for matomo tracker
+    example: 1
+    x-scope:
+      - client-area
+  locales:
+    type: array
+    description: The list of possible locales
+    example: ['en', 'ru']
+    items:
+      type: string
+      format: 'ISO 639-1'
+  default_locale:
+    type: string
+    format: 'ISO 639-1'
+    example: 'en'
+    description: The default locale
+
+  debian_package: # Это хорошо бы перенести во что-то продуктоспецифичное
+    description: Properties of the product debian package.
+    type: object
+    properties:
+      name:
+        description: The debian package name.
+        type: string
+        example: "streamer"
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-private: true

@@ -1,0 +1,122 @@
+type: object
+properties:
+  #
+  # DETECTION
+  #
+  detections_count:
+    description: |
+      Total number of detected objects.  
+      Consists of 4 buckets: rejected by confidence, size, orientation and accepted detections.  
+      Each bucket is represented by number of detections in that bucket
+    
+      For each rejection reason there is a cumulative _quality_ metric for all detections
+      and cumulative _quality_ metric for accepted detections
+
+      For example:  
+      `detections_confidence` is a cumulative confidence of _all_ detections  
+      `detections_accepted_confidence` is a cumulative confidence of _accepted_ detections
+
+      `detections_area` is a cumulative size of _all_ detections  
+      `detections_accepted_area` is a cumulative size of _accepted_ detections
+
+    type: integer
+  detections_accepted_count:
+    description: The number of detected objects **after** filtering
+    type: integer
+  detections_confidence_rejected_count:
+    description: Total number of detections rejected due to inacceptable **confidence**
+    type: integer
+    minimum: 0
+  detections_orientation_rejected_count:
+    description: Total number of detections rejected due to **orientation** inacceptable for fingerprinting
+    type: integer
+    minimum: 0
+  detections_area_rejected_count:
+    description: Total number of detections rejected due to **size** inacceptable for fingerprinting
+    type: integer
+    minimum: 0
+
+  detections_confidence:
+    description: Cumulative detection confidences **before** filtering
+    type: number
+    minimum: 0.0
+  detections_accepted_confidence:
+    description: Cumulative detection confidence **after** filtering
+    type: number
+    minimum: 0.0
+
+  detections_area:
+    description: Cumulative detection size (in fraction of frame area) **before** filtering
+    type: number
+    minimum: 0.0
+  detections_accepted_area:
+    description: Cumulative detection size **after** filtering
+    type: number
+    minimum: 0.0
+
+
+  #
+  # FINGERPRINTING
+  #
+  fingerprints_count:
+    description: |
+      Total number of fingerprinted objects
+      Consists of 2 buckets: rejected by confidence and accepted fingerprints.  
+      Each bucket is represented by number of fingerprints in that bucket
+    
+      For each rejection reason there is a cumulative _quality_ metric for all fingerprints
+      and cumulative _quality_ metric for accepted fingerprints
+
+      For example:  
+      `fingerprints_confidence` is a cumulative confidence of _all_ fingerprints  
+      `fingerprints_accepted_confidence` is a cumulative confidence of _accepted_ fingerprints
+
+    type: integer
+  fingerprints_accepted_count:
+    description: The number of fingerprinted objects
+    type: integer
+
+  fingerprints_confidence:
+    description: Cumulative fingerprints confidence **before** filtering by confidence threshold
+    type: number
+    minimum: 0.0
+  fingerprints_accepted_confidence:
+    description: Cumulative fingerprints confidence **after** filtering by confidence threshold
+    type: number
+    minimum: 0.0
+
+
+  # 
+  # PROFILING
+  # 
+  device_transfer_time:
+    description: Time spent on copying the input data (batch of frames) to the inference device
+    type: integer
+    format: milliseconds
+  device_transferred_bytes:
+    description: How many bytes of the input data (batch of frames) was copied to the inference device
+    type: integer
+    format: bytes
+
+  detection_time:
+    description: Total time spent on detection
+    type: integer
+    format: milliseconds
+  fingerprinting_time:
+    description: Total time spent on fingerprinting
+    type: integer
+    format: milliseconds
+
+  host_transfer_time:
+    description: Time spent on copying the processing results (both detection and fingerprinting) to the host for further postprocessing
+    type: integer
+    format: milliseconds
+  host_transferred_bytes:
+    description: How many bytes of the processing results (both detection and fingerprinting) was copied to the host for further postprocessing
+    type: integer
+    format: bytes
+
+  fingerprint_serialization_time:
+    description: Time spent on serialization of processing results (both detection and fingerprinting) to pass them into the next stage (forming the episode)
+    type: integer
+    format: milliseconds

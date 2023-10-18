@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: string
+    description: Agent identifier
+    x-primary-key: true
+    example: '1234567'
+  key:
+    type: string
+    description: Agent authentication key.
+  stats:
+    description: Agents's metrics and other statistical information.
+    allOf:
+    - $ref: '../../schemas.yml#/watcher_agent_stats'
+    readOnly: true
+    nullable: true
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project ID
+    x-scope:
+      - cloud

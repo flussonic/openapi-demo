@@ -1,0 +1,65 @@
+type: object
+properties:
+  from:
+    type: integer
+    format: utc
+    description: The UTC timestamp of the first recording in this archive.
+    example: 1641045644
+  depth:
+    type: integer
+    format: seconds
+    description: The time interval between the start of the *first* recording segment
+      and the end of the *last* one.
+    openmetrics_metric: dvr_depth
+    x-metric-type: gauge
+    example: 259200
+  ranges:
+    description: The list of DVR ranges.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvr_range'
+    type: array
+  locks:
+    description: The list of DVR locks.
+    deprecated: true
+    x-delete-at: 23.12
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvr_range'
+    type: array
+  motion_log:
+    description: |
+      The list of events from the motion detector (if it is enabled).
+      This mechanism doesn't developed anymore and should be replaced with episodes list
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvr_motion_event'
+    type: array
+    deprecated: true
+    x-delete-at: 23.09
+  bytes:
+    description: The size of the recorded archive.
+    type: integer
+    format: bytes
+    example: 129600000000
+  disk_size:
+    description: The size of the disk where the archive is recorded.
+    type: integer
+    format: bytes
+    openmetrics_metric: dvr_disk_size
+    x-metric-type: gauge
+    example: 1099511627776
+  duration:
+    type: integer
+    format: seconds
+    description: |
+      A total duration of the recorded segments, excluding recording gaps.
+      It can be smaller than depth if you have gaps.
+    openmetrics_metric: dvr_duration
+    x-metric-type: gauge
+    example: 172800
+required:
+- from
+- depth
+- ranges
+

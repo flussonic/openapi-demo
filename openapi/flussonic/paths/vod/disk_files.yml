@@ -1,0 +1,37 @@
+get:
+  operationId: disk_files_list
+  summary: List files in a VOD location
+  description: This method allows to get the list of all files and folders for a specific storage subpath in a VOD location.
+  parameters:
+  - name: prefix
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for playing VOD files in this location.
+    in: path
+    required: true
+    schema:
+      example: 'vod'
+      type: string
+  - name: storage_index
+    in: path
+    description: The index of the storage in the VOD location.
+    required: true
+    schema:
+      example: 0
+      type: integer
+  - name: folder
+    in: query
+    description: The folder in the storage to filter the results by. 
+    required: false
+    schema:
+      example: 'abc'
+      type: string
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/disk_files_list'
+      description: List of files in the VOD storage
+  tags:
+  - vod

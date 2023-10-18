@@ -1,0 +1,10 @@
+oneOf:
+- type: string
+  const: streamer
+  description: The "streamer" role is used for nodes where Flussonic Media Server is deployed.
+- type: string
+  const: vision
+  description: The "vision" role is used for nodes where Flussonic Vision is deployed. On "vision" nodes, Central provisions streams with the "vision" parameter set.
+- type: string
+  const: identification
+  description: The "identification" role is used for nodes where Flussonic Vision Identification is deployed. Central fetches enriched episodes with persons from Flussonic Identification Service.

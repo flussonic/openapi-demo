@@ -1,0 +1,24 @@
+type: string
+oneOf:
+- title: H.264
+  const: h264
+- title: HEVC (H.265)
+  const: hevc
+- title: MP2V
+  const: mp2v
+- title: VP9
+  const: vp9
+  deprecated: true
+  x-delete-at: 23.09
+- title: VP8
+  const: vp8
+  deprecated: true
+  x-delete-at: 23.09
+- title: MJPEG
+  const: mjpeg
+- title: Screen
+  const: screen
+- title: JPEG
+  const: jpeg
+- title: AV1
+  const: av1

@@ -1,0 +1,1192 @@
+# global
+program_id:
+  type: integer
+  minimum: 1
+  maximum: 65535
+  x-notice: mpegts program number
+ts_pid:
+  maximum: 8191
+  minimum: 0
+  type: integer
+iso8601:
+  type: integer
+  # format: date-time
+  x-notice: '2016-07-08T09:04:46Z'
+psi_version:
+  type: integer
+  minimum: 0
+  maximum: 31
+loglevel:
+  $ref: ./schemas/config/loglevel.yml
+auth_token:
+  $ref: ./schemas/config/auth_token.yml
+
+
+binary_value:
+  type: string
+binary_boolean:
+  type: string
+binary_int:
+  type: string
+
+
+prometheus_metrics:
+  $ref: ./schemas/global/prometheus_metrics.yml
+prometheus_streams_metrics:
+  $ref: ./schemas/global/prometheus_streams_metrics.yml
+prometheus_udp_pusher_metrics:
+  $ref: ./schemas/global/prometheus_udp_pusher_metrics.yml
+
+memory_stats:
+  $ref: ./schemas/global/memory_stats.yml
+scheduler_stats:
+  $ref: ./schemas/global/scheduler_stats.yml
+
+
+collection_response:
+  $ref: ./schemas/collection_response.yml
+error_response:
+  $ref: ./schemas/error_response.yml
+error:
+  $ref: ./schemas/error.yml
+
+thumbnails_spec:
+  $ref: ./schemas/global/thumbnails_spec.yml
+thumbnails_enabled_spec:
+  $ref: ./schemas/global/thumbnails_enabled_spec.yml
+thumbnails_size_spec:
+  $ref: ./schemas/global/thumbnails_size_spec.yml
+
+
+ad_placement:
+  $ref: ./schemas/ad/placement.yml
+
+# session
+
+session_type:
+  $ref: ./schemas/session/session_type.yml  
+session_key:
+  $ref: ./schemas/session/session_key.yml
+session_status:
+  $ref: ./schemas/session/session_status.yml
+protocol:
+  $ref: ./schemas/session/protocol.yml
+ssl_protocol:
+  $ref: ./schemas/tls/tls_version.yml
+segments_container:
+  $ref: ./schemas/session/segments_container.yml
+session_generic:
+  $ref: ./schemas/session/session_generic.yml
+session_details:
+  $ref: ./schemas/session/session_details.yml
+session:
+  $ref: ./schemas/session/session.yml
+session_player:
+  $ref: ./schemas/session/session_player.yml
+session_player_details:
+  $ref: ./schemas/session/session_player_details.yml
+application_name:
+  $ref: ./schemas/session/application_name.yml
+request_tracks:
+    $ref: ./schemas/session/request_tracks.yml
+manifest_type:
+  $ref: ./schemas/session/manifest_type.yml
+
+auth_response_v1:
+  $ref: ./schemas/session/auth_response_v1.yml
+playback_headers:
+  $ref: ./schemas/session/playback_headers.yml
+  
+
+# media_info
+flow_type:
+  $ref: ./schemas/media_info/flow_type.yml
+frame_video_codec:
+  $ref: ./schemas/media_info/frame_video_codec.yml
+frame_audio_codec:
+  $ref: ./schemas/media_info/frame_audio_codec.yml
+frame_text_codec:
+  $ref: ./schemas/media_info/frame_text_codec.yml
+frame_raw_codec:
+  $ref: ./schemas/media_info/frame_raw_codec.yml
+frame_app_codec:
+  $ref: ./schemas/media_info/frame_app_codec.yml
+frame_codec:
+  $ref: ./schemas/media_info/frame_codec.yml
+frame_content:
+  $ref: ./schemas/media_info/frame_content.yml
+frame_video_pix_fmt:
+  $ref: ./schemas/media_info/frame_video_pix_fmt.yml
+track_info:
+  $ref: ./schemas/media_info/track_info.yml
+track_info_base:
+  $ref: ./schemas/media_info/track_info_base.yml
+track_info_base_configurable:
+  $ref: ./schemas/media_info/track_info_base_configurable.yml
+track_info_video:
+  $ref: ./schemas/media_info/track_info_video.yml
+track_info_video_specific:
+  $ref: ./schemas/media_info/track_info_video_specific.yml
+track_info_video_configurable:
+  $ref: ./schemas/media_info/track_info_video_configurable.yml
+track_info_audio:
+  $ref: ./schemas/media_info/track_info_audio.yml
+track_info_audio_specific:
+  $ref: ./schemas/media_info/track_info_audio_specific.yml
+track_info_text:
+  $ref: ./schemas/media_info/track_info_text.yml
+track_info_text_specific:
+  $ref: ./schemas/media_info/track_info_text_specific.yml
+track_info_application:
+  $ref: ./schemas/media_info/track_info_application.yml
+track_info_application_specific:
+  $ref: ./schemas/media_info/track_info_application_specific.yml
+track_info_metadata:
+  $ref: ./schemas/media_info/track_info_metadata.yml
+track_info_full:
+  $ref: ./schemas/media_info/track_info_full.yml
+closed_captions:
+  $ref: ./schemas/media_info/closed_captions.yml
+
+media_info:
+  $ref: ./schemas/media_info/media_info.yml
+
+transcoder_track_info:
+  $ref: ./schemas/transcoder/transcoder_track_info.yml
+transcoder_track_info_audio:
+  $ref: ./schemas/transcoder/transcoder_track_info_audio.yml
+transcoder_track_info_video:
+  $ref: ./schemas/transcoder/transcoder_track_info_video.yml
+
+
+requested_media_info:
+  $ref: ./schemas/media_info/requested_media_info.yml
+requested_track_info:
+  $ref: ./schemas/media_info/requested_track_info.yml
+
+
+# playback
+
+abstract_manifest:
+  $ref: ./schemas/responses/abstract_manifest.yml
+abstract_playback_period:
+  $ref: ./schemas/responses/abstract_playback_period.yml
+stream_segment:
+  $ref: ./schemas/stream/stream_segment.yml
+ad_splice_legacy:
+  $ref: ./schemas/stream/ad_splice_legacy.yml
+stream_drm_hls:
+  $ref: ./schemas/stream/stream_drm_hls.yml
+stream_drm_cenc:
+  $ref: ./schemas/stream/stream_drm_cenc.yml
+
+
+webrtc_sdp:
+  $ref: ./schemas/webrtc/webrtc_sdp.yml
+webrtc_sdp_track:
+  $ref: ./schemas/webrtc/webrtc_sdp_track.yml
+webrtc_sdp_track_payload:
+  $ref: ./schemas/webrtc/webrtc_sdp_track_payload.yml
+webrtc_sdp_track_direction:
+  $ref: ./schemas/webrtc/webrtc_sdp_track_direction.yml
+webrtc_sdp_track_extension:
+  $ref: ./schemas/webrtc/webrtc_sdp_track_extension.yml
+webrtc_rtcp_feedbacks:
+  $ref: ./schemas/webrtc/webrtc_rtcp_feedbacks.yml
+webrtc_ice_candidate:
+  $ref: ./schemas/webrtc/webrtc_ice_candidate.yml
+webrtc_prefer_codec:
+  $ref: ./schemas/webrtc/webrtc_prefer_codec.yml
+webrtc_transport:
+  $ref: ./schemas/webrtc/webrtc_transport.yml
+
+
+
+hls_master_playlist:
+  $ref: ./schemas/hls/hls_master_playlist.yml
+hls_playlist_media_link:
+  $ref: ./schemas/hls/hls_playlist_media_link.yml
+hls_playlist_stream_inf_link:
+  $ref: ./schemas/hls/hls_playlist_stream_inf_link.yml
+hls_playlist_image_stream_inf_link:
+  $ref: ./schemas/hls/hls_playlist_image_stream_inf_link.yml
+hls_bitrate_playlist:
+  $ref: ./schemas/hls/hls_bitrate_playlist.yml
+hls_playlist_segment:
+  $ref: ./schemas/hls/hls_playlist_segment.yml
+
+
+output_audio:
+  $ref: ./schemas/stream/output_audio.yml
+
+# transcoder
+h264_level:
+  $ref: ./schemas/transcoder/h264_level.yml
+hevc_level:
+  $ref: ./schemas/transcoder/hevc_level.yml
+mp2v_level:
+  $ref: ./schemas/transcoder/mp2v_level.yml
+
+video_adapter_device_stats:
+  $ref: ./schemas/config/video_adapter_device_stats.yml
+transcoder_device:
+  $ref: ./schemas/transcoder/transcoder_device.yml
+transcoder_device_stats:
+  $ref: ./schemas/transcoder/transcoder_device_stats.yml
+transcoder_resize_mode:
+  $ref: ./schemas/transcoder/transcoder_resize_mode.yml
+tc_bitrate:
+  $ref: ./schemas/transcoder/tc_bitrate.yml
+tc_reconfig_support:
+  $ref: ./schemas/transcoder/tc_reconfig_support.yml
+tc_deviceid:
+  $ref: ./schemas/transcoder/tc_deviceid.yml
+tc_fps:
+  $ref: ./schemas/transcoder/tc_fps.yml
+tc_preset:
+  $ref: ./schemas/transcoder/tc_preset.yml
+tc_profile:
+  $ref: ./schemas/transcoder/tc_profile.yml
+rc_method:
+  $ref: ./schemas/transcoder/rc_method.yml
+tc_label_box:
+  $ref: ./schemas/transcoder/tc_label_box.yml
+tc_label_font:
+  $ref: ./schemas/transcoder/tc_label_font.yml
+tc_label:
+  $ref: ./schemas/transcoder/tc_label.yml
+tc_burn:
+  $ref: ./schemas/transcoder/tc_burn.yml
+tc_global:
+  $ref: ./schemas/transcoder/tc_global.yml
+tc_crop:
+  $ref: ./schemas/transcoder/tc_crop.yml
+deinterlace_settings:
+  $ref: ./schemas/transcoder/deinterlace_settings.yml
+tc_decoder:
+  $ref: ./schemas/transcoder/tc_decoder.yml
+tc_audio_opts:
+  $ref: ./schemas/transcoder/tc_audio_opts.yml
+tc_size:
+  $ref: ./schemas/transcoder/tc_size.yml
+tc_sar:
+  $ref: ./schemas/transcoder/tc_sar.yml
+tc_logo:
+  $ref: ./schemas/transcoder/tc_logo.yml
+tc_qp_range:
+  $ref: ./schemas/transcoder/tc_qp_range.yml
+interlace_settings:
+  $ref: ./schemas/transcoder/interlace_settings.yml
+tc_video_opts:
+  $ref: ./schemas/transcoder/tc_video_opts.yml
+tc_external_audio_filter:
+  $ref: ./schemas/transcoder/tc_external_audio_filter.yml
+transcoder_opts:
+  $ref: ./schemas/transcoder/transcoder_opts.yml
+
+
+
+# dvr
+
+dvr_schedule_range:
+  $ref: ./schemas/dvr/dvr_schedule_range.yml
+dvr_range:
+  $ref: ./schemas/dvr/dvr_range.yml
+dvr_motion_event:
+  $ref: ./schemas/dvr/dvr_motion_event.yml
+dvr_base_config:
+  $ref: ./schemas/dvr/dvr_base_config.yml
+dvr_storage_config:
+  $ref: ./schemas/dvr/dvr_storage_config.yml
+dvr_config:
+  $ref: ./schemas/dvr/dvr_config.yml
+raid_disk_config:
+  $ref: ./schemas/dvr/raid_disk_config.yml
+raid_disk_mode:
+  $ref: ./schemas/dvr/raid_disk_mode.yml
+raid_disk_stats:
+  $ref: ./schemas/dvr/raid_disk_stats.yml
+
+# PTZ
+ptz_state:
+  $ref: ./schemas/ptz/ptz_state.yml
+ptz_position:
+  $ref: ./schemas/ptz/ptz_position.yml
+ptz_move_continuous:
+  $ref: ./schemas/ptz/ptz_move_continuous.yml
+ptz_command:
+  $ref: ./schemas/ptz/ptz_command.yml
+# ptz_move_abs:
+#   $ref: ./ptz/ptz_move_abs.yml
+# ptz_set_route:
+#   $ref: ./ptz/ptz_set_route.yml
+# ptz_routes:
+#   $ref: ./ptz/ptz_routes.yml
+# ptz_route:
+#   $ref: ./ptz/ptz_route.yml
+
+
+# Stream
+debug_stream_spec:
+  $ref: ./schemas/stream/debug_stream_spec.yml
+debug_stream_tracepoints:
+  $ref: ./schemas/stream/debug_stream_tracepoints.yml
+motion_detector_spec:
+  $ref: ./schemas/stream/motion_detector_spec.yml
+cache_spec:
+  $ref: ./schemas/stream/cache_spec.yml
+vbi_line:
+  $ref: ./schemas/stream/vbi_line.yml
+ttxt_descriptors:
+  $ref: ./schemas/stream/ttxt_descriptors.yml
+vbi_service:
+  $ref: ./schemas/stream/vbi_service.yml
+srt_config:
+  $ref: ./schemas/global/srt_config.yml
+mpegts_lang_track:
+  $ref: ./schemas/stream/mpegts_lang_track.yml
+audio_track:
+  $ref: ./schemas/stream/audio_track.yml
+push_audio_track:
+  $ref: ./schemas/stream/push_audio_track.yml
+
+
+
+stream_dvr_specific_spec:
+  $ref: ./schemas/stream/stream_dvr_specific_spec.yml
+stream_dvr_spec:
+  $ref: ./schemas/stream/stream_dvr_spec.yml
+subtitle_style:
+  $ref: ./schemas/stream/subtitle_style.yml
+transponder_pid:
+  $ref: ./schemas/mpts/transponder_pid.yml
+transponder_pid_stats:
+  $ref: ./schemas/mpts/transponder_pid_stats.yml
+multiplexer_stats:
+  $ref: ./schemas/mpts/multiplexer_stats.yml
+vision_spec:
+  $ref: ./schemas/stream/vision_spec.yml
+auth_spec:
+  $ref: ./schemas/stream/auth_spec.yml
+stream_stats:
+  $ref: ./schemas/stream/stream_stats.yml
+public_stream_stats:
+  $ref: ./schemas/stream/public_stream_stats.yml
+stream_stats_base:
+  $ref: ./schemas/stream/stream_stats_base.yml
+stream_status:
+  $ref: ./schemas/stream/stream_status.yml
+pusher_status:
+  $ref: ./schemas/stream/pusher_status.yml
+play_protocols_spec:
+  $ref: ./schemas/stream/play_protocols_spec.yml
+stream_config:
+  $ref: ./schemas/stream/stream_config.yml
+public_stream_config:
+  $ref: ./schemas/stream/public_stream_config.yml
+stream_config_stripped:
+  $ref: ./schemas/stream/stream_config_stripped.yml
+stream_config_specific:
+  $ref: ./schemas/stream/stream_config_specific.yml
+stream_config_base:
+  $ref: ./schemas/stream/stream_config_base.yml
+stream_config_media:
+  $ref: ./schemas/stream/stream_config_media.yml
+stream_config_onpremises:
+  $ref: ./schemas/stream/stream_config_onpremises.yml
+stream_config_single_media:
+  $ref: ./schemas/stream/stream_config_single_media.yml
+stream_config_deprecated:
+  $ref: ./schemas/stream/stream_config_deprecated.yml
+stream_config_additional:
+  $ref: ./schemas/stream/stream_config_additional.yml
+stream_config_watcher:
+  $ref: ./schemas/stream/stream_config_watcher.yml
+template_config:
+  $ref: ./schemas/stream/template_config.yml
+template_config_specific:
+  $ref: ./schemas/stream/template_config_specific.yml
+push_stats:
+  $ref: ./schemas/stream/push_stats.yml
+silencedetect_spec:
+  $ref: ./schemas/stream/silencedetect_spec.yml
+vbi_lines:
+  $ref: ./schemas/stream/vbi_lines.yml
+scale_algorithm:
+  $ref: ./schemas/stream/scale_algorithm.yml
+web_logo_spec:
+  $ref: ./schemas/stream/web_logo_spec.yml
+map_spec:
+  $ref: ./schemas/stream/map_spec.yml
+network_port:
+  $ref: ./schemas/global/network_port.yml
+network_port_range:
+  $ref: ./schemas/global/network_port_range.yml
+
+## deprecated
+listen_spec:
+  $ref: ./schemas/global/listen_spec.yml
+##
+listeners:
+  $ref: ./schemas/global/listeners.yml
+listen_config:
+  $ref: ./schemas/global/listen_config.yml
+listen_ssl_config:
+  $ref: ./schemas/global/listen_ssl_config.yml
+listen_http_config:
+  $ref: ./schemas/global/listen_http_config.yml
+listen_http_config_params:
+  $ref: ./schemas/global/listen_http_config_params.yml
+listen_https_config:
+  $ref: ./schemas/global/listen_https_config.yml
+listen_rtmps_config:
+  $ref: ./schemas/global/listen_rtmps_config.yml
+listen_rtsps_config:
+  $ref: ./schemas/global/listen_rtsps_config.yml
+listen_srt_config:
+  $ref: ./schemas/global/listen_srt_config.yml
+listen_port_range_config:
+  $ref: ./schemas/global/listen_port_range_config.yml
+session_key_query:
+  format: query_session_key
+  type: string
+input_stats:
+  $ref: ./schemas/stream/input_stats.yml
+segment_duration:
+  $ref: ./schemas/stream/segment_duration.yml
+stream_push:
+  $ref: ./schemas/stream/stream_push.yml
+stream_input:
+  $ref: ./schemas/stream/stream_input.yml
+stream_input_base:
+  $ref: ./schemas/stream/stream_input_base.yml
+stream_input_deprecated:
+  $ref: ./schemas/stream/stream_input_deprecated.yml
+stream_input_fake:
+  $ref: ./schemas/stream/stream_input_fake.yml
+stream_input_file:
+  $ref: ./schemas/stream/stream_input_file.yml
+stream_input_h323:
+  $ref: ./schemas/stream/stream_input_h323.yml
+stream_input_hls:
+  $ref: ./schemas/stream/stream_input_hls.yml
+stream_input_rtmp:
+  $ref: ./schemas/stream/stream_input_rtmp.yml
+stream_input_rtsp:
+  $ref: ./schemas/stream/stream_input_rtsp.yml
+stream_input_sdi:
+  $ref: ./schemas/stream/stream_input_sdi.yml
+stream_input_srt:
+  $ref: ./schemas/stream/stream_input_srt.yml
+stream_input_tshttp:
+  $ref: ./schemas/stream/stream_input_tshttp.yml
+stream_input_webrtc:
+  $ref: ./schemas/stream/stream_input_webrtc.yml
+stream_input_mixer:
+  $ref: ./schemas/stream/stream_input_mixer.yml
+stream_input_mosaic2:
+  $ref: ./schemas/stream/stream_input_mosaic2.yml
+stream_input_requested_config:
+  $ref: ./schemas/stream/stream_input_requested_config.yml
+webrtc_abr_opts:
+  $ref: ./schemas/stream/webrtc_abr_opts.yml
+drm_spec:
+  $ref: ./schemas/stream/drm_spec.yml
+named_by:
+  $ref: ./schemas/stream/named_by.yml
+backup_config:
+  $ref: ./schemas/stream/backup_config.yml
+drm_system:
+  $ref: ./schemas/stream/drm_system.yml
+auth_url:
+  $ref: ./schemas/stream/auth_url.yml
+dvr_info:
+  $ref: ./schemas/dvr/dvr_info.yml
+cluster_ingest_config:
+  $ref: ./schemas/stream/cluster_ingest_config.yml
+url_prefix:
+  $ref: ./schemas/stream/url_prefix.yml
+output_mpegts_pids:
+  $ref: ./schemas/stream/output_mpegts_pids.yml
+output_mpegts_ac3:
+  $ref: ./schemas/stream/output_mpegts_ac3.yml
+bm_display_mode:
+  $ref: ./schemas/stream/bm_display_mode.yml
+video_format:
+  $ref: ./schemas/stream/video_format.yml
+language_value:
+  $ref: ./schemas/stream/language_value.yml
+srt_direction:
+  $ref: ./schemas/global/srt_direction.yml
+
+# transponders
+transponder_push:
+  $ref: ./schemas/mpts/transponder_push.yml
+ts_descriptor:
+  $ref: ./schemas/mpts/ts_descriptor.yml
+ts_timeouts:
+  $ref: ./schemas/mpts/ts_timeouts.yml
+ts_service_type:
+  $ref: ./schemas/mpts/ts_service_type.yml  
+ts_versions:
+  $ref: ./schemas/mpts/ts_versions.yml
+transponder_time_offset:
+  $ref: ./schemas/mpts/transponder_time_offset.yml
+ts_eit_intervals:
+  $ref: ./schemas/mpts/ts_eit_intervals.yml  
+transponder_eit:
+  $ref: ./schemas/mpts/transponder_eit.yml
+transponder_program:
+  $ref: ./schemas/mpts/transponder_program.yml
+transponder_config:
+  $ref: ./schemas/mpts/transponder_config.yml
+transponder_other:
+  $ref: ./schemas/mpts/transponder_other.yml
+epg_source:
+  $ref: ./schemas/mpts/epg_source.yml
+
+
+# cluster
+peer_stats:
+  $ref: ./schemas/cluster/peer_stats.yml
+peer_config:
+  $ref: ./schemas/cluster/peer_config.yml
+balancer_config:
+  $ref: ./schemas/cluster/balancer_config.yml
+balancer_server_config:
+  $ref: ./schemas/cluster/balancer_server_config.yml
+source_config:
+  $ref: ./schemas/cluster/source_config.yml
+source_group_config:
+  $ref: ./schemas/cluster/source_group_config.yml
+source_specific_config:
+  $ref: ./schemas/cluster/source_specific_config.yml
+
+
+# logo
+logo_file:
+  $ref: ./schemas/logo/logo_file.yml
+
+# vod
+disk_file:
+  $ref: ./schemas/vod/disk_file.yml
+disk_file_stats:
+  $ref: ./schemas/vod/disk_file_stats.yml
+vod_storage:
+  $ref: ./schemas/vod/vod_storage.yml
+vod_config:
+  $ref: ./schemas/vod/vod_config.yml
+
+
+# DVB card
+dvb_card_config:
+  $ref: ./schemas/hardware/dvb_card_config.yml
+dvb_card_stats:
+  $ref: ./schemas/hardware/dvb_card_stats.yml
+dvb_fec:
+  $ref: ./schemas/hardware/dvb_fec.yml
+
+
+# Decklink card
+decklink_card_id:
+  $ref: ./schemas/hardware/decklink_card_id.yml
+decklink_config:
+  $ref: ./schemas/hardware/decklink_config.yml
+
+# event sinks
+event_sink_filter:
+  $ref: ./schemas/event_sinks/event_sink_filter.yml
+event_sink_config:
+  $ref: ./schemas/event_sinks/event_sink_config.yml
+
+# event includes
+streamer_event1:
+  $ref: ./schemas/events/streamer_event.yml
+event_default:
+  $ref: ./schemas/events/event_default.yml
+event_media:
+  $ref: ./schemas/events/event_media.yml
+event_session:
+  $ref: ./schemas/events/event_session.yml
+event_play:
+  $ref: ./schemas/events/event_play.yml
+
+# list of events
+server_starting:
+  $ref: ./schemas/events/server_starting.yml
+server_started:
+  $ref: ./schemas/events/server_started.yml
+change_server_id:
+  $ref: ./schemas/events/change_server_id.yml
+presence_connected:
+  $ref: ./schemas/events/presence_connected.yml
+presence_disconnected:
+  $ref: ./schemas/events/presence_disconnected.yml
+config_external_error:
+  $ref: ./schemas/events/config_external_error.yml
+
+source_opened:
+  $ref: ./schemas/events/source_opened.yml
+source_connected:
+  $ref: ./schemas/events/source_connected.yml
+source_started:
+  $ref: ./schemas/events/source_started.yml
+source_updated:
+  $ref: ./schemas/events/source_updated.yml
+source_closed:
+  $ref: ./schemas/events/source_closed.yml
+
+stream_opened:
+  $ref: ./schemas/events/stream_opened.yml
+stream_updated:
+  $ref: ./schemas/events/stream_updated.yml
+stream_closed:
+  $ref: ./schemas/events/stream_closed.yml
+
+play_opened:
+  $ref: ./schemas/events/play_opened.yml
+play_started:
+  $ref: ./schemas/events/play_started.yml
+play_updated:
+  $ref: ./schemas/events/play_updated.yml
+play_closed:
+  $ref: ./schemas/events/play_closed.yml
+
+push_opened:
+  $ref: ./schemas/events/push_opened.yml
+push_connected:
+  $ref: ./schemas/events/push_connected.yml
+push_started:
+  $ref: ./schemas/events/push_started.yml
+push_updated:
+  $ref: ./schemas/events/push_updated.yml
+push_closed:
+  $ref: ./schemas/events/push_closed.yml
+push_blocked:
+  $ref: ./schemas/events/push_blocked.yml
+push_restored:
+  $ref: ./schemas/events/push_restored.yml
+
+
+chassis_connected:
+  $ref: ./schemas/events/chassis_connected.yml
+chassis_disconnected:
+  $ref: ./schemas/events/chassis_disconnected.yml
+
+transcoder_device_insufficient_resources:
+  $ref: ./schemas/events/transcoder_device_insufficient_resources.yml
+
+
+webrtc_play_prober_timeout:
+  $ref: ./schemas/events/webrtc_play_prober_timeout.yml
+webrtc_play_prober_wrong_interval:
+  $ref: ./schemas/events/webrtc_play_prober_wrong_interval.yml
+
+ad_injected:
+  $ref: ./schemas/events/ad_injected.yml
+
+
+multiplexer_pid_on:
+  $ref: ./schemas/events/multiplexer_pid_on.yml
+multiplexer_pid_off:
+  $ref: ./schemas/events/multiplexer_pid_off.yml
+
+motion_base:
+  $ref: ./schemas/events/motion_base.yml
+motion_started:
+  $ref: ./schemas/events/motion_started.yml
+motion_stopped:
+  $ref: ./schemas/events/motion_stopped.yml
+
+# Generic config
+auth_backend_url:
+  $ref: ./schemas/config/auth_backend_url.yml
+auth_backend_config:
+  $ref: ./schemas/config/auth_backend_config.yml
+
+cache_config:
+  $ref: ./schemas/config/cache_config.yml
+segment_cache_spec:
+  $ref: ./schemas/config/segment_cache_spec.yml
+
+web_script_config:
+  $ref: ./schemas/config/web_script_config.yml
+
+http_proxy_config:
+  $ref: ./schemas/config/http_proxy_config.yml
+
+
+
+ssh_agent:
+  $ref: ./schemas/config/ssh_agent.yml
+system_updater_status:
+  $ref: ./schemas/config/system_updater_status.yml
+system_upgrade_request:
+  $ref: ./schemas/config/system_upgrade_request.yml
+
+upload_logs_req:
+  $ref: ./schemas/system/upload_logs_req.yml
+upload_logs_res:
+  $ref: ./schemas/system/upload_logs_res.yml
+
+# chassis
+network_addr:
+  type: string
+  minLength: 1
+network_mask:
+  type: integer
+  minimum: 1
+  maximum: 32
+interface_mode:
+  enum:
+  - static
+  - dynamic
+  type: string
+chassis_config:
+  $ref: ./schemas/chassis/chassis_config.yml
+chassis_stats:
+  $ref: ./schemas/chassis/chassis_stats.yml
+interface_config:
+  $ref: ./schemas/chassis/interface_config.yml
+interface_stats:
+  $ref: ./schemas/chassis/interface_stats.yml
+chassis_dhcpd_stats:
+  $ref: ./schemas/chassis/chassis_dhcpd_stats.yml
+chassis_tftp_stats:  
+  $ref: ./schemas/chassis/chassis_tftp_stats.yml
+chassis_ntpd_stats:
+  $ref: ./schemas/chassis/chassis_ntpd_stats.yml
+coder_stream_stats:  
+  $ref: ./schemas/chassis/coder_stream_stats.yml
+chassis_firmware:
+  $ref: ./schemas/chassis/chassis_firmware.yml
+chassis_version:
+  type: string
+chassis_disk:
+  $ref: ./schemas/chassis/chassis_disk.yml
+coder_config:
+  $ref: ./schemas/chassis/coder_config.yml
+coder_stats:  
+  $ref: ./schemas/chassis/coder_stats.yml
+chassis_backup:
+  $ref: ./schemas/chassis/chassis_backup.yml
+chassis_blink:
+  $ref: ./schemas/chassis/chassis_blink.yml
+chassis_ping_request:
+  $ref: ./schemas/chassis/chassis_ping_request.yml
+chassis_ping_response:
+  $ref: ./schemas/chassis/chassis_ping_response.yml
+
+
+server_meta:
+  type: string
+config_version:
+  type: array
+  items:
+    type: integer
+previous_server_state:
+  $ref: ./schemas/config/previous_server_state.yml
+config_path_segment:
+  $ref: ./schemas/config/config_path_segment.yml
+config_error_status:
+  $ref: ./schemas/config/config_error_status.yml
+license_type:
+  $ref: ./schemas/config/license_type.yml
+partition_stats:
+  $ref: ./schemas/config/partition_stats.yml
+server_stats:
+  $ref: ./schemas/config/server_stats.yml
+server_stats_whoami:
+  $ref: ./schemas/config/server_stats_whoami.yml
+server_stats_streamer:
+  $ref: ./schemas/config/server_stats_streamer.yml
+server_stats_network:
+  $ref: ./schemas/config/server_stats_network.yml
+server_stats_events:
+  $ref: ./schemas/config/server_stats_events.yml
+
+admin_credentials:
+  $ref: ./schemas/config/admin_credentials.yml
+server_config:
+  $ref: ./schemas/config/server_config.yml
+server_config_base:
+  $ref: ./schemas/config/server_config_base.yml
+server_config_full:
+  $ref: ./schemas/config/server_config_full.yml
+server_config_stats:
+  $ref: ./schemas/config/server_config_stats.yml
+server_config_external:
+  $ref: ./schemas/config/server_config_external.yml
+
+ui_settings_config:
+  $ref: ./schemas/config/ui_settings_config.yml
+  
+# activate
+activate:
+  $ref: ./schemas/license/activate.yml
+
+# license
+license:
+  $ref: ./schemas/license/license.yml
+license_activation:
+  $ref: ./schemas/license/activation.yml
+license_client:
+  $ref: ./schemas/license/client.yml
+license_request:
+  $ref: ./schemas/license/request.yml
+
+# vsaas
+forward_ports_config:
+  $ref: ./schemas/vsaas/forward_ports_config.yml
+rproxy_config:
+  $ref: ./schemas/vsaas/rproxy_config.yml
+vsaas_config:
+  $ref: ./schemas/vsaas/vsaas_config.yml
+camera_alarm_config:
+  $ref: ./schemas/vsaas/camera_alarm_config.yml
+vision_config:
+  $ref: ./schemas/vsaas/vision_config.yml
+
+
+
+# iptv
+iptv_config:
+  $ref: ./schemas/iptv/iptv_config.yml
+subscribers_list:
+  $ref: ./schemas/iptv/subscribers_list.yml
+subscriber_config:
+  $ref: ./schemas/iptv/subscriber_config.yml
+packages_list:
+  $ref: ./schemas/iptv/packages_list.yml
+package_config:
+  $ref: ./schemas/iptv/package_config.yml
+
+
+
+
+# central
+central_streams_list:
+  $ref: ./schemas/central/central_streams_list.yml
+central_stream_config:
+  $ref: ./schemas/central/central_stream_config.yml
+streamers_list:
+  $ref: ./schemas/central/streamers_list.yml
+streamer_config:
+  $ref: ./schemas/central/streamer_config.yml
+central_vision_node:
+  $ref: ./schemas/central/vision_node.yml
+central_streamer_node:
+  $ref: ./schemas/central/streamer_node.yml
+central_identification_node:
+  $ref: ./schemas/central/identification_node.yml
+central_dvrs_list:
+  $ref: ./schemas/central/central_dvrs_list.yml
+central_dvr_config:
+  $ref: ./schemas/central/central_dvr_config.yml
+central_events_batch:
+  $ref: ./schemas/central/events_batch.yml
+central_node_role:
+  $ref: ./schemas/central/node_role.yml
+central_config:
+  $ref: ./schemas/central/config/config.yml
+central_config_database:
+  $ref: ./schemas/central/config/database.yml
+central_config_tracer:
+  $ref: ./schemas/central/config/tracer.yml
+central_stats:
+  $ref: ./schemas/central/stats/stats.yml
+central_cluster_stats:
+  $ref: ./schemas/central/stats/cluster_stats.yml
+
+
+
+# watcher-core
+watcher_agents_list:
+  $ref: ./schemas/vsaas/watcher_agents_list.yml
+watcher_agent_config:
+  $ref: ./schemas/vsaas/watcher_agent_config.yml
+watcher_agent_stats:
+  $ref: ./schemas/vsaas/watcher_agent_stats.yml
+watcher_agent_logs:
+  $ref: ./schemas/vsaas/watcher_agent_logs.yml
+watcher_agent_control_connection:
+  $ref: ./schemas/vsaas/watcher_agent_control_connection.yml
+
+# episodes
+episode:
+  $ref: ./schemas/episodes/episode.yml
+episode_base:
+  $ref: ./schemas/episodes/episode_base.yml
+episodes_list:
+  $ref: ./schemas/episodes/episodes_list.yml
+episode_type:
+  $ref: ./schemas/episodes/episode_type.yml
+episode_close_reason:
+  $ref: ./schemas/episodes/episode_close_reason.yml
+episode_generic:
+  $ref: ./schemas/episodes/episode_generic.yml
+external_episode:
+  $ref: ./schemas/episodes/external_episode.yml
+external_episodes_list:
+  $ref: ./schemas/episodes/external_episodes_list.yml
+
+# vision
+vision_confidence:
+  $ref: ./schemas/vision/confidence.yml
+vision_region:
+  $ref: ./schemas/vision/geometry/region.yml
+vision_box:
+  $ref: ./schemas/vision/geometry/box.yml
+vision_point:
+  $ref: ./schemas/vision/geometry/point.yml
+vision_keypoint:
+  $ref: ./schemas/vision/keypoint.yml
+
+vision_episode_face:
+  $ref: ./schemas/vision/episodes/episode_face.yml
+vision_episode_vehicle:
+  $ref: ./schemas/vision/episodes/episode_vehicle.yml
+
+
+vision_detected_object_base:
+  $ref: ./schemas/vision/detected_object_base.yml
+vision_detected_face:
+  $ref: ./schemas/vision/detected_face.yml
+vision_detected_vehicle:
+  $ref: ./schemas/vision/detected_vehicle.yml
+vision_detected_license_plate:
+  $ref: ./schemas/vision/detected_license_plate.yml
+
+vision_face_attributes:
+  $ref: ./schemas/vision/face_attributes.yml
+vision_face_fingerprint:
+  $ref: ./schemas/vision/face_fingerprint.yml
+vision_face_keypoints:
+  $ref: ./schemas/vision/face_keypoints.yml
+
+vision_vehicle_attributes:
+  $ref: ./schemas/vision/vehicle_attributes.yml
+vision_vehicle_purpose:
+  $ref: ./schemas/vision/vehicle_purpose.yml
+
+vision_license_plate_attributes:
+  $ref: ./schemas/vision/license_plate_attributes.yml
+vision_license_plate_text:
+  $ref: ./schemas/vision/license_plate_text.yml
+
+vision_object_class:
+  $ref: ./schemas/vision/object_class.yml
+vision_detector:
+  $ref: ./schemas/vision/detector.yml
+vision_appearance:
+  $ref: ./schemas/vision/appearance.yml
+
+vision_image_mimetype:
+  $ref: ./schemas/vision/image_mimetype.yml
+vision_image_attributes:
+  $ref: ./schemas/vision/image_attributes.yml
+
+vision_person:
+  $ref: ./schemas/vision/person.yml
+vision_person_match:
+  $ref: ./schemas/vision/person_match.yml
+vision_person_originator:
+  $ref: ./schemas/vision/person_originator.yml
+vision_person_matches:
+  $ref: ./schemas/vision/person_matches.yml
+vision_persons_list:
+  $ref: ./schemas/vision/persons_list.yml
+vision_persons_match_list:
+  $ref: ./schemas/vision/persons_match_list.yml
+
+
+# cloud
+cloud_dvrs_list:
+  $ref: ./cloud/dvr/dvrs_list.yml
+cloud_dvr_config:
+  $ref: ./cloud/dvr/dvr_config.yml
+
+cloud_accounts_list:
+  $ref: ./cloud/admin/accounts_list.yml
+cloud_account:
+  $ref: ./cloud/admin/account.yml
+cloud_account_price:
+  $ref: ./cloud/admin/account_price_config.yml
+cloud_account_prices_list:
+  $ref: ./cloud/admin/account_prices_list.yml
+cloud_account_usage:
+  $ref: ./cloud/admin/account_usage.yml
+cloud_account_usage_list:
+  $ref: ./cloud/admin/account_usage_list.yml
+cloud_account_balance_increment:
+  $ref: ./cloud/admin/account_balance_increment_config.yml
+cloud_api_key:
+  $ref: ./cloud/admin/api_key.yml
+cloud_api_keys_list:
+  $ref: ./cloud/admin/api_keys_list.yml
+
+
+cloud_projects_list:
+  $ref: ./cloud/projects/projects_list.yml
+cloud_project:
+  $ref: ./cloud/projects/project_config.yml
+
+api_calls_list:
+  $ref: ./cloud/history/api_calls_list.yml
+api_call:
+  $ref: ./cloud/history/api_call.yml
+agent_object:
+  $ref: ./cloud/history/agent_object.yml
+api_key_object:
+  $ref: ./cloud/history/api_key_object.yml
+disk_file_object:
+  $ref: ./cloud/history/disk_file_object.yml
+stream_object:
+  $ref: ./cloud/history/stream_object.yml
+vod_object:
+  $ref: ./cloud/history/vod_object.yml
+project_object:
+  $ref: ./cloud/history/project_object.yml
+
+cloud_usages_list:
+  $ref: ./cloud/history/usages_list.yml
+cloud_usage:
+  $ref: ./cloud/history/usage.yml
+
+cloud_prices_list:
+  $ref: ./cloud/pricing/prices_list.yml
+cloud_price:
+  $ref: ./cloud/pricing/price.yml
+cloud_price_base:
+  $ref: ./cloud/pricing/price_base.yml
+cloud_resources:
+  $ref: ./cloud/resources/resources.yml
+cloud_resource_usage:
+  $ref: ./cloud/resources/resource_usage.yml
+cloud_resource_price:
+  $ref: ./cloud/resources/resource_price.yml
+cloud_resource_amount:
+  $ref: ./cloud/resources/resource_amount.yml
+
+cloud_stream:
+  $ref: ./cloud/admin/stream.yml
+cloud_stream_streamer_config:
+  $ref: ./cloud/admin/stream_streamer_config.yml
+
+cloud_hostnames:
+  $ref: ./cloud/cloud_hostnames.yml
+
+# tls
+tls_certificate:
+  $ref: ./schemas/tls/tls_certificate.yml
+certificate_info:
+  $ref: ./schemas/tls/certificate_info.yml
+letsencrypt_request:
+  $ref: ./schemas/tls/letsencrypt_request.yml
+certificate_save_request:
+  $ref: ./schemas/tls/certificate_save_request.yml
+tls_version:
+  $ref: ./schemas/tls/tls_version.yml
+
+
+# responses
+streams_list:
+  $ref: ./schemas/responses/streams_list.yml
+public_streams_list:
+  $ref: ./schemas/responses/public_streams_list.yml
+stream_dvr_ranges_list:
+  $ref: ./schemas/responses/stream_dvr_ranges_list.yml
+stream_dvr_locks_list:
+  $ref: ./schemas/responses/stream_dvr_locks_list.yml
+
+sessions_list:
+  $ref: ./schemas/responses/sessions_list.yml
+
+templates_list:
+  $ref: ./schemas/responses/templates_list.yml
+
+transponder_ts_descriptors_list:
+  $ref: ./schemas/responses/transponder_ts_descriptors_list.yml
+transponder_others_list:
+  $ref: ./schemas/responses/transponder_others_list.yml
+transponder_programs_list:
+  $ref: ./schemas/responses/transponder_programs_list.yml
+transponder_pushes_list:
+  $ref: ./schemas/responses/transponder_pushes_list.yml
+transponder_time_offsets_list:
+  $ref: ./schemas/responses/transponder_time_offsets_list.yml
+transponders_list:
+  $ref: ./schemas/responses/transponders_list.yml
+dvb_cards_list:
+  $ref: ./schemas/responses/dvb_cards_list.yml
+event_sinks_list:
+  $ref: ./schemas/responses/event_sinks_list.yml
+available_events_list:
+  $ref: ./schemas/responses/available_events_list.yml
+auth_backends_list:
+  $ref: ./schemas/responses/auth_backends_list.yml
+caches_list:
+  $ref: ./schemas/responses/caches_list.yml
+dvrs_list:
+  $ref: ./schemas/responses/dvrs_list.yml
+dvr_disks_list:
+  $ref: ./schemas/responses/dvr_disks_list.yml
+peers_list:
+  $ref: ./schemas/responses/peers_list.yml
+balancers_list:
+  $ref: ./schemas/responses/balancers_list.yml
+sources_list:
+  $ref: ./schemas/responses/sources_list.yml
+vods_list:
+  $ref: ./schemas/responses/vods_list.yml
+disk_files_list:
+  $ref: ./schemas/responses/disk_files_list.yml
+logos_list:
+  $ref: ./schemas/responses/logos_list.yml
+media_info_list:
+  $ref: ./schemas/responses/media_info_list.yml
+admin_view_token:
+  $ref: ./schemas/responses/admin_view_token.yml
+
+chassis_firmwares_list:
+  $ref: ./schemas/chassis/chassis_firmwares_list.yml
+chassis_interfaces_list:
+  $ref: ./schemas/chassis/chassis_interfaces_list.yml
+# chassis_disks_list:
+#   $ref: ./schemas/chassis/chassis_disks_list.yml
+chassis_coders_list:
+  $ref: ./schemas/chassis/chassis_coders_list.yml
+chassis_backups_list:
+  $ref: ./schemas/chassis/chassis_backups_list.yml
+
+license_activations_list:
+  $ref: ./schemas/responses/license_activations_list.yml
+license_clients_list:
+  $ref: ./schemas/responses/license_clients_list.yml
+
+
+# file_processor
+file_processor_config:
+  $ref: ./schemas/file_processor/file_processor_config.yml
+file_processor_job:
+  $ref: ./schemas/file_processor/file_processor_job.yml
+file_processor_filter:
+  $ref: ./schemas/file_processor/file_processor_filter.yml
+file_processor_filter_overlay:
+  $ref: ./schemas/file_processor/file_processor_filter_overlay.yml
+file_processor_filter_crop:
+  $ref: ./schemas/file_processor/file_processor_filter_crop.yml
+file_processor_filter_mute:
+  $ref: ./schemas/file_processor/file_processor_filter_mute.yml
+file_processor_filter_mosaic:
+  $ref: ./schemas/file_processor/file_processor_filter_mosaic.yml
+file_processor_filter_transcoder:
+  $ref: ./schemas/file_processor/file_processor_filter_transcoder.yml
+
+# prometheus
+openmetrics_labels:
+  $ref: ./schemas/prometheus/openmetrics_labels.yml
+
+# telemetry
+admin_session:
+  $ref: ./schemas/admin_session/admin_session.yml

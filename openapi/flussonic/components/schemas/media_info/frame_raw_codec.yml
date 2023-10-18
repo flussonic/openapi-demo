@@ -1,0 +1,18 @@
+type: string
+oneOf:
+- title: YUV
+  const: yuv
+- title: UYVY422
+  const: uyvy422
+- title: YUYV422
+  const: yuyv422
+- title: YUV422p10
+  const: yuv422p10
+- title: ARGB
+  const: argb
+- title: RGB48
+  const: rgb48
+- title: V210
+  const: v210
+- title: PCM
+  const: pcm

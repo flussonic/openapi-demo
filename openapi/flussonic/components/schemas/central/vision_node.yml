@@ -1,0 +1,10 @@
+allOf:
+- $ref: '../../schemas.yml#/peer_config'
+- type: object
+  properties:
+    role:
+      $ref: '../../schemas.yml#/central_node_role'
+required:
+ - cluster_key
+ - role
+ - hostname

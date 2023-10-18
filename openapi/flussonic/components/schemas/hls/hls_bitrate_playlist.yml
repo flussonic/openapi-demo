@@ -1,0 +1,51 @@
+type: object
+properties:
+  version:
+    description: |
+      HLS playlists have protocol version.
+    type: integer
+  playlist_type:
+    description: |
+      Playlist can be live, event (with fixed beginning) and vod
+    type: string
+    enum:
+    - live
+    - event
+    - vod
+  target_duration:
+    description: |
+      Average duration of each segment of this playlist and future updates.
+    type: number
+  chunk_duration:
+    description: |
+      `#EXT-X-PART-INF:PART-TARGET=0.443` target duration of low latency chunk.
+    type: number
+    nullable: true
+
+  media_sequence:
+    description: |
+      Number of first segment in this playlist.
+
+      Important for identifying segments after refresh.
+    type: integer
+  discontinuity_sequence:
+    description: Discontinuity sequence counter (the number of times discontinuity segments were removed from the playlist). 
+    type: integer
+    nullable: true
+  datetime:
+    description: |
+      Precise UTC timestamp of first segment in this playlist.
+    type: string
+    format: date_time
+
+  segments:
+    description: |
+      List of referenced segments.
+      May be sliding.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/hls_playlist_segment'
+
+
+

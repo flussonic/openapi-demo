@@ -1,0 +1,22 @@
+get:
+  description: Fetch all multiplexer ts_descriptors.
+  operationId: transponder_ts_descriptors_list
+  parameters:
+  - description: Multiplexer name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/transponder_ts_descriptors_list'
+      description: Response
+  summary: Get multiplexer ts_descriptors
+  tags:
+  - multiplexer

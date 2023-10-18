@@ -1,0 +1,9 @@
+type: object
+properties:
+  label:
+    description: Disk label.
+    type: string
+  mount_point:
+    description: The mount point of the disk.
+    type: string
+  

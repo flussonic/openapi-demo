@@ -1,0 +1,9 @@
+type: object
+properties:
+  price_id:
+    type: integer
+    format: snowflake_id
+    example: 1479629459169476608
+    description: price id
+required:
+  - price_id

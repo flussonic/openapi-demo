@@ -1,0 +1,13 @@
+get:
+  operationId: chassis_backups_list
+  description: Fetch the list of backups.
+  summary: List backups
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_backups_list'
+      description: Response
+  tags:
+  - chassis

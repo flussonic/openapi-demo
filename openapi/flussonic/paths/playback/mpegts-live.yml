@@ -1,0 +1,53 @@
+get:
+  operationId: http_mpegts_live_play
+  summary: HTTP-MPEGTS playback
+  description: Use this URL to play a stream via HTTP-MPEGTS protocol.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/video-playback/#http-mpeg-ts
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e., `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        video/mpeg:
+          schema:
+            type: string
+      description: Played HTTP-MPEGTS chunked transfer encoding live stream
+  tags:
+    - mpegts
+post:
+  operationId: http_mpegts_live_publish
+  summary: HTTP-MPEGTS publishing
+  description: Use this URL to publish an HTTP MPEG-TS stream.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/live-streaming/publishing-video-to-the-server/#http-mpeg-ts
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  requestBody:
+    content:
+      video/mpeg:
+        schema:
+          type: string
+    description: Published HTTP-MPEGTS chunked transfer live stream.
+  responses:
+    '204':
+      description: |
+        Void status that is really not used
+  tags:
+    - mpegts
+
+

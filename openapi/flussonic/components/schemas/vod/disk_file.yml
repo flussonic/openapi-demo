@@ -1,0 +1,109 @@
+type: object
+properties:
+  name:
+    description: The file or directory name.
+    type: string
+    format: media_name
+    nullable: true
+    examples:
+      default:
+        value: 'vod/bunny.mp4'
+      bunny1:
+        value: 'vod/bunny1.mp4'
+      bunny2:
+        value: 'vod/bunny2.mp4'
+      bunny3:
+        value: 'vod/bunny3.mp4'
+  prefix:
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for playing VOD files in this location.
+    type: string
+    format: media_name
+    nullable: true
+    examples:
+      default:
+        value: 'vod'
+      bunny1:
+        value: 'vod1'
+      bunny2:
+        value: 'vod2'
+      bunny3:
+        value: 'vod3'
+  url:
+    description: URL of the file or directory.
+    type: string
+    format: url
+    nullable: true
+    examples:
+      default:
+        value: '/storage/bunny.mp4'
+      bunny1:
+        value: '/storage/bunny1.mp4'
+      bunny2:
+        value: '/storage/bunny2.mp4'
+      bunny3:
+        value: '/storage/bunny3.mp4'
+  folder:
+    description: Name of the folder containing the file or directory.
+    type: string
+    nullable: true
+    example: 'example'
+  subpath:
+    description: Subpath to the file or directory in the storage.
+    type: string
+    nullable: true
+    examples:
+      default:
+        value: 'bunny.mp4'
+      bunny1:
+        value: 'bunny1.mp4'
+      bunny2:
+        value: 'bunny2.mp4'
+      bunny3:
+        value: 'bunny3.mp4'
+  bytes:
+    description: File size in bytes.
+    type: integer
+    nullable: true
+    example: 42309561
+  is_directory:
+    description: Whether it is a directory.
+    type: boolean
+    default: false
+    example: false
+  is_multibitrate_directory:
+    description: Whether it is a directory with multi-bitrate content.
+    type: boolean
+    default: false
+    example: false
+  opened:
+    description: Whether the file or directory is currently opened.
+    type: boolean
+    default: false
+    example: true
+  egress_hostnames:
+    allOf:
+    - $ref: '../../schemas.yml#/cloud_hostnames'
+    description: |
+      Egress hostname (hls, dash, ...) only for Admin UI, not public API.
+      Need for cloud only for replace window.location
+    x-private: true
+    x-scope:
+      - cloud
+    example: ['egress-1.example.com', 'egress-2.example.com']
+  stats:
+    description: Statistics of the file usage.
+    allOf:
+    - $ref: '../../schemas.yml#/disk_file_stats'
+    nullable: true
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project ID
+    x-scope:
+      - cloud
+
+
+

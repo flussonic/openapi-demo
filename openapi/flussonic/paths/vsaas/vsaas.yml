@@ -1,0 +1,46 @@
+get:
+  operationId: vsaas_get
+  description: Get Watcher configuration.
+  summary: Get vsaas
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vsaas_config'
+      description: Returns vsaas config
+  tags:
+  - vsaas
+put:
+  operationId: vsaas_save
+  description: Update Watcher configuration.
+  summary: Save vsaas
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/vsaas_config'
+  responses:
+    '200':
+      description: Updated vsaas config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vsaas_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - vsaas
+delete:
+  operationId: vsaas_delete
+  description: Delete Watcher configuration.
+  summary: Delete vsaas
+  responses:
+    '204':
+      description: Deleted vsaas config
+  tags:
+  - vsaas

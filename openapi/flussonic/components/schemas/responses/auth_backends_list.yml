@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      auth_backends:
+        description: Configurations of the authorization backends.
+        items:
+          $ref: '../../schemas.yml#/auth_backend_config'
+        type: array

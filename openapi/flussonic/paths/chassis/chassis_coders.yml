@@ -1,0 +1,13 @@
+get:
+  operationId: chassis_coders_list
+  description: Fetch all coder modules.
+  summary: List coder modules
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_coders_list'
+      description: Response
+  tags:
+  - chassis

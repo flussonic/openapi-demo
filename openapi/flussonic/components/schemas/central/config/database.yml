@@ -1,0 +1,23 @@
+type: object
+properties:
+  url:
+    type: string
+    description: Connection string to PostgreSQL database
+    example: "postgres://central:pass@localhost:5432/central_dev"
+  max_connections:
+    type: integer
+    description: Max connection pool size that Central use to connect with database
+    example: 40
+    default: 40
+  connect_max_retries:
+    type: integer
+    description: The number of retries for Central to connect with its database
+    default: 20
+    example: 20
+  connect_retry_timeout:
+    type: string
+    description: Timeout of retry for Central to connect with its database
+    default: 1s
+    example: 2s
+required:
+  - url

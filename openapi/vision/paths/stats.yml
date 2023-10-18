@@ -1,0 +1,20 @@
+get:
+  operationId: stats_get
+  summary: Server info and runtime stats
+  description: |
+    Provides information about running instance such as version, available hardware and utilization
+  tags:
+    - monitoring
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: ../../schemas.yml#/vision_server_info
+            - $ref: ../../schemas.yml#/vision_server_devices
+        text/plain:
+          schema:
+            description: Prometheus metrics
+            type: string

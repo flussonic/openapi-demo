@@ -1,0 +1,37 @@
+type: string
+oneOf:
+- title: Normal
+  const: normal
+  description: |
+    Flussonic reads the data from and writes it to the hard drive, removing the data according to the DVR settings.
+    The default mode.
+- title: Migrate
+  const: migrate
+  description: |
+    Flussonic migrates the data from the current hard drive to other hard drives in the array on the fly, cleaning up the current hard drive.
+    You can check that Flussonic finished migrating the data, when there aren't any calls to this hard drive.
+    In the meantime, Flussonic continues archive recording, so it isn't interrupted. You don't need to restart Flussonic after you remove the disk.
+    Use this option if you need to extract the hard drive and don't want to lose the data.
+- title: Readonly
+  const: readonly
+  description: |
+    Flussonic reads the data from the hard drive, restricting any writing to it. Use this option in the following cases:  
+    Flussonic reads the data from the hard drive until the data on it expires. Then Flussonic deletes the data.
+    * If the hard drive is worn out and you can't write the data to the hard drive, delete files, update the index, or copy the data to another hard drive.
+    * If the hard drive stores the records written in the `keep` mode and you want to store the data permanently.
+- title: Rescue
+  const: rescue
+  description: |
+    Flussonic copies all the data from the old hard drive that's going to fail and stops writing the data to this hard drive.
+    Flussonic doesn't delete the data from the hard drive, unlike in `migrate` mode, so you can still access the archive.
+    Use this option in an emergency.
+- title: Abandon
+  const: abandon
+  description: |
+    Flussonic stops writing new data on this hard drive. When the data becomes obsolete, Flussonic deletes it, updating the index. 
+    Use this option when you want to replace a hard drive, for example, with a larger one.
+- title: Keep
+  const: keep
+  description: |
+    Flussonic writes the data to the hard drive, but doesn't delete it.
+    Use this option if you need to store the entire archive permanently.

@@ -1,0 +1,53 @@
+type: object
+properties:
+  object:
+    x-private: true
+    description: |
+      Object kind, clarifies information about api call target entity.
+    type: object
+    oneOf:
+    - $ref: ../../schemas.yml#/agent_object
+    - $ref: '../../schemas.yml#/api_key_object'
+    - $ref: '../../schemas.yml#/disk_file_object'
+    - $ref: '../../schemas.yml#/stream_object'
+    - $ref: '../../schemas.yml#/vod_object'
+    - $ref: '../../schemas.yml#/project_object'
+    discriminator:
+      propertyName: type
+      mapping:
+        agent: '#/components/schemas/agent_object'
+        api_key: '#/components/schemas/api_key_object'
+        disk_file: '#/components/schemas/disk_file_object'
+        stream: '#/components/schemas/stream_object'
+        vod: '#/components/schemas/vod_object'
+        project: '#/components/schemas/project_object'
+
+  created_at:
+    type: string
+    format: date-time
+    description: Creation date and time
+    example: "2021-01-30T08:30:00.432567Z"
+  ip:
+    description: IP address of the caller.
+    type: string
+    format: ip
+    example: '192.34.32.10'
+  user_agent:
+    description: The type of the device from which the API call was produced.
+    type: string
+  operation_id:
+    description: API method ID.
+    type: string
+  payload:
+    description: Payload data transmitter in the API call.
+    type: string
+  status:
+    description: Request status code.
+    type: integer
+  duration:
+    type: integer
+    description: Microseconds that this request took
+  request_id:
+    x-primary-key: true
+    type: string
+    description: Internal request-id for this operation

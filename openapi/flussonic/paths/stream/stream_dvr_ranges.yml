@@ -1,0 +1,36 @@
+parameters:
+- description: Stream name.
+  in: path
+  name: name
+  required: true
+  schema:
+    example: abc
+    type: string
+  style: simple
+get:
+  description: This method allows to get the list of DVR recorded ranges for a stream.
+  operationId: stream_dvr_ranges_list
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/stream_dvr_ranges_list'
+      description: Response
+  summary: Get stream recorded dvr ranges
+  tags:
+  - stream-dvr
+delete:
+  description: This method allows to delete a DVR recording in a specified range for a stream.
+  operationId: stream_dvr_ranges_delete
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/dvr_range'
+  responses:
+    '204':
+      description: The DVR recording for the specified range is deleted.
+  summary: Delete stream recorded DVR range
+  tags:
+  - stream-dvr

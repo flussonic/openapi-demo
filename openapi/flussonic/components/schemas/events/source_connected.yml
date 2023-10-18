@@ -1,0 +1,57 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Source is connected
+    url:
+      description: The input (source) URL.
+      type: string
+      format: url
+      nullable: true
+    priority:
+      description: The input priority.
+      type: integer
+      nullable: true
+    status:
+      type: string
+      description: Status
+      oneOf:
+      - title: Connecting
+        const: connecting
+        description: Connection is in progress
+      - title: Connected
+        const: connected
+        description: Source is connected
+      - title: Retrying
+        const: retrying
+        description: Retrying connection
+      - title: Redirected
+        const: redirected
+        description: Redirection received from the source
+      - title: Socket_connected
+        const: socket_connected
+        description: Socket is connected
+      - title: Transport_connected
+        const: transport_connected
+        description: Transport is connected
+      example: socket_connected
+    while:
+      type: string
+      nullable: true
+      description: The state of connection
+      example: rtsp_setup
+    version:
+      type: string
+      nullable: true
+      description: Protocol version (when applicable)
+    redirected_to:
+      type: string
+      nullable: true
+      description: |
+        URL to which connection was redirected. The value is available only on 'redirected' status. 
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

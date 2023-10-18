@@ -1,0 +1,20 @@
+type: object
+description: Digital fingerprint of the face
+required:
+  - data
+  - version
+properties:
+  data:
+    description: Base64 encoded representation of the fingerprint
+    type: string
+    format: byte
+  version:
+    description: |
+      Version identifier of the fingerprint's data. The version is assigned automatically.
+      Fingerprints of different versions cannot be compared to each other.
+    type: string
+    examples:
+      default:
+        value: aabbccdd
+      one:
+        value: c6ba4246

@@ -1,0 +1,34 @@
+get:
+  operationId: http_mpegts_timeshift_abs
+  summary: HTTP-MPEGTS absolute timeshift
+  description: |
+    If your stream is being recorded on the server with DVR, you can use this URL to play the recorded stream by HTTP-MPEGTS starting at a specified moment of time. 
+    For example, you can use it for old STBs or viewing recoreded shows with EPG.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/digital-video-recording-dvr/accessing-dvr-archives-via-various-protocols/#absolute-timeshift
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e., `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: Start time of playing the DVR archive in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  responses:
+    '200':
+      content:
+        video/mpeg:
+          schema:
+            type: string
+      description: HTTP-MPEGTS chunked transfer encoding live stream
+  tags:
+    - mpegts
+    - dvr

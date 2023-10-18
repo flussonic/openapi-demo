@@ -1,0 +1,44 @@
+get:
+  operationId: ptz_routes_get
+  summary: Get PTZ routes
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/ptz_routes'
+      description: PTZ routes
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Camera doesn't support PTZ routes
+  tags:
+  - ptz
+put:
+  operationId: ptz_routes_put
+  summary: Set PTZ routes
+  requestBody:
+    description: PTZ routes
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas.yml#/ptz_routes
+  responses:
+    '204':
+      description: Routes were set
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Error in routes array
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Camera doesn't support PTZ routes
+  tags:
+  - ptz

@@ -1,0 +1,19 @@
+type: object
+properties:
+  ip:
+    description: IP address to send ping request.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+  iface:
+    description: Interface via which to send ping.
+    type: string
+    format: interface_name
+  limit:
+    description: Limit to the number of packages sent.
+    type: integer
+  delay:
+    description: The delay between packages.
+    type: number
+    format: milliseconds
+required:
+  - ip

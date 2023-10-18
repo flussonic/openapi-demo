@@ -1,0 +1,22 @@
+type: object
+properties:
+  name:
+    type: string
+    format: media_name
+    description: Globally unique template name.
+    x-primary-key: true
+  prefixes:
+    description: |
+      List of prefixes that will be used to create dynamic names for published streams. 
+      A template creates one publishing point with one or more publishing locations, depending on the number of prefixes you define. 
+      All settings within the template with prefixes apply to the streams published under the name of the prefixes. 
+      You can also specify an empty prefix (`""`) to publish a stream with any prefix or even without a prefix. 
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/admin/stream-configuration-templates/#templates-and-prefixes
+    items:
+      type: string
+      format: media_name
+    type: array
+    nullable: true
+    example: ["chats", ""]

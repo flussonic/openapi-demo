@@ -1,0 +1,7 @@
+type: object
+description: Attributes of the detected vehicle
+properties:
+  plate_text:
+    description: Recognized vehicle's license plate number
+    allOf:
+    - $ref: ../../schemas.yml#/vision_license_plate_text

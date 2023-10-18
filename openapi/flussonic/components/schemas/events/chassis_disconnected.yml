@@ -1,0 +1,12 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Chassis is disconnected.
+    node:
+      description: The node name.
+      type: string
+      x-atom: true
+- $ref: '../../schemas.yml#/event_default'
+

@@ -1,0 +1,78 @@
+# https://datatracker.ietf.org/doc/html/rfc8216#section-4.3.4.2
+type: object
+properties:
+  uri:
+    description: |
+      URI of the playlist with segments and exact bitrate.
+      Can be:
+      - relative
+      - absolute
+      - full
+
+      Relative is used in regular situations.
+
+      Absolute CAN be used in vod_mbr when another medias are referenced.
+
+      Full can be used in CDN scenario, however we prefer to pass playlists through flussonic.
+    type: string
+    format: url
+
+  bandwidth:
+    description: Peak segment bit rate of the Variant Stream
+    type: integer
+
+  average_bandwidth:
+    description: Average segment bit rate of the Variant Stream.
+    type: integer
+    nullable: true
+
+  codecs:
+    description: |
+      List of formats, where each format specifies a media sample type that is
+      present in one or more Renditions specified by the Variant Stream.
+      See https://tools.ietf.org/html/rfc6381 for a formal, detailed description of this attribute.
+    type: array
+    items:
+      type: string
+    nullable: true
+    example: ["avc1.42c00d", "mp4a.40.2"]
+
+  width:
+    description: |
+      Width is a part of the RESOLUTION attribute
+      The optimal pixel resolution at which to display all the video in the Variant Stream.
+    type: integer
+    nullable: true
+
+  height:
+    description: |
+      Height is a part of the RESOLUTION attribute
+      The optimal pixel resolution at which to display all the video in the Variant Stream.
+    type: integer
+    nullable: true
+
+  frame_rate:
+    description: Maximum frame rate for all the video in the Variant Stream
+    type: integer
+    nullable: true
+
+  audio:
+    description: |
+      `group_id` property of an `hls_playlist_media_link` in the same `hls_master_playlist`
+      Indicates the set of audio Renditions that SHOULD be used when playing the presentation.
+    type: string
+    nullable: true
+
+  subtitles:
+    description: |
+      `group_id` property of an `hls_playlist_media_link` in the same `hls_master_playlist`
+      Indicates the set of subtitle Renditions that SHOULD be used when playing the presentation.
+    type: string
+    nullable: true
+
+  closed_captions:
+    description: |
+      `group_id` property of an `hls_playlist_media_link` in the same `hls_master_playlist`
+      Indicates the set of closed captions Renditions that SHOULD be used when playing the presentation.
+    type: string
+    nullable: true

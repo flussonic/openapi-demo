@@ -1,0 +1,6 @@
+type: object
+properties:
+  box:
+    description: Position of the objects at the frame
+    allOf:
+    - $ref: ../../schemas.yml#/vision_box

@@ -1,0 +1,6 @@
+items:
+  oneOf:
+    - $ref: '../../schemas.yml#/motion_started'
+    - $ref: '../../schemas.yml#/motion_stopped'
+type: array
+description: Batch of events

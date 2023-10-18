@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      accounts:
+        items:
+          $ref: '../../schemas.yml#/cloud_account'
+        type: array
+        description: List of accounts

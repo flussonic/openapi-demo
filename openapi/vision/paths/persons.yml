@@ -1,0 +1,36 @@
+get:
+  operationId: persons_list
+  summary: List of persons
+  description: Returns a list of persons
+  tags:
+  - persons
+  parameters:
+  - name: tag
+    in: query
+    description: Filter results by tags, comma-separated
+    required: false
+    explode: false
+    style: form
+    schema:
+      type: string
+      examples:
+        - employee,visitor
+        - engineer,accountant
+  - name: attribute
+    in: query
+    description: Filter results by user-defined attributes.
+    required: false
+    explode: true
+    style: deepObject
+    schema:
+      type: string
+      examples:
+        - attribute[employee_id]=8458
+        - attribute[organization_id]=237
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_persons_list

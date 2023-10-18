@@ -1,0 +1,50 @@
+type: object
+properties:
+  text:
+    description: |
+      Text, time, or subtitles to burn-in to video frames.
+
+      * For text - it is the text
+      * For subtitles - it is the subtitles track, e.g., `t1`.
+      * For time - it is the time in one of the formats:
+      ** `%T` - the time in 24-hour notation (`%H:%M:%S`).
+      ** `%F` - equivalent to `%Y-%m-%d` (the ISO 8601 date format).
+    nullable: true
+    type: string
+  x:
+    description: The offset of the text, timestamp, or subtitles position, in pixel, to the right or left to the center of the screen.
+    nullable: true
+    type: integer
+  y:
+    description: The offset of the text, timestamp, or subtitles position, in pixel, up or down to the center of the screen.
+    nullable: true
+    type: integer
+  position:
+    description: Position to burn text.
+    nullable: true
+    oneOf:
+    - title: Top left
+      const: tl
+    - title: Bottom left
+      const: bl
+    - title: Top right
+      const: tr
+    - title: Bottom right
+      const: br
+    - title: Center
+      const: c
+    - title: Center top
+      const: ct
+    - title: Center bottom
+      const: cb
+    type: string
+  font:
+    description: Font to be used for text, timestamp, or subtitles burn-in to video frames.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_label_font'
+  box:
+    description: Parameters of the box around the text, timestamp, or subtitles.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_label_box'

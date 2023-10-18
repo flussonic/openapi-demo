@@ -1,0 +1,18 @@
+properties:
+  account_id:
+    type: integer
+    format: snowflake_id
+    example: 6902558627475886087
+    description: Account Id
+  balance:
+    type: integer
+    description: The balance is not expressed in any real currency, these are internal conventional units.
+    readOnly: true
+  actual_price:
+    allOf:
+    - $ref: '../../schemas.yml#/cloud_account_price'
+    description: Resource price as of today. Can be null if not set actual price for the account.
+    nullable: true
+    readOnly: true
+required:
+  - account_id

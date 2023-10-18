@@ -1,0 +1,6 @@
+enum:
+- file
+- stream
+- dvr_file
+- dvr_stream
+type: string

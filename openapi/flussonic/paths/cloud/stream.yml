@@ -1,0 +1,25 @@
+get:
+  x-private: true
+  description: |
+    Get configurations of stream.
+    Cloud config and list of provisioned flussonic's configs on each streamer.
+  operationId: stream_get
+  summary: Cloud stream configurations
+  parameters:
+  - name: name
+    description: Stream name
+    in: path
+    required: true
+    schema:
+      example: abc-xyz
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_stream'
+      description: Cloud stream configurations
+  tags:
+  - streams

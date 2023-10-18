@@ -1,0 +1,136 @@
+type: object
+properties:
+  http:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_http_config'
+    default: []
+    description: List of HTTP ports or `host:port` pairs that will be used
+      for listening.
+    examples:
+      default:
+        value: [{"port":80, "api": false}]
+  https:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_https_config'
+    default: []
+    description: List of HTTPS ports or `host:port` pairs that will be used
+      for listening.
+    examples:
+      default:
+        value: [{"port":443}]
+  rtmp:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_config'
+    description: List of RTMP ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":1935}]
+    x-api-deny:
+      - central
+  rtmps:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_rtmps_config'
+    description: List of RTMPS ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":1936}]
+    x-api-deny:
+      - central
+  rtsp:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_config'
+    description: List of RTSP ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":554}]
+    x-api-deny:
+      - central
+  rtsps:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_rtsps_config'
+    description: List of RTSPS ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":555}]
+    x-api-deny:
+      - central
+  turn:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_config'
+    description: List of TURN ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":3478}]
+    x-api-deny:
+      - central
+  snmp:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_config'
+    description: List of SNMP ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":161}]
+    x-api-deny:
+      - central
+  sip:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_config'
+    description: List of SIP ports or `host:port` pairs that will be used
+      for listening.
+    default: []
+    examples:
+      default:
+        value: [{"port":5060}]
+    x-api-deny:
+      - central
+
+  srt:
+    description: |
+      The list of port ranges or `host:port-range` pairs that may be in use for playing SRT or accepting SRT publications 
+      (depending on the `mode` parameter).
+
+      When publishing to one of the ports from the range using `srt://server:port` URL with `stream_id` not specified,
+      Media Server requests the stream name from `config_external` backend using 
+      [GET /srt_port_resolve/{port}](https://flussonic.com/doc/api/config-external/#tag/stream/operation/srt_port_resolve) endpoint
+      and creates the stream with such name if it's found. Use the stream name for further operations with the stream.
+      
+      So for the stream name to be returned to Media Server by SRT port you need 
+      1) `config_external` option set and 
+      2) some stream in the configuration backend side that has corresponding `srt` port specified in its config.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/listen_srt_config'
+    default: []
+    x-api-deny:
+      - central

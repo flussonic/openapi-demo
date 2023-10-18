@@ -1,0 +1,57 @@
+# https://datatracker.ietf.org/doc/html/rfc8216#section-4.3.4.1
+type: object
+properties:
+  type:
+    description: Content of the referenced url, corresponds to TYPE attribute
+    type: string
+    enum:
+    - audio
+    - subtitles
+    - closed_captions
+
+  uri:
+    description: |
+      URI of the playlist with segments and exact bitrate.
+      Can be:
+      - relative
+      - absolute
+      - full
+
+      Relative is used in regular situations.
+
+      Absolute CAN be used in vod_mbr when another medias are referenced.
+
+      Full can be used in CDN scenario, however we prefer to pass playlists through flussonic.
+    type: string
+    format: url
+
+  group_id:
+    description: Specifies the group to which the Rendition belongs.
+    type: string
+
+  language:
+    description: |
+      One of the standard Tags for Identifying Languages, which identifies the primary
+      language used in the Rendition.
+    type: string
+    nullable: true
+
+  name:
+    description: Human-readable description of the Rendition.
+    type: string
+
+  default:
+    description: Flag indicates that this media is default
+    type: boolean
+    nullable: true
+
+  instream_id:
+    description: |
+      A Rendition within the segments in the Media Playlist.
+      This attribute is REQUIRED if the TYPE attribute is CLOSED-CAPTIONS,
+      in which case it MUST have one of the values: "CC1", "CC2", "CC3", "CC4", or "SERVICEn"
+      where n MUST be an integer between 1 and 63 (e.g., "SERVICE9" or "SERVICE42").
+
+      For all other TYPE values, the INSTREAM-ID MUST NOT be specified.
+    type: string
+    nullable: true

@@ -1,0 +1,78 @@
+type: object
+properties:
+  port:
+    description: |
+      Listening port or a `host:port` pair for the SRT configuration.
+      Must be unique on the whole server.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    nullable: true
+    example: 9050
+  minversion:
+    description: |
+      The minimum SRT version that is required from the peer for SRT publication.
+      The format is `x.y.z`. 
+      The default value is `1.0.0`.
+    type: string
+    nullable: true
+    x-notice: SRTO_MINVERSION (0x010000)
+    example: '1.1.0'
+  version:
+    description: |
+      Required SRT version. The format is `x.y.z`.
+      The default value is `1.0.0`.
+    type: string
+    nullable: true
+    x-notice: SRTO_VERSION
+    example: '1.3.0'
+  enforcedencryption:
+    description: |
+      Whether both connection parties must have the same password set (including empty, in other words, with no encryption). 
+      If the passwords do not match or only one side is unencrypted, the connection is rejected. 
+      The default value is `true`.
+    type: boolean
+    nullable: true
+    x-notice: SRTO_ENFORCEDENCRYPTION (true)
+    example: true
+  passphrase:
+    description: |
+      The password for the encrypted transmission. 
+      Its length should be not less than 10 and not more than 79 characters. 
+      The default value is an empty string ("").
+    type: string
+    nullable: true
+    x-notice: SRTO_PASSPHRASE ("")
+    example: mytopsecret
+  timeout:
+    description: |
+      Data transmission timeout in seconds. 
+      If set to `false` then data transmission time is unlimited. This is a defalut behavior.
+    anyOf:
+    - type: integer
+      format: seconds
+    - enum:
+      - false
+      type: boolean
+    nullable: true
+    x-notice: SRTO_RCVTIMEO SRTO_SNDTIMEO (ms, -1 no limit)
+    example: 10
+  linger:
+    description: |
+      The time, in seconds, that the socket waits for the unsent data before closing. 
+      The default value is 180.
+    type: integer
+    format: seconds
+    nullable: true
+    x-notice: SRTO_LINGER on, (180s) (off - 0s)
+    example: 15
+
+  latency:
+    description: |
+      The latency value for both directions of the socket.
+      By default initial value latency is 0 when transmitting and 120ms when receiving video.
+      Actual value established after connection handshake.
+      Increased value helps tolerate network losses and delays.
+    type: integer
+    format: milliseconds
+    x-notice: SRTO_LATENCY
+    example: 150

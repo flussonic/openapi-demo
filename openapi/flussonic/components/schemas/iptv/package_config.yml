@@ -1,0 +1,13 @@
+type: object
+properties:
+  name:
+    description: The package name.
+    type: string
+  channels:
+    description: The list of channels in the package.
+    type: array
+    items:
+      type: string
+    default: []
+required:
+  - name

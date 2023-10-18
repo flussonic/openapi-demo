@@ -1,0 +1,6 @@
+type: array
+description: Line
+items:
+  $ref: ../../../schemas.yml#/vision_point
+minItems: 2
+maxItems: 2

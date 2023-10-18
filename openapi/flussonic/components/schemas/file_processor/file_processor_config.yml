@@ -1,0 +1,14 @@
+type: object
+properties:
+  path:
+    description: The directory where Flussonic puts output files.
+    type: string
+    format: disk_path
+  out:
+    description: The directory where Flussonic puts output files.
+    type: string
+    format: disk_path
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: path
+

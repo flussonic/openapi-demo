@@ -1,0 +1,6 @@
+type: string
+enum:
+- system_b
+- system_a
+- keep
+example: keep

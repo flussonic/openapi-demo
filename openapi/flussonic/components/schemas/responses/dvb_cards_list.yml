@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      dvb_cards:
+        description: The list of DVB cards configured on the server.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/dvb_card_config'

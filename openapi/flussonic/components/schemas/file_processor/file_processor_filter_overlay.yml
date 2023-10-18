@@ -1,0 +1,41 @@
+type: object
+required:
+- group
+- start
+- stop
+- position
+properties:
+  group:
+    type: string
+    title: Overlay
+    const: overlay
+    description: Put black rectangle to the specified place
+  start:
+    description: Filter start time
+    type: integer
+    format: milliseconds
+  stop:
+    description: Filter end time
+    type: integer
+    format: milliseconds
+  position:
+    description: Overlay position at the output image
+    type: object
+    required:
+    - x1
+    - y1
+    - x2
+    - y2
+    properties:
+      x1:
+        description: Top overlay coordinate
+        type: integer
+      y1:
+        description: Left overlay coordinate
+        type: integer
+      x2:
+        description: Right overlay coordinate
+        type: integer
+      y2:
+        description: Bottom overlay coordinate
+        type: integer

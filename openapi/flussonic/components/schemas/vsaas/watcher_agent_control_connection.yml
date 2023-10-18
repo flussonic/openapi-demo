@@ -1,0 +1,33 @@
+type: object
+properties:
+  opened_at:
+    type: number
+    format: utc_ms
+    nullable: true
+    description: Timestamp of the current Agent control connection opening.
+    example: 1637094994
+  hostname:
+    type: string
+    nullable: true
+    description: Hostname of the server
+    example: agents-001.vsaas.io
+  alive:
+    type: boolean
+    description: A flag showing if Agent is connected at the moment of the request. 
+  status_changed_at:
+    description: |
+      UTC timestamp of the last Agent status change to offline or online.
+      Same as `opened_at` if Agent is now connected.
+    type: integer
+    format: utc_seconds
+    example: 1634560921
+  bytes_from_server:
+    type: integer
+    format: bytes
+    description: The number of bytes received from the server by Agent since `opened_at`.
+    example: 40000
+  bytes_to_server:
+    type: integer
+    format: bytes
+    description: The number of bytes sent to the server by Agent since `opened_at`.
+    example: 400000000000

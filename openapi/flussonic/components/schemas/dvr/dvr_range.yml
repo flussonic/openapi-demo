@@ -1,0 +1,17 @@
+type: object
+properties:
+  from:
+    description: |
+      The beginning of the recorded DVR range. 
+    type: integer
+    format: utc
+    example: 1525186456
+  duration: 
+    description: |
+      The duration of the recorded DVR range. 
+    type: integer
+    format: seconds
+    example: 28800
+required:
+- from
+- duration

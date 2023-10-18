@@ -1,0 +1,74 @@
+type: object
+properties:
+  bitrate:
+    description: |
+      Audio bitrate. The allowed values are:
+
+      * `copy` - the bitrate or the original stream is copied to the outgoing stream.
+      * a full number of bits (e.g., 64000) or a short form of the number with `k` (e.g., 64k).
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_bitrate'
+    example: 96
+  sample_rate:
+    description: |
+      Sample rate, in hertz - 
+      the number of samples per second taken from a continuous signal to make a discrete or digital signal.
+      The allowed values are: 
+      `0` - to copy input sample rate, a number (input audio is resampled with equalization), or the empty value (equalization without resampling)
+    nullable: true
+    type: integer
+    example: 8000
+  codec:
+    description: Audio codec (the AAC codec is used by default).
+    nullable: true
+    oneOf:
+    - title: AAC
+      const: aac
+    - title: Opus
+      const: opus
+    - title: MP2A
+      const: mp2a
+    - title: AC3
+      const: ac3
+    - title: PCMA
+      const: pcma
+    type: string
+    example: opus
+  channels:
+    description: The number of audio channels in an output stream.
+    nullable: true
+    type: integer
+    example: 2
+  avol:
+    description: |
+      Output audio volume. The value can be specified in decibels (dB) or it can be an integer/float (3, 0.5, etc.).
+
+      If it is just an integer or a float, the output audio volume is calculated by this formula:
+
+      `output_volume = avol * input_volume`
+
+      If specified in decibels (dB), the output audio volume is calculated as follows:
+
+      `output_volume = input_volume +/- avol`
+
+      depending whether it is a positive (+9dB) or a negative value (-6dB).
+      
+      By default it equals to 1 (the input audio volume).
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/transcoder/how-to-change-the-volume-level
+    nullable: true
+    type: string
+    example: '-6dB'
+  split_channels:
+    description: |
+      This option allows to split each audio track with multiple channels into several mono tracks.
+    nullable: true
+    type: boolean
+    default: false
+  external_audio_filter:
+    description: Custom audio filter developed by a user; this should be an ffmpeg library compiled as `.so` file.
+    allOf:
+    - $ref: '../../schemas.yml#/tc_external_audio_filter'
+    x-private: true

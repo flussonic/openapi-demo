@@ -1,0 +1,19 @@
+oneOf:
+- title: CPU
+  const: cpu
+- title: Intel Quick Sync Video
+  const: qsv
+- title: Nvidia NVENC (encoder only)
+  const: nvenc
+- title: Nvidia NVENC 2
+  const: nvenc2
+  x-private: true
+- title: Flussonic Coder
+  const: coder
+- title: Raspberry Pi OMX
+  const: omx
+  x-private: true
+- title: L4T2
+  const: l4t2
+  x-private: true
+type: string

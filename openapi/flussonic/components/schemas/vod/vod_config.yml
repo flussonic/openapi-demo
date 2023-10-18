@@ -1,0 +1,158 @@
+type: object
+properties:
+  prefix:
+    description: |
+      The unique name of VOD location. 
+
+      It is used as a prefix in file playback requests to explicitly specify where the system should find the files for playing. 
+      All the path after the prefix will be cut and added to the specified path on the disk (the storage configured for this VOD location). 
+      Thus, the system will find the file on the disk and play it.
+    type: string
+    format: media_name
+    x-primary-key: true
+    example: 'movies'
+  auto_mbr:
+    description: Turns on automatic creation of a multi-bitrate HLS playlist from several files with different bitrates.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/vod-file-broadcasting/a-multibitrate-playlist-made-from-files/#vod-auto_mbr-page
+    type: boolean
+    default: false
+  position:
+    type: integer
+    format: sort_index
+    description: If an order of VOD locations is declared, it is a position of the this VOD location in the order.
+    nullable: true
+    x-notice: only for stream
+    example: 1
+  disabled:
+    description: Whether this VOD location is disabled.
+    type: boolean
+    nullable: true
+    example: false
+  storages:
+    description: The directories (on disk or on another server) that Flussonic scans for VOD files.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/vod_storage'
+    type: array
+    nullable: true
+  auth:
+    description: Configuraton of the authorization backend for play sessions **only**.
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: on_play
+  on_play:
+    description: |
+      Configuraton of the authorization backend for play sessions **only**. 
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/#playback-authorization
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+    nullable: true
+  cache:
+    description: |
+      Configuraton of the local file cache which is used for files from a cloud or an HTTP server.
+
+      If this option is enabled, a file will be downloaded to a local cache path by megabyte blocks. 
+      During playback, the file will be first read from the cache. 
+      This allows to avoid multiple HTTP requests to the source for each part of data and, thus, to speed up broadcasting.
+    allOf:
+    - $ref: '../../schemas.yml#/cache_spec'
+    nullable: true
+  segment_cache:
+    x-private: true
+    description: |
+      Configuraton of the intermediate cache of video file segements for files on SSD drives.
+      It is not recommended to use this option without local cahe.
+    allOf:
+    - $ref: '../../schemas.yml#/segment_cache_spec'
+    nullable: true
+  read_queue:
+    description: The number of simultaneous readers form disk that should wait in a queue for playing a file.
+    type: integer
+    nullable: true
+    example: 100
+  max_readers:
+    description: The number of simultaneous requests to disk for a given prefix.
+    type: integer
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    example: 100
+  thumbnails:
+    description: Configuration of thumbnails generator.
+    allOf:
+    - $ref: '../../schemas.yml#/thumbnails_spec'
+    nullable: true
+  download:
+    description: |
+      Enables downloading files from the URL `http://FLUSSONIC-IP:80/vod_prefix/file_subpath.mp4`. 
+      The `Range` HTTP headers are supported.
+    type: boolean
+    default: false
+    example: false
+  protocols:
+    description: Configuraton of play protocols.
+    allOf:
+    - $ref: '../../schemas.yml#/play_protocols_spec'
+    nullable: true
+  url_prefix:
+    description: |
+      The names of separate segments within a segment-based HLS or DASH playlist start with the *specified* prefix. 
+      The option no longer works for *variant playlists*.
+    allOf:
+    - $ref: '../../schemas.yml#/url_prefix'
+    nullable: true
+  segment_duration:
+    description: The time, in seconds, of the segment duration. Used for the protocols like HLS or DASH. 
+    allOf:
+    - $ref: '../../schemas.yml#/segment_duration'
+    nullable: true
+  logo:
+    description: Overlay logo.
+    allOf:
+    - $ref: '../../schemas.yml#/web_logo_spec'
+    nullable: true
+  timeout:
+    description: |
+      The time (in milliseconds) passed since the last file request.
+      If the file was not requested within this period, it will be closed and its resources will be deallocated.
+    type: integer
+    nullable: true
+    example: 3
+  drm:
+    description: Configuraton of the content encryption (DRM).
+    allOf:
+    - $ref: '../../schemas.yml#/drm_spec'
+    nullable: true
+  pulse_off:
+    x-private: true
+    description: If this option is enabled, the data about playing the files is not collected for the Pulse tab in Flussonic UI.    
+    type: boolean
+    nullable: true
+    example: false
+    x-notice: do not collect pulse data on this stream
+  add_audio_only:
+    description: |
+      Whether to add an audio-only version of an HLS stream. 
+      Used to create App Store compliant HLS streams to deliver the content to Apple iOS devices.
+      Add audio-only HLS playlist to variant MBR playlist for iOS compliant streaming.
+    type: boolean
+    nullable: true
+    example: false
+  provider:
+    description: Human-readable name of the content provider. Applicable to MPEG-TS.
+    type: string
+    nullable: true
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project ID
+    x-scope:
+      - cloud

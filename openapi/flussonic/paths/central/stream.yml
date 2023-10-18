@@ -1,0 +1,91 @@
+get:
+  operationId: stream_get
+  summary: Get one stream
+  description: |
+    This method allows you to fetch a single stream. 
+    The data returned in this method are the same as for `streams_list` operation.
+  parameters:
+  - name: name
+    description: Stream name
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/central_stream_config'
+      description: Whole stream
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Stream not found
+  tags:
+  - stream
+put:
+  operationId: stream_save
+  summary: Save stream
+  description: |
+    Create or update a stream by its name.
+    If the stream doesn't exists in the disk config, it will be created.
+
+    If you pass only a partial stream configuration, just the passed field(s) will be updated, not the whole stream.
+    
+    To create a new stream the property `name` is required.
+
+    Pass the `"$reset": true` option to replace the stream configuration with the provided one.
+  parameters:
+  - name: name
+    description: Stream name
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    description: Partial stream configuration
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/central_stream_config'
+  responses:
+    '200':
+      description: Updated stream
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/central_stream_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - stream
+delete:
+  operationId: stream_delete
+  summary: Delete stream
+  description: |
+    The stream will be permanently deleted from the project.
+  parameters:
+  - name: name
+    description: Stream name
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Stream deleted successfully.
+  tags:
+  - stream

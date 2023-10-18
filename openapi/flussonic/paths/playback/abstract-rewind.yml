@@ -1,0 +1,35 @@
+get:
+  operationId: abstract_rewind_manifest
+  summary: abstract rewind manifest
+  description: |
+    Nice combination of live and DVR DASH playlists.
+
+    This request gives a playlist with a wide sliding window that allows you to rewind DASH streams and pause them for many hours.
+
+    For example, the playlist "rewind-7200.json" allows your clients to pause the stream for up to 2 hours or rewind to the start of a TV show without using catchup URLs.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name.
+    required: true
+    schema:
+      type: string
+      example: 'clock'
+  - name: ago
+    in: path
+    description: |
+      DVR window size in seconds.
+      It is a duration of a DASH manifest in seconds, so your clients will be able to pause the stream up to this period or rewind it, for example, to the start of a TV show.
+    required: true
+    schema:
+      type: integer
+      example: 7200
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/abstract_manifest'
+      description: abstract manifest
+  tags:
+    - api

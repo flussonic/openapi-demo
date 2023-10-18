@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      streams:
+        items:
+          $ref: '../../schemas.yml#/central_stream_config'
+        type: array
+        description: List of fetched streams according to the query parameters.

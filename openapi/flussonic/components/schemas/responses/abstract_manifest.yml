@@ -1,0 +1,35 @@
+description: |
+  List of periods. Each period has single media_info, single DRM key (if any), no significant gaps.
+type: object
+properties:
+  mutability:
+    description: |
+      Mutability information. This property shows how the manifest will change on future requests
+    type: string
+    oneOf:
+    - title: Live
+      const: live
+      description: New segments will be added, and old segments will disappear
+    - title: Event (append-only)
+      const: event
+      description: New segments will be appended, but all previously seen segments will be kept
+    - title: Static (VOD)
+      const: static
+      description: No changes will be made to this manifest
+  segment_prefix:
+    description: |
+      Segment path template is `/{stream_name}/{segment_prefix}-{segment_dts}.{segment_extension}`
+
+      This field is a prefix to insert into segment URL template.
+      E.g. when desired format is mpegts and the segment is stored in DVR,
+      segments of the stream 'clock' would be accessible by url `http://example.com/clock/dvr-1653316321820.ts`
+    type: string
+    enum:
+    - live
+    - dvr
+    - vod
+  periods:
+    description: Continuous playback periods.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/abstract_playback_period'

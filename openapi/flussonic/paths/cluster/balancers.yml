@@ -1,0 +1,13 @@
+get:
+  description: Fetch all balancers
+  operationId: balancers_list
+  summary: List the balancers
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/balancers_list'
+      description: Response
+  tags:
+  - cluster

@@ -1,0 +1,17 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Presence disconnected.
+    reason:
+      description: Reason for disconnecting from the presence server.
+      type: string
+      x-atom: true
+      nullable: true
+    ip:
+      description: Presence server IP address.
+      type: string
+      # format: network_addr
+- $ref: '../../schemas.yml#/event_default'
+

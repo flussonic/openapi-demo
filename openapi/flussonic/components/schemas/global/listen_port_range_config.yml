@@ -1,0 +1,12 @@
+type: object
+properties:
+  address:
+    type: string
+    description: Network address that will be used for listening.
+    example: '10.0.35.1'
+  ports:
+    description: The range of ports that will be listened.
+    allOf:
+    - $ref: '../../schemas.yml#/network_port_range'
+required:
+- ports

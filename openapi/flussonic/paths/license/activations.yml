@@ -1,0 +1,14 @@
+get:
+  x-private: true
+  operationId: activations_list
+  description: Fetch all activations.
+  summary: List activations
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license_activations_list'
+      description: List of activations
+  tags:
+  - license

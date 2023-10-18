@@ -1,0 +1,19 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Server started successfully.
+    previous_state:
+      $ref: '../../schemas.yml#/previous_server_state'
+      nullable: true
+    version:
+      description: Version of Media Server.
+      type: string
+      # format: server_version
+    instance_id:
+      description: The ID of the started instance. 
+      type: string
+      # format: instance_id
+- $ref: '../../schemas.yml#/event_default'
+

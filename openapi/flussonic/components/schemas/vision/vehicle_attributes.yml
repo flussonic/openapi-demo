@@ -1,0 +1,9 @@
+type: object
+properties:
+  purpose:
+    description: The purpose of the vehicle, e.g. emergency or regular.
+    allOf:
+    - $ref: ../../schemas.yml#/vision_vehicle_purpose
+  license_plate_missing:
+    type: boolean
+    description: Indicates if no license plate is detected on this vehicle

@@ -1,0 +1,10 @@
+properties:
+  service_type:
+    type: integer
+    nullable: true
+    description: The type of the program.
+  media_info:
+    type: integer
+    nullable: true
+    description: The timeout value.
+type: object

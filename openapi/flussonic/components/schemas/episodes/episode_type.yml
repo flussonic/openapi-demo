@@ -1,0 +1,10 @@
+oneOf:
+- type: string
+  const: generic
+  description: Unspecified stream episode
+- type: string
+  const: vehicle
+  description: Vehicle is detected
+- type: string
+  const: face
+  description: Face is detected

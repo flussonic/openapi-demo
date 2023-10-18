@@ -1,0 +1,40 @@
+# договорились сделать account_balance_increment отдельным REST ресурсом с токеном транзакции (Twitter ID)
+# облако реализует это ресурс как "write once":
+# - первая успешная запись вернет код 200
+# - все последующие запись с тем же токеном вернет код 410 "Gone"
+
+post:
+  description: |
+    Increment account balance. Transaction id is used to write increment once.
+  x-private: true
+  operationId: account_balance_increment_save
+  summary: Increment balance on the account
+  parameters:
+  - name: account_id
+    description: Account id.
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_account_balance_increment'
+  responses:
+    '204':
+      description: Balance increment created successfully
+    '400':
+      description: |
+        Balance increment rejected for specified transaction package_id due to:
+          - transaction id is expired
+          - transaction id is already used for creating balance increment 
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - accounts

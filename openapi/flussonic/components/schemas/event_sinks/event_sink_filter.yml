@@ -1,0 +1,21 @@
+type: object
+# properties:
+#   event:
+#     type: array
+#     items:
+#       type: string
+#     nullable: true
+#   media:
+#     type: array
+#     items:
+#       type: string
+#     nullable: true
+additionalProperties:
+  description: |
+    A set of filters for event fields.
+    You can specify an event field and its possible values.
+  type: array  
+  items:
+    type: string
+    example: 'stream_stopped'
+ 

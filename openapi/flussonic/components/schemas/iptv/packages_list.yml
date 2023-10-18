@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      packages:
+        items:
+          $ref: '../../schemas.yml#/package_config'
+        type: array
+        description: List of fetched packages according to query parameters.

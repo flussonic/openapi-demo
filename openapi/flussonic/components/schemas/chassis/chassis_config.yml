@@ -1,0 +1,98 @@
+type: object
+properties:
+  api_port:
+    description: Private port for API requests to the chassis from coders.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    readOnly: true
+  auto_reboot:
+    description: Shows if auto restart of coders when (re)starting chassis is enabled.
+    type: boolean
+    default: false
+    readOnly: true
+  dhcpd_iface:
+    description: |
+      Network interface for automatic reception of IP address from DHCP server. 
+      This interface will be used for launching coders.
+    type: string
+    format: interface_name
+    readOnly: true
+  dhcpd_port:
+    description: Source port for DHCP requests.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    readOnly: true
+  dhcpd_port_dest:
+    description: Destination port for DHCP requests.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    readOnly: true
+  lcd:
+    description: Shows if LCD monitor capabilities are enabled in the firmware.
+    type: boolean
+    default: false
+    readOnly: true
+  ntpd_iface:
+    description: Network interface for NTP daemon. 
+    type: string
+    format: interface_name
+    readOnly: true
+  ntpd_port:
+    description: Port for NTP daemon.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    readOnly: true
+  tftp_port:
+    description: Port for TFTP used for loading program core to the coders.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    readOnly: true
+  tftp_root:
+    description: TFTP root directory.
+    type: string
+    format: disk_path
+    readOnly: true
+  update_channel:
+    description: Update channel specified in the config file.
+    type: string
+    readOnly: true
+  firmware_host:
+    description: URL for downloading firmware.
+    type: string
+    format: url
+    readOnly: true
+  firmware_version:
+    description: Firmware version installed on the device.
+    type: string
+    readOnly: true
+  firmware_boot_dir:
+    description: Directory to boot the device from. This is also where the firmware is downloaded on updates.
+    type: string
+    format: disk_path
+    readOnly: true
+  stats:
+    description: Statistics of the chassis connections.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_stats'
+    readOnly: true
+  restart_coder_timeout:
+    description: Timeout for restarting coders.
+    type: integer
+    readOnly: true
+  hostname:
+    description: The name of the chassis server.
+    type: string
+    format: server_name
+    example: coder1.local
+  default_gateway_interface:
+    description: |
+      If `default_gateway` parameters are set the individual interfaces config, 
+      this gateway is only used for checking license and updates. 
+      Otherwise, it is used as gateway for all traffic.
+    type: string
+    example: 'streaming'
+  ntp_servers:
+    description: List of NTP server host names or IP addresses
+    type: array
+    items:
+      type: string

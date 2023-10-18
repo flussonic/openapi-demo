@@ -1,0 +1,15 @@
+get:
+  operationId: dvrs_list
+  summary: Available DVR storages
+  description: |
+    You can select one of pre-configured dvr storages with their predefined
+    limits and guaranties.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_dvrs_list'
+      description: Response
+  tags:
+  - dvr

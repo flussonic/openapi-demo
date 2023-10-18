@@ -1,0 +1,9 @@
+type: string
+enum:
+- shutdown
+- killed
+- unknown
+- none
+- error_reading
+- unconfigured
+description: The previous state of the server.

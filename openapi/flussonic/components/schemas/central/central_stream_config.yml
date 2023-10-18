@@ -1,0 +1,14 @@
+allOf:
+- $ref: '../../schemas.yml#/stream_config'
+- type: object
+  properties:
+    streamer_hostname:
+      type: string
+      description: Streamer hostname
+      x-scope:
+      - central
+      - watcher-core
+      x-api-allow:
+      - watcher-core
+      deprecated: true
+      x-delete-at: 23.12

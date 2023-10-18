@@ -1,0 +1,10 @@
+anyOf:
+- $ref: '../../schemas.yml#/frame_video_codec'
+- $ref: '../../schemas.yml#/frame_audio_codec'
+- $ref: '../../schemas.yml#/frame_raw_codec'
+- $ref: '../../schemas.yml#/frame_text_codec'
+- $ref: '../../schemas.yml#/frame_app_codec'
+- type: string
+  readOnly: true
+  x-private: true
+  description: We will show recieved codec, but it could not be configured.

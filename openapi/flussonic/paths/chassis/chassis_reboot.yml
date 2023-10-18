@@ -1,0 +1,9 @@
+post:
+  description: Reboot chassis
+  operationId: chassis_reboot
+  summary: Reboot chassis
+  responses:
+    '204':
+      description: Response
+  tags:
+  - chassis

@@ -1,0 +1,55 @@
+type: object
+properties:
+  ips:
+    description: Client IP addresses which data is recorded.
+    type: array
+    items:
+      allOf:
+        - $ref: '../../schemas.yml#/network_addr'
+    example: ["10.10.10.9"]
+  tracepoints:
+    description: |
+      Points in stream pipeline where data is recorded.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/debug_stream_tracepoints'
+    default: [input]
+    example: [input,stream,webrtc_play_network]
+  root:
+    description: |
+      The path to the directory where the session data will be recorded.
+      Recommended for debugging needs **only**.
+    type: string
+    format: dvr_url
+    example: /tmp/debug
+  storage_limit:
+    description: |
+      Maximum disk consumption in bytes. When this limit is reached, 
+      the oldest segment of the recording will be overridden by later data.
+    type: integer
+    format: bytes
+    example: 400000000000
+  expiration:
+    description: |
+      A period (in seconds) back from the current moment during which the files are stored.
+      As time goes, the files which are older than this period are being overridden by the later files.
+    type: integer
+    format: seconds
+    example: 604800
+  duration:
+    description: Time for recording in seconds.
+    type: integer
+    format: milliseconds
+    example: 6000
+  at:
+    description: |
+      Points in stream pipeline where data is recorded.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/debug_stream_tracepoints'
+    deprecated: true
+    x-delete-at: 23.12
+    x-alias: tracepoints
+required:
+- root
+

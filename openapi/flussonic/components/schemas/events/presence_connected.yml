@@ -1,0 +1,15 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Presence connected.
+    flush:
+      description: The number of flushes.
+      type: integer
+      nullable: true
+    ip:
+      description: Presence server IP address.
+      type: string
+- $ref: '../../schemas.yml#/event_default'
+

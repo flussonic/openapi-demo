@@ -1,0 +1,87 @@
+type: object
+properties:
+
+# TSHTTP
+  programs:
+    description: Choose a program to ingest from an MPEG-TS stream.
+    items:
+      type: integer
+    type: array
+    example: [1]
+  pids:
+    description: |
+      Choose a specific PID to ingest from an MPEG-TS stream. 
+      PID identifies separate data stream inside the multiplexed MPEG-TS stream. 
+      It is possible to set PID values for PMT, SDT, video, and audio tracks.
+    items:
+      type: integer
+    type: array
+    example: [211]
+  no_fix_subs_dts:
+    x-private: true
+    description: If this option is enabled, Flussonic will not try to fix subtitles DTS.
+    type: boolean
+  cc_check:
+    x-private: true
+    description: |
+      This parameter defines the behavior when getting a CC (Continuity Counter) error.
+    oneOf:
+      - const: no
+        description: Do nothing.
+      - const: log
+        description: Write to the log.
+      - const: repeat
+        description: Try again.
+  subtitles:
+    description: |
+      This parameter allows to manage subtitles in an output stream.
+    oneOf:
+      - const: drop
+        description: An output stream will have no subtitles track.
+      - const: accept
+        description: An output stream will have a subtitles track in DVB, without conversion to text (default behavior).
+      - const: ocr_replace
+        description: An output stream will have a track containing subtitles converted to a text format (WebVTT).
+      - const: ocr_add
+        description: | 
+          An output stream will have two tracks containing subtitles: 
+          the original track with subtitles in DVB and a new track with text subtitles.
+    example: drop
+  closed_captions:
+    additionalProperties:
+      type: string
+    type: object
+    x-key-type: string
+    description: |
+      The rules for handling the closed captions.
+  scte35:
+    description: |
+      This option disables processing of SCTE-35 markers from an MPEG-TS input stream.
+      Deprecated since 22.12.
+      Available ways to disable processing of SCTE-35 markers:
+      1. pids option to select tracks without SCTE-35 markers
+      2. hls_scte35 option from stream_config_media for hls output
+      3. performing appropriate tuning pids in the transponder
+    type: boolean
+    default: true
+    example: true
+    deprecated: true
+    x-delete-at: 23.09
+  languages:
+    #FIXME: раскрыть additionalProperties
+    additionalProperties:
+      type: string
+    type: object
+    x-key-type: mpegts_lang_track
+    description: |
+      An array of MPEG-TS language descriptors in format `[{key: track, value: language}]`
+  bypass_psis:
+    x-private: true
+    description: The list of PIDs that will transmit PSI tables as video frames (content=metadata).
+    items:
+      type: integer
+    type: array
+  try_adts:
+    x-private: true
+    description: If this option is enabled, the decoder tries to decode LATM as ADTS.
+    type: boolean

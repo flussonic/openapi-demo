@@ -1,0 +1,3 @@
+allOf:
+- $ref: '../../schemas.yml#/track_info_base'
+- $ref: '../../schemas.yml#/track_info_base_configurable'

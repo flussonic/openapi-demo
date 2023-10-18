@@ -1,0 +1,79 @@
+get:
+  operationId: subscriber_get
+  summary: Get one subscriber
+  description: |
+    Get the subscriber status.
+  parameters:
+  - name: name
+    description: subscriber name
+    in: path
+    required: true
+    schema:
+      example: client01
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/subscriber_config'
+      description: Whole subscriber
+  tags:
+  - iptv
+put:
+  operationId: subscriber_save
+  summary: Save the subscriber
+  description: |
+    Create or update the subscriber, identified by his unique name.
+    Partial configuration is ok.
+  parameters:
+  - name: name
+    description: subscriber name
+    in: path
+    required: true
+    schema:
+      example: client01
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/subscriber_config'
+    description: Partial subscriber configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/subscriber_config'
+      description: Updated subscriber
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - iptv
+delete:
+  operationId: subscriber_delete
+  summary: Delete the subscriber
+  description: |
+    Delete the subscriber from database.
+    If he is watching video, all his sessions will be terminated soon.
+  parameters:
+  - name: name
+    description: subscriber name
+    in: path
+    required: true
+    schema:
+      example: client01
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - iptv

@@ -1,0 +1,53 @@
+post:
+  operationId: person_identify
+  summary: Identify person by face fingerprint
+  description: |
+    Identifies the supplied face fingerprint by comparing it with the database of persons.
+    Returns a list of matched persons with corresponding confidence score.
+  tags:
+  - persons
+  parameters:
+  - name: tag
+    in: query
+    description: |
+      Comma-separated list of tags to filter results.
+      May be used to limit the lookup in a specific scope of samples: employees, visitors
+    required: false
+    explode: false
+    style: form
+    schema:
+      type: string
+      examples:
+        - employee,visitor
+        - engineer,accountant
+  - name: attribute
+    in: query
+    description: |
+      Filter results by user-defined attributes.
+      May be used to limit the lookup in a specific scope of samples: specific person, specific organization
+    required: false
+    explode: true
+    style: deepObject
+    schema:
+      type: string
+      examples:
+      - attribute[employee_id]=8458
+      - attribute[organization_id]=237
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          description: The fingerprint of the detected person
+          allOf:
+          - $ref: ../components/schemas.yml#/vision_face_fingerprint
+
+  responses:
+    '200':
+      description: Identification results
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_persons_match_list
+
+

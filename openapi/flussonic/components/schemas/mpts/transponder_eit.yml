@@ -1,0 +1,36 @@
+type: object
+properties:
+  sources:
+    description: |
+      List of epg sources
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/epg_source'
+    type: array
+    x-private: true
+  max_bitrate:
+    description: Maximum bitrate for the transponder's EIT EPG.
+    type: integer
+    format: max_bitrate
+    nullable: true
+  xmltv_url:
+    description: Directory for storing the XMLTV EPG files.
+    type: string
+    nullable: true
+    example: 'xmltv_dir'
+  keep_epg:
+    description: Period for storing the XMLTV files.
+    type: integer
+    format: seconds
+    nullable: true
+  intervals_pf:
+    description: Periods for sending the present/following events.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_eit_intervals'
+    nullable: true
+  intervals_schedule:
+    description: Periods for sending the event schedules.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_eit_intervals'
+    nullable: true
+

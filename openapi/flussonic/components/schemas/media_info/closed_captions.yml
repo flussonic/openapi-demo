@@ -1,0 +1,35 @@
+type: object
+properties:
+  language:
+    description: Language of closed captions.
+    type: string
+    nullable: true
+    example: eng
+  name:
+    description: Under what name the audio track will be displayed on the player.
+    type: string
+    nullable: true
+    example: English
+  type:
+    x-private: true
+    description: |
+      The standard of the closed captions. 
+      The value is either 608 or 708 for CEA-608 and CEA-708 standards respectively.
+
+      This value is important for HLS and DASH players to display closed captions. 
+      For such players the presence should be explicit in the manifest files.
+    type: string
+    x-notice: CC 608, 708
+    nullable: true
+    example: '608'
+  # FIXME: почему не enum
+  id:
+    x-private: true
+    description: |
+      The number of the channel that has closed captions. 
+      It's an integer between 1 and 4 for CEA-608 and between 1 and 63 for CEA-708.
+    type: string
+    x-notice: CC 608 channel, CC 708 service num
+    nullable: true
+    example: '3'
+  # FIXME: почему не integer

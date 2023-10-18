@@ -1,0 +1,4 @@
+type: integer
+format: utc_ms
+minimum: 1000
+maximum: 15000

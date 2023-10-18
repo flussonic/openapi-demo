@@ -1,0 +1,29 @@
+type: string
+description: The level of logging according to event importance. Several values separated by comma.
+example: 'debug'
+oneOf:
+- title: None
+  const: none
+  description: Logging disabled.
+- title: Debug
+  const: debug
+  description: Messages of all types are logged.
+- title: Info
+  const: info
+  description: Log info messages.
+- title: Notice
+  const: notice
+  description: Log notices.
+- title: Warning
+  const: warning
+  description: Log warnings.
+- title: Error
+  const: error
+  description: Log errors.
+- title: Alert
+  const: alert
+  description: Log alerts.
+- title: Critical
+  const: critical
+  description: Log critical messages.
+

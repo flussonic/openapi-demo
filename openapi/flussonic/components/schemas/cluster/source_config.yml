@@ -1,0 +1,4 @@
+allOf:
+- $ref: '../../schemas.yml#/source_specific_config'
+- $ref: '../../schemas.yml#/stream_config_media'
+- $ref: '../../schemas.yml#/stream_config_onpremises'

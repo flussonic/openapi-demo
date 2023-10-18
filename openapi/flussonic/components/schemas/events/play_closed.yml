@@ -1,0 +1,16 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Play session closed.
+    reason:
+      description: Reason for closing the play session.
+      type: object
+      nullable: true
+- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/event_play'
+

@@ -1,0 +1,13 @@
+get:
+  description: Fetch all peers
+  operationId: peers_list
+  summary: List peers
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/peers_list'
+      description: Response
+  tags:
+  - cluster

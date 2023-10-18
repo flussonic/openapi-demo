@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      streamers:
+        items:
+          $ref: '../../schemas.yml#/streamer_config'
+        type: array
+        description: The list of streamers fetched according to the query parameters.

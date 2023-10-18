@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      disks:
+        description: The list of disks installed in the chassis.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/chassis_disk'

@@ -1,0 +1,55 @@
+type: object
+properties:
+  url:
+    description: URL and port of the remote server to get streams from.
+    type: string
+    format: hostport
+    x-primary-key: true
+  prefix:
+    description: |
+      The prefix used for the streams on the remote server from which the peer gets them.
+    type: string
+    format: media_name
+    nullable: true
+  stats:
+    description: Statistics of the peer.
+    allOf:
+    - $ref: '../../schemas.yml#/peer_stats'
+    nullable: true
+  streams:
+    description: The list of streams coming from the source. Replaced with `only` and `except` in newer versions.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/stream_stats'
+    deprecated: true
+    x-delete-at: 23.09
+    nullable: true
+  only:
+    description: |
+      White list of streams. 
+      The items of the array may be individual stream names or values like `prefix/*`
+      which stands for all streams with the given prefix.
+    type: array
+    items:
+      type: string
+      format: media_name
+    nullable: true
+  except:
+    description: Black list of streams. Higher priority than `only`.
+    type: array
+    items:
+      type: string
+      format: media_name
+    nullable: true
+  group_config:
+    description: Configuration applied to the specific group of streams (all or limited by `only` and `except`) received from the sources.
+    type: object
+    additionalProperties:
+      $ref: '../../schemas.yml#/source_group_config'
+    nullable: true
+    x-key-type: string
+  cluster_key:
+    description: Cluster ingest stream key.
+    type: string
+    nullable: true

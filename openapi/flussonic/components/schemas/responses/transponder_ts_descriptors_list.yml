@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      ts_descriptors:
+        description: The list of transport stream descriptors. Descriptors are added to NIT and SDT.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/ts_descriptor'

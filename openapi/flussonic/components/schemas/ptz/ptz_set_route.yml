@@ -1,0 +1,11 @@
+type: object
+required:
+  - command
+properties:
+  command:
+    type: string
+    example: set_route
+  route_index:
+    nullable: true
+    type: integer
+    minimum: 0

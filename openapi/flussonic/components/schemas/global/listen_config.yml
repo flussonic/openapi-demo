@@ -1,0 +1,16 @@
+type: object
+properties:
+  port:
+    type: integer
+    format: network_port
+    description: Port that will be used for listening.
+    example: 80
+    x-primary-key: true
+  address:
+    type: string
+    nullable: true
+    description: Network address that will be used for listening.
+    example: '10.0.35.1'
+required:
+- port
+

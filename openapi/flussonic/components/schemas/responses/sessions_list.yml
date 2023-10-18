@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      sessions:
+        type: array
+        description: List of fetched sessions according to query parameters.
+        items:
+          $ref: '../../schemas.yml#/session'

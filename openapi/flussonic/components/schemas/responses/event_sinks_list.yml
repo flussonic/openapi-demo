@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      event_sinks:
+        description: The configuration of event notifications.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/event_sink_config'

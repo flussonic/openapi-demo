@@ -1,0 +1,6 @@
+type: object
+properties:
+  fingerprint:
+    description: The fingerprint of the detected face
+    allOf:
+    - $ref: ../../schemas.yml#/vision_face_fingerprint

@@ -1,0 +1,18 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: WebRTC Play Prober wrong interval
+    direction:
+      description: Shows if the problem occurs when sending or receiving the `probe` packets.
+      type: string
+      enum:
+      - sending
+      - receiving
+    value:
+      description: The interval value that is wrong.
+      type: integer
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'

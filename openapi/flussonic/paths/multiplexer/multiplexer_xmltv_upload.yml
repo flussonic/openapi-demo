@@ -1,0 +1,44 @@
+post:
+  operationId: multiplexer_xmltv_upload
+  summary: Upload XMLTV files
+  description: |
+    Upload XMLTV files to multiplexer
+  parameters:
+  - description: multiplexer name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              description: The array of XMLTV files.
+              type: array
+              items:
+                type: string
+                format: binary
+    description: Multipart XMLTV files upload request
+  responses:
+    '204':
+      description: The XMLTV files were uploaded
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Multiplexer not found
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't upload
+  tags:
+  - multiplexer

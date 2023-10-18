@@ -1,0 +1,9 @@
+anyOf:
+- enum:
+  - starting
+  - pending
+  - retry
+  - error
+  type: string
+- allOf:
+  - $ref: '../../schemas.yml#/session_status'

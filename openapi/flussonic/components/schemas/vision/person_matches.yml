@@ -1,0 +1,8 @@
+type: object
+description: Person matching information
+properties:
+  matched_persons:
+    description: List of matched persons with similarity metric
+    type: array
+    items:
+      $ref: ../../schemas.yml#/vision_person_match

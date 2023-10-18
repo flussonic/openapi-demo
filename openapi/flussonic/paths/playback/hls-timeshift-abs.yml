@@ -1,0 +1,58 @@
+get:
+  operationId: hls_timeshift_abs_manifest
+  summary: HLS absolute timeshift
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play the recorded stream by HLS starting at a specified moment of time.
+    For example, you can use it for old STBs or viewing recoreded shows with EPG.
+    
+    Please note that when you use the same timeshift URL several times, any additional requests use the same existing session. 
+    Therefore the time is not pure "absolute" and is still related to the current session.
+    Therefore every time you request the same time, you get different part of the video.
+    To solve this problem, you can change the token parameter in every new request to start a new session. 
+    For example:
+    
+    * `http://FLUSSONIC-IP:80/CHANNEL-NAME/timeshift_abs-1430227800.m3u8?token=123` - the first request,
+    * `http://FLUSSONIC-IP:80/CHANNEL-NAME/timeshift_abs-1430227800.m3u8?token=124` - the second request, and so on.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/video-playback/hls-playback/#dvr-timeshift-playback
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: Start time of playing the DVR archive in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: separate_audio
+    in: query
+    description: |
+      Whether audio tracks are specified separately in the playlist.
+
+      This option is used for some players like Samsung TV or browsers supporting MSE that cannot switch between 
+      multiple audio tracks (for instance, for different languages) and, as a result, do not display such audio tracks. 
+      For such cases, Flussonic can create a playlist with separate audio.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/hls_master_playlist'
+      description: HLS DVR manifest with links to other manifests
+  tags:
+    - hls
+

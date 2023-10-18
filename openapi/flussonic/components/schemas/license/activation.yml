@@ -1,0 +1,14 @@
+type: object
+properties:
+  version:
+    type: string
+    description: Version number
+    example: '22.07'
+    x-primary-key: true
+  payload:
+    type: string
+    description: Base64 encoded string
+    example: QSBwYXJ0IG9mIGEgZHVtbXkgYWN0aXZhdGlvbiBwYXlsb2FkIHN0cmluZw==
+required:
+  - version
+  - payload

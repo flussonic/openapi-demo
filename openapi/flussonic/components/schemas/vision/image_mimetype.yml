@@ -1,0 +1,5 @@
+type: string
+oneOf:
+- const: image/jpeg
+  title: jpeg
+  description: jpeg

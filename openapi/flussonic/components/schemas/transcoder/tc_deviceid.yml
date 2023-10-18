@@ -1,0 +1,6 @@
+anyOf:
+- oneOf:
+  - title: Auto
+    const: auto
+    type: string
+- type: integer

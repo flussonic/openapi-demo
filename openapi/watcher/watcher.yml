@@ -1,0 +1,42 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This is an API for Flussonic Watcher.
+
+  title: Flussonic Watcher API
+  version: 1.0.0
+
+components:
+  schemas:
+    $ref: './components/schemas.yml'
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /login:
+    $ref: './paths/login.yml'
+
+  /ui_settings:
+    $ref: './paths/config/ui_settings.yml'
+
+  /streamers:
+    $ref: './paths/streamers/streamers.yml'
+  /streamers/{hostname}:
+    $ref: './paths/streamers/streamer.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Your local Watcher installation
+  url: http://localhost:80/watcher/admin-api/v3
+tags:
+- name: config
+- name: streamer
+- name: auth

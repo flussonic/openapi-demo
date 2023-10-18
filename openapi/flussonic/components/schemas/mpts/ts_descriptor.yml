@@ -1,0 +1,12 @@
+type: object
+properties:
+  tag:
+    type: integer
+    description: Identifier of the descriptor.
+  hex:
+    type: string
+    format: hexbinary
+    description: Descriptor data.
+required:
+  - tag
+  - hex

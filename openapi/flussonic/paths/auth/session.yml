@@ -1,0 +1,42 @@
+get:
+  operationId: session_get
+  summary: Get the session
+  description: |
+    Get the play session.
+  parameters:
+  - description: Unique identifier (or UUID) of the session.
+    in: path
+    name: id
+    required: true
+    schema:
+      example: '61942414-8c15-4809-8bb6-adf1ae846027'
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/session'
+      description: Whole session
+  tags:
+  - session
+delete:
+  operationId: session_delete
+  summary: Close the session
+  description: |
+    Close the play session. The closed session will be available in the sessions history.
+  parameters:
+  - description: Unique identifier (or UUID) of the session.
+    in: path
+    name: id
+    required: true
+    schema:
+      example: '61942414-8c15-4809-8bb6-adf1ae846027'
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - session

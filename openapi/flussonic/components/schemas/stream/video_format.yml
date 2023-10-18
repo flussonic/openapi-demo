@@ -1,0 +1,79 @@
+type: string
+
+# тут мы указываем не произвольные видеоформаты, а телевизионные стандарты, поддерживаемые семейством SDI SMPTE спек.
+# они же подходят для HDMI и SDI портов, применяемых для захвата с профессиональных камер.
+
+# они же подходят и для захвата сигнала с большинства бытовых устройств (захвата видео с ПК, приставки), но
+# мы не описываем тут всевозможные конфигурации мониторов, а опираемся на те видеоформаты, которые дают нам вендоры плат, поддержку которых мы добавили во флюссоник
+
+# пока тут режимы для dektec, в рамках задач для decklink\aja будет дополнятся
+# описано в DTAPI.h из состава dektec linux sdk и в документации на matrix api dektec
+
+oneOf:  
+  - const: pal
+    description: pal 720x576 @ 50Hz interlace SMPTE-259
+  - const: 625i50
+    description: Similar PAL
+  - const: ntsc
+    description: NTSC 720x480 @ 59.94Hz interlace SMPTE-259
+  - const: 525i29.97
+    description: Similar NTSC
+  - const: 525i29
+    description: Similar NTSC
+  - const: 720p23.98
+    description: 1280x720 @ 23.98Hz progressive SMPTE-296
+  - const: 720p23
+    description: Similar 720p23.98
+  - const: 720p24
+  - const: 720p25
+  - const: 720p29.97
+  - const: 720p29
+  - const: 720p30
+  - const: 720p50
+  - const: 720p59.94
+  - const: 720p59
+  - const: 720p60
+  - const: 1080p23.98
+    description: 1920x1080 @ 23.98Hz progressive SMPTE-274
+  - const: 1080p23
+  - const: 1080p24
+  - const: 1080p25
+  - const: 1080p29.97
+  - const: 1080p29
+  - const: 1080p30
+  - const: 1080psf23.98
+    description: 1920x1080 @ 23.98Hz progressive Progressive segmented Frame SMPTE-274
+  - const: 1080psf23  
+  - const: 1080psf24
+  - const: 1080psf25
+  - const: 1080psf29.97
+  - const: 1080psf29
+  - const: 1080psf30
+  - const: 1080i50
+  - const: 1080i59.94
+  - const: 1080i60
+  - const: 1080p50
+    description: 1920x1080 @ 50Hz progressive annex A or annex B depending hardware SMPTE-274
+  - const: 1080p50b
+    description: 1920x1080 @ 50Hz progressive annex B SMPTE-274
+  - const: 1080p59.94
+  - const: 1080p59
+  - const: 1080p59.94b
+  - const: 1080p59b
+  - const: 1080p60
+  - const: 1080p60b
+  - const: 2160p50
+    description: 4k 3840x2160 @ 50Hz progressive SMPTE-2036
+  - const: 2160p50b
+  - const: 2160p59.94
+  - const: 2160p59
+  - const: 2160p59.94b
+  - const: 2160p59
+  - const: 2160p60
+  - const: 2160p60b
+  - const: 2160p23
+  - const: 2160p24
+  - const: 2160p25
+  - const: 2160p29
+  - const: 2160p30
+

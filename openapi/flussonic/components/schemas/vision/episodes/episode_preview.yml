@@ -1,0 +1,6 @@
+type: object
+properties:
+  thumbnail:
+    description: Latest preview of the episode's detected object
+    allOf:
+    - $ref: ../../../schemas.yml#/vision_image_attributes

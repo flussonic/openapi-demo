@@ -1,0 +1,10 @@
+type: object
+properties:
+  mode:
+    description: The type of SRT sessions expected for the port.
+    enum:
+    - play
+    - publish
+    type: string
+required:
+- mode

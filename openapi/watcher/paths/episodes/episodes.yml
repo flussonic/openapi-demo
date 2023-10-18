@@ -1,0 +1,87 @@
+parameters:
+- name: select
+  description: Comma-separated list of fields (including nested) that will be returned.
+  explode: false
+  in: query
+  required: false
+  schema:
+    example: episode_id,media,close_reason
+    type: string
+  style: form
+- name: limit
+  description: Limit select count in collection to N elements.
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: integer
+    example: 100
+  style: form
+- name: cursor
+  description: |
+    Properly encoded analog of offset, allowing to read next bunch of items. 
+    We do not offer common `offset` fields, use please cursor for predictable
+    fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+  in: query
+  required: false
+  schema:
+    type: string
+    example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+- name: episode_type
+  description: Episode type
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: string
+    example: motion
+  style: form
+- name: media
+  description: Filter the collection by media name on which the episode is registered
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: string
+    example: cam-045
+  style: form
+- name: updated_at_gt
+  description: |
+    Filter the collection by episode update time.
+    This field is rather specific because it allows to have an update stream with new/updated episodes
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: integer
+    format: utc_ms
+    example: 1637094994000
+  style: form
+- name: poll_timeout
+  description: |
+    Client may ask to delay a response if there are no episodes to fetch.
+    This should be used as a long-poll mechanism for lightweight fetching episodes from origin.
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: integer
+    format: seconds
+    example: 30
+  style: form
+
+get:
+  operationId: episodes_list
+  summary: List episodes
+  description: |
+    This method allows you to fetch registered episodes
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/episodes_list'
+      description: Response
+  tags:
+  - episode

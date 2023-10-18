@@ -1,0 +1,12 @@
+oneOf:
+- title: Slow
+  const: slow
+- title: Medium
+  const: medium
+- title: Fast
+  const: fast
+- title: Very fast
+  const: veryfast
+- title: Ultra fast
+  const: ultrafast
+type: string

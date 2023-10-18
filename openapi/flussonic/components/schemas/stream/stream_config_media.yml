@@ -1,0 +1,346 @@
+type: object
+properties:
+# Stream general properties
+  provider:
+    description: |
+      Human-readable name of the content provider. Used, for example, for MPEG-TS.      
+    type: string
+    example: "SportsTV"    
+  clients_timeout:
+    description: |
+      Stream's lifetime after the last client was disconnected (can be expressed in *seconds* or set to `False`). 
+      Applicable to on-demand streams **only**.      
+    anyOf:
+    - type: integer
+    - type: boolean
+    example: 485    
+    x-api-allow:
+    - watcher-core
+  retry_limit:
+    description: |
+      Number of attempts for the server to reconnect to a data source.
+      Applicable to on-demand streams **only**. If not defined, server will constantly try to reconnect (unlimited number of retries). 
+      If the input does not become active after specified amount of attempts, stream shuts down till the next user request.
+    type: integer
+    x-api-allow:
+    - watcher-core
+  groups:
+    description: |
+      List of groups the stream belongs to. Can be used for tagging,
+      API calls, or configuration on restreamers.      
+    items:
+      type: string
+      format: group_name
+    type: array
+    example: ["sporthd"]
+    deprecated: true
+    x-delete-at: 23.12
+
+
+
+
+# Streams input
+
+
+  source_timeout:
+    description: |
+      If a connected source does not send any data within this timeout period (in seconds), 
+      the source connection is considered to be lost.
+      This is a default configuration for a stream, can be modified for any input.
+    anyOf:
+    - type: integer
+      format: seconds
+    - enum:
+      - false
+      type: boolean
+    example: 10
+    x-api-allow:
+    - watcher-core
+  silencedetect:
+    x-private: true
+    description: Configuration of silence detection for the stream.
+    allOf:
+    - $ref: '../../schemas.yml#/silencedetect_spec'
+  motion_detector:
+    x-private: true
+    description: Configuration of motion detection for a stream.
+    allOf:
+    - $ref: '../../schemas.yml#/motion_detector_spec'
+    x-api-allow:
+    - watcher-core
+  backup:
+    description: |
+      When all inputs are down, this can be used to show at least something to users.
+      It is important to understand that backup video behaves differently, not as inputs. 
+      It is not a _last input_ in the list. After any input stops sending frames, timer starts.
+      After `source_timeout` seconds backup starts working, while all other inputs are still trying to
+      connect and start working.
+      So backup and all inputs are working in parallel.
+    allOf:
+    - $ref: '../../schemas.yml#/backup_config'
+    x-api-allow:
+    - watcher-core
+  epg_enabled:
+    description: Whether to extract EPG from the input.
+    type: boolean
+    example: true
+
+
+
+# Transcoder
+
+  transcoder:
+    description: Configuration of the transcoder settings.
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_opts'
+    nullable: true
+    examples:
+      mylive/bunny:
+        value: {}
+  logo:
+    x-private: true
+    x-notice: not documented yet
+    description: Overlay logo.
+    allOf:
+    - $ref: '../../schemas.yml#/web_logo_spec'
+
+  thumbnails:
+    description: Configuration of thumbnails generator.
+    allOf:
+    - $ref: '../../schemas.yml#/thumbnails_spec'
+    x-api-allow:
+    - watcher-core
+
+
+
+#  Archive / DVR 
+
+
+  dvr:
+    description: DVR configuraton.
+    allOf:
+    - $ref: '../../schemas.yml#/stream_dvr_spec'
+    x-api-allow:
+    - watcher-core
+
+# Protect
+
+  on_play:
+    description: Configuration of authorization backend for play sessions.
+    externalDocs:
+      description: "Find more information about `on_play` and `on_publish` here."
+      url: https://flussonic.com/doc/authorization/#enabling-playback-and-publish-sessions-authorization
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+    x-api-allow:
+    - watcher-core
+
+  on_publish:
+    description: Configuration of authorization backend for publish sessions.
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+
+  password:
+    description: |
+      Specify a password when publishing a password-protected stream.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/live-streaming/publishing-video-to-the-server/#authorization-for-stream-publishing
+    type: string
+    x-scope:
+      - flussonic
+      - config-external
+
+  drm:
+    description: Configuraton of Digital Rights Management system (DRM).
+    allOf:
+    - $ref: '../../schemas.yml#/drm_spec'
+
+
+
+# Play
+
+  protocols:
+    description: | 
+      Configuration to allow/forbid playing the stream via various protocols. 
+      - If the `whitelist` option is set to 'true', the server allows a playback only for listed protocols;
+      - If the `whitelist` option is set to 'false', the server forbids a playback for listed protocols;
+      - Server allows a playback for all the protocols by default.
+
+    allOf:
+    - $ref: '../../schemas.yml#/play_protocols_spec'
+
+  prepush:
+    description: |
+      The time (in seconds) that *Flussonic* reserves for preloading the data, i. e. *buffering*.
+      Prepush is always defined through GoP, but this option provides you with a more flexible way
+      to configure the buffer size, e. g. a 1-3 or 7-10 seconds time interval.
+
+      The bigger the buffer size, the better the user experience is for the users
+      with a bad internet connection. However, the latency also increases.
+
+      If it is set to `False` to remove the latency, the stream's start time 
+      increases. To decrease it, reduce the GoP size and make the bitrate larger 
+      or the video quality lower.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/glossary/#prepush
+    anyOf:
+    - type: boolean
+    - type: integer
+    example: false
+    x-api-allow:
+    - watcher-core
+
+  cmaf_enabled:
+    x-private: true
+    x-notice: this should be opt-out in `protocols`, not here
+    description: Whether CMAF is enabled for the HLS protocol.
+    type: boolean
+    example: true
+
+  segment_count:
+    description: |
+      Number of segments stored in memory for the segment-based protocols, such as HLS and DASH.
+      Added to HLS live manifest. Do not forget that one more segment is stored for stale clients
+      that come too late, but the latest segment is not shown in the manifest.
+    type: integer
+    # default: 4
+    example: 4
+
+  segment_duration:
+    description: |
+      The time of the segment duration. Used for the protocols like HLS or DASH. 
+      The disk config offers this value in seconds.
+    allOf:
+    - $ref: '../../schemas.yml#/segment_duration'
+    # default: 5000
+    example: 5000
+
+  chunk_duration:
+    description: Chunk duration in LL-HLS manifest to be used for tunning latency.
+    type: integer
+    format: milliseconds
+    # default: 200
+    example: 200
+
+  dash_update_period:
+    description: |
+      The option allows to override "minimumUpdatePeriod" attribute in DASH manifest.
+      In fact the option controls how often a client will request an updated manifest.
+      Please notice that it may broke playback, we recommend use it at your own risk.
+    type: integer
+    format: milliseconds
+    example: 270000000
+    x-private: true
+
+  url_prefix:
+    description: |
+      A string starting the addresses of separate segments within a *segment-based* playlists (HLS or DASH).
+      Each sub-playlist is stored on Flussonic.
+
+      If set to `false`, the configured value in a template will be disabled. 
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/live-streaming/#stream-and-group-settings
+    allOf:
+    - $ref: '../../schemas.yml#/url_prefix'
+
+  hls_scte35:
+    description: |
+      Whether to enable SCTE-35 ad insertion markers signaling in HLS manifest.
+      Ad markers can be included in SCTE-35 (`scte35`), AWS (`aws`), EXT-X-DATERANGE (`rfc8216`) formats or not included (`false`).
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/iptv/ad-insertion-markers/#conversion-of-markers
+      type: string
+    oneOf:
+    - title: aws
+      const: aws
+      description: AWS format
+    - title: scte35
+      const: scte35
+      description: ANSI SCTE35 format
+    - title: rfc8216
+      const: rfc8216
+      description: Apple RFC 8216 EXT-X-DATERANGE format
+    example: scte35
+
+
+  add_audio_only:
+    description: |
+      Whether to add an audio-only version of an HLS stream. 
+      Used to create App Store compliant HLS streams to deliver the content to Apple iOS devices.      
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/live-streaming/#turning-on-audio-only-hls
+    type: boolean
+    example: true
+
+
+  substyle:
+    x-private: true
+    x-notice: This option should be renamed to something more clear
+    description: Subtitles style configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/subtitle_style'
+
+
+  webrtc_abr:
+    description: WebRTC play configuration for a stream.
+    allOf:
+      - $ref: '../../schemas.yml#/webrtc_abr_opts'
+
+
+# Push
+
+  pushes:
+    description: |
+      A list of pushes. When a server initiates the connection and sends a stream 
+      to other server(s), it is called a `push`.      
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/video-playback/pushing-a-stream-to-other-servers/
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/stream_push'
+    type: array
+    x-api-allow:
+    - watcher-core
+
+
+
+
+
+
+  mpegts_pids:
+    description: |
+        This parameter sets PIDs values for outgoing MPEG-TS streams. PID contains information about the TS package content and can be decoded according to special service tables. 
+        It is possible to set PID values for PMT, SDT, video, and audio tracks. Tracks are numbered starting from one. 
+        The code `a1=123` sets a PID value for the first audio track. It is possible to set the base index for the tracks of a certain type using the 0 (zero) index. 
+        For example, `t0=100` sets PID=101 for the first track, 102 for the second, and so on. Numbers can be given in decimal form (by default) or hexadecimal with 16# prefix.       
+    allOf:
+    - $ref: '../../schemas.yml#/output_mpegts_pids'
+
+  mpegts_ac3:
+    description: It allows to specify pack information about ac3 for outgoing MPEGTS-TS streams. The default value is `system_b`.
+    allOf:
+    - $ref: '../../schemas.yml#/output_mpegts_ac3'
+
+  labels:
+    additionalProperties:
+      type: string
+    type: object
+    x-key-type: string
+    description: Stream labels in key value format
+    example: {"key1":"value1","key2":"value2"}
+    x-api-allow:
+    - watcher-core
+
+  playback_headers:
+    description: |
+        This parameter sets playback HTTP headers for streams.
+    items:
+      $ref: '../../schemas.yml#/playback_headers'
+    type: array
+

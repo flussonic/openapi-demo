@@ -1,0 +1,54 @@
+type: object
+properties:
+  #
+  # DECODING
+  #
+  input_frames_count:
+    description: The number of frames that was sent by the input.
+    type: integer
+  decoded_frames_count:
+    description: The number of decoded frames
+    type: integer
+  decoder_restarts_count:
+    description: How many times decoder was restarted
+    type: integer
+  decoder_errors_count:
+    description: The number of decoding errors
+    type: integer
+
+
+  #
+  # PROCESSING
+  #
+  processed_frames_count:
+    description: |
+      The number of frames that were processed by videoanalytics.
+      This number may be less than `input_frames` because some input frames can be skipped depending on the hardware capabilities.
+    type: integer
+  processing_errors_count:
+    description: Total number of processing errors
+    type: integer
+
+
+  # 
+  # PROFILING
+  # 
+  decoding_time:
+    description: Total time spent on decoding
+    type: integer
+    format: milliseconds
+  frame_preprocessing_time:
+    description: Total time spent on frame preprocessing to make a batch. It includes frame resizing and chroma channels planarization, if needed
+    type: integer
+    format: milliseconds
+
+  processing_wait_time:
+    description: |
+      Total delay before a received input frame being started to process.  
+      This delay is counted only for frames sent to videoanalytics.
+    type: integer
+    format: milliseconds
+  processing_time:
+    description: Total time spent on processing (includes detection and fingerprinting stages)
+    type: integer
+    format: milliseconds

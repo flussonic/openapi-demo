@@ -1,0 +1,11 @@
+description: |
+  This is a reduced configuration of stream that contains only actual used config.
+  Can compare it with stream_config that includes some runtime information and 
+  interpretation of stream config information, like config_on_disk
+allOf:
+  - $ref: '../../schemas.yml#/stream_config_specific'
+  - $ref: '../../schemas.yml#/stream_config_base'
+  - $ref: '../../schemas.yml#/stream_config_media'
+  - $ref: '../../schemas.yml#/stream_config_onpremises'
+  - $ref: '../../schemas.yml#/stream_config_single_media'
+  - $ref: '../../schemas.yml#/stream_config_deprecated'

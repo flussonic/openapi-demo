@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    description: |
+      Unique identifier of a media track within a session description.
+    type: string
+
+  content:
+    description: Content of the track.
+    allOf:
+    - $ref: '../../schemas.yml#/frame_content'
+
+  payloads:
+    description: |
+      Payload choice for the track
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/webrtc_sdp_track_payload'
+    default: []
+
+
+  ssrc:
+    description: 4 byte integer used for track identification
+    type: integer
+    nullable: true
+
+  direction:
+    description: |
+      Direction choice for the track
+    oneOf:
+      - $ref: '../../schemas.yml#/webrtc_sdp_track_direction'
+    example: recvonly
+
+  extensions:
+    description: RTP header extension mapping
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/webrtc_sdp_track_extension'
+    default: []

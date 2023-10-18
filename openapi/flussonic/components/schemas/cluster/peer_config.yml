@@ -1,0 +1,91 @@
+type: object
+properties:
+  hostname:
+    type: string
+    format: server_name
+    description: Globally unique server name.
+    x-primary-key: true
+    readOnly: true
+    example: 'peer.example.com'
+  stats:
+    description: Statistics on peers in the cluster.
+    allOf:
+    - $ref: '../../schemas.yml#/peer_stats'
+    nullable: true
+    readOnly: true
+  api_url:
+    type: string
+    format: url
+    example: 'http://streamer.local:8080'
+    description: |
+      The internal address for internal communication between the server and the peers. 
+      Internal communications are based on API so this is basically an URL for API calls. This URL does not have to be public.
+      The API URL can include a port number, or the port number can be set by the `admin_http` parameter.
+  public_payload_url:
+    description: |
+      The public address that is exposed to clients. It can also contain a port number.
+      The client will be redirected to this URL and port when requesting for the stream captured on the peer
+      even if other `http` port is set in the peer's own config.
+    type: string
+    format: url
+    example: 'http://public.example.com'
+  public:
+    description: The public address that is exposed to clients.
+    type: string
+    format: url
+    deprecated: true
+    x-alias: public_payload_url
+    x-delete-at: 23.09
+    x-api-deny:
+    - watcher
+  private_payload_url:
+    description: |
+      The internal address for communication in a local network (by default, it is equal to API URL).
+    type: string
+    format: url
+    example: 'http://streamer.local'
+  fetch_timeout:
+    description: How often the peer will try to get the data from the remote server via internal API.
+    type: integer
+    format: milliseconds
+    example: 1000
+    x-api-deny:
+    - watcher
+  stale_timeout:
+    description: |
+      The time after which deleted streams on this server are considered to be inactive 
+      and cannot be used in the `cluster_ingest` mechanism.
+    type: integer
+    format: milliseconds
+    example: 1000
+    x-api-deny:
+    - watcher
+  channel_limit:
+    description: Maximal number of streams.
+    type: integer
+    example: 5
+    x-api-deny:
+    - watcher
+  cpu_limit:
+    description: CPU limit in percents.
+    type: integer
+    format: percents
+    example: 10
+    x-api-deny:
+    - watcher
+  cluster_key:
+    description: |
+      The key for authorization for inter-Flussonic connections.
+      All cluster peers should have the same cluster key.
+    type: string
+    example: 'xS6i6Q3DCc5nEvnu'
+  max_bitrate:
+    description: Maximal output bitrate of the peer.
+    type: integer
+    format: speed
+    deprecated: true
+    x-delete-at: 23.09
+    x-api-deny:
+    - watcher
+  # capacity:
+  #   $ref: '../../schemas.yml#/cloud_resources'

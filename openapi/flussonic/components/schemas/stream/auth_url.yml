@@ -1,0 +1,7 @@
+anyOf:
+- type: string
+  format: url
+- type: string
+  oneOf:
+  - const: "true"
+    description: "Allow all playback sessions. Use the value to override template value."

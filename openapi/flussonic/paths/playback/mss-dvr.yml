@@ -1,0 +1,61 @@
+get:
+  operationId: mss_dvr_manifest
+  summary: MSS DVR
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play a specified DVR window, for example,
+    you can play a telecast if you know its beginning and end from EPG.
+
+    This URL works in two modes: file and event. If `duration` is specified as `now`, this
+    url will respond with a growing playlist for playing an event.
+
+    If `duration` is an exact positive number, then the server will respond with playlist, having
+    this requested amount of seconds of video as a file.
+
+    Note the following rules:
+
+      * The first segment in this playlist will not start earlier than `from`.
+      * The last segment in this playlist will not start later than `from + duration`.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/digital-video-recording-dvr/accessing-dvr-archives-via-various-protocols/#mss-playback
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e., `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: The start time of the DVR window in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: duration
+    in: path
+    description: |
+      The duration of the DVR window in seconds. 
+
+      You also can specify `now` for a growing playlist till current time.
+
+      If `from`+`duration` is in the future, the playlist will grow as well until it reaches the specified moment.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+          example: 7200
+        - type: string
+          enum:
+            - now
+  responses:
+    '200':
+      content:
+        text/xml:
+          schema:
+            type: string
+      description: MSS DVR playlist
+  tags:
+    - mss
+    - dvr

@@ -1,0 +1,37 @@
+get:
+  operationId: http_mpegts_timeshift_rel
+  summary: HTTP-MPEGTS relative timeshift
+  description: |
+    If your stream is being recorded on the server with DVR, you can use this URL to play the recorded stream by HTTP-MPEGTS with a specified delay. 
+    This can be useful, for example, for TV broadcasting in different time zones, so that people in a different time zone watch morning broadcasts in the morning, and not late at night.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/digital-video-recording-dvr/accessing-dvr-archives-via-various-protocols/#relative-timeshift
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e., `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: ago
+    in: path
+    description: |
+      Delay in seconds
+
+      For example, if it is 7200, the stream will be played with a two-hours (7200 seconds) delay.
+    required: true
+    schema:
+      type: integer
+      example: 7200
+  responses:
+    '200':
+      content:
+        video/mpeg:
+          schema:
+            type: string
+      description: HTTP-MPEGTS chunked transfer encoding live stream
+  tags:
+    - mpegts
+    - dvr

@@ -1,0 +1,74 @@
+type: object
+properties:
+  ber:
+    description: |
+      Bit error rate. It is the percent of bit errors from total number of transferred bits.
+    type: integer
+    nullable: true
+    example: 5
+  strength_raw:
+    description: Signal strength, as a raw 16-bit number received from DVB API.
+    type: integer
+    nullable: true
+    example: 62446
+  strength:
+    description: Signal strength, in percent.
+    type: integer
+    nullable: true
+    openmetrics_metric: dvb_card_strength
+    x-metric-type: gauge
+    example: 95
+  snr_raw:
+    description: |
+      Signal-noise ratio, as a raw 16-bit number received from DVB API. It is the ratio of signal power to the noise power.
+    type: integer
+    nullable: true
+    example: 894
+  snr:
+    description: |
+      Signal-noise ratio, in percent. It is the ratio of signal power to the noise power. 
+    type: integer
+    nullable: true
+    example: 1
+  has_signal:
+    description: Whether a signal is detected above the normal noise level.
+    type: boolean
+    nullable: true
+    example: true
+  has_carrier:
+    description: Carrier detected in signal.
+    type: boolean
+    nullable: true
+    example: true
+  has_viterbi:
+    description: DVB signal was locked at Viterbi decoder stage.
+    type: boolean
+    nullable: true
+    example: true
+  has_sync:
+    description: Synchronization bytes detected.
+    type: boolean
+    nullable: true
+    example: true
+  has_lock:
+    description: DVB signal was successfully locked.
+    type: boolean
+    nullable: true
+    example: true
+  has_timedout:
+    description: The signal was not locked within the last about 2 seconds.
+    type: boolean
+    nullable: true
+    example: false
+  has_reinit:
+    description: |
+      The frontend was reinitialized, the application is recommended to reset DiSEqC, tone and parameters.
+    type: boolean
+    nullable: true
+    example: false
+  has_rate:
+    description: |
+      Input rate is sufficient (900 bps or greater). Used for capturing from DekTec ASI cards.
+    type: boolean
+    nullable: true
+    example: true

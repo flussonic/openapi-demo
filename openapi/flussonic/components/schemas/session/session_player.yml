@@ -1,0 +1,8 @@
+type: object
+properties:
+  application:
+    allOf:
+      - $ref: "../../schemas.yml#/session_player_details"
+    description: Player's application session details
+    nullable: true
+    x-private: true

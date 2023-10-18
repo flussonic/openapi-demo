@@ -1,0 +1,31 @@
+get:
+  operationId: mp4_preview
+  summary: MP4 thumbnail
+  description: |
+    Use this URL to get the last video thumbnail (keyframe) of a stream or a VOD file in MP4 format.
+
+    Video thumbnails are essentially fragments of H.264 video each containing one frame.
+    Flussonic takes the first keyframe from each segment of a stream or a VOD file and creates an MP4 file from it. 
+    This file is sent to the browser, where it is then shown as a picture.
+  parameters:
+  - name: name
+    in: path
+    description: |
+      Media name. It may be multi-segment, i.e. `/part1/part2/part3`.
+      
+      For live stream, it is the name of the stream.
+      For VOD file, it is `vod/file_subpath.mp4`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        video/mp4:
+          schema:
+            type: string
+            format: binary
+      description: The last video thumbnail as an MP4 file
+  tags:
+    - image

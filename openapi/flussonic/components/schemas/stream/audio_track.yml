@@ -1,0 +1,25 @@
+properties:
+  track:
+    description: The audio track name in Media Server.
+    type: string
+    example: a1
+    x-primary-key: true    
+  sample_type:
+    description: The audio track format. 
+    type: string
+    oneOf:
+      - const: pcm
+      - const: smpte337
+    default: pcm
+  channels:
+    description: The list of SDI audio channels from which you want to assemble the audio track. 
+    type: array
+    items:
+      type: integer
+  lang:
+    description: The audio track language.
+    anyOf:
+    - $ref: '../../schemas.yml#/language_value'
+type: object
+required:
+- channels

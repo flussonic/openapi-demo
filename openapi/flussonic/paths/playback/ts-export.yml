@@ -1,0 +1,52 @@
+get:
+  operationId: ts_export
+  summary: Export TS
+  description: This URL is a recommended way to export a fragment of a DVR archive to a local computer as an MPEG-TS file.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: The start time of the DVR window in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: duration
+    in: path
+    description: The duration of the DVR window in seconds. You also can specify `now` for a DVR window till current time.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+          format: seconds
+          example: 7200
+        - type: string
+          enum:
+            - now
+
+  - name: filter.tracks
+    in: query
+    description: |
+      If a stream has several audio and video tracks, use this parameter to specify which tracks should be exported
+    required: false
+    schema:
+      type: string
+      example: v1a1
+
+  responses:
+    '200':
+      content:
+        video/mpeg:
+          schema:
+            type: string
+      description: TS file containing DVR content
+  tags:
+    - mpegts
+    - dvr
+

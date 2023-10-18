@@ -1,0 +1,55 @@
+post:
+  operationId: process
+  summary: Image analysis
+  description: |
+    Analyzes the supplied image or video fragment.
+    Detects objects and computes digital fingerprints of the detected objects
+    (if fingerprints are supported for the object type).
+  tags:
+  - process
+  parameters:
+  - name: select
+    in: query
+    description: Comma-separated list of fields that will be returned.
+    required: false
+    explode: false
+    style: form
+    schema:
+      type: string
+      examples:
+      - face.appearance,face.fingerprint,face.features,face.keypoints
+      - human.appearance,human.keypoints
+      - vehicle.appearance,vehicle.license_plate
+      - license_plate.appearance,license_plate.plate_number
+  requestBody:
+    content:
+      image/jpeg:
+        schema:
+          description: Image
+          type: string
+          format: binary
+      video/mp4:
+        schema:
+          description: Video fragment
+          type: string
+          format: binary
+      application/json:
+        schema:
+          type: object
+          properties:
+            url:
+              description: URL of the image or video fragment
+              type: string
+              format: url
+              examples:
+                - http://172.16.0.34/employees/john-smith.jpg
+                - http://172.16.0.34/incidents/roundabout-3.mp4
+  responses:
+    '200':
+      description: Detection and recognition results
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_process_result
+
+

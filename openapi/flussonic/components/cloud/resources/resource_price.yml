@@ -1,0 +1,5 @@
+type: integer
+description: Price in carrots per unit of resource
+example: 100
+x-scope:
+  - cloud

@@ -1,0 +1,44 @@
+type: object
+properties:
+  name:
+    type: string
+    maxLength: 1000
+    example: "middleware deploy key"
+    description: User provided name, e.g. the name of your application.
+  key_id:
+    type: integer
+    format: snowflake_id
+    example: 6902558627475886000
+    description: Key Id
+  created_at:
+    format: date-time
+    type: string
+    description: |
+      Date and time of the api key creation.
+  bearer:
+    type: string
+    format: api-key
+    readOnly: true
+    nullable: true
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOjY5MDI1NTg2Mjc0NzU4ODYwMDAsInByb2plY3RzX2lkcyI6WzY5MDI1NTg2Mjc0NzU4ODUwMDBdLCJzY29wZSI6WyJhZG1pbiJdfQ.VeVqLzU9Wv7bWNEH-qibHdlsBpBAPT4AMq7hDZ-S8-8'
+    description: An API authentication token that is generated only once on the key creation. In other cases this field will not be transmitted.
+  project_ids:
+    type: array
+    items:
+      type: string
+    description: |
+      The list of the identifiers of the Projects to which the user has access with the key.
+    example: ['aBc', 'dEf']
+  scope:
+    type: array
+    items:
+      type: string
+      oneOf:
+      - title: admin
+        const: admin
+        description: Admin access
+    description: |
+      The list of access rights to the Projects that the user can access with the key.
+
+required:
+  - name

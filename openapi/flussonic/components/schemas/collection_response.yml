@@ -1,0 +1,26 @@
+type: object
+properties:
+  estimated_count:
+    description: |
+      Estimated total number of records for the query (regardless of the cursors).
+    type: integer
+    nullable: true
+    example: 5
+  next:
+    description: |
+      Next cursor: a properly encoded equivalent of offset allowing to read the next bunch of items. 
+      More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors). 
+    example: 'JTI0cG9zaXRpb25fZ3Q9MA=='
+    type: string
+    nullable: true    
+  prev:
+    description: |
+      Previous cursor: a properly encoded equivalent of offset allowing to read the previous bunch of items. 
+      More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors).
+    example: 'JTI0cG9zaXRpb25fbHQ9MSYlMjRyZXZlcnNlZD10cnVl'
+    type: string
+    nullable: true    
+  timing:
+    description: An object with a list of different timings measured during this API call.
+    type: object
+    nullable: true

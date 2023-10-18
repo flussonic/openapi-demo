@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      dvrs:
+        description: Configurations of the DVRs.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/dvr_config'

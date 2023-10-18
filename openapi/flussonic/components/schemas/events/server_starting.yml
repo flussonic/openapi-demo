@@ -1,0 +1,18 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Server started booting.
+    version:
+      description: Version of Media Server.
+      type: string
+      # format: server_version
+      nullable: true
+    full_version:
+      description: Full version of Media Server with the build number.
+      type: string
+      # format: server_version
+      nullable: true
+- $ref: '../../schemas.yml#/event_default'
+

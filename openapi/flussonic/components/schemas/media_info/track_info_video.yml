@@ -1,0 +1,5 @@
+allOf:
+- $ref: '../../schemas.yml#/track_info_base'
+- $ref: '../../schemas.yml#/track_info_base_configurable'
+- $ref: '../../schemas.yml#/track_info_video_specific'
+- $ref: '../../schemas.yml#/track_info_video_configurable'

@@ -1,0 +1,49 @@
+oneOf:
+- $ref: '../../schemas.yml#/server_starting'
+- $ref: '../../schemas.yml#/server_started'
+- $ref: '../../schemas.yml#/change_server_id'
+- $ref: '../../schemas.yml#/presence_connected'
+- $ref: '../../schemas.yml#/presence_disconnected'
+- $ref: '../../schemas.yml#/config_external_error'
+
+- $ref: '../../schemas.yml#/source_opened'
+- $ref: '../../schemas.yml#/source_connected'
+- $ref: '../../schemas.yml#/source_started'
+- $ref: '../../schemas.yml#/source_updated'
+- $ref: '../../schemas.yml#/source_closed'
+
+- $ref: '../../schemas.yml#/stream_opened'
+- $ref: '../../schemas.yml#/stream_updated'
+- $ref: '../../schemas.yml#/stream_closed'
+
+- $ref: '../../schemas.yml#/play_opened'
+- $ref: '../../schemas.yml#/play_started'
+- $ref: '../../schemas.yml#/play_updated'
+- $ref: '../../schemas.yml#/play_closed'
+
+- $ref: '../../schemas.yml#/push_opened'
+- $ref: '../../schemas.yml#/push_connected'
+- $ref: '../../schemas.yml#/push_started'
+- $ref: '../../schemas.yml#/push_updated'
+- $ref: '../../schemas.yml#/push_closed'
+- $ref: '../../schemas.yml#/push_blocked'
+- $ref: '../../schemas.yml#/push_restored'
+
+- $ref: '../../schemas.yml#/chassis_connected'
+- $ref: '../../schemas.yml#/chassis_disconnected'
+
+- $ref: '../../schemas.yml#/transcoder_device_insufficient_resources'
+
+- $ref: '../../schemas.yml#/webrtc_play_prober_timeout'
+- $ref: '../../schemas.yml#/webrtc_play_prober_wrong_interval'
+
+- $ref: '../../schemas.yml#/ad_injected'
+
+- $ref: '../../schemas.yml#/multiplexer_pid_on'
+- $ref: '../../schemas.yml#/multiplexer_pid_off'
+
+- $ref: '../../schemas.yml#/motion_started'
+- $ref: '../../schemas.yml#/motion_stopped'
+
+discriminator:
+  propertyName: event

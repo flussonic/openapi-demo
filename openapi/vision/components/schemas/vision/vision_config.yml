@@ -1,0 +1,7 @@
+type: object
+properties:
+  streams:
+    description: List of streams being processed by Vision
+    type: array
+    items:
+      $ref: ../../schemas.yml#/vision_stream

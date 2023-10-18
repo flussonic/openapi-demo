@@ -1,0 +1,7 @@
+type: object
+properties:
+  activations:
+    description: The list of license activations.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/license_activation'

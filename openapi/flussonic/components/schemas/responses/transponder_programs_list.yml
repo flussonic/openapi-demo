@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      programs:
+        description: The list of programs configured in the multiplexer.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/transponder_program'

@@ -1,0 +1,36 @@
+get:
+  operationId: mss_live_manifest
+  summary: MSS
+  description: Use this URL to play a stream via MSS (Microsoft Smooth Streaming) protocol.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/video-playback/#mss
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: filter.tracks
+    in: query
+    description: |
+      If a stream has several audio, video, and subtitles tracks, use this parameter to specify which tracks should be delivered. 
+      For example, `http://FLUSSONIC-IP/STREAMNAME.isml/manifest?filter.tracks=a1` - select audio only.
+
+      Selecting tracks is useful to play video on client devices that do not support the multi-language MSS manifest.
+    required: false
+    schema:
+      type: string
+      example: v1a1
+  responses:
+    '200':
+      content:
+        text/xml:
+          schema:
+            type: string
+      description: MSS live
+  tags:
+    - mss
+

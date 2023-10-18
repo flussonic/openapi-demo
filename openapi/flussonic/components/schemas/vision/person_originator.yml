@@ -1,0 +1,11 @@
+type: string
+oneOf:
+- title: api
+  const: api
+  description: Person is created by operator or external system via API
+
+- title: identification_service
+  const: identification_service
+  description: |
+    Person is created automatically by the Identification service
+    because no matching person was found in the persons database

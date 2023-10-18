@@ -1,0 +1,44 @@
+get:
+  x-private: true
+  operationId: ssh_agent_get
+  summary: Get the ssh agent
+  description: Method allows to fetch single ssh_agent
+  responses:
+    '200':
+      description: Whole ssh_agent
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/ssh_agent'
+    '404':
+      description: Not running
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - system
+put:
+  x-private: true
+  operationId: ssh_agent_save
+  summary: Save the ssh agent
+  description: Create or update ssh_agent
+  responses:
+    '200':
+      description: ssh_agent status
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/ssh_agent'
+  tags:
+  - system
+delete:
+  x-private: true
+  operationId: ssh_agent_delete
+  summary: Delete the ssh agent
+  description: Delete the ssh_agent by its name
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - system

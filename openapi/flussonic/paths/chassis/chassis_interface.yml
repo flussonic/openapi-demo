@@ -1,0 +1,49 @@
+parameters:
+- description: interface name
+  in: path
+  name: name
+  required: true
+  schema:
+    example: coder1
+    type: string
+  style: simple
+
+get:
+  operationId: chassis_interface_get
+  description: Get the configuration of a specific network interface.
+  summary: Get NIC
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/interface_config'
+      description: Response
+  tags:
+  - chassis
+put:
+  operationId: chassis_interface_save
+  description: Update the configuration of a specific network interface.
+  summary: Save NIC
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/interface_config'
+    description: Request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/interface_config'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - chassis
+

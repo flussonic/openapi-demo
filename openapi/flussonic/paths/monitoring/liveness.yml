@@ -1,0 +1,17 @@
+get:
+  operationId: liveness_probe
+  summary: Liveness probe
+  description: |
+    K8s liveness probe.
+  responses:
+    '200':
+      description: |
+        Means that server process has started, but doesn't know anything about
+        its readiness. Check readiness to validate that server can accept requests.
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas.yml#/server_stats_whoami'
+  tags:
+  - monitoring
+

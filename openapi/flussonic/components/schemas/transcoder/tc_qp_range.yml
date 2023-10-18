@@ -1,0 +1,38 @@
+type: object
+properties:
+  qpmini:
+    description: Minimal quantization parameter for I-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer
+  qpmaxi:
+    description: Maximal quantization parameter for I-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer
+  qpminp:
+    description: Minimal quantization parameter for P-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer
+  qpmaxp:
+    description: Maximal quantization parameter for P-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer
+  qpminb:
+    description: Minimal quantization parameter for B-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer
+  qpmaxb:
+    description: Maximal quantization parameter for B-frames.
+    nullable: true
+    maximum: 100
+    minimum: 0
+    type: integer

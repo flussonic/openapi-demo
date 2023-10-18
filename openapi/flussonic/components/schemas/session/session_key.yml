@@ -1,0 +1,17 @@
+anyOf:
+- oneOf:
+  - title: IP
+    const: ip
+    description: IP address
+  - title: Name
+    const: name
+    description: Stream name
+  - title: Proto
+    const: proto
+    description: Protocol
+  - title: Token
+    const: token
+    description: Token
+  type: string
+- allOf:
+  - $ref: '../../schemas.yml#/session_key_query'

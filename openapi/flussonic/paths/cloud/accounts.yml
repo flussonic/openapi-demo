@@ -1,0 +1,34 @@
+get:
+  operationId: accounts_list
+  summary: Get all accounts
+  description: Get all accounts
+  parameters:
+  - name: limit
+    description: Limit select count in collection to N elements.  Default value is 100.
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      default: 100
+      example: 500
+    style: form
+  - name: cursor
+    description: |
+      Properly encoded analog of offset, allowing to read next bunch of items. 
+      We do not offer common `offset` fields, use please cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_accounts_list'
+      description: Response
+  tags:
+  - accounts

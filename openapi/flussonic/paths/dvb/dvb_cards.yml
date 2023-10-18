@@ -1,0 +1,14 @@
+get:
+  operationId: dvb_cards_list
+  summary: Get list of DVB cards
+  description: This method allows to get the list of all DVB cards configured in Flussonic.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/dvb_cards_list'
+      description: Response
+
+  tags:
+  - dvb

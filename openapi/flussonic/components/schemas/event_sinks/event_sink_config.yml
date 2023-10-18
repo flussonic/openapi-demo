@@ -1,0 +1,128 @@
+type: object
+properties:
+  name:
+    type: string
+    format: event_sink_name
+    description: Globally unique event sink name.
+    x-primary-key: true
+    example: 'my_json_sink'
+  url:
+    type: string
+    description: |
+      Path where events are sent.
+
+      * For event handler, it is the URL of an HTTP handler or the path to a lua script:  `http://URL`, `https://URL`, or `path_to_lua_script.lua`.
+      * For event logging, it is the path to a log file (human-readable text file or JSON): `log://path_to_log_file.log` or `jsonlog://path_to_log_file.json`.
+    nullable: true
+    example: 'jsonlog:///var/log/events-json.log'
+    pattern: '^(log|jsonlog|http|https)://.+$|^pid://<[0-9]+.[0-9]+.[0-9]+>$'
+  only:
+    description: |
+      If specified, only the events that match **every** filter in the filter set will be passed to the event sink target.
+
+      That is, if even one of the conditions is not satisfied, an event will **not** be processed. 
+      Each filter (condition) has several possible values. For an event to satisfy the condition, 
+      an event should match **any** of the specified values, not all of them.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/event_sink_filter'
+    nullable: true
+    examples:
+      default:
+        value: [{"event":["listener_start"], "group": ["system_overloaded"]}]
+  except:
+    description: |
+      If specified, only the events that match **every** filter in the filter set will not be be passed to the event sink target.
+
+      That is, if even one of the conditions is not satisfied, an event will be processed.
+
+      Each filter (condition) has several possible values. For an event to satisfy the condition, 
+      an event should match **any** of the specified values, not all of them.
+    type: array
+    examples:
+      default:
+        value: [{"event":["stream_stopped", "stream_started", "source_*"]}]
+    items:
+      $ref: '../../schemas.yml#/event_sink_filter'
+    nullable: true
+  throttle_delay:
+    description: |
+      The delay (in seconds) before sending an event to the sink after saving it into the buffer. 
+      This parameter allows to lower frequency of sending events.
+
+      If there are more than 100 events in the buffer, all of them will be sent to the sink without any delay.  
+    type: integer
+    format: seconds
+    nullable: true
+    example: 1
+  max_size:
+    description: |
+      Maximum size of a log file. 
+
+      When this limit is reached, log rotation is performed: the oldest events will be overridden by later data.
+    type: integer
+    format: bytes
+    nullable: true
+    example: 10000
+  max_depth:
+    description: |
+      Maximal number of log files with events (JSON or text) that can be stored on a disk.
+      
+      When this limit is reached, log rotation is performed: the oldest files will be overridden by later data.
+    type: integer
+    nullable: true
+    example: 100
+  resend_limit:
+    description: |
+      If an error occurs (`HTTP 500` or any other error), then *Flussonic* will try to buffer events and send them later.
+
+      The option defines the **number** of events to keep in memory for further delivery.
+
+      The default value is `unlimited`.
+    type: integer
+    nullable: true
+    example: 1000
+  resend_timeout:
+    description: How often *Flussonic* will try to resend non-confirmed events to the handler (in seconds).
+    type: integer
+    nullable: true
+    example: 10
+
+  resend_notifications_limit:
+    description: Maximum number of events in a buffer accumulated when the event handler does not respond.
+    type: integer
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: resend_limit
+  resend_notifications_timeout: 
+    description: Timeout for attempts to resend events accumulated when the event handler did not respond.
+    type: integer
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: resend_timeout
+
+  verbose:
+    description: The level of logging according to event importance.
+    allOf:
+    - $ref: '../../schemas.yml#/loglevel'
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: level
+  level:
+    allOf:
+    - $ref: '../../schemas.yml#/loglevel'
+    nullable: true
+    description: |
+      Specify logging level for this sink. Anything more verbose than it will not get into this sink.
+  extra:
+    additionalProperties:
+      type: string
+    type: object
+    nullable: true
+    description: Some additional options.
+required:
+  - name
+  - url

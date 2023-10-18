@@ -1,0 +1,20 @@
+properties:
+  enabled:
+    description: |
+      This parameter allows Flussonic to receive motion detection events from cameras via ONVIF protocol. 
+      Flussonic adds corresponding marks in the archive recordings in the places when motion was detected.    
+    default: true
+    type: boolean
+    example: true
+  pull:
+    description: |
+      The address from which Flussonic will get motion detection events.
+      The events are taken from the ONVIF pull point provided by the cameras.
+
+      The format of the address is `onvif://{login}:{password}@{address}:{port}/onvif/device_service`
+    externalDocs:
+      description: Find more information here.
+      url: http://www.onvif.org/specs/core/ONVIF-Core-Specification.pdf
+    type: string
+    nullable: true
+type: object

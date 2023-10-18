@@ -1,0 +1,3 @@
+allOf:
+- $ref: '../../schemas.yml#/license'
+- $ref: '../../schemas.yml#/admin_credentials'

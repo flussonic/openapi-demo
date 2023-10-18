@@ -1,0 +1,16 @@
+type: object
+properties:
+  service:
+    description: |
+      The service information passed to VBI of the output analog stream.
+      The allowed value is `ttxt` - teletext.
+    allOf:
+    - $ref: '../../schemas.yml#/vbi_service'
+    nullable: true
+  lines: 
+    description: Numbers of VBI lines that will carry a teletext track.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/vbi_line'
+    type: array
+    nullable: true

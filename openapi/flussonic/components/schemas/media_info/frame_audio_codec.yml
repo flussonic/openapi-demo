@@ -1,0 +1,18 @@
+type: string
+oneOf:
+- title: AAC
+  const: aac
+- title: MP3
+  const: mp3
+- title: MP2A
+  const: mp2a
+- title: Opus
+  const: opus
+- title: AC3
+  const: ac3
+- title: EAC3
+  const: eac3
+- title: PCMA
+  const: pcma
+- title: PCMU
+  const: pcmu

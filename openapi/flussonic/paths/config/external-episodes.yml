@@ -1,0 +1,69 @@
+get:
+  operationId: external_episodes_list
+  summary: External episodes
+  description: |
+    This method will return episodes for selected streams that should be 
+    left on disk during DVR cleaning process.
+  
+  parameters:
+  - name: name
+    description: |
+      Requested list of streams. If some stream is not returned,
+      then all content for this will be erased.
+
+      If you cannot fetch this information for any reasons and not sure
+      that you are ready to delete all old DVR for the requested stream,
+      better fail with 
+    explode: false
+    in: query
+    required: true
+    schema:
+      example: s01,s02,s03
+      type: string
+    style: form
+  - name: opened_at_lt
+    description: |
+      If you want to fetch episodes earlier than 1 day ago, you need to skip all new episodes,
+      so you need those episodes, whose `opened_at` is in past, i.e. `less than = lt` then 1 day ago.
+
+      The meaning of this parameter is following: all episodes with `time =< opened_at`
+      (opposite to requested) are very new and not interesting for the requester. Only old enough episodes
+      with `opened_at` far in the past can be interesting to us.
+    in: query
+    required: false
+    schema:
+      type: integer
+      format: utc
+      example: 1645012045
+  - name: closed_at_gt
+    description: |
+      Streamer may use this field to skip asking for dozens of very old episodes that were fetched
+      some requests ago. For example: it may take sense to ask for episodes in the period from 2 days ago to
+      1 day ago. Everything older is not interesting and it takes too much time to fetch it.
+
+      Use this query option to fetch only required subset of episodes, reduce requested dataset to
+      only required small amount.
+    in: query
+    required: false
+    schema:
+      type: integer
+      format: utc
+      example: 1645012045
+  responses:
+    '200':
+      description: |
+        Success response with interleaved list of episodes
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/external_episodes_list'
+    '501':
+      description: |
+        Could not fetch information about stream, but not allowing to delete all DVR.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - dvr
+

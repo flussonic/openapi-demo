@@ -1,0 +1,27 @@
+type: object
+properties:
+  path:
+    description: Mount path.
+    type: string
+    format: disk_path
+    example: '_var_lib_docker_overlay2_3684778579db0a4d418fdc1a8a6953b680ab92d179a7d6f9506710d073095e36_merged'
+    openmetrics_label: path
+  device:
+    description: The block device or file related to a mount path.
+    type: string
+    format: disk_device
+    example: 'sda1'
+  total_mb:
+    description: Total number of megabytes shown by the OS for this partition.
+    type: integer
+    format: megabytes
+    openmetrics_metric: partition_total_mb
+    x-metric-type: gauge
+    example: 45423
+  usage:
+    description: Percentage of usage of this partition.
+    type: integer
+    format: percents
+    openmetrics_metric: partition_usage
+    x-metric-type: gauge
+    example: 30

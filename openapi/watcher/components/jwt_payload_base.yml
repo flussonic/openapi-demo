@@ -1,0 +1,10 @@
+type: object
+properties:
+  exp:
+    type: integer
+    description: |
+      the time when the token will expire
+    example: 1666781590
+
+required:
+  - exp

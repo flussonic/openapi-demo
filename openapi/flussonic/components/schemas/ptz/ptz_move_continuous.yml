@@ -1,0 +1,54 @@
+type: object
+properties:
+  command:
+    type: string
+    example: move_continuous
+    description: start PTZ continuous move
+  up:
+    type: integer
+    nullable: true
+    description: |
+      Speed to move the camera up. Percentage of the maximum pan speed.
+    maximum: 100
+    minimum: 0
+    example: 0
+  down:
+    type: integer
+    nullable: true
+    description: |
+      Speed to move the camera down. Percentage of the maximum pan speed.
+    maximum: 100
+    minimum: 0
+    example: 50
+  left:
+    type: integer
+    nullable: true
+    description: |
+      Speed to move the camera left. Percentage of the maximum tilt speed.
+    maximum: 100
+    minimum: 0
+    example: 50
+  right:
+    type: integer
+    nullable: true
+    description: |
+      Speed to move the camera right. Percentage of the maximum tilt speed.
+    maximum: 100
+    minimum: 0
+    example: 0
+  in:
+    type: integer
+    nullable: true
+    description: |
+      Speed to zoom in the camera. Percentage of the maximum zoom speed.
+    maximum: 100
+    minimum: 0
+    example: 20
+  out:
+    type: integer
+    nullable: true
+    description: |
+      Speed to zoom out the camera. Percentage of the maximum zoom speed.
+    maximum: 100
+    minimum: 0
+    example: 0

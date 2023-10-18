@@ -1,0 +1,11 @@
+type: string
+oneOf:
+- title: Running
+  const: running
+  description: Input is OK, stream is ready to be served to your audience.
+- title: Waiting
+  const: waiting
+  description: Flussonic awaits for input (publish) or it's an 'on demand' stream waiting for client.
+- title: Error
+  const: error
+  description: Something is wrong and Flussonic is not able to serve the stream to your audience.

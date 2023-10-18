@@ -1,0 +1,10 @@
+properties:
+  cloud_config:
+    $ref: '../../schemas.yml#/stream_config_stripped'
+    description: Cloud stream configuration
+  streamer_configs:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/cloud_stream_streamer_config'
+    description: Streamers stream configuration

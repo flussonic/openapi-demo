@@ -1,0 +1,25 @@
+description: DRM info specific to CENC formats (DASH, fMP4 HLS, CMAF)
+nullable: true
+type: object
+properties:
+  format:
+    description: Period format.
+    const: "cenc"
+  system_id:
+    description: Protection system ID (see https://dashif.org/identifiers/content_protection/)
+    type: string
+    format: uuid
+    example: "edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"
+  system_name:
+    description: Human-readable protection system name
+    type: string
+    nullable: true
+    example: "Widevine"
+  key_id:
+    description: Protection Key ID
+    type: string
+    format: uuid
+  header:
+    description: PSSH payload
+    type: string
+    format: base64

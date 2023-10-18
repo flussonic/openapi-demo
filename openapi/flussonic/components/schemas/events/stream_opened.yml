@@ -1,0 +1,10 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Stream opened.
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

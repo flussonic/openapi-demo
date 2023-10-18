@@ -1,0 +1,12 @@
+type: object
+properties:
+  library:
+    description: The name of the `.so` ffmpeg library file. 
+    type: string
+    example: "eflanger"
+  arguments:
+    description: The list of arguments for your external audio filter.
+    type: string
+    example: "delay=30:depth=2:width=71:speed=10"
+required:
+- library

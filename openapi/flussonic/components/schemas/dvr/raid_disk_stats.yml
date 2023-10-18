@@ -1,0 +1,51 @@
+type: object
+properties:
+  disk:
+    description: |
+      The path to a mounted disk. 
+    example: volume1
+    type: string
+    format: disk_path
+    openmetrics_label: disk
+  path:
+    description: A path where the DVR archive is stored.
+    type: string
+    format: dvr_url
+  mounted:
+    description: Whether the disk is mounted correctly.
+    type: boolean
+  mode:
+    description: |
+      The mode of using the disk.
+    example: keep
+    allOf:
+    - $ref: '../../schemas.yml#/raid_disk_mode'
+  blobs_count:
+    description: The number of blobs on the disk.
+    type: integer
+  size:
+    description: The size of the disk in bytes.
+    type: integer
+    format: bytes
+  usage:
+    description: Disk utilization percentage.
+    type: integer
+    format: percents
+  io_usage:
+    description: Disk I/O utilization percentage from `/proc/devstat`.
+    type: integer
+    format: percents
+    openmetrics_metric: raid_disk_io_usage
+    x-metric-type: gauge
+  migration_speed:
+    description: The speed of copying the last blob, in bytes per second.
+    type: integer
+    format: speed
+  migration_eta:
+    description: The estimated migration end time, in UTC seconds.
+    type: integer
+    format: utc
+  migration_updated:
+    description: The time when the values of `migration_speed` and `migration_eta` were last updated.
+    type: integer
+    format: utc

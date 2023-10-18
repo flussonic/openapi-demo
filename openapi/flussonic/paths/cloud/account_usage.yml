@@ -1,0 +1,162 @@
+get:
+  x-private: true
+  operationId: account_usage_list
+  summary: Report usage resources and spent carrots
+  description: |
+    Getting a report on the resources used and spent carrots with detailed by 
+    entire account, projects, streams, or separately sku's.
+  parameters:
+  - name: account_id
+    description: Account id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  - name: project_id
+    description: |
+      Comma-separated list of project id. Supported only 
+      [filtering by a value](https://flussonic.com/doc/api/flussonic-http-api/#filtering-by-a-value).
+
+      If not specified, will return usage for all account's projects.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+        format: base62
+    examples:
+      one:
+        value: ['aBc']
+        summary: One project
+      many:
+        value: ['aBc', 'xYz']
+        summary: Many projects
+  - name: media
+    description: |
+      Comma-separated list of streams. Supported only 
+      [filtering by a value](https://flussonic.com/doc/api/flussonic-http-api/#filtering-by-a-value).
+
+      If not specified, will return usage for all project's streams.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+    examples:
+      one:
+        value: ['aBc-qWe']
+        summary: One stream
+      many:
+        value: ['aBc-qWe', 'aBc-aSd']
+        summary: Several streams
+  - name: datetime
+    description: |
+      Date and time for which the report is generated.
+      If not specified, will return usage for current day.
+      
+      Supported [filtering by a condition](https://flussonic.com/doc/api/flussonic-http-api/#filtering-by-a-condition).
+      
+      Examples:
+       - `datetime_gte=1662386000` - get usage after specified timestamp
+       - `datetime_gte=1662386000&datetime_lte=1662386100` - get usage between specified timestamps
+      
+      Specifying the exact moment of time (`datetime=1662386000`) is meaningless, please use filtering by a condition.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: integer
+      format: unix-time
+  - name: interval
+    description: The time interval by which the usage will be grouped.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: string
+      default: hour
+      enum:  # Enum instead array of const because is self-documenting values
+        - hour
+        - day
+        - week
+        - month
+        - quarter
+        - year
+  - name: group_by
+    description: |
+      How report of usage will be grouped.
+
+      If not specified, will be grouped by `stream`.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: string
+      default: stream
+      enum:  # Enum instead array of const because is self-documenting values
+        - account
+        - project
+        - stream
+  - name: select
+    description: |
+      Comma-separated list of sku for report. Supported limitation only for sku's fields.
+      
+      If not specified, usage will be returned for all sku's.
+    in: query
+    style: form
+    explode: false
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+    examples:
+      dvr:
+        value: [skus.dvr_storage_duration]
+        summary: Get report only for DVR resource
+      transcoder:
+        value: [skus.transcoder_sd_duration,skus.transcoder_hd_duration,skus.transcoder_fhd_duration]
+        summary: Get report only for transcoder resources
+  - name: limit
+    description: Limit select count in collection to N elements.
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      default: 100
+      example: 1000
+    style: form
+  - name: cursor
+    description: |
+      Properly encoded analog of offset, allowing to read next bunch of items. 
+      We do not offer common `offset` fields, use please cursor for predictable
+      fetching of quickly changing list of items. More information can be found 
+      [here](https://flussonic.com/doc/api/flussonic-http-api/#limiting-collection-rows-cursors)
+    in: query
+    explode: false
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_account_usage_list'
+      description: Report of usage resources and spent carrots
+  tags:
+  - accounts

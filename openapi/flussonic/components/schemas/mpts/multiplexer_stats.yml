@@ -1,0 +1,35 @@
+type: object
+properties:
+  payload:
+    description: The payload bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: multiplexer_payload
+    x-metric-type: counter
+  encoded:
+    description: The encoded bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: multiplexer_encoded
+    x-metric-type: counter
+  fillers:
+    description: The filler packets count.
+    type: integer
+    openmetrics_metric: multiplexer_fillers
+    x-metric-type: counter
+  stuffing:
+    description: The stuff packets count.
+    type: integer
+    openmetrics_metric: multiplexer_stuffing
+    x-metric-type: counter
+  trimmed_bytes:
+    description: The trimmed bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: multiplexer_trimmed_bytes
+    x-metric-type: counter
+  trimmed_frames:
+    description: The trimmed frames count.
+    type: integer
+    openmetrics_metric: multiplexer_trimmed_frames
+    x-metric-type: counter

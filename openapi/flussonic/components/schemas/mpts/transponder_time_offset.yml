@@ -1,0 +1,23 @@
+properties:
+  country:
+    description: The country code.
+    type: string
+  region:
+    description: The region code.
+    type: integer
+  time_of_change:
+    description: Date and time when the time change takes place.
+    allOf:
+    - $ref: '../../schemas.yml#/iso8601'
+    nullable: true
+  local_time_offset:
+    description: The current offset time from UTC.
+    type: string
+    nullable: true
+  next_time_offset:
+    description: The next offset time after the change.
+    type: string
+    nullable: true
+required:
+  - country
+type: object

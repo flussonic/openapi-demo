@@ -1,0 +1,3 @@
+maximum: 65535
+minimum: 0
+type: integer

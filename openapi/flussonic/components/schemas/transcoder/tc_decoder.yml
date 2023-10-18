@@ -1,0 +1,100 @@
+type: object
+properties:
+  pix_fmt:
+    description: The required pixel format according to a color model.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/frame_video_pix_fmt'
+  deinterlace:
+    description: |
+      Activate deinterlacing, i.e., converting an interlaced image to a progressive image. 
+      It is necessary for comfortable viewing of legacy TV video on PC/mobile devices.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/deinterlace_settings'
+    example: true
+  deinterlace_rate:
+    description: |
+      This parameter is used when encoding with Nvidia NVENC.
+      You can remove duplicate frames that were produced after deinterlacing, preventing increased bitrate, by one of two methods.
+    nullable: true
+    oneOf:
+    - title: Frame
+      const: frame
+      description: |
+        From field sequence `1a 1b 2a 2b 3a 3b` we get frame sequence `1a1b 2a2b 3a3b`. 
+        The FPS stays the same.
+    - title: Field
+      const: field
+      description: |
+        Fields `1a 1b 2a 2b 3a 3b` transform into `1a1b 1b2a 2a2b 2b3a` frames. 
+        The FPS increases two times after transcoding.
+    type: string
+    example: 'frame'
+  enable_audio_desync_comp:
+    description: |
+      If this option is enabled, the missed audio frames are compensated by the silence.
+    nullable: true
+    type: boolean
+    deprecated: true
+    x-delete-at: 23.09
+    example: true
+  dsurfaces:
+    description: |
+      This parameter is applicable for NVENC transcoder only.
+      It is the number of the buffers used by the decoder. A buffer allows to compensate different sizes of frames: 
+      if a frame is too big to be played in time with a specified FPS, the frames from the buffer are played.
+
+      The default value is 16.
+      You can specify a value from 4 to 48 depending of the video card memory.
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    type: integer
+    example: 18
+  gen_pts:
+    description: |
+      Enable generation of PTS (presentation time stamps) when using QSV transcoder.
+
+      If `gen_pts=no`, the PTS received from the decoder are used. 
+      In some cases, it could result in unsynced audio and video. 
+      So this parameter was implemented for better audio and video synchronization.
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    type: boolean
+    example: true
+  crop:
+    description: Video cropping options.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_crop'
+  drop_frame_interval:
+    description: |
+      This parameter is applicable for NVIDIA Jetson transcoder only.
+      This is the number of frames after wich the decoder skips a frame and, thus, allows to save the resources. For example:
+
+      * 1 - sip each frame
+      * 2 - skip each second frame
+      * 3 - skip each third frame, etc.
+
+      This option can be useful for streams with high FPS (e.g., 60) as it allows to increase the bandwidth.
+    nullable: true
+    maximum: 1000
+    minimum: 1
+    type: integer
+    example: 3
+  no_dpb: 
+    description: |
+      Switch off the decoded picture buffer. Works for the streams with 1 reference frame.
+      The default value is `false`.
+    nullable: true
+    type: boolean
+    example: false
+  streaming_frame:
+    description: |
+      Allow receiving incomplete frames from the input buffer.
+      If it is set to `true`, the decoder can start decoding before the complete frame is received.
+    nullable: true
+    type: boolean
+    example: false

@@ -1,0 +1,37 @@
+type: object
+properties:
+  'ccm fir':
+    description: Indicates the use of Codec Control Messages (CCMs) with Full Intra Request (FIR) command.
+    type: boolean
+    default: false
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/rfc5104
+  nack:
+    description: Indicates the use of Negative ACKnowledgement (NACK) packet loss indicators.
+    type: boolean
+    default: false
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/rfc3941
+  'nack pli':
+    description: Indicates the use of Picture Loss Indication (PLI) feedback together with NACK.
+    type: boolean
+    default: false
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/rfc4585
+  goog-remb:
+    description: Indicates the use Receiver Estimated Maximum Bitrate (REMB) mechanism for bitrate selection.
+    type: boolean
+    default: false
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/draft-alvestrand-rmcat-remb-03
+  transport-cc:
+    description: Indicates the use of Transport-wide Congestion Control (TWCC) mechanism for bitrate selection.
+    type: boolean
+    default: false
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/draft-holmer-rmcat-transport-wide-cc-extensions-01

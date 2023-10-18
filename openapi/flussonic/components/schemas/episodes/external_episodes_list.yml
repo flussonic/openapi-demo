@@ -1,0 +1,9 @@
+allOf:
+- $ref: ../../schemas.yml#/collection_response
+- type: object
+  properties:
+    episodes:
+      description: The list of Episodes fetched according to the query parameters.
+      type: array
+      items:
+        $ref: ../../schemas.yml#/external_episode

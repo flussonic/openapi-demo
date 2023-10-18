@@ -1,0 +1,62 @@
+parameters:
+- name: name
+  in: path
+  required: true
+  description: logo path name
+  schema:
+    example: file.png
+    type: string
+  style: simple
+get:
+  operationId: logo_get
+  summary: Get the logo
+  description: Method allows to fetch single logo file
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/logo_file'
+      description: Whole logo
+  tags:
+  - logo
+put:
+  operationId: logo_save
+  summary: Upload the logo
+  description: Upload logo file
+  requestBody:
+    description: Uploaded logo
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/logo_file'
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/logo_file'
+      description: Uploaded logo file
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - logo
+delete:
+  operationId: logo_delete
+  summary: Delete the logo file
+  description: Delete the logo by its path
+  responses:
+    '204':
+      description: Deleted
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - logo

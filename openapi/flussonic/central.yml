@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This is an API for Flussonic Central subsystem. Flussonic Central is the underlying
+    technology behind [Flussonic Watcher](https://flussonic.com/doc/watcher/watcher-introduction)
+    and Flussonic Cloud,
+    providing you with options for managing streams, events, and Agents 
+    in a cluster of several streamers (i.e. Flussonic Media Servers) through a single point of access. 
+
+    Permanent [download link](https://flussonic.com/doc/api/central.json) to JSON schema file.
+
+    Flussonic Central does not include features for managing users and their permissions.
+    This part is Watcher VMS subsystem or Cloud.
+
+    Watcher VMS addresses Flussonic Central when users manage cameras (streams), Agents, and events.
+    However, you may use Flussonic Central for any streams, not only cameras.
+
+    ```
+    Streamer 1
+                 Flussonic Central <-> Watcher VMS
+    Streamer N
+    ``` 
+
+    You can install Flussonic Central subsystem on your local server or
+    use [Flussonic Cloud](https://flussonic.com/doc/cloud/cloud-introduction) implementation of this API.
+
+    Some methods in Flussonic Central API may look very similar to Flussonic Media Server API, 
+    but you should pay attention to some parameters that are different. For example, all streams
+    are created manually in Watcher Core while streams with dynamic names are not supported
+    so you will not find the `named_by` parameter in the stream config 
+    or the `part` parameter in the `stream_save` method. Do not rely on any undocumented parameters.
+
+  title: Flussonic Central API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: './components/schemas.yml'
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+
+
+  /streams:
+    $ref: './paths/central/streams.yml'
+  /streams/{name}:
+    $ref: './paths/central/stream.yml'
+
+  /ui_settings:
+    $ref: './paths/config/ui_settings.yml'
+
+  /streamers:
+    $ref: './paths/central/streamers.yml'
+  /streamers/{hostname}:
+    $ref: './paths/central/streamer.yml'
+  /streamers/{hostname}/streams:
+    $ref: './paths/central/streamer_streams.yml'
+  /streamers/{hostname}/episodes:
+    $ref: './paths/central/external/episodes.yml'
+
+  /auth_backends:
+    $ref: './paths/auth/auth_backends.yml'
+  /auth_backends/{name}:
+    $ref: './paths/auth/auth_backend.yml'
+  /auth:
+    $ref: './paths/auth/request_v1.yml'
+  /admin_view_token:
+    $ref: './paths/auth/admin_view_token.yml'
+
+  # TODO:
+  #
+  # Что мы хотим писать в облаке про агенты? Ведь агенты нужны и в on-premises вотчере,
+  # и в облаке.
+  # Ведь агент может быть регистратором или даже другим вотчером, значит у него отдельная БД с паролями.
+  # Нужно ли так же делать систему тегов для разграничения доступа к агентам для юзера?
+  # Наверное да, чтобы клиент не мог создать себе камеру, сосущую с чужого агента.
+  #
+  # Агент не может быть свойством камеры, потому что он может быть источником для большого количества стримов,
+  # значит он должен быть отдельной сущностью
+
+
+
+  /agents:
+    $ref: './paths/central/agents.yml'
+  /agents/{id}:
+    $ref: './paths/central/agent.yml'
+  #/agents/{id}/logs:
+  #  $ref: './paths/central/agent_logs.yml'
+  /endpoint/connect:
+    $ref: './paths/central/agents_endpoint_auth.yml'
+
+  /events/collector:
+    $ref: './paths/central/events_collector.yml'
+
+  # Управление ptz
+  #/streams/{name}/ptz:
+  #  $ref: './paths/stream/stream_ptz.yml'
+
+
+  # /streams/{name}/onvif:
+  #   $ref: ./paths/central/ApiCameraOnvifInfo.yml
+  # /streams/{name}/onvif/datetime:
+  #   $ref: ./paths/central/ApiCameraOnvifDatetime.yml
+  # /streams/{name}/onvif/imaging:
+  #   $ref: ./paths/central/ApiCameraOnvifImaging.yml
+  # /streams/{name}/onvif/network:
+  #   $ref: ./paths/central/ApiCameraOnvifNetwork.yml
+  # /streams/{name}/onvif/profiles:
+  #   $ref: ./paths/central/ApiCameraOnvifProfiles.yml
+  # /streams/{name}/onvif/reboot:
+  #   $ref: ./paths/central/ApiCameraOnvifReboot.yml
+  # /streams/{name}/onvif/users:
+  #   $ref: ./paths/central/ApiCameraOnvifUsers.yml
+  # /streams/{name}/ptz:
+  #   $ref: ./paths/central/ApiCameraPtz.yml
+
+
+  # Это евенты аналитики и соска к истории евентов.
+  # Сюда не хвататает самой настройки аналитики на камере
+  #
+  # Интересен ещё такой вопрос: как же именно разграничивать доступ к базе данных лиц и евентов?
+  #
+  #/events:
+  #  $ref: './paths/central/watcher-events.yml'
+  #/event_sinks:
+  #  $ref: './paths/events/event_sinks.yml'
+  #/event_sinks/{name}:
+  #  $ref: './paths/events/event_sink.yml'
+
+  /dvrs:
+    $ref: './paths/central/dvrs.yml'
+
+  # Видеоаналитика
+  /episodes:
+    $ref: './paths/central/episodes.yml'
+  /episodes/{episode_id}:
+    $ref: './paths/central/episode.yml'
+  /persons:
+    $ref: './paths/central/vision_persons.yml'
+  /persons/{person_id}:
+    $ref: './paths/central/vision_person.yml'
+
+  
+  /config:
+    $ref: './paths/central/config.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Your local Flussonic Central installation
+  url: http://localhost:80/streamer/api/v3
+tags:
+- name: stream
+- name: agent
+- name: config
+- name: streamer
+- name: episode
+- name: vision
+- name: dvr
+- name: config-external
+- name: events
+- name: auth

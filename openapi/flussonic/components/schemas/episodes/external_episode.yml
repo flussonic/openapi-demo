@@ -1,0 +1,22 @@
+type: object
+
+required:
+  - opened_at
+  - updated_at
+
+properties:
+  opened_at:
+    type: integer
+    format: utc_ms
+    description: The time when this episode was created.
+    example: 1637094994000
+  updated_at:
+    type: integer
+    format: utc_ms
+    description: The time of last detection associated with this episode.
+    example: 1637098611000
+  closed_at:
+    type: integer
+    format: utc_ms
+    description: The time when this episode was closed.
+    example: 1637094994000

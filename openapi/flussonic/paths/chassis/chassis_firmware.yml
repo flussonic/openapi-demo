@@ -1,0 +1,18 @@
+delete:
+  description: Delete the downloaded firmware by its version
+  operationId: chassis_firmware_delete
+  summary: Delete firmware
+  parameters:
+  - description: firmware version
+    in: path
+    name: version
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - chassis

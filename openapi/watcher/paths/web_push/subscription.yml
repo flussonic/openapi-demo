@@ -1,0 +1,25 @@
+parameters:
+  - name: endpoint
+    in: query
+    required: true
+    schema:
+      type: string
+    description: Subscription endpoint
+
+get:
+  operationId: web_push_subscription_existence_get
+  summary: Subscription existence
+  description: |
+    Checks for subscription on the backend
+  responses:
+    '204':
+      description: Subscription exists
+    '404':
+      description: Subscription does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+
+  tags:
+    - web_push

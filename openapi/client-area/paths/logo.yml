@@ -1,0 +1,16 @@
+get:
+  operationId: logo_get
+  summary: Get the SVG logo of the product
+  x-private: true
+  description: |
+    The method allows you to fetch the SVG logo of the product.
+  responses:
+    '200':
+      description: SVG logo
+      content:
+        image/svg:
+          schema:
+            type: string
+            format: binary
+  tags:
+    - config

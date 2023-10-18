@@ -1,0 +1,35 @@
+type: object
+properties:
+  playback:
+    type: string
+    description: Playback type for which the HTTP headers apply.
+    nullable: true
+    oneOf:
+    - title: Live
+      const: live
+    - title: DVR
+      const: dvr
+    example: live
+  protocols:
+    description: Configuration to allow/forbid headers for various playback protocols.
+    allOf:
+      - $ref: '../../schemas.yml#/play_protocols_spec'
+    nullable: true
+  headers:
+    additionalProperties:
+      type: string
+    type: object
+    x-key-type: string
+    nullable: true
+    description: HTTP headers in name-value format for manifest requests.
+    example: {"Cache-Control":"max-age=3600"}
+  segment_headers:
+    additionalProperties:
+      type: string
+    type: object
+    x-key-type: string
+    nullable: true
+    description: HTTP headers in name-value format for segment requests.
+    example: {"Cache-Control":"max-age=3600"}
+
+

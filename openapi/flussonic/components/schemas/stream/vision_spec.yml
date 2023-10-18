@@ -1,0 +1,25 @@
+type: object
+properties:
+  alg:
+    description: |
+      The algorithm used for video analytics.
+    type: string
+    oneOf:
+      - const: faces
+        description: The algorithm for face recognition is used.
+      - const: plates
+        description: The algorithm for license plate recognition is used.
+      - const: fake_detector
+        description: The algorithm used only for tests, it produces an event each frame processed.
+    example: 'faces'
+    x-api-allow:
+    - vision-config-external
+
+  areas:
+    description: |
+      This parameter allows you to select specific polygonal area(s) to detect license plates (works only for `alg = plates`).
+      By default, it is empty and the recognition system searches for license plates over all the camera field of view.
+      
+      Each area is specified as a sequence of comma-separated coordinates of vertices of the polygon: `x0,y0,x1,y1,x2,y2,...`.
+      The vertices are specified in a counter-clockwise direction. Multiple areas are separated by `:`.
+    type: string

@@ -1,0 +1,30 @@
+type: object
+properties:
+  aac:
+    allOf:
+    - $ref: '../../schemas.yml#/binary_boolean'
+    x-notice: used in rtsp_source instead of rtsp2  
+    description: Enables transcoding to the AAC codec for the audio track of the input.
+    deprecated: true
+    x-delete-at: 23.12
+    x-api-allow:
+    - watcher-core
+  aac_ab:
+    x-private: true
+    allOf:
+    - $ref: '../../schemas.yml#/binary_int'
+    description: Sets the bitrate of the resulting transcoded AAC audio track.
+    deprecated: true
+    x-delete-at: 23.12
+    x-api-allow:
+    - watcher-core
+
+  mbr:
+    x-private: true
+    type: string
+    deprecated: true
+    description: |
+      Enables the multi-bitrate mode for transcoding the input.
+      Need to remove it, but must offer some replacement to Watcher
+    x-api-allow:
+    - watcher-core

@@ -1,0 +1,14 @@
+get:
+  x-private: true
+  description: Fetch all license clients.
+  operationId: license_clients_list
+  summary: List license clients
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license_clients_list'
+      description: Response
+  tags:
+  - license

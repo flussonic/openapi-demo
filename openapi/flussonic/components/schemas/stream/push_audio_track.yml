@@ -1,0 +1,20 @@
+properties:
+  track:
+    description: The audio track name.
+    type: string
+    example: a1
+  sample_type:
+    description: The audio track output format.
+    type: string
+    oneOf:
+      - const: pcm
+    default: pcm
+  channels:
+    description: The list of SDI audio channel numbers to which the audio track shall be pushed.
+    type: array
+    items:
+      type: integer
+type: object
+required:
+- track
+- channels

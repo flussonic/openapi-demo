@@ -1,0 +1,33 @@
+get:
+  operationId: identification_config_get
+  summary: Configuration
+  description: |
+    Returns the current configuration of the analytics modules at your server.
+
+    The configuration is read-only.
+  tags:
+    - config
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_config_identification
+
+post:
+  x-private: true
+  operationId: identification_config_env
+  summary: Environment variables
+  description: List of the environment variables used to configure service
+  tags:
+    - environment
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas.yml#/vision_config_identification_env
+
+  responses:
+    '204':
+      description: Response

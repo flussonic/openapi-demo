@@ -1,0 +1,6 @@
+type: object
+properties:
+  token:
+    type: string
+    description: The admin auth token represented as an ASCII string.
+    example: ADM1-1659967259-a4ff9221f358938cc091b38679291378ac49f720

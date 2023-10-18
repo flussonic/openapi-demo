@@ -1,0 +1,58 @@
+parameters:
+- description: Template name.
+  in: path
+  name: name
+  required: true
+  schema:
+    example: hd-sports
+    type: string
+  style: simple
+get:
+  operationId: template_get
+  summary: Get the template
+  description: This method allows to get a single template by name.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/template_config'
+      description: The whole template configuration.
+  tags:
+  - template
+put:
+  operationId: template_save
+  summary: Save the template
+  description: |
+    Create or update a template. 
+    If you pass only a partial template configuration, only the passed fields will be updated, not the whole template.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/template_config'
+    description: Partial template configuration.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/template_config'
+      description: Updated template.
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - template
+delete:
+  operationId: template_delete
+  summary: Delete the template
+  description: Delete the template by its name.
+  responses:
+    '204':
+      description: The template is deleted.
+  tags:
+  - template

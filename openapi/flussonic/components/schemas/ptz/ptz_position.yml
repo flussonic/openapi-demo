@@ -1,0 +1,37 @@
+type: object
+required:
+  - pan
+  - tilt
+properties:
+  pan:
+    description: |
+      The angle ranges from the leftmost angle of camera (-1000) to the rightmost (1000). 
+      0 is the horizontal home position.
+      Actual camera angle depends on its model.
+    type: integer
+    minimum: -1000
+    maximum: 1000
+  tilt:
+    description: |
+      The angle ranges from the lowest angle of camera (-1000) to the highest (1000). 
+      0 is the vertical home position.
+      Actual camera angle depends on its model.
+    type: integer
+    minimum: -1000
+    maximum: 1000
+  zoom:
+    description: |
+      Camera zoom. 0 is the widest zoom angle. 100 is the narrowest zoom angle
+      If camera doesn't support zoom, this field is ignored
+    type: integer
+    nullable: true
+    minimum: 0
+    maximum: 100
+  focus:
+    description: |
+      Camera focus. 0 is the nearest focal plane. 1000 is the farthest focal place
+      If camera doesn't support focus, this field is ignored
+    type: integer
+    nullable: true
+    minimum: 0
+    maximum: 1000

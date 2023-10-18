@@ -1,0 +1,20 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name of available DVR storage
+    example: "ssd_storage"
+  storage_limit:
+    description: |
+      DVR storage size limit.
+      When this limit is reached, the oldest segments are overridden by later data.
+    type: integer
+    format: bytes
+    nullable: true
+  expiration:
+    description: |
+      Archive depth in the DVR storage, i.e. the retention period 
+      after which the DVR recordings are removed from the directory.
+    type: integer
+    format: seconds
+    nullable: true

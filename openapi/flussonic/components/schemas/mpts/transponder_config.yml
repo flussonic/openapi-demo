@@ -1,0 +1,107 @@
+properties:
+  name:
+    description: The name of the transponder.
+    type: string
+    format: media_name
+    x-primary-key: true
+    openmetrics_label: name
+    example: 'multiplexer'
+  pushes:
+    description: The list of pushes for the transponder.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_push'
+    type: array
+    nullable: true
+  bitrate:
+    description: Transponder bitrate.
+    type: integer
+    format: speed
+    nullable: true
+  provider:
+    description: Provider of the transponder.
+    type: string
+    nullable: true
+    example: 'Example Provider'
+  network_name:
+    description: The name of the TV network.
+    type: string
+    nullable: true
+    example: 'Example Network'
+  ts_stream_id:
+    description: The identifier of the transport stream for the transponder.
+    type: integer
+    nullable: true
+  network_id:
+    description: Identifier of the delivery network.
+    type: integer
+    nullable: true
+  original_network_id:
+    description: Identifier of the original delivery network. The same original network is used for NIT and SDT.
+    type: integer
+    nullable: true
+  ts_descriptors:
+    description: The list of transport stream descriptors. Descriptors are added to NIT and SDT.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/ts_descriptor'
+    type: array
+    default: []
+  timeouts:
+    description: |
+      The list of timeouts for autodetect of provider, title, and service_type of the programs.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_timeouts'
+    nullable: true
+  programs:
+    description: The list of programs in the transponder.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_program'
+    type: array
+    nullable: true
+  time_offsets:
+    description: The list of time offsets.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_time_offset'
+    type: array
+    default: []
+  versions:
+    description: Versions of PSI tables.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_versions'
+    nullable: true
+  others:
+    description: The list of other transponders on the network.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_other'
+    type: array
+    default: []
+  eit:
+    description: Transponder's program guide in EIT format.
+    allOf:
+    - $ref: '../../schemas.yml#/transponder_eit'
+    nullable: true
+  video_buffer:
+    description: The size of the video buffer for the transponder.
+    type: integer
+    nullable: true
+  prebuffer:
+    description: |
+      The length of multiplexer input buffer.
+      The higher value makes the multiplexer more robust to non-uniform inputs.
+      The lower value reduces input-to-output latency, but requires more stable bitrate (CBR) on input.
+    format: milliseconds
+    default: 300
+    example: 800
+    type: integer
+    nullable: true
+  stats:
+    description: Detailed runtime information about the multiplexer.
+    allOf:
+    - $ref: '../../schemas.yml#/multiplexer_stats'
+    nullable: true
+    readOnly: true
+type: object

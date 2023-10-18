@@ -1,0 +1,68 @@
+parameters:
+- name: episode_id
+  description: Episode's identifier
+  in: path
+  required: true
+  schema:
+    type: integer
+    format: snowflake_id
+  style: simple
+
+get:
+  operationId: episode_get
+  summary: Get the episode
+  description: |
+    This method allows you to fetch the episode by its identifier
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/episode'
+      description: Response
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Episode not found
+  tags:
+  - episode
+
+put:
+  operationId: episode_save
+  summary: Save the Episode
+  description: |
+    This method allows you to create a new episode or update attributes of the existing one
+  requestBody:
+    description: A set of episode's attributes
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/episode'
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/episode'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Invalid request
+  tags:
+  - episode
+
+delete:
+  operationId: episode_delete
+  summary: Delete the Episode
+  description: |
+    This method allows you to delete an episode
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - episode

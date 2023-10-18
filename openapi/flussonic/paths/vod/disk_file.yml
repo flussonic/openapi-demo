@@ -1,0 +1,137 @@
+get:
+  operationId: disk_file_get
+  summary: Get a single VOD file
+  description: This method allows to get a single VOD file.  
+  parameters:
+  - name: prefix
+    in: path
+    required: true
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for playing VOD files in this location.
+    schema:
+      example: 'vod'
+      type: string
+    style: simple
+  - name: storage_index
+    in: path
+    required: true
+    description: Index of the storage in the VOD location.
+    schema:
+      example: 0
+      type: integer
+    style: simple
+  - name: subpath
+    in: path
+    description: Subpath to the file in the storage including filename.
+    required: true
+    schema:
+      example: 'bunny.mp4'
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/disk_file'
+      description: Whole VOD file configuration.
+  tags:
+  - vod
+put:
+  operationId: disk_file_save
+  summary: Save a VOD file
+  description: Upload a file to the VOD location.
+  parameters:
+  - name: prefix
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for playing VOD files in this location.
+    in: path
+    required: true
+    schema:
+      example: 'vod'
+      type: string
+    style: simple
+  - name: storage_index
+    description: Index of the storage in the VOD location.
+    in: path
+    required: true
+    schema:
+      example: 0
+      type: integer
+    style: simple
+    explode: false
+  - name: subpath
+    description: Subpath to the file in the storage including filename.
+    in: path
+    required: true
+    schema:
+      example: 'bunny.mp4'
+      type: string
+    style: simple
+  requestBody:
+    description: Streaming VOD file payload.
+    content:
+      '*/*':
+        schema:
+          type: string
+          format: binary
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/disk_file'
+      description: Uploaded VOD file.
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - vod
+delete:  
+  operationId: disk_file_delete
+  summary: Delete a VOD file
+  description: Delete a VOD file by its name.
+  parameters:
+  - name: prefix
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for playing VOD files in this location.
+    in: path
+    required: true
+    schema:
+      example: 'vod'
+      type: string
+    style: simple
+  - name: storage_index
+    description: Index of the storage in the VOD location.
+    in: path
+    required: true
+    schema:
+      example: 0
+      type: integer
+    explode: false
+    style: simple
+  - name: subpath
+    description: Subpath to the file in the storage including filename.
+    in: path
+    required: true
+    schema:
+      example: 'bunny.mp4'
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - vod

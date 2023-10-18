@@ -1,0 +1,67 @@
+parameters:
+- name: person_id
+  description: Person's identifier
+  in: path
+  required: true
+  schema:
+    type: integer
+    format: snowflake_id
+  style: simple
+
+get:
+  operationId: person_get
+  summary: Get the Person
+  x-api-deny:
+  - watcher-core
+  description: |
+    This method allows you to fetch the person by its identifier
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vision_person'
+      description: Response
+  tags:
+  - vision
+
+put:
+  operationId: person_save
+  summary: Save the Person
+  x-api-deny:
+  - watcher-core
+  description: |
+    This method allows you to create a new person or update attributes of the existing one
+
+  requestBody:
+    description: A set of person's attributes
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/vision_person'
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vision_person'
+      description: Response
+  tags:
+  - vision
+
+
+delete:
+  operationId: person_delete
+  summary: Delete the Person
+  x-api-deny:
+  - watcher-core
+  description: |
+    This method allows you to delete the person by its identifier
+
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - vision

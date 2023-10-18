@@ -1,0 +1,9 @@
+type: object
+required:
+- group
+properties:
+  group:
+    type: string
+    title: Mosaic
+    const: mosaic
+    description: Combine all input files into single image. Cannot be used with other filters

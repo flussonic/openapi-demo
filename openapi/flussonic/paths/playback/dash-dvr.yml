@@ -1,0 +1,102 @@
+get:
+  operationId: dash_dvr_manifest
+  summary: DASH DVR
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play a specified DVR window, for example,
+    you can play a telecast if you know its beginning and end from EPG.
+
+    This URL works in two modes: file and event. If `duration` is specified as `now`, this
+    url will respond with a growing playlist for playing an event.
+
+    If `duration` is an exact positive number, then the server will respond with playlist, having
+    this requested amount of seconds of video as a file.
+
+    Note the following rules:
+
+      * The first segment in this playlist will not start earlier than `from`.
+      * The last segment in this playlist will not start later than `from + duration`.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: The start time of the DVR window in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: duration
+    in: path
+    description: |
+      The duration of the DVR window in seconds. 
+
+      You also can specify `now` for a growing playlist till current time.
+
+      If `from`+`duration` is in the future, the playlist will grow as well until it reaches the specified moment.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+          example: 7200
+        - type: string
+          enum:
+            - now
+  - name: period
+    in: query
+    description: |
+      Flussonic can create DASH manifest of two types: with multiple periods and with a single period. 
+
+      By default, Flussonic creates a multi-period manifest. If there is a gap in playing a stream (for example, when the stream is restarted) or video quality changes,
+      Flussonic starts a new period of playing, so there are multiple continuous periods in the resulting playlist.
+
+      However, such a manifest is incompatible with a wide range of devices and TV sets. 
+      In such cases you can specify `period=mono` option, i.e. `http://FLUSSONIC-IP/STREAMNAME/archive-TIME-DURATION.mpd?period=mono`.
+      As a result, Flussonic will recalculate timestamps of all frames and join the parts of the interrupted video together into a single period. 
+
+      Please note that this option should not work in the event mode because Flussonic cannot join a period in future.
+    required: false
+    schema:
+      type: string
+      enum:
+        - mono
+  - name: thumbnails
+    in: query
+    description: |
+      If this parameter is specified, the thumbnail playlist is added to the primary playlist.
+
+      Example of the thumbnail playlist:
+      ```
+       <AdaptationSet id="3" mimeType="image/jpeg" contentType="image">
+               <SegmentTemplate media="$RepresentationID$/dvr-1648098000-$Time$.m4v.jpg" duration="771"></SegmentTemplate>
+               <Representation bandwidth="10000" id="images-320x240" width="320" height="240">
+                  <EssentialProperty schemeIdUri="http://dashif.org/guidelines/thumbnail_tile" value="1x1"/>
+               </Representation>
+        </AdaptationSet>
+      ```
+
+      This value defines how many thumbnail links will be added to the thumbnail playlist to cover the
+      requested duration of the DVR window.
+      The player will add the thumbnail links to the progress bar at regular intervals.
+      The duration of the interval between thumbnails is the whole duration of the DVR window divided by this value.
+
+      NOTE: This option requires the parameters `thumbnails enabled=ondemand` and `size` included in the stream settings. 
+      For example, `thumbnails enabled=ondemand size=320x240;`.
+    schema:
+      type: integer
+      example: 100
+    required: false
+  responses:
+    '200':
+      content:
+        application/dash+xml:
+          schema:
+            type: string
+      description: DASH DVR manifest
+  tags:
+    - dash
+    - dvr

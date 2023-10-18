@@ -1,0 +1,21 @@
+type: object
+properties:
+  name:
+    description: The Decklink card name.
+    allOf:
+    - $ref: '../../schemas.yml#/decklink_card_id'
+    x-primary-key: true
+  profile:
+    description: The Decklink card profile that allows choosing between input and output direction.
+    oneOf:
+    - const: one_full
+      description: The `bmdProfileOneSubDeviceFullDuplex` mode.
+    - const: one_half
+      description: The `bmdProfileOneSubDeviceHalfDuplex` mode.
+    - const: two_full
+      description: The `bmdProfileTwoSubDevicesFullDuplex` mode.
+    - const: two_half
+      description: The `bmdProfileTwoSubDevicesHalfDuplex` mode.
+    - const: four_half
+      description: The `bmdProfileFourSubDevicesHalfDuplex` mode.
+  

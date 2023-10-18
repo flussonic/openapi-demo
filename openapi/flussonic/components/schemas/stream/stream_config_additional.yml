@@ -1,0 +1,46 @@
+type: object
+properties:
+  config_on_disk:
+    description: Part of the effective config from the configuration file.
+    allOf:
+    - $ref: '../../schemas.yml#/stream_config_stripped'
+    nullable: true
+    x-api-deny:
+    - config-external
+  stats:
+    description: Stream's metrics and other statistical information. 
+    allOf:
+    - $ref: '../../schemas.yml#/stream_stats'
+    readOnly: true
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+    x-api-deny:
+    - config-external
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project ID
+    x-scope:
+      - cloud
+  egress_hostnames:
+    allOf:
+    - $ref: '../../schemas.yml#/cloud_hostnames'
+    description: |
+      Egress hostname (hls, dash, ...) only for Admin UI, not public API.
+      Need for cloud only for replace window.location
+    x-private: true
+    x-scope:
+      - cloud
+    example: ['egress-1.example.com', 'egress-2.example.com']
+  ingress_hostnames:
+    allOf:
+    - $ref: '../../schemas.yml#/cloud_hostnames'
+    description: |
+      Igress hostname (hls, dash, ...) only for Admin UI, not public API.
+      Need for cloud only for replace window.location 
+    x-private: true
+    x-scope:
+      - cloud
+    example: ['igress-1.example.com', 'igress-2.example.com']

@@ -1,0 +1,136 @@
+type: string
+oneOf:
+  - title: copy
+    const: copy
+  - title: fake
+    const: fake
+  - title: RTMP
+    const: rtmp
+  - title: RTMPS
+    const: rtmps
+  - title: RTMPE
+    const: rtmpe
+  - title: RTSP
+    const: rtsp
+  - title: RTSP-UDP
+    const: rtsp-udp
+  - title: RTSP2
+    const: rtsp2
+  - title: RTSPS
+    const: rtsps
+  - title: EST
+    const: est
+  - title: SRT
+    const: srt
+  - title: MSE-LD
+    const: mseld
+  - title: SHOUTcast
+    const: shoutcast
+  - title: SHOUTcasts
+    const: shoutcasts
+  - title: WebRTC
+    const: webrtc
+  - title: HLS
+    const: hls
+  - title: HLSS
+    const: hlss
+  - title: HLS2
+    const: hls2
+  - title: HLSS2
+    const: hlss2
+  - title: LL-HLS
+    const: llhls
+  - title: CMAF
+    const: cmaf
+  - title: DASH
+    const: dash
+  - title: MSS
+    const: mss
+  - title: M4S
+    const: m4s
+  - title: M4SS
+    const: m4ss
+  - title: M4F
+    const: m4f
+  - title: M4FS
+    const: m4fs
+  - title: HTTP MPEG-TS
+    const: tshttp
+  - title: HTTPS MPEG-TS
+    const: tshttps
+  - title: TCP MPEG-TS
+    const: tstcp
+  - title: SSL MPEG-TS
+    const: tsssl
+  - title: FLV
+    const: flv
+  - title: annexB
+    const: annexb
+  - title: UDP
+    const: udp
+  - title: UDP1
+    const: udp1
+  - title: UDP2
+    const: udp2
+  - title: UDP3
+    const: udp3
+  - title: UDP MPTS
+    const: mpts-udp
+  - title: HTTP MPTS
+    const: mpts-http
+  - title: HTTPS MPTS
+    const: mpts-https
+  - title: DVB MPTS
+    const: mpts-dvb
+  - title: DVB
+    const: dvb
+  - title: Decklink
+    const: decklink
+  - title: AJA
+    const: aja
+  - title: DekTec
+    const: dektec
+  - title: DekTec ASI
+    const: dektec-asi
+  - title: v4l
+    const: v4l
+  - title: v4l2
+    const: v4l2
+  - title: Playlist
+    const: playlist
+  - title: Mixer
+    const: mixer
+  - title: Mosaic
+    const: mosaic
+  - title: Mosaic2
+    const: mosaic2
+  - title: Timeshift
+    const: timeshift
+  - title: File
+    const: file
+  - title: Download
+    const: download
+  - title: MBR
+    const: mbr
+  - title: MP4
+    const: mp4
+  - title: Logo
+    const: logo
+  - title: JPEG
+    const: jpeg
+  - title: MJPEG
+    const: mjpeg
+  - title: H.323
+    const: h323
+  - title: Ad injector
+    const: ad_injector
+  - title: ffmpeg
+    const: ffmpeg
+  - title: Transponder
+    const: transponder
+  - title: API
+    const: api
+  - title: JSON manifest
+    const: json_manifest
+  - title: Player
+    const: player

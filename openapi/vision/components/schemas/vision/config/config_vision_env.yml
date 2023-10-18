@@ -1,0 +1,15 @@
+type: object
+properties:
+  HTTP_PORT:
+    description: Port that will be used for listening for HTTP requests.
+    type: integer
+    format: network_port
+  CONFIG_EXTERNAL:
+    type: string
+    format: url
+    description: Central URL
+    example: 'http://central.example.com/'
+  HW:
+    allOf:
+    - description: Device type used for inference
+    - $ref: ../../schemas.yml#/vision_inference_device

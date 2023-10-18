@@ -1,0 +1,57 @@
+type: object
+properties:
+  hw:
+    description: Transcoder hardware device type to be used for transcoding a stream. 
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_device'
+  deviceid:
+    description: Identifier of hardware device to be used for transcoding a stream. 
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_deviceid'
+  external:
+    description: |
+      If this parameter is se to `true` (by default), the transcoder runs in a separate process from Flussonic.
+
+      If it is set to `false`, the transcoder will run in the same process as Flussonic. 
+      This mode speeds up encoding, especially when encoding audio or when using an Nvidia device. 
+      However, a transcoder error may cause Flussonic to crash.
+    nullable: true
+    type: boolean
+  keep_ts:
+    x-private: true
+    description: Do not bind frames timestamps to realtime before transcoding (disables timestamps being monotonic even if source switches/restarts).
+    nullable: true
+    type: boolean
+  fps:
+    description: FPS (frames per second) value to be applied for any video track in the stream. May be overridden for a track. 
+    nullable: true
+    x-private: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_fps'
+    example: 24
+  gop:
+    description: |
+      GOP (group of pictures) size (in frames) to be applied for any video track in the stream.
+      The encoder will create all GOPs of an exactly identical size - as specified in this option.
+      May be overridden for a track. 
+    nullable: true
+    type: integer
+    example: 150
+  resize_mode:
+    description: |
+      The mode to be used for resizing video tracks. It is one of the computing platforms for Flussonic Coder:
+
+      * vic -  Video Image Converter, specific for Jetson Nvidia
+      * cuda - CUDA (or Compute Unified Device Architecture)
+    x-private: true
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_resize_mode'
+  burn:
+    description: |
+      Configuration of text, timestamp or subtitles burn-in to video frames. 
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_burn'

@@ -1,0 +1,19 @@
+get:
+  operationId: readiness_probe
+  summary: Readiness probe
+  description: |
+    K8s readiness probe.
+  responses:
+    '200':
+      description: |
+        Means that server process is ready to work. All disks are mounted,
+        DVR storages opened, etc.
+
+        Ready for work.
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas.yml#/server_stats_whoami'
+  tags:
+  - monitoring
+

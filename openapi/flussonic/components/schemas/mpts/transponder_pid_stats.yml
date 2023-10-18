@@ -1,0 +1,29 @@
+type: object
+payload:
+  description: The payload bytes count.
+  type: integer
+  format: bytes
+  openmetrics_metric:  pid_payload
+  x-metric-type: counter
+fillers:
+  description: The filler bytes count.
+  type: integer
+  format: bytes
+  openmetrics_metric: pid_fillers
+  x-metric-type: counter
+stuffing:
+  description: The stuff packets count.
+  type: integer
+  openmetrics_metric: pid_stuffing
+  x-metric-type: counter
+trimmed_bytes:
+  description: The trimmed bytes count.
+  type: integer
+  format: bytes
+  openmetrics_metric: pid_trimmed_bytes
+  x-metric-type: counter
+trimmed_frames:
+  description: The trimmed frames count.
+  type: integer
+  openmetrics_metric: pid_trimmed_frames
+  x-metric-type: counter

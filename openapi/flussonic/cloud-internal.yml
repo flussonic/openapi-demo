@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This API describes internal admin API for Flussonic cloud service.
+
+  title: Cloud Flussonic API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: './components/schemas.yml'
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /accounts:
+    $ref: './paths/cloud/accounts.yml'
+  /accounts/{account_id}:
+    $ref: './paths/cloud/account.yml'
+  /accounts/{account_id}/prices:
+    $ref: './paths/cloud/account_prices.yml'
+  /accounts/{account_id}/prices/{actual_from}:
+    $ref: './paths/cloud/account_price.yml'
+  /accounts/{account_id}/usage:
+    $ref: './paths/cloud/account_usage.yml'
+  /accounts/{account_id}/balance_increment:
+    $ref: './paths/cloud/account_balance_increment.yml'
+
+  /auth/play:
+    $ref: './paths/auth/request_v1.yml'
+
+  /streams/{name}:
+    $ref: './paths/cloud/stream.yml'
+
+  /streamers:
+    $ref: './paths/central/streamers.yml'
+  /streamers/{hostname}:
+    $ref: './paths/central/streamer.yml'
+
+  /prices:
+    $ref: './paths/cloud/prices.yml'
+  /prices/{price_id}:
+    $ref: './paths/cloud/price.yml'
+
+  /system/provision:
+    $ref: './paths/cloud/system_provision.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Private admin flussonic cloud
+  url: https://api.flussonic.cloud/internal/v1
+tags:
+- name: accounts
+- name: pricing
+- name: streamer
+- name: auth
+- name: streams
+- name: system

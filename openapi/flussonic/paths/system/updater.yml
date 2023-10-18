@@ -1,0 +1,43 @@
+get:
+  operationId: system_updater_get
+  summary: Updater status
+  x-private: true
+  description: |
+    Get information about streamer updater status
+  responses:
+    '200':
+      description: Updater info
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/system_updater_status'
+  tags:
+  - system
+post:
+  operationId: system_updater_update
+  summary: Upgrade flussonic
+  x-private: true
+  description: |
+    Upgrade flussonic to requested version
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/system_upgrade_request'
+    description: Partial authorization backend configuration.
+  parameters:
+  - name: version
+    description: requested version
+    in: query
+    schema:
+      example: '21.12'
+      type: string
+  responses:
+    '200':
+      description: system_updater status
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/system_updater_status'
+  tags:
+  - system

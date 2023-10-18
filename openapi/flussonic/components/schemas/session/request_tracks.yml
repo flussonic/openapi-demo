@@ -1,0 +1,10 @@
+type: object
+properties:
+  tracks:
+    description: The list of the audio and video track identifiers to be selected for playing.
+    nullable: true
+    x-private: true
+    type: array
+    items:
+      type: string
+    example: ["v2","a1"]

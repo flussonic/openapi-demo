@@ -1,0 +1,77 @@
+get:
+  description: Method allows to fetch single project
+  operationId: project_get
+  summary: Get the project
+  parameters:
+  - name: project_id
+    description: project id
+    in: path
+    required: true
+    schema:
+      type: string
+      format: base62
+      example: aBc
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_project'
+      description: Whole project
+  tags:
+  - projects
+put:
+  description: Update project
+  operationId: project_save
+  summary: Update project
+  parameters:
+  - name: project_id
+    description: project id
+    in: path
+    required: true
+    schema:
+      type: string
+      format: base62
+      example: aBc
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_project'
+    description: Partial project configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_project'
+      description: Updated project
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - projects
+delete:
+  description: Delete the project
+  operationId: project_delete
+  summary: Mark the project as deleted by its id
+  parameters:
+  - name: project_id
+    description: project id
+    in: path
+    required: true
+    schema:
+      type: string
+      format: base62
+      example: aBc
+    style: simple
+  responses:
+    '204':
+      description: Marked as deleted
+  tags:
+  - projects

@@ -1,0 +1,15 @@
+type: object
+properties:
+  requested_config:
+    description: |
+      This option allows to request some media configuration from input.
+
+      The exact way of delivering this request to input may vary and depends on the exact url.
+
+      For example, RTSP input can use ONVIF for configuring IP camera,
+      H323 will use SDP for this request.
+    allOf:
+    - $ref: '../../schemas.yml#/requested_media_info'
+    x-scope:
+      - iris
+      - central

@@ -1,0 +1,40 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Advertisement injected.
+    path:
+      type: string
+      description: The path to the advertising file in a VOD location.
+    placement:
+      allOf:
+      - $ref: '../../schemas.yml#/ad_placement'
+    duration:
+      type: integer
+      format: seconds
+      description: The advertising file duration.
+    midroll_insert_by:
+      nullable: true
+      type: string
+      enum:
+        - interval
+        - splicing
+      description: |
+        When to perform midrolls.
+        If your stream has SCTE35 or SCTE104 you may opt to use them.
+        By default ads are inserted on regular intervals
+    session_id:
+      type: string
+      format: uuid
+      description: Unique identifier (or UUID) of the session.
+      example: '61942414-8c15-4809-8bb6-adf1ae846027'
+    dts:
+      type: integer
+      format: utc_ms
+      description: First advertising keyframe's DTS
+      example: 1655362349383
+
+- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_play'

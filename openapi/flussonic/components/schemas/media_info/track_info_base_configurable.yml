@@ -1,0 +1,37 @@
+type: object
+properties:
+  content:
+    description: Content of the track (audio, video, or text).
+    allOf:
+    - $ref: '../../schemas.yml#/frame_content'
+  title:
+    description: Human-readable localized title of the track.
+    nullable: true
+    type: string
+    x-notice: Human-readable localized title for HDS/HLS
+    example: Video1
+  codec:
+    description: Codec of the track. Different codecs do **not** get the same track.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/frame_codec'
+    example: h264
+  bitrate:
+    description: Bitrate of the track.
+    nullable: true
+    type: integer
+    format: speed
+    example: 2543
+  pid:
+    description: |
+      This parameter sets PIDs values for outgoing MPEG-TS streams.
+      PID identifies separate data stream inside the multiplexed MPEG-TS stream.
+      It is possible to set PID values for PMT, SDT, video, and audio tracks.
+      Tracks are numbered starting from one. The code a1=123 sets a PID value for the first audio track.
+
+      It is possible to set the base index for the tracks of a certain type using the 0 (zero) index.
+      For example, t0=100 sets PID=101 for the first track, 102 for the second, and so on.
+      Numbers can be given in decimal form (by default) or hexadecimal with 16# prefix.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'

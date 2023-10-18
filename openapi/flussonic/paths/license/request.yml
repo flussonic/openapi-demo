@@ -1,0 +1,14 @@
+get:
+  x-private: true
+  description: Read license request
+  operationId: license_request_get
+  summary: Get license request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license_request'
+      description: License request
+  tags:
+  - license

@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This API describes how Cloud Flussonic streaming server connects to an external authorization backend
+    to check if the user is allowed to access a stream or a VOD file.
+
+    This specification does not have any external dependencies and is designed to be as minimal,
+    as possible for reducing needs of maintaining unneeded backward compatibility.
+
+    This API is designed to be implementable by third parties.
+
+  title: Cloud Flussonic Authorization Backend API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /auth-request-v1:
+    $ref: './paths/auth/request_v1.yml'
+
+
+security:
+- bearerAuth: []
+servers:
+- description: your local installation
+  url: http://localhost:8080/streamer/api/v3
+tags:
+- name: auth

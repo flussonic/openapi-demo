@@ -1,0 +1,17 @@
+allOf:
+  # в specific идет то, что относится только к стриму, но не к темплейту
+  - $ref: '../../schemas.yml#/stream_config_specific'
+  # в basic уже то, что может быть и в темплейте, но общего назначения
+  - $ref: '../../schemas.yml#/stream_config_base'
+  # в media лежат вещи по настройке самого видеопотока, конфигурация live_stream_core
+  - $ref: '../../schemas.yml#/stream_config_media'
+  # в onpremises уходит то, что не имеет смысла для облака
+  - $ref: '../../schemas.yml#/stream_config_onpremises'
+  # single_media это то, что не имеет смысла для темплейта, но там только листенеры srt
+  - $ref: '../../schemas.yml#/stream_config_single_media'
+  # deprecated это надо удалить
+  - $ref: '../../schemas.yml#/stream_config_deprecated'
+  # в additional лежит то, что не совсем про стрим, а скорее про то, как его обрабатывают
+  - $ref: '../../schemas.yml#/stream_config_additional'
+  # опции, необходимые для вотчера
+  - $ref: '../../schemas.yml#/stream_config_watcher'

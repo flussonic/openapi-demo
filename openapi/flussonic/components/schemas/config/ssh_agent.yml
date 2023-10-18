@@ -1,0 +1,19 @@
+type: object
+properties:
+  configured:
+    type: boolean
+    readOnly: true
+    description: SSH keys support configured in `authorized_keys`.
+  enabled:
+    type: boolean
+    readOnly: true
+    description: Whether `ssh_agent` will start on reboot.
+  running:
+    type: boolean
+    readOnly: true
+    description: Whether `ssh_agent` is running right now.
+  connected:
+    type: boolean
+    readOnly: true
+    description: Whether `ssh_agent` is connected. In this case our support team has an access to your server.
+

@@ -1,0 +1,38 @@
+type: object
+properties:
+  file:
+    description: |
+      The subpath to the `.ttf` font file in the `font` subdirectory of the `/etc/flussonic/` directory. 
+      This means you can place the font file like `/etc/flussonic/font/SomeFont.ttf`.
+
+      If the font file specified is missing in `/etc/flussonic/font/`, the default `FiraCode-Regular.ttf` font will be used, which is included in Flussonic.
+
+      You can also specify the full path to a font file. Make sure you put the font file in the directory you specified. 
+    nullable: true
+    type: string
+    example: '/usr/share/fonts/truetype/freefont/FONT_NAME.ttf'
+  size:
+    description: The font size in pixel.
+    nullable: true
+    type: integer
+    example: 24
+  color:
+    description: Font color.
+    nullable: true
+    anyOf:
+    - type: string
+      examples:
+        default:
+          value: "black"
+        mylive/bunny:
+          value: "white"
+    - type: string
+      format: hexcolor
+      example: '#d62d20'
+  alpha:
+    description: Font opacity (use values from 0.1 to 1.0, 0.0 - completely transparent, 1.0 - completely opaque).
+    nullable: true
+    maximum: 1
+    minimum: 0
+    type: number
+    example: 1

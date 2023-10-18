@@ -1,0 +1,108 @@
+get:
+  operationId: hls_dvr_manifest
+  summary: HLS DVR
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play a specified DVR window, for example,
+    you can play a telecast if you know its beginning and end from EPG.
+    
+    This method returns one of two types of HLS playlists:
+
+    * "VOD" is suitable for ended TV shows and events, CCTV recordings
+    * "EVENT" is suitable for current events, webinars, and TV shows.
+    
+    This URL is a recommended way to play DVR, because it allows pausing. If a player can seamlessly 
+    switch between different URLs, you can make seamless DVR playback with non-overlapping HLS DVR requests.
+  externalDocs:
+    description: Find more information here
+    url: https://flussonic.com/doc/video-playback/hls-playback/#dvr-catchup-playback
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: The start time of the DVR window in UTC seconds. The first segment of this playlist will not start earlier than `from`.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: duration
+    in: path
+    description: The duration of the DVR window in seconds. You also can specify `now` for a DVR window till current time.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+          example: 7200
+          description: The last segment in this playlist will not start later than `from + duration`.
+        - type: string
+          enum:
+            - now
+          description: A server will return HLS EVENT (append-only) manifest. It contains a list of segments starting from `from` up to the current moment.
+  - name: separate_audio
+    in: query
+    description: |
+      Whether audio tracks are specified separately in the playlist.
+      
+      This option is used for some players like Samsung TV or browsers supporting MSE that cannot switch between 
+      multiple audio tracks (for instance, for different languages) and, as a result, do not display such audio tracks. 
+      For such cases, Flussonic can create a playlist with separate audio.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  - name: thumbnails
+    in: query
+    description: |
+      If this parameter is specified, the thumbnail playlist is added to the primary playlist.
+
+      Example of the thumbnail playlist:
+      
+      ```
+      #EXT-X-IMAGE-STREAM-INF:BANDWIDTH=10000,RESOLUTION=320x240,CODECS="jpeg",URI="images-320x240/tpl-1644304617-60-100.m3u8"
+      ```
+
+      This value defines how many thumbnail links will be added to the thumbnail playlist to cover the
+      requested duration of the DVR window.
+      The player will add the thumbnail links to the progress bar at regular intervals.
+      The duration of the interval between thumbnails is the whole duration of the DVR window divided by this value.
+
+      NOTE: This option requires the parameters `thumbnails enabled=ondemand` and `size` included in the stream settings. 
+      For example, `thumbnails enabled=ondemand size=320x240;`.
+    schema:
+      type: integer
+      example: 100
+    required: false
+  - name: event
+    in: query
+    description: |
+      By default, the VOD playlist is returned unless "duration=now" was requested.
+
+      Using an 'event' option its type can be changed to the 'EVENT' if playlist has the end of the requested range in the future.
+
+      When the end of the requested range is passed (for archive-1641045644-5000.m3u8 it will be at 1641050644 UTC), the playlist will change its type to VOD, as no new segments are expected.
+
+      Please note that most hls players start playing the VOD playlist at the beginning and the EVENT playlist at the live edge (the very end of the playlist).
+
+      The default behaviour (always VOD) makes players behave consistently, but players will not request updated playlists.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/hls_master_playlist'
+      description: HLS DVR playlist with links to other playlists
+  tags:
+    - hls
+    - dvr

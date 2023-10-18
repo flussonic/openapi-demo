@@ -1,0 +1,72 @@
+type: object
+properties:
+  database:
+    allOf:
+    - $ref: '../../schemas.yml#/central_config_database'
+    description: The configuration of database connection
+  listeners:
+    allOf:
+    - $ref: '../../schemas.yml#/listeners'
+    description: The configuration of network listeners.
+  edit_auth:
+    allOf:
+    - $ref: '../../schemas.yml#/admin_credentials'
+    description: Credentials for administrator access to the server.
+  api_key:
+    type: string
+    description: API_KEY is used to access Central API
+    example: api_key
+  api_url:
+    type: string
+    description: API URL used for setting the hostname and port under which Central is accessible by Flussonic for CONFIG_EXTERNAL and http_proxy requests
+    example: http://central.ru:9019/streamer/api/v3
+    format: url
+  streamer_connector_retries:
+    type: integer
+    description: Number of retries for sending requests to streamers
+    example: 5
+    default: 5
+  streamer_fetch_timeout:
+    type: string
+    description: Timeout for sending requests to streamers
+    example: 5s
+    default: 75s
+  streams_stats_fetch_interval:
+    type: string
+    description: Interval of fetching streams statuses from streamers
+    example: 5s
+  loglevel:
+    allOf:
+    - $ref: '../../schemas.yml#/loglevel'
+    description: Set logging level
+    example: error
+  log_requests:
+    type: string
+    description: Enables logging HTTP-requests
+    example: 'false'
+    default: 'false'
+  pprof_enabled:
+    type: string
+    description: Enables Go pprof for profiling Central
+    example: 'false'
+    default: 'false'
+    x-private: true
+  log_runtime_metrics:
+    type: string
+    description: Enables logging Go runtime metrics
+    example: 'false'
+    default: 'false'
+    x-private: true
+  tracer:
+    allOf:
+    - $ref: '../../schemas.yml#/central_config_tracer'
+    description: The configuration of database connection
+  stats:
+    allOf:
+    - $ref: '../../schemas.yml#/central_stats'
+    description: Server runtime stats
+
+required:
+  - database
+  - api_key
+

@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      api_keys:
+        items:
+          $ref: '../../schemas.yml#/cloud_api_key'
+        type: array
+        description: List of API keys

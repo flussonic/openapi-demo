@@ -1,0 +1,9 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: WebRTC Play Prober timeout
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'

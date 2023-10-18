@@ -1,0 +1,5 @@
+enum:
+- widevine
+- fairplay
+- playready
+type: string

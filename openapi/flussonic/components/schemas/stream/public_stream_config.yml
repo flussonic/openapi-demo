@@ -1,0 +1,37 @@
+type: object
+properties:
+  name:
+    type: string
+    format: media_name
+    description: Globally unique stream name.
+    x-primary-key: true
+    examples:
+      default:
+        value: 'hockey1'
+  title:
+    description: |
+      Human-readable title of the stream. Provided for SDT MPEG-TS table or
+      SDP RTSP title parameter.
+    type: string
+    example: "Hockey channel"
+  provider:
+    description: |
+      Human-readable name of the content provider. Used, for example, for MPEG-TS.      
+    type: string
+    example: "SportsTV"
+  logo:
+    description: Overlay logo.
+    allOf:
+    - $ref: '../../schemas.yml#/web_logo_spec'
+  auth_token:
+    allOf:
+    - $ref: '../../schemas.yml#/auth_token'
+    description: |
+      Configure key name of query string key-value pair for token authentication
+  stats:
+    description: Stream's metrics and other statistical information. 
+    allOf:
+    - $ref: '../../schemas.yml#/public_stream_stats'
+    readOnly: true
+required:
+- name

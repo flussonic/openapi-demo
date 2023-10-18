@@ -1,0 +1,52 @@
+type: object
+properties:
+  file:
+    description: |
+      Path to the backup file in a VOD location on the server (**not on the local disk!**). 
+      The backup file is played to fill in a time interval when the source is down.
+    externalDocs: 
+      description: Find more information here.
+      url: https://flussonic.com/doc/live-streaming/source-failover/
+    type: string
+    nullable: true
+    example: 'vod/blank.mp4'
+  timeout:
+    description: |
+      The time (in seconds) for Flussonic to switch to the fallback source if the main source stops sending frames. 
+      The important thing here is that the source remains active (connected), allowing for a client-publisher to stay on the socket.
+      This option takes any type of frames into account. 
+
+      If you do not specify timeout specifically for a fallback source, then in the absence of frames, `source_timeout` of the main source will be used.
+    type: integer
+    nullable: true
+    example: 10
+  audio_timeout:
+    description: The time (in seconds) for Flussonic to switch to the fallback source if the main source stops sending audio frames.
+    type: integer
+    nullable: true
+    example: 5
+  video_timeout:
+    description: The time (in seconds) for Flussonic to switch to the fallback source if the main source stops sending video frames.
+    type: integer
+    nullable: true
+    example: 4
+  transcode:
+    description: |
+      Whether or not to transcode the backup file. Set to `True` by default. 
+      If set to `False`, backup file frames will bypass as-is to the output stream.
+
+      Should not be set to `False` unless the backup file has the same stream characteristics
+      as the live stream.
+    externalDocs: 
+      description: Find more information here.
+      url: https://flussonic.com/doc/live-streaming/source-failover/#live-sources-backup_transcode
+    type: boolean
+    nullable: true
+    # default: true
+  dvr:
+    description: |
+      Whether or not to record a backup to DVR. 
+      Set to `False` by default (backup is not recorded).
+    type: boolean
+    nullable: true
+    # default: false

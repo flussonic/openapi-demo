@@ -1,0 +1,41 @@
+type: object
+properties:
+  global:
+    description: |
+      Transcoder settings to be used for transcoding. 
+    allOf:
+    - $ref: '../../schemas.yml#/tc_global'
+    x-default:
+      $ref: '../../schemas.yml#/tc_global'
+  decoder:
+    description: |
+      Decoder settings to be used for transcoding. 
+    allOf:
+    - $ref: '../../schemas.yml#/tc_decoder'
+    x-default:
+      $ref: '../../schemas.yml#/tc_decoder'
+  audio:
+    description: |
+      List of audio tracks the stream audio track will be transcoded into.
+    allOf:
+    - $ref: '../../schemas.yml#/tc_audio_opts'
+    x-default:
+      $ref: '../../schemas.yml#/tc_audio_opts'
+    deprecated: true
+    x-delete-at: 23.09
+  video:
+    description: |
+      List of video tracks the stream video track will be transcoded into. 
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/tc_video_opts'
+    type: array
+    default: []
+  tracks:
+    description: Info on the tracks.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transcoder_track_info'
+    type: array
+    default: []
+

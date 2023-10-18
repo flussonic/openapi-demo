@@ -1,0 +1,28 @@
+type: object
+properties:
+  track_id:
+    description: Track identifier assigned by Flussonic.
+    nullable: true
+    anyOf:
+    - type: integer
+    - type: string
+    example: v1
+  frame_duration:
+    description: |
+      For video track, it is the time between the beginning of a frame and the beginning of the next frame.
+
+      This parameter is important for some protocols. Normally, frame duration is a difference between timestamps of two neighbouring frames.
+      However, sometimes (when the connection is broken) video breakups are possible.
+      As result, the delta between two consequent frame timestamps will not be equal to the frame duration.
+      This situation is considered as a frame gap and is handled differently across different protocols.
+    type: number
+    format: ticks
+    nullable: true
+  avg_fps:
+    description: |
+      Actual average FPS - the number of frames diplayed per second (calculated for the last 200 frames).
+      The higher FPS is, the smoother the video playback is. 
+      Usually, standard values of FPS for films and video are used in different countries (for example, in Russia and Europe it is 25 FPS).
+    nullable: true
+    type: number
+    x-notice: calculated fps for statistic

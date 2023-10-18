@@ -1,0 +1,10 @@
+type: object
+properties:
+  metrics:
+    $ref: ../../schemas.yml#/vision_metrics
+  episodes:
+    description: List of detected episodes
+    nullable: true
+    type: array
+    items:
+      $ref: ../../schemas.yml#/episode

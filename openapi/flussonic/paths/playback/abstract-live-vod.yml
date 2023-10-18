@@ -1,0 +1,31 @@
+get:
+  operationId: abstract_manifest
+  summary: abstract manifest
+  description: |
+    Abstract manifest describing media segments grouped into periods of continious playback
+  parameters:
+  - name: name
+    in: path
+    description: |
+      The name of a stream or a VOD file. It may be multi-segment, i.e. `/part1/part2/part3`.
+
+      For a VOD file, it consists of the VOD storage name and a path to the file within the storage.
+    required: true
+    schema:
+      type: string
+    examples:
+        stream:
+          summary: Stream name example
+          value: 'clock'
+        vod:
+          summary: VOD file name example
+          value: 'vod/movies/bunny.mp4'
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/abstract_manifest'
+      description: abstract manifest
+  tags:
+    - api

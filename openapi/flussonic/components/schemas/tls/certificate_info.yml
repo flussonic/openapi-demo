@@ -1,0 +1,23 @@
+type: object
+properties:
+  domains:
+    description: One or more domains for which the certificate is issued.
+    type: array
+    items:
+      type: string
+  not_before:
+    description: Start date of the certificate.
+    type: integer
+    nullable: true
+  not_after:
+    description: End date of the certificate.
+    type: integer
+    nullable: true
+  issuer_name:
+    description: The name of the issuing authority.
+    type: string
+    nullable: true
+  public_key:
+    description: Public key.
+    type: string
+    nullable: true

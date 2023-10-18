@@ -1,0 +1,10 @@
+oneOf:
+- title: Low
+  const: low
+- title: Main
+  const: main
+- title: High
+  const: high
+- title: High 1440
+  const: high1440
+type: string

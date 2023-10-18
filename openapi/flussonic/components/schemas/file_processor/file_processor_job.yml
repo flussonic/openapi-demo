@@ -1,0 +1,61 @@
+description: Video files processing request
+type: object
+properties:
+  input_files:
+    description: Input files
+    type: array
+    minItems: 1
+    items:
+      type: string
+      format: disk_path
+  output_file:
+    description: Output file
+    type: string
+  filters:
+    description: Processing filters
+    type: array
+    minItems: 1
+    items:
+      $ref: '../../schemas.yml#/file_processor_filter'
+
+  id:
+    description: Job id
+    type: string
+    readOnly: true
+  legacy_id:
+    description: Job id in old format. Equals to output_file path.
+    type: string
+    readOnly: true
+    example: '/storage/output/file.mp4'
+    x-private: true
+    deprecated: true
+    x-delete-at: 24.06
+  status:
+    description: Job status.
+    type: string
+    enum:
+    - new
+    - running
+    - done
+    - error
+    readOnly: true
+  size:
+    description: Output file size
+    type: integer
+    readOnly: true
+  duration:
+    description: Output file duration
+    type: integer
+    readOnly: true
+  progress:
+    description: Percent done
+    type: integer
+    minimum: 0
+    maximum: 100
+    readOnly: true
+  errors:
+    description: List of errors
+    type: array
+    items:
+      $ref: '../../schemas.yml#/error'
+    readOnly: true

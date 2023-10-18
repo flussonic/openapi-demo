@@ -1,0 +1,79 @@
+type: object
+properties:
+  type:
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_device'
+    nullable: true
+    description: The type of the device used for transcoding.
+    example: cpu
+  id:
+    allOf:
+    - $ref: '../../schemas.yml#/tc_deviceid'
+    nullable: true
+    description: |
+      The ID of the device used for transcoding.
+
+      In PUT requests, you can use `auto` for Flussonic to set the ID itself. 
+      In the response to GET requests, the `id` will always be a number.
+  name:
+    type: string
+    nullable: true
+    description: The name of the transcoder device.
+    openmetrics_label: name
+  can_logo:
+    type: boolean
+    nullable: true
+    description: Shows if the device can put a logo on the image.
+  can_interlace:
+    type: boolean
+    nullable: true
+    description: Shows if the device can make an interlaced stream from a progressive one.
+  can_internal:
+    type: boolean
+    nullable: true
+    description: Shows if the transcoder with this device can run in the same process as Flussonic Media Server.
+  memTotal:
+    type: integer
+    nullable: true
+    description: Total RAM on the device.
+  memFree:
+    type: integer
+    nullable: true
+    description: Free RAM.
+  memUsed:
+    type: integer
+    nullable: true
+    description: Utilized RAM.
+  reconfig_support:
+    allOf:
+    - $ref: '../../schemas.yml#/tc_reconfig_support'
+    nullable: true
+    description: |
+      The ability of the device to be reconfigured online, i.e. without complete restart of the transcoder.
+
+      `full` means that both decoder and encoder can be reconfigured online.
+      `encoder` means that only encoder can be reconfigured online.
+      `decoder` means that only decoder can be reconfigured online.
+      `false` means that online reconfiguration is not supported.
+  gpu_temp:
+    type: integer
+    nullable: true
+    description: GPU temperature, °C.
+    openmetrics_metric: gpu_temperature
+    x-metric-type: gauge
+  gpu_enc:
+    type: integer
+    nullable: true
+    description: GPU encoder load percentage.
+    openmetrics_metric: gpu_encoder_load
+    x-metric-type: gauge
+  gpu_dec:
+    type: integer
+    nullable: true
+    description: GPU decoder load percentage.
+    openmetrics_metric: gpu_decoder_load
+    x-metric-type: gauge
+  gpu_sm:
+    type: integer
+    nullable: true
+    description: GPU shared memory amount.

@@ -1,0 +1,14 @@
+type: object
+properties:
+  ram_total_bytes:
+    description: RAM size in bytes (gauge)
+    type: integer
+    example: 34359738368
+  ram_used_bytes:
+    description: Used RAM size in bytes (gauge)
+    type: integer
+    example: 22548578304
+  utilization_percent:
+    description: Utilization percent of the computing device (gauge)
+    type: integer
+    example: 87

@@ -1,0 +1,31 @@
+type: object
+properties:
+  dts:
+    description: first frame's DTS
+    type: integer
+    format: utc_ms
+    example: 1653316321820
+  duration:
+    description: period duration
+    type: integer
+    format: milliseconds
+    example: 738270
+  media_info:
+    description: Technical information about the output media content.
+    allOf:
+      - $ref: '../../schemas.yml#/media_info'
+  drm:
+    description: Available protection systems
+    nullable: true
+    type: array
+    items:
+      oneOf:
+      - $ref: '../../schemas.yml#/stream_drm_hls'
+      - $ref: '../../schemas.yml#/stream_drm_cenc'
+      discriminator:
+        propertyName: format
+  segments:
+    description: The list of stream segments.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/stream_segment'

@@ -1,0 +1,69 @@
+get:
+  operationId: srt_port_resolve
+  summary: UDP port to stream name
+  description: |
+    This API method will be called to find stream name by the port which received srt connection.
+
+    SRT protocol has two modes: when no stream name is passed in protocol, or when it is passed,
+    but only if passwords match on both sides.
+
+    So you cannot rely on a stream name, because it is either not passed, either is password protected.
+
+    When you build a cloud, you cannot offer the same password to all clients, because it is just the same
+    like without password.
+
+    This method allows some dynamic configuration when you wait for a client on a pool of servers on a fixed
+    UDP port. When connection comes (publish/ingress of play/egress), your configuration backend will be called
+    for resolving this UDP port to a stream configuration. Streamer will find out what is the name of the stream,
+    its password and all other settings.
+  parameters:
+  - name: port
+    description: Srt port which has received the connection
+    in: path
+    required: true
+    schema:
+      $ref: '../../components/schemas.yml#/network_port'
+    example: 3000
+  - name: mode
+    description: |
+      Configured mode of the listener, play or publish.
+
+      As SRT doesn't have any mandatory signalling in protocol: is this a play or a publish request,
+      the pool of UDP ports has a mandatory configuration option: is it a play or a publish port.
+
+      When any connection is made to one of these ports, this mode is fetched from a configuration.
+    in: query
+    required: true
+    schema:
+      type: string
+      enum:
+      - play
+      - publish
+      example: publish
+  - name: host
+    description: |
+      Hostname of the streamer server
+    explode: false
+    in: query
+    required: true
+    schema:
+      example: streamer03.my.cdn
+      type: string
+    style: form
+
+  responses:
+    '200':
+      description: Stream name
+      content:
+        text/plain:
+          schema:
+            type: string
+            format: media_name
+    '404':
+      description: Stream was not found
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+  tags:
+  - srt

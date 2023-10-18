@@ -1,0 +1,42 @@
+type: object
+properties:
+  input_track:
+    description: |
+      Input track to be transcoded.
+    nullable: true
+    anyOf:
+    - type: integer
+    - type: string
+    example: a1
+  volume:
+    description: |
+      Output audio volume. The value can be specified in decibels (dB) or it can be an integer/float (3, 0.5, etc.).
+
+      If it is just an integer or a float, the output audio volume is calculated by this formula:
+
+      `output_volume = volume * input_volume`
+
+      If specified in decibels (dB), the output audio volume is calculated as follows:
+
+      `output_volume = input_volume +/- volume`
+
+      depending whether it is a positive (+9dB) or a negative value (-6dB).
+      
+      By default it equals to 1 (the input audio volume).
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/transcoder/how-to-change-the-volume-level
+    nullable: true
+    type: string
+    example: '-6dB'
+  split_channels:
+    description: |
+      This option allows to split each audio track with multiple channels into several mono tracks.
+    nullable: true
+    type: boolean
+    default: false
+  external_audio_filter:
+    description: Custom audio filter developed by a user; this should be an ffmpeg library compiled as `.so` file.
+    allOf:
+    - $ref: '../../schemas.yml#/tc_external_audio_filter'
+    x-private: true

@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      interfaces:
+        description: The list of interfaces.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/interface_config'

@@ -1,0 +1,31 @@
+allOf:
+  - type: object
+    properties:
+      datetime:
+        type: string
+        format: date-time
+        description: Measurement date and time
+        example: "2021-01-30T08:30:00Z"
+      project_id:
+        type: string
+        format: base62
+        example: aBc
+        description: project id
+      price_id:
+        type: integer
+        format: snowflake_id
+        example: 1479629459169476608
+        description: price id
+      media:
+        type: string
+        example: 'aBc-xYz'
+        description: Stream or VOD file name including project id as prefix
+      title:
+        description: User provided title of the stream.
+        type: string
+        nullable: true
+        example: "Hockey channel"
+      resources:
+        description: Resources that are used primarily for calculating account balances (billing).
+        allOf:
+        - $ref: '../../schemas.yml#/cloud_resources'

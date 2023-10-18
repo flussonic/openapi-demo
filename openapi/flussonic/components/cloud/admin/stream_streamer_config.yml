@@ -1,0 +1,30 @@
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Streamer id
+    example: '61893ba6-07b3-431b-b2f7-716ac1643953'
+  role:
+    type: string
+    example: INGRESS
+    description: Streamer role
+  hostname:
+    type: string
+    example: i1.publish-flussonic.cloud
+    description: Streamer hostname
+  expected_config:
+    allOf:
+    - $ref: '../../schemas.yml#/stream_config_stripped'
+    description: Expected stream configuration (defined by cloud pipeline)
+    nullable: true
+  actual_config:
+    allOf:
+    - $ref: '../../schemas.yml#/stream_config_stripped'
+    description: Actual stream configuration (returned by Flussonic)
+    nullable: true
+  synced_at:
+    type: string
+    format: date-time
+    description: Datetime when actual config was received. Null if failed to get actual configuration.
+    example: "2021-01-30T08:30:00.432567Z"
+    nullable: true

@@ -1,0 +1,9 @@
+description: Confidence metric
+type: number
+examples:
+  default:
+    value: 0.34
+  one:
+    value: 0.98
+minimum: 0.0
+maximum: 1.0

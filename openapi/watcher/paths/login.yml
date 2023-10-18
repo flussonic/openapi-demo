@@ -1,0 +1,29 @@
+post:
+  operationId: login_create
+  summary: Get an auth token
+  description: |
+    The method creates a new temporary auth-token (JWT). The JTW token used as Bearer token in requests other than `/login`.
+  responses:
+    '200':
+      description: |
+        Authorization passed.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/login_info'
+    '403':
+      description: |
+        Permission denied. The user not having the necessary permissions for a resource.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+    '401':
+      description: |
+        Unauthorized. The request doesn't have valid authentication credentials (expired, deleted, invalid login or password).
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+  tags:
+    - auth

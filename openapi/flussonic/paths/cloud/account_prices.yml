@@ -1,0 +1,24 @@
+get:
+  operationId: account_prices_list_get
+  description: Get list of account prices.
+  summary: Get the list of prices associated to the account
+  parameters:
+  - name: account_id
+    description: Account Id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+      
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_account_prices_list'
+      description: Response
+  tags:
+  - accounts

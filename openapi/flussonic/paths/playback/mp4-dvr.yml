@@ -1,0 +1,38 @@
+get:
+  operationId: mp4_dvr
+  summary: MP4 DVR thumbnail
+  description: |
+    If your stream is already being recorded on the server with DVR, 
+    you can use this URL to get a video thumbnail in MP4 format as the first keyframe after a specified moment of time.
+  externalDocs:
+    description: Find more information here.
+    url: https://flussonic.com/doc/jpeg-thumbnails/video-thumbnails/#video-thumbnails-of-dvr
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: |
+      The UTC moment after which Flussonic will search for the first keyframe to generate MP4 file from.
+
+      If you know that somewhere in 10 minutes after a point in time you have recorded video, you can request unexistent URL (with approximate time).
+      Flussonic will find the existing keyframe in that period of time and return it. 
+      This approach will save your cache: the browser will make two requests, but only the existing keyframe will be saved to the browser cache.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  responses:
+    '200':
+      content:
+        video/mp4:
+          schema:
+            type: string
+      description: The first keyframe after the specified moment as an MP4 file 
+  tags:
+    - image

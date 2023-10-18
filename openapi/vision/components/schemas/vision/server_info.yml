@@ -1,0 +1,26 @@
+type: object
+properties:
+  server_version:
+    description: Package version of the server. Might be simple a number of release like 21.11 or
+      longer if you have a rolling release installed.
+    type: string
+    format: server_version
+    example: '21.12'
+  build:
+    type: integer
+    description: Build version
+    example: 235
+  schema_version:
+    description: API schema revision implemented in this version of the server
+    type: string
+    example: '5e5e91d8'
+  now:
+    type: integer
+    format: utc_ms
+    description: Server's current timestamp
+    example: 1639337825
+  started_at:
+    description: Timestamp when this instance was started
+    type: integer
+    format: utc
+    example: 1639337825

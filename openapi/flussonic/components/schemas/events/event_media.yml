@@ -1,0 +1,12 @@
+type: object
+properties:
+  media:
+    type: string
+    nullable: true
+    description: |
+      The name of the stream or file where the event was captured.
+  submedia:
+    description: |
+      Some additional info on the media, may vary depending on the media type.
+    type: string
+    nullable: true

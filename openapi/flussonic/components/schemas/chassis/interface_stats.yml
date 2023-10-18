@@ -1,0 +1,41 @@
+type: object
+properties:
+  blinking:
+    description: Shows if interface blinking is enabled.
+    type: boolean
+    default: false
+  hw:
+    description: MAC address of the interface.
+    type: string
+    format: interface_hwaddr
+    example: "00:1b:63:84:45:e6"
+  ip:
+    description: IP address of the interface.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+    example: "10.10.10.9"
+  mask:
+    description: Subnet mask of the interface.
+    allOf:
+    - $ref: '../../schemas.yml#/network_mask'
+    example: 24
+  gw:
+    description: Gateway address.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+    example: "10.10.10.10"
+  dns:
+    description: DNS server address.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/network_addr'
+  mode:
+    description: The way of assigning network settings to the interface.
+    allOf:
+    - $ref: '../../schemas.yml#/interface_mode'
+  running:
+    description: Shows if the interface is currently active.
+    type: boolean
+  up:
+    description: Shows if the interface is up.
+    type: boolean

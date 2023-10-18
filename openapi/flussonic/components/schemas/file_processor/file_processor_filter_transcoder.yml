@@ -1,0 +1,14 @@
+type: object
+required:
+- group
+- transcoder
+properties:
+  group:
+    type: string
+    title: Transcoder
+    const: transcoder
+    description: Transcode the input file. Cannot be used with other filters
+  transcoder:
+    description: Transcoder configuration
+    allOf:
+      - $ref: '../../schemas.yml#/transcoder_opts'

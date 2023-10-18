@@ -1,0 +1,22 @@
+post:
+  x-private: true
+  operationId: admin_view_token_generate
+  summary: Generate the administrator authentication token
+  description: |
+    The token allows the administrator to play streams requiring authentication without actually passing it.
+    The token won't be generated if the Flussonic is started with the environment vairable `STREAMER_ADMIN_VIEW_DISABLED` set to `true`.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/admin_view_token'
+      description: The admin auth token.
+    '405':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: The token generation is disabled.
+  tags:
+  - auth

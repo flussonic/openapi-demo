@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      api_calls:
+        items:
+          $ref: '../../schemas.yml#/api_call'
+        type: array
+        description: List of fetched according to query parameters api calls recorded in audit log

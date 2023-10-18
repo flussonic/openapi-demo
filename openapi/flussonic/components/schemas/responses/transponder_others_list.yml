@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      others:
+        description: The list of other multiplexers added for the current multiplexer.
+        items:
+          $ref: '../../schemas.yml#/transponder_other'
+        type: array

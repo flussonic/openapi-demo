@@ -1,0 +1,326 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Runtime stream ID.
+    example: '61893ba6-07b3-431b-b2f7-716ac1643953'
+    x-api-allow:
+    - watcher-client
+  source_id:
+    type: string
+    format: uuid
+    description: Current source ID.
+    example: '61893be1-054e-4acc-8d24-8ed92efe6ad0'
+  opened_at:
+    type: integer
+    format: utc_ms
+    description: The time when the stream opened before authorization/connection completed(in UTC milliseconds).
+    example: 1636383729002
+    x-api-allow:
+    - watcher-client
+  started_at:
+    type: integer
+    format: utc_ms
+    description: The time when the stream started after authorization/connection completed(in UTC milliseconds).
+    example: 1636383729002
+  status:
+    description: | 
+      Indicates the status of the stream.
+    allOf:
+    - $ref: '../../schemas.yml#/stream_status'
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+  backup_running:
+    description: Whether a backup is currently running.
+    type: boolean
+
+# Playback
+  playback_token:
+    description: Temporary token for playback requests (Media Server Streaming API, Central Streaming API).
+    type: string
+    x-api-allow:
+      - watcher-client
+    x-scope:
+      - watcher-client
+    example: 'onetime_token'
+
+# DVR
+  dvr_enabled:
+    description: If DVR is enabled for the stream.
+    default: true
+    type: boolean
+  dvr_info:
+    description: The information about the recorded DVR archive.
+    allOf:
+    - $ref: '../../schemas.yml#/dvr_info'
+    nullable: true
+    examples:
+      mylive/bunny:
+        value: null
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+  dvr_only:
+    description: This field is deprecated. Do not use.
+    default: false
+    type: boolean
+    deprecated: true #26067
+    x-delete-at: 23.09
+  dvr_replication:
+    description: |
+      If DVR replication is enabled for the stream.
+      Replication means that a DVR archive is stored on two (or more) Flussonic servers for reliability.
+    type: integer
+    format: percents
+  dvr_replication_running:
+    description: |
+      If DVR replication is in progress for the stream.
+      Replication means that a DVR archive is stored on two (or more) Flussonic servers for reliability.
+    default: false
+    type: boolean
+
+
+
+  last_dts:
+    type: number
+    format: ticks
+    description: Last frame timestamp read from the stream.
+    nullable: true
+    example: 383835646
+    x-api-allow:
+    - watcher-client
+  last_dts_at:
+    type: number
+    format: utc_ms
+    description: The time when the last time frame was sent to the stream output (in UTC).
+    nullable: true
+    example: 1636383841974
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+  media_info:
+    allOf:
+    - $ref: '../../schemas.yml#/media_info'
+    description: Technical information about the output media content.
+    nullable: true
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+
+  alive:
+    default: false
+    type: boolean
+    nullable: true
+    example: true
+    description: Becomes `false` when `ts_delay` > 12000 (= 12 seconds)
+    x-api-allow:
+    - watcher-client
+  ts_delay:
+    type: number
+    format: ticks
+    nullable: true
+    example: 1284
+    description: The time period during which no frames were received from the stream's input.
+  remote:
+    default: false
+    type: boolean
+    deprecated: true
+    x-delete-at: 23.09
+    x-notice: Used only for grouping the streams in UI.
+    description: If the stream is not local, i.e. sourced from the remote server.
+  source_hostname:
+    type: string
+    format: server_name
+    deprecated: true
+    x-delete-at: 23.09
+    x-notice: Used only for grouping the streams in UI.
+    description: URL of the stream source.
+  server:
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+    x-notice: Used only for grouping the streams in UI.
+    description: The name of the server where the stream is running. 
+  published_from:
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+    description: IP address of the source of publication to Flussonic.
+    example: "192.168.0.100"
+  published_via:
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+    description: The protocol used for publication to Flussonic.
+    example: rtmp
+  url:
+    type: string
+    format: url
+    deprecated: true
+    x-delete-at: 23.09
+    description: The stream URL.
+    examples:
+      default:
+        value: 'udp://239.0.0.1:1234'
+      mylive/bunny:
+        value: 'publish://'
+      decklink:
+        value: 'decklink://0'
+      dektec:
+        value: 'dektec://12345:1'
+      test_stream:
+        value: 'udp://239.0.0.1:4321'
+  source_error:
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+    examples:
+      default:
+        value: ''
+      mylive/bunny:
+        value: ''
+      decklink:
+        value: ''
+      test_stream:
+        value: frame_drop
+    description: Error code showing if there are any problems with capturing the stream. 
+  input_error_rate:
+    type: integer
+    description: The number of packets dropped per second.
+    example: 0
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+
+  coder_error:
+    default: false
+    type: boolean
+    description: Shows if there was any encoding error.
+
+
+  lifetime:
+    type: number
+    format: milliseconds
+    description: The time period in seconds during which the stream is being captured.
+    example: 71977
+  retry_count:
+    type: integer
+    description: The number of attempts to restore the stream if `alive=false`.
+    openmetrics_metric: stream_retry_count
+    x-metric-type: counter
+    example: 0
+    x-api-allow:
+    - watcher-core
+  client_count:
+    type: integer
+    format: client_count
+    description: The number of clients receiving the stream.
+    openmetrics_metric: stream_client_count
+    x-metric-type: gauge
+    example: 3
+    x-api-allow:
+    - watcher-core
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: online_clients
+  online_clients:
+    type: integer
+    format: client_count
+    description: The number of clients receiving the stream.
+    openmetrics_metric: stream_online_clients
+    x-metric-type: gauge
+    example: 3
+    x-api-allow:
+    - watcher-core
+  last_access_at:
+    type: number
+    format: utc_ms
+    description: Date and time the stream was accessed the last time.
+    example: 1669106270979
+  bytes_in:
+    type: integer
+    format: bytes
+    description: The amount of stream data received from the input.
+    openmetrics_metric: stream_bytes_in
+    x-metric-type: counter
+    example: 2445568
+    x-api-allow:
+    - watcher-core
+  bytes_out:
+    type: integer
+    format: bytes
+    description: The amount of stream data sent to the clients.
+    openmetrics_metric: stream_bytes_out
+    x-metric-type: counter
+    example: 0
+    x-api-allow:
+    - watcher-core
+  out_bandwidth:
+    type: integer
+    format: speed
+    description: The output traffic of the stream.
+    openmetrics_metric: stream_out_bandwidth
+    x-metric-type: gauge
+    example: 0
+  bitrate:
+    type: integer
+    format: speed
+    description: Stream bitrate.
+    openmetrics_metric: stream_bitrate
+    x-metric-type: gauge
+    example: 186
+    x-api-allow:
+    - watcher-core
+  input_bitrate:
+    type: integer
+    format: speed
+    description: Input bitrate.
+    example: 186
+  output_bitrate:
+    type: integer
+    format: speed
+    description: Stream output bitrate.
+    example: 186
+  current_agent_id:
+    type: string
+    format: agent_id
+    description: The identifier of the Agent that is currently serving the stream.
+    x-api-allow:
+    - watcher-core
+  agent_status:
+    enum:
+    - connected
+    - not_connected
+    - rproxy_not_configured
+    type: string
+    description: The status of the Agent serving the stream.
+    x-api-allow:
+    - watcher-core
+  running_transcoder:
+    default: false
+    type: boolean
+    description: If the transcoder is enabled for the stream.
+  transcoder_overloaded:
+    default: false
+    type: boolean
+    description: If the transcoder is overloaded.
+  running:
+    default: true
+    deprecated: true
+    x-delete-at: 23.09
+    type: boolean
+    description: Shows if the stream is ready to be served to clients. Replaced with `status = running` in newer versions.
+    example: true
+  start_running_at:
+    type: number
+    format: utc_ms
+    description: Date and time when `status = running` was set.
+  running_on:
+    type: array
+    items:
+      type: string
+      format: server_name
+    description: List of servers hostnames where the stream is running on.
+    example: ["streamer1.example.com"]

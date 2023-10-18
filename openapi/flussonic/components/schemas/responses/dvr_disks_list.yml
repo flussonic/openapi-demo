@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      disks:
+        description: Configurations of the RAID disks.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/raid_disk_config'

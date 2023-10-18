@@ -1,0 +1,50 @@
+type: object
+properties:
+  episodes_created_count:
+    description: The number of _created_ episodes
+    type: integer
+  episodes_updated_count:
+    description: The number of _updates_ of existing episodes
+    type: integer
+
+  episodes_detections_count:
+    description: Total number of detections assigned to all episodes
+    type: integer
+  episodes_duration:
+    description: Total duration of episodes
+    type: integer
+    format: milliseconds
+
+  rejected_episodes_count:
+    description: |
+      The number of rejected episodes.
+      Episode has being rejected if it contains unsufficient number of detections or total confidence of them.
+    type: integer
+  rejected_episodes_detections_count:
+    description: Total number of detections assigned to rejected episodes
+    type: integer
+  rejected_episodes_duration:
+    description: Total duration of rejected episodes
+    type: integer
+    format: milliseconds
+
+  episode_creation_distance:
+    description: Total minimum distance between detected object and objects in existing episodes
+    type: number
+    minimum: 0.0
+  episode_update_distance:
+    description: Total distance between detected object and object in the existing episode that is updated
+    type: number
+    minimum: 0.0
+
+  # 
+  # PROFILING
+  # 
+  episodes_forming_time:
+    description: Total time spent on making a decision to make a new episode or extend existing one
+    type: integer
+    format: milliseconds
+  episodes_preview_encoding_time:
+    description: Time spent on encoding episode previews into JPEG
+    type: integer
+    format: milliseconds

@@ -1,0 +1,58 @@
+type: object
+properties:
+  name:
+    type: string
+    format: media_name
+    nullable: true
+    description: File used in the streaming session.
+    example: 'hockey1'
+  token:
+    type: string
+    format: session_token
+    nullable: true
+    description: Token provided by the client.
+    example: 'zGAFxLkoWluO1pG7_nJmQAbCnM5'
+  country:
+    type: string
+    format: iso3166
+    nullable: true
+    description: Peer's IP geolocation (country).
+    example: 'us'
+  user_id:
+    type: string
+    nullable: true
+    description: User ID provided by the Middleware authorization backend.
+    example: '5435'
+  max_sessions:
+    type: integer
+    nullable: true
+    description: The maximum number of sessions allowed for the given `user_id` by the middleware authorization backend.
+  soft_limitation:
+    type: boolean
+    default: false
+    description: The flag shows if the soft limitation mode is enabled for the sessions with the given `user_id`.
+  user_name:
+    type: string
+    format: media_name
+    nullable: true
+    description: User-provided original stream/VOD name before the rewrite of a media [*aliaser*](https://flussonic.com/doc/video-playback/media-name-aliasing/).
+  referer:
+    type: string
+    format: url
+    nullable: true
+    description: Referer HTTP header or its analog for other protocols.
+    example: 'http://my-tv-portal.local/hockey1'
+  query_string:
+    type: string
+    nullable: true
+    description: Full query string for the initial request of the session.
+  current_time:
+    type: number
+    format: milliseconds
+    nullable: true
+    description: The current time value of the playback session.
+  user_agent:
+    type: string
+    nullable: true
+    description: Client's user agent for selected protocol.
+    example: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML. like Gecko) Chrome/90.0.4430.72 Safari/537.36'

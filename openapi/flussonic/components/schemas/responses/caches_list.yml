@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      caches:
+        description: The list of caches.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/cache_config'

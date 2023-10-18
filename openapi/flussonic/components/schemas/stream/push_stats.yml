@@ -1,0 +1,92 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Runtime pusher instance ID.
+    openmetrics_label: id
+  opened_at:
+    type: integer
+    format: utc
+    description: The time when the pusher instance was created (in UTC).
+  bytes:
+    type: integer
+    format: bytes
+    description: Total amount of bytes sent since the pusher was created.
+    openmetrics_metric: pusher_bytes
+    x-metric-type: counter
+  status:
+    description: State of the push session.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/api/streaming-sessions-in-flussonic/#events-and-session-states
+    allOf:
+    - $ref: '../../schemas.yml#/pusher_status'
+  since:
+    deprecated: true # 22731
+    x-delete-at: 23.09
+    description: |
+      The time, in UTC seconds, of the last error (is the pusher does not work) or of the pusher start (if it works).
+    type: integer
+    format: seconds
+  retries:
+    description: Number of retries since the last successful push.
+    type: integer
+    openmetrics_metric: pusher_retries
+    x-metric-type: counter
+  last_error:
+    description: If the pusher does not work, this field displays the text of the last error.
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+  payload:
+    description: The payload bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_payload
+    x-metric-type: counter
+  encoded:
+    description: The encoded bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_encoded
+    x-metric-type: counter
+  fillers:
+    description: The filler bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_fillers
+    x-metric-type: counter
+  stuffing:
+    description: The stuff packets count.
+    type: integer
+    openmetrics_metric: pusher_stuffing
+    x-metric-type: counter
+  trimmed_bytes:
+    description: The trimmed bytes count.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_trimmed_bytes
+    x-metric-type: counter
+  trimmed_frames:
+    description: The trimmed frames count.
+    type: integer
+    openmetrics_metric: pusher_trimmed_frames
+    x-metric-type: counter
+  sys_fillers:
+    description: The fillers bytes count for system traffic.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_sys_fillers
+    x-metric-type: counter
+  sys_payload:
+    description:  The payload bytes count for system traffic.
+    type: integer
+    format: bytes
+    openmetrics_metric: pusher_sys_payload
+    x-metric-type: counter
+  sys_stuffing:
+    description: The stuff packets count for system traffic.
+    type: integer
+    openmetrics_metric: pusher_sys_stuffing
+    x-metric-type: counter

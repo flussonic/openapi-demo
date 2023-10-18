@@ -1,0 +1,23 @@
+type: object
+properties:
+  # rtmp
+
+  pageUrl:
+    description: |
+      URL of the web page from where the SWF file was loaded. 
+      This is an RTMP header (Referer) used for establishing connection.
+    type: string
+    format: url
+    example: 'http://somehost/sample.html'
+  swfUrl:
+    description: URL of the source SWF file making the connection by RTMP.
+    type: string
+    format: url
+    example: 'file://C:/FlvPlayer.swf'
+  tcUrl:
+    description: |
+      URL of the remote Server for entering credentials. 
+      It has the following format: `protocol://servername:port/appName/appInstance`.
+    type: string
+    format: url
+    example: 'rtmp://localhost:1935/testapp/instance1'

@@ -1,0 +1,59 @@
+# https://datatracker.ietf.org/doc/html/draft-pantos-hls-rfc8216bis-10#section-4.4.6.3
+# https://developer.roku.com/en-gb/docs/developer-program/media-playback/trick-mode/hls-and-dash.md#tag-for-master-playlist
+# > All attributes defined for the EXT-X-I-FRAME-STREAM-INF tag are also defined for the EXT-X-IMAGE-STREAM-INF tag, except for HDCP-LEVEL and VIDEO-RANGE, which are not applicable.
+type: object
+properties:
+  type:
+    description: Content of the referenced url, selects a tag between '#EXT-X-I-FRAME-STREAM-INF' and '#EXT-X-IMAGE-STREAM-INF'
+    type: string
+    enum:
+    - i_frame
+    - image
+
+  uri:
+    description: |
+      URI that identifies the I-frame (or Image) Media Playlist file.
+      Can be:
+      - relative
+      - absolute
+      - full
+
+      Relative is used in regular situations.
+
+      Absolute CAN be used in vod_mbr when another medias are referenced.
+
+      Full can be used in CDN scenario, however we prefer to pass playlists through flussonic.
+    type: string
+    format: url
+
+  bandwidth:
+    description: Peak segment bit rate of the Variant Stream
+    type: integer
+
+  average_bandwidth:
+    description: Average segment bit rate of the Variant Stream.
+    type: integer
+    nullable: true
+
+  codecs:
+    description: |
+      A list of compressed graphic image formats present in the Image Media Playlist.
+      See https://tools.ietf.org/html/rfc6381 for a formal, detailed description of this attribute.
+    type: array
+    items:
+      type: string
+    example: ["jpeg"]
+
+  width:
+    description: |
+      Width is a part of the RESOLUTION attribute
+      The optimal pixel resolution at which to display all the video in the Variant Stream.
+    type: integer
+    nullable: true
+
+  height:
+    description: |
+      Height is a part of the RESOLUTION attribute
+      The optimal pixel resolution at which to display all the video in the Variant Stream.
+    type: integer
+    nullable: true

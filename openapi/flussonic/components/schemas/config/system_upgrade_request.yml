@@ -1,0 +1,7 @@
+type: object
+properties:
+  version:
+    type: string
+    description: |
+      Provide exact version or null if you want last version.
+    nullable: true

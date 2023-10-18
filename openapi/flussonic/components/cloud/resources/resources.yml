@@ -1,0 +1,501 @@
+type: object
+properties:
+
+#
+# Resources to be used primarily for calculating account balances (billing)
+#
+
+  # Hardware resources
+
+  cpu_units:
+    x-metric-type: gauge
+    title: CPU
+    description: |
+      The absolute metric to be used for estimating CPU performance and capacity.
+      Suppose we have Server A and Server B with different CPUs.
+      For calculating absolute metric we can measure the CPU load on both servers 
+      keeping the same set of streams on both servers.
+      Deprecated as not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated as not used.
+
+  ram_bytes:
+    format: bytes
+    title: RAM
+    description: Total amount of server RAM in (mega)bytes
+    x-metric-type: gauge
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+
+  # Inputs resources
+
+  inputs_duration:
+    default: 0
+    format: seconds
+    x-metric-type: counter
+    title: Input Duration
+    description: Total duration of all inputs successfully captured since `opened_at`  (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  inputs_bytes:
+    default: 0
+    format: bytes
+    title: Input Traffic
+    x-metric-type: counter
+    description: Total amount of data in all inputs captured since `opened_at`  (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  inputs_bandwidth:
+    format: bps
+    x-metric-type: gauge
+    title: Input Traffic
+    description: Downstream bandwidth at the time of the request  (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+
+  # Transcoder resources
+
+  # overall metrics
+  transcoded_streams:
+    x-metric-type: gauge
+    title: Transcoded streams
+    description: |
+      The number of streams decoded at the time of the request (gauge).
+      A reasonable limit to prevent transcoder overload by large amount of transcoded streams
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_total_output_bitrate:
+    format: bps
+    x-metric-type: gauge
+    title: Transcoder Output Bitrate (MBR)
+    description: |
+      Transcoder's total output bitrate measured at the time of the request (gauge).
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_total_pixelrate:
+    format: gpxps
+    x-metric-type: gauge
+    title: Transcoder Total Pixelrate
+    description: Transcoder's total output measured in gigapixels per second (gpxps)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+
+  # per output profile
+
+  # SD 
+
+  transcoder_sd_duration:
+    format: seconds
+    x-metric-type: counter
+    title: Transcoded SD duration
+    description: |
+      Seconds of total **output** video transcoded with SD or less resolution. 
+      If you have 3 SD profiles running during 100 seconds, this parameter will be 300 seconds. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+  transcoder_sd_bytes:
+    format: bytes
+    x-metric-type: counter
+    title: Transcoded SD bytes
+    description: |
+      Bytes of total **output** video transcoded with SD or less resolution. 
+      If you have 3 SD profiles transcoded into 100 bytes each, this parameter will be 300 bytes. (counter)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_sd_bitrate:
+    format: bps
+    x-metric-type: gauge
+    title: Transcoded SD bitrate
+    description: |
+      Transcoder's SD profile output measured in bits per seconds at the time of the request.
+      If you have 3 SD profiles with 1000 bps each, this parameter will be 3000 bps. (gauge)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_sd_pixels:
+    x-metric-type: counter
+    title: Transcoded SD pixels
+    description: Total amount of transcoded pixels in SD profile. Specified in billions.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_sd_pixelrate:
+    format: gpxps
+    x-metric-type: gauge
+    title: Transcoded SD pixelrate
+    description: | 
+      Transcoder's SD profile output measured in (giga)pixels per second at the time of the request (gauge).
+      If you have 3 SD profiles with 1000 gpxps each, this parameter will be 3000 gpxps. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  # HD 
+  transcoder_hd_duration:
+    format: seconds
+    x-metric-type: counter
+    title: Transcoded HD duration
+    description: |
+      Seconds of total **output** video transcoded with HD or less resolution. 
+      If you have 3 HD profiles running during 100 seconds, this parameter will be 300 seconds. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+  transcoder_hd_bytes:
+    format: bytes
+    x-metric-type: counter
+    title: Transcoded HD bytes
+    description:  |
+      Bytes of total **output** video transcoded with HD or less resolution. 
+      If you have 3 HD profiles transcoded into 100 bytes each, this parameter will be 300 bytes. (counter)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_hd_bitrate:
+    format: bps
+    x-metric-type: gauge
+    title: Transcoded HD bitrate
+    description: |
+      Transcoder's HD profile output measured in bits per seconds at the time of the request.
+      If you have 3 HD profiles with 1000 bps each, this parameter will be 3000 bps. (gauge)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_hd_pixels:
+    x-metric-type: counter
+    title: Transcoded HD pixels
+    description: Total amount of transcoded pixels. Specified in billions. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_hd_pixelrate:
+    format: gpxps
+    x-metric-type: gauge
+    title: Transcoded HD pixelrate
+    description: | 
+      Transcoder's HD profile output measured in (giga)pixels per second at the time of the request (gauge).
+      If you have 3 HD profiles with 1000 gpxps each, this parameter will be 3000 gpxps. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+# HD
+  transcoder_fhd_duration:
+    format: seconds
+    x-metric-type: counter
+    title: Transcoded FullHD duration
+    description: |
+      Seconds of total **output** video transcoded with FullHD or less resolution. 
+      If you have 3 FullHD profiles running during 100 seconds, this parameter will be 300 seconds. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+  transcoder_fhd_bytes:
+    format: bytes
+    x-metric-type: counter
+    title: Transcoded FullHD bytes
+    description: |
+      Bytes of total **output** video transcoded with FullD or less resolution. 
+      If you have 3 FullHD profiles transcoded into 100 bytes each, this parameter will be 300 bytes. (counter)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_fhd_bitrate:
+    format: bps
+    x-metric-type: gauge
+    title: Transcoded FullHD bitrate
+    description: |
+      Transcoder's FullHD profile output measured in bits per seconds at the time of the request.
+      If you have 3 FullHD profiles with 1000 bps each, this parameter will be 3000 bps. (gauge)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_fhd_pixels:
+    x-metric-type: counter
+    title: Transcoded FullHD pixels
+    description: Total amount of transcoded pixels. Specified in billions. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_fhd_pixelrate:
+    format: gpxps
+    x-metric-type: gauge
+    title: Transcoded FullHD pixelrate
+    description: | 
+      Transcoder's FullHD profile output measured in (giga)pixels per second at the time of the request (gauge).
+      If you have 3 FullHD profiles with 1000 gpxps each, this parameter will be 3000 gpxps. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+# Ultra HD
+  transcoder_uhd_duration:
+    format: seconds
+    x-metric-type: counter
+    title: Transcoded UltraHD duration
+    description: |
+      Seconds of total **output** video transcoded with UltraHD or less resolution. 
+      If you have 3 UltraHD profiles running during 100 seconds, this parameter will be 300 seconds. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+  transcoder_uhd_bytes:
+    format: bytes
+    x-metric-type: counter
+    title: Transcoded UltraHD bytes
+    description: |
+      Bytes of total **output** video transcoded with UltraHD or less resolution. 
+      If you have 3 UltraHD profiles transcoded into 100 bytes each, this parameter will be 300 bytes. (counter).
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_uhd_bitrate:
+    format: bps
+    x-metric-type: gauge
+    title: Transcoded UltraHD bitrate
+    description: |
+      Transcoder's UltraHD profile output measured in bits per seconds at the time of the request.
+      If you have 3 UltraHD profiles with 1000 bps each, this parameter will be 3000 bps. (gauge)
+      Deprecated, not used.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated, not used.
+  transcoder_uhd_pixels:
+    x-metric-type: counter
+    title: Transcoded UltraHD pixels
+    description: Total amount of transcoded pixels. Specified in billions.  (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  transcoder_uhd_pixelrate:
+    format: gpxps
+    x-metric-type: gauge
+    title: Transcoded UltraHD pixelrate
+    description: | 
+      Transcoder's UltraHD profile output measured in (giga)pixels per second at the time of the request (gauge).
+      If you have 3 UltraHD profiles with 1000 gpxps each, this parameter will be 3000 gpxps. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+
+  # DVR resources
+
+
+  dvr_storage_io_read:
+    format: bps
+    x-metric-type: gauge
+    title: DVR io Read
+    description: |
+      Total bandwidth of all read requests to DVR storage in bytes per second. (gauge)
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  dvr_storage_io_write:
+    format: bps
+    x-metric-type: gauge
+    title: DVR io Write
+    description: |
+      Total bandwidth of all write requests to DVR storage in bytes per second. (gauge)
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  dvr_storage_duration:
+    format: seconds
+    x-metric-type: gauge
+    title: DVR Stored Duration
+    description: |
+      The duration of all segments kept on storage at the time of the request 
+      no matter how many tracks a segment contains. (gauge)
+      Deprecated, same as duration from dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Same as duration from dvr_info
+  dvr_storage_bytes:
+    format: bytes
+    title: DVR Stored Bytes
+    description: |
+      Total bytes of all segments kept on storage at the time of the request. (gauge)
+      Deprecated, bytes from dvr_info can be used instead it.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+    deprecated: true
+    x-delete-at: 23.09
+    # Same as bytes from dvr_info
+  dvr_recorded_duration:
+    format: seconds
+    x-metric-type: counter
+    title: DVR Recorded Duration
+    description: |
+      Total duration of segments recorded into DVR since `opened_at` no matter how many tracks a segment contains (counter).
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  dvr_recorded_bytes:
+    format: bytes
+    title: DVR Recorded Bytes
+    x-metric-type: counter
+    description: |
+      Total amount of data in segments recorded into DVR since `opened_at`. (counter)
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  dvr_played_duration:
+    format: seconds
+    x-metric-type: counter
+    title: DVR Playback Duration
+    description: |
+      Total duration of segments played from DVR since `opened_at` 
+      no matter how many tracks a played segment contains (counter)
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  dvr_played_bytes:
+    format: bytes
+    x-metric-type: counter
+    title: DVR Playback Traffic
+    description: |
+      Total amount of data in segments played from DVR since `opened_at` 
+      no matter how many tracks a played segment contains. (counter)
+      Deprecated, not needed. DVR info can be found at dvr_info.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+  
+  # Output resources
+
+  output_bandwidth:
+    format: bps
+    x-metric-type: gauge
+    title: Output Bandwidth
+    description: Upstream bandwidth on the time of the request. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  playback_total_sessions:
+    default: 0
+    x-metric-type: counter
+    title: Playback Sessions
+    description: The number of sessions played since `opened_at`. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  playback_opened_sessions:
+    default: 0
+    x-metric-type: gauge
+    title: Playback Simultaneously Opened Sessions
+    description: The number of open sessions at the moment of the request. (gauge)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  playback_duration:
+    default: 0
+    format: seconds
+    x-metric-type: counter
+    title: Playback Duration
+    description: The number of seconds that viewers have watched since `opened_at`. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  playback_bytes:
+    default: 0
+    format: bytes
+    title: Playback Traffic
+    x-metric-type: counter
+    description: The number of bytes downloaded by viewers since `opened_at`. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    - $ref: '../../schemas.yml#/cloud_resource_price'
+    - $ref: '../../schemas.yml#/cloud_resource_amount'
+
+  # Push resources
+
+  push_duration:
+    default: 0
+    format: seconds
+    x-metric-type: counter
+    title: Push Duration
+    description: The number of seconds pushed since `opened_at`. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+  push_bytes:
+    default: 0
+    format: bytes
+    title: Push Traffic
+    x-metric-type: counter
+    description: The number of bytes pushed since `opened_at`. (counter)
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+
+
+  # Videoanalytics
+
+  vision_units:
+    x-metric-type: gauge
+    title: Computer Vision
+    description: |
+      Empirically picked metric and cap for estimated video analytics utilization.
+
+      Let's say Nvidia 1080 is able to process 10 streams with face detection,
+      so one 1080 GPU has 10 virtual units and one stream utilizes 1 unit. (gauge)
+      The option is not used and deprecated.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated as not used.
+  vision_gpu_ram_bytes:
+    format: bytes
+    x-metric-type: gauge
+    title: Computer Vision GPU RAM
+    description: |
+      GPU RAM size in bytes (gauge)
+      The option is not used and deprecated.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated as not used.
+  vision_pixelrate:
+    format: mpps
+    x-metric-type: gauge
+    title: Computer Vision Pixelrate
+    description: |
+      Vision module throughput measured in (mega)pixels per second at the moment of the request. (gauge)
+      The option is not used and deprecated.
+    oneOf:
+    - $ref: '../../schemas.yml#/cloud_resource_usage'
+    deprecated: true
+    x-delete-at: 23.09
+    # Deprecated as not used.

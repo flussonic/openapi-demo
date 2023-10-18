@@ -1,0 +1,8 @@
+type: string
+oneOf:
+- title: TLSv1
+  const: tlsv1
+- title: TLSv1.1
+  const: tlsv1.1
+- title: TLSv1.2
+  const: tlsv1.2

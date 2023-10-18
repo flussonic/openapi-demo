@@ -1,0 +1,22 @@
+get:
+  description: Fetch all other multiplexers for the multiplexer with the specified name.
+  operationId: transponder_others_list
+  parameters:
+  - description: Multiplexer name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/transponder_others_list'
+      description: Response
+  summary: Get other multiplexers
+  tags:
+  - multiplexer

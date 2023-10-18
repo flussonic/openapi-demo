@@ -1,0 +1,85 @@
+type: object
+properties:
+  url:
+    description: The URL of an HTTP backend.
+    allOf:
+    - $ref: '../../schemas.yml#/auth_url'
+    nullable: true
+    example: "http://middleware-address/auth/v2"
+  domains:
+    description: |
+      Specifying the domains, within which playing this video is allowed. 
+      This does not work for those clients that do not pass the value of Referer HTTP header.
+    items:
+      type: string
+    type: array
+    nullable: true
+    example: ['mycompany.com']
+  max_sessions:
+    description: |
+      The maximal number of streams or files the user can view simultaneously.
+      This limitation allows to prevent users from full restreaming to their servers.
+    type: integer
+    nullable: true
+    example: 5000
+  allowed_countries:
+    description: |
+      Explicit list of countries (two-letter country codes according to ISO 3166-1) that have access to the content without any other checks. 
+      
+      Flussonic uses the MaxMind GeoLite2 Country database to map a country to a block of IP addresses. 
+      New releases of GeoIP2 databases come out more often than the releases of Flussonic server, so sometimes the used database can become outdated. 
+      Therefore we recommend you to install a separate GeoIP2 library and set up Flussonic to use it.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/geoip/
+    items:
+      type: string
+      format: iso3166  
+    type: array
+    nullable: true
+    example: ['US', 'DE', 'GB']
+  disallowed_countries:
+    description: |
+      Explicit list of countries (two-letter country codes according to ISO 3166-1) that are banned from accessing the content. 
+      
+      Flussonic uses the MaxMind GeoLite2 Country database to map a country to a block of IP addresses. 
+      New releases of GeoIP2 databases come out more often than the releases of Flussonic server, so sometimes the used database can become outdated. 
+      Therefore we recommend you to install a separate GeoIP2 library and set up Flussonic to use it.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/geoip/
+    items:
+      type: string
+      format: iso3166  
+    type: array
+    nullable: true
+    example: ['US', 'DE', 'GB']
+  soft_limitation:
+    description: |
+      If this option is enabled and `max_sessions` limitation is used, the extra sessions are interrupted not immediately, but in 30 or 90 seconds.
+      This can be useful for middlewares that cannot generate a new token for every new stream or file request 
+      and therefore need time to understand that all sessions are being used.
+    type: boolean
+    nullable: true
+    example: false
+  session_keys:
+    description: |
+      A list of keys to generate a session ID value, allowing to configure the authorization scheme 
+      which is a hash sum calculated as follows: `hash(name + ip + proto)`.
+      This parameter allows to finish one session and start another one with the same authorization token.
+      The keys `name`,`ip`, and `proto` are required.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/authorization/#how-to-finish-one-session-and-start-another-one-with-the-same-token
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/session_key'
+    type: array
+    nullable: true
+    example: ['name','token','proto','ip']
+  extra:
+    additionalProperties:
+      type: string
+    type: object
+    nullable: true
+    description: Some additional options.

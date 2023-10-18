@@ -1,0 +1,28 @@
+type: object
+properties:
+  version:
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_version'
+    description: Full version number of the downloaded firmware.
+    example: "21.09.1-234"
+  channel:
+    type: string
+    description: |
+      Update channel: release, master or anything else.
+  download_progress:
+    description: Download progress (percentage). If exists, then it is downloading right now.
+    type: integer
+    minimum: 0
+    maximum: 100
+  downloaded:
+    type: boolean
+    default: false
+    description: Whether firmware is already downloaded and ready to be used.
+  current:
+    type: boolean
+    default: false
+    description: Whether the firmware is currently running.
+  selected:
+    type: boolean
+    default: false
+    description: Whether the firmware is selected for the next boot.

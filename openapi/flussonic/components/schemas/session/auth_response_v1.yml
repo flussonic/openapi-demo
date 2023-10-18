@@ -1,0 +1,50 @@
+type: object
+properties:
+  ad_inject:
+    description: Configuration of injecting advertising video clips into played stream.
+    type: object
+    properties:
+      v:
+        description: |
+          The version of ad insertion mechanism used by Flussonic. 
+
+          The first mechanism is an extension of the authorization system, it works with HLS and DASH protocols only.
+          Plugins such as AdBlock can block the advertisement.
+
+          By default, the second mechanism is used. It complicates the work of ad blockers. 
+          It replaces the stream segments within the play session so that it is impossible to distinguish whether it is a main stream segment or an ad segment. 
+          It also allows you to customize the advertisements for a particular user. 
+          Besides, it works with a single-period as well as a multi-period DASH.
+        type: integer
+        default: 2
+        example: 2
+      preroll:
+        description: |
+          The paths to the pre-roll advertising files in a VOD location.
+        type: array
+        items:
+          type: string
+        example: ["ad_vod/preroll1.mp4"]
+      midroll:
+        description: |
+          The paths to the mid-roll advertising files in a VOD location.
+        type: array
+        items:
+          type: string
+        example: ["ad_vod/midroll1.mp4", "ad_vod/midroll2.mp4"]
+      midroll_insert_by:
+        description: |
+          When to perform midrolls.
+          If your stream has SCTE35 or SCTE104 you may opt to use them.
+          By default ads are inserted on regular intervals
+        type: string
+        enum:
+          - interval
+          - splicing
+        default:
+          interval
+      midroll_interval:
+        description: The interval between showing mid-roll advertisement files.
+        type: integer
+        example: 180
+

@@ -1,0 +1,36 @@
+post:
+  description: Start downloading
+  operationId: chassis_firmware_download_create
+  summary: Download firmare
+  parameters:
+  - description: firmware version
+    in: query
+    name: version
+    required: true
+    schema:
+      example: '21.09-204'
+      type: string
+  - description: download channel
+    in: query
+    name: channel
+    schema:
+      example: lanner/master
+      type: string
+  responses:
+    '200':
+      description: Downloaded firmware
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_firmware'
+  tags:
+  - chassis
+delete:
+  description: Stop downloading
+  operationId: chassis_firmware_download_delete
+  summary: Stop downloading
+  responses:
+    '204':
+      description: Download stopped
+  tags:
+  - chassis

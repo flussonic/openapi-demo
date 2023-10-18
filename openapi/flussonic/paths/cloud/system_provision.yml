@@ -1,0 +1,12 @@
+post:
+  x-private: true
+  description: |
+    Use carefully - only one call simultaneously.
+    Run in background provisioning of all streams on all streamers.
+  operationId: system_provision
+  summary: Force streams provision
+  responses:
+    '204':
+      description: Provision launched in background
+  tags:
+  - system

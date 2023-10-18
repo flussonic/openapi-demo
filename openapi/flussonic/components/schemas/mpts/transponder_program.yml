@@ -1,0 +1,43 @@
+type: object
+properties:
+  program_id:
+    description: Identifier of the program within the transponder.
+    allOf:
+    - $ref: '../../schemas.yml#/program_id'
+    x-primary-key: true
+    openmetrics_label: program_id
+  source:
+    description: The stream that is in use as the program source.
+    type: string
+    format: media_name
+    nullable: true
+    openmetrics_label: source
+    example: 'hockey1'
+  lcn:
+    description: Logical channel number.
+    type: integer
+    nullable: true
+    example: 5
+  service_type:
+    description: Information about the program type.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_service_type'
+    nullable: true
+    example: 'digital_tv'
+  title:
+    description: The program title.
+    type: string
+    nullable: true
+    example: 'ProgramTitle'
+  pids:
+    description: The list of PIDs.
+    allOf:
+    - $ref: '../../schemas.yml#/output_mpegts_pids'
+    nullable: true
+  eit_title:
+    description: The name of the EIT.
+    type: string
+    nullable: true
+    example: 'EIT_Title'
+required:
+  - program_id

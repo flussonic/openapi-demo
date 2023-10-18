@@ -1,0 +1,6 @@
+type: object
+properties:
+  raw:
+    x-private: true
+    description: If this option is enabled, file source produce raw stream.
+    type: boolean

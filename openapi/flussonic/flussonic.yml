@@ -1,0 +1,347 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This document is a comprehensive API specification for the Flussonic Media Server.
+
+    The Flussonic Media Server API lets you manage the server configuration: retrieving the information about the streams, DVRs, templates, etc., 
+    creating/updating, and removing them.
+    To know more about our API's design principles, visit [Flussonic HTTP API](https://flussonic.com/doc/api/flussonic-http-api/) page.
+
+    Permanent [download link](https://flussonic.com/doc/api/reference.json) to JSON schema file.
+
+    This API Reference provides you with all the methods, fields, values, and endpoints currently accessible in Flussonic.
+
+    Before you proceed, read the following information:
+
+    * `server_config` represents the server configuration file. Our built-in config parser validates the configuration file structure 
+    according to this specification.
+    * Some API methods may send extra fields in responses, so your application must be ready to drop them;
+    * Do not rely on undocumented fields in the responses as we may modify them at any moment.
+    * In further updates of this document, some fields may become deprecated. Such fields will be scheduled for deletion with 
+    `x-delete-at` property with year and month, after which it will no longer exist.
+
+  title: Flussonic Media Server API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+      description: |
+        To use Basic Auth to authorize API calls, you need a token. To learn how to generate such a token and use it to make API calls, 
+        please refer to the [Flussonic Media Server API](https://flussonic.com/doc/api/flussonic-media-server-api/#authorizing-api-calls) page. 
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      description: |
+        To use Bearer Token to authorize API calls, you need a token. To learn how to generate such a token and use it to make API calls, 
+        please refer to the [Flussonic Media Server API](https://flussonic.com/doc/api/flussonic-media-server-api/#authorizing-api-calls) page.
+paths:
+  /streams:
+    $ref: './paths/stream/streams.yml'
+  /streams/{name}:
+    $ref: './paths/stream/stream.yml'
+  /streams/{name}/stop:
+    $ref: './paths/stream/stream_stop.yml'
+  /streams/{name}/inputs/{index}/select:
+    $ref: './paths/stream/stream_input_select.yml'
+
+  /streams/{name}/dvr/ranges:
+    $ref: './paths/stream/stream_dvr_ranges.yml'
+  /streams/{name}/dvr/locks:
+    $ref: './paths/stream/stream_dvr_locks.yml'
+  /streams/{name}/dvr/export:
+    $ref: './paths/stream/stream_dvr_export.yml'
+
+
+  /sessions:
+    $ref: './paths/auth/sessions.yml'
+  /sessions/reauth:
+    $ref: './paths/auth/sessions_reauth.yml'
+  /sessions/{id}:
+    $ref: './paths/auth/session.yml'
+
+
+
+  /templates:
+    $ref: './paths/template/templates.yml'
+  /templates/{name}:
+    $ref: './paths/template/template.yml'
+
+
+
+
+  /transponders:
+    $ref: './paths/transponder/transponders.yml'
+  /transponders/{name}:
+    $ref: './paths/transponder/transponder.yml'
+  /transponders/{name}/pushes:
+    $ref: './paths/transponder/transponder_pushes.yml'
+  /transponders/{name}/pushes/{index}:
+    $ref: './paths/transponder/transponder_push.yml'
+  /transponders/{name}/ts_descriptors:
+    $ref: './paths/transponder/transponder_descriptors.yml'
+  /transponders/{name}/ts_descriptors/{index}:
+    $ref: './paths/transponder/transponder_descriptor.yml'
+  /transponders/{name}/programs:
+    $ref: './paths/transponder/transponder_programs.yml'
+  /transponders/{name}/programs/{program_id}:
+    $ref: './paths/transponder/transponder_program.yml'
+  /transponders/{name}/time_offsets:
+    $ref: './paths/transponder/transponder_time_offsets.yml'
+  /transponders/{name}/time_offsets/{index}:
+    $ref: './paths/transponder/transponder_time_offset.yml'
+  /transponders/{name}/others:
+    $ref: './paths/transponder/transponder_others.yml'
+  /transponders/{name}/others/{index}:
+    $ref: './paths/transponder/transponder_other.yml'
+
+  /multiplexers/{name}/xmltv_upload:
+    $ref: './paths/multiplexer/multiplexer_xmltv_upload.yml'
+
+
+  /dvb_cards:
+    $ref: './paths/dvb/dvb_cards.yml'
+  /dvb_cards/{name}:
+    $ref: './paths/dvb/dvb_card.yml'
+  /dvb_cards/{name}/available_programs:
+    $ref: './paths/dvb/dvb_available_programs.yml'
+
+  /event_sinks:
+    $ref: './paths/events/event_sinks.yml'
+  /event_sinks/{name}:
+    $ref: './paths/events/event_sink.yml'
+  /event_sinks/{name}/events:
+    $ref: './paths/events/events.yml'
+
+  /auth_backends:
+    $ref: './paths/auth/auth_backends.yml'
+  /auth_backends/{name}:
+    $ref: './paths/auth/auth_backend.yml'
+
+  /admin_view_token:
+    $ref: './paths/auth/admin_view_token.yml'
+
+  /caches:
+    $ref: './paths/config/caches.yml'
+  /caches/{name}:
+    $ref: './paths/config/cache.yml'
+
+
+  /dvrs:
+    $ref: './paths/dvr/dvrs.yml'
+  /dvrs/{name}:
+    $ref: './paths/dvr/dvr.yml'
+  /dvrs/{name}/disks:
+    $ref: './paths/dvr/dvr_disks.yml'
+  /dvrs/{name}/disks/{path}:
+    $ref: './paths/dvr/dvr_disk.yml'
+
+
+  /cluster/peers:
+    $ref: './paths/cluster/peers.yml'
+  /cluster/peers/{hostname}:
+    $ref: './paths/cluster/peer.yml'
+  /cluster/balancers:
+    $ref: './paths/cluster/balancers.yml'
+  /cluster/balancers/{name}:
+    $ref: './paths/cluster/balancer.yml'
+  /cluster/sources:
+    $ref: './paths/cluster/sources.yml'
+  /cluster/sources/{url}:
+    $ref: './paths/cluster/source.yml'
+
+  /logos:
+    $ref: './paths/logo/logos.yml'
+  /logos/{name}:
+    $ref: './paths/logo/logo.yml'
+
+  /vods:
+    $ref: './paths/vod/vods.yml'
+  /vods/opened_files:
+    $ref: './paths/vod/opened_files.yml'
+  /vods/{prefix}:
+    $ref: './paths/vod/vod.yml'
+  /vods/{prefix}/storages/{storage_index}/files:
+    $ref: './paths/vod/disk_files.yml'
+  /vods/{prefix}/storages/{storage_index}/files/{subpath}:
+    $ref: './paths/vod/disk_file.yml'
+
+  /chassis:
+    $ref: './paths/chassis/chassis.yml'
+  /chassis/reboot:
+    $ref: './paths/chassis/chassis_reboot.yml'
+  /chassis/firmwares:
+    $ref: './paths/chassis/chassis_firmwares.yml'
+  /chassis/firmwares/download:
+    $ref: './paths/chassis/chassis_firmware_download.yml'
+  /chassis/firmwares/install:
+    $ref: './paths/chassis/chassis_firmware_install.yml'
+  /chassis/firmwares/{version}:
+    $ref: './paths/chassis/chassis_firmware.yml'
+
+  /chassis/interfaces:
+    $ref: './paths/chassis/chassis_interfaces.yml'
+  /chassis/interfaces/{name}:
+    $ref: './paths/chassis/chassis_interface.yml'
+  /chassis/interfaces/{name}/blink:
+    $ref: './paths/chassis/chassis_interface_blink.yml'
+
+  /chassis/ping:
+    $ref: './paths/chassis/chassis_ping.yml'
+
+
+  /chassis/coders:
+    $ref: './paths/chassis/chassis_coders.yml'
+  /chassis/coders/{coder}/shutdown:
+    $ref: './paths/chassis/chassis_coder_shutdown.yml'
+  /chassis/coders/{coder}/boot:
+    $ref: './paths/chassis/chassis_coder_boot.yml'
+  /chassis/coders/{coder}/reboot:
+    $ref: './paths/chassis/chassis_coder_reboot.yml'
+
+  /chassis/backups:
+    $ref: './paths/chassis/chassis_backups.yml'
+  /chassis/backups/{name}:
+    $ref: './paths/chassis/chassis_backup.yml'
+  /chassis/backups/{name}/restore:
+    $ref: './paths/chassis/chassis_backup_restore.yml'
+
+
+  /config:
+    $ref: './paths/config/config.yml'
+  /config/stats:
+    $ref: './paths/config/stats.yml'
+
+  /ui_settings:
+    $ref: './paths/config/ui_settings.yml'
+
+  /monitoring/liveness:
+    $ref: './paths/monitoring/liveness.yml'
+  /monitoring/readiness:
+    $ref: './paths/monitoring/readiness.yml'
+
+  # Это надо раскоментить в рамках #25072
+  # /monitoring/metrics:
+  #   $ref: './paths/monitoring/metrics.yml'
+
+
+  /activate:
+    $ref: './paths/license/activate.yml'
+  /license:
+    $ref: './paths/license/license.yml'
+  /license/activations:
+    $ref: './paths/license/activations.yml'
+  /license/activations/{version}:
+    $ref: './paths/license/activation.yml'
+  /license/request:
+    $ref: './paths/license/request.yml'
+  /license/clients:
+    $ref: './paths/license/clients.yml'
+
+
+
+  /iptv:
+    $ref: './paths/iptv/iptv.yml'
+  /iptv/packages:
+    $ref: './paths/iptv/packages.yml'
+  /iptv/packages/{name}:
+    $ref: './paths/iptv/package.yml'
+  /iptv/subscribers:
+    $ref: './paths/iptv/subscribers.yml'
+  /iptv/subscribers/{name}:
+    $ref: './paths/iptv/subscriber.yml'
+
+
+  /vsaas:
+    $ref: './paths/vsaas/vsaas.yml'
+  /rproxy:
+    $ref: './paths/vsaas/rproxy.yml'
+  /camera_alarm:
+    $ref: './paths/vsaas/camera_alarm.yml'
+  /vision:
+    $ref: './paths/vsaas/vision.yml'
+
+  /system/ssh_agent:
+    $ref: './paths/system/ssh_agent.yml'
+  /system/restart:
+    $ref: './paths/system/restart.yml'
+  /system/updater:
+    $ref: './paths/system/updater.yml'
+  /system/upload_logs:
+    $ref: './paths/system/upload_logs.yml'
+  /tls/letsencrypt:
+    $ref: './paths/tls/letsencrypt.yml'
+  /tls/certificate:
+    $ref: './paths/tls/certificate.yml'
+
+  /file_processor:
+    $ref: './paths/file_processor/file_processor.yml'
+  /file_processor/jobs:
+    $ref: './paths/file_processor/file_processor_jobs.yml'
+  /file_processor/jobs/{id}:
+    $ref: './paths/file_processor/file_processor_job.yml'
+
+  /admin_session_save/{session_id}:
+    $ref: './paths/admin_session/admin_session.yml'
+
+security:
+- basicAuth: []
+- bearerAuth: []
+servers:
+- description: your local installation
+  url: http://localhost:8080/streamer/api/v3
+tags:
+- name: stream
+  description: Managing streams in Flussonic.
+- name: stream-dvr
+  description: Managing DVR archives for streams.
+- name: stream-ops
+  description: Stream operations in runtime
+- name: template
+  description: Managing templates in Flussonic. A template defines a set of settings to be applied to several streams to provide a more organized and manageable way of configuring streams.
+- name: dvr
+  description: Managing global DVR configurations in Flussonic.
+- name: auth
+  description: Managing authorization backends.
+- name: session
+  description: Managing play sessions in Flussonic.
+- name: events
+  description: Managing event sinks and events in Flussonic.
+- name: monitoring
+  description: Probes for cluster monitoring
+- name: cache
+- name: cluster
+  description: Managing cluster and peers in Flussonic.
+- name: vod
+- name: logo
+  description: Managing logos in Flussonic.
+- name: transponder
+- name: multiplexer
+- name: chassis
+- name: dvb
+  description: Managing DVB cards in Flussonic.
+- name: license
+- name: vsaas
+- name: system
+- name: config
+- name: tls
+- name: iptv
+  description: |
+    Manage trivial middleware with user management and channel permissions.
+    Use players like Kodi to get access to per-user playlists.
+
+    It is very trivial, just for very trivial operations like giving someone a static
+    token for accessing content.
+
+    Database is a static JSON file on disk that is overwritten on each update.
+- name: file_processor
+- name: telemetry

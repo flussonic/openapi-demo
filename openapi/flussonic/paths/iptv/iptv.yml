@@ -1,0 +1,56 @@
+get:
+  operationId: iptv_get
+  summary: IPTV status
+  description: |
+    Get current status of the trivial IPTV subscriber management system.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/iptv_config'
+      description: Returns iptv config
+    '404':
+      description: IPTV plugin is not configured
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - iptv
+put:
+  operationId: iptv_save
+  summary: Save IPTV
+  description: |
+    Enable or reload IPTV plugin configuration and disk state
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/iptv_config'
+    description: iptv configuration
+  responses:
+    '200':
+      description: Updated iptv config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/iptv_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - iptv
+delete:
+  operationId: iptv_delete
+  summary: Disable IPTV
+  description: |
+    Disable trivial IPTV plugin, remove it from the config and stop runtime status.
+  responses:
+    '204':
+      description: Deleted iptv config
+  tags:
+  - iptv

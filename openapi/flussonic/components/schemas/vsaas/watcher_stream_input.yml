@@ -1,0 +1,5 @@
+allOf:
+- $ref: '../../schemas.yml#/stream_input_base'
+- $ref: '../../schemas.yml#/stream_input_rtsp'
+- $ref: '../../schemas.yml#/stream_input_requested_config'
+- $ref: '../../schemas.yml#/stream_input_deprecated'

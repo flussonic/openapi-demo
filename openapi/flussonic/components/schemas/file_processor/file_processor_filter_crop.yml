@@ -1,0 +1,19 @@
+type: object
+required:
+- group
+- start
+- stop
+properties:
+  group:
+    type: string
+    title: Crop
+    const: crop
+    description: Cut off interval [start, stop] from the output
+  start:
+    description: Filter start time
+    type: integer
+    format: milliseconds
+  stop:
+    description: Filter end time
+    type: integer
+    format: milliseconds

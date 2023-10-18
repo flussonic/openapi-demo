@@ -1,0 +1,76 @@
+get:
+  operationId: dvb_card_get
+  summary: Get the DVB card
+  description: This method allows to get a single DVB card by name.
+  parameters:
+  - description: dvb_card name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/dvb_card_config'
+      description: Response
+  tags:
+  - dvb
+put:
+  operationId: dvb_card_save
+  summary: Save the DVB card
+  description: |
+    Create or update a DVB card.
+    If you pass only a partial DVB card configuration, only the passed fields will be updated, not the whole configuration.
+  parameters:
+  - description: dvb_card name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/dvb_card_config'
+    description: Request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/dvb_card_config'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save a DVB card
+  tags:
+  - dvb
+delete:
+  operationId: dvb_card_delete
+  summary: Delete the DVB card
+  description: Delete the DVB card by its name.
+  parameters:
+  - description: dvb_card name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - dvb

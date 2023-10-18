@@ -1,0 +1,16 @@
+type: object
+properties:
+  align:
+    description: |
+      Horizontal alignment of subtitles.
+      Allowed values: `left`, `center`, `right`.
+    type: string
+    nullable: true
+    example: middle
+  valign:
+    description: |
+      Vertical alignment of subtitles.
+      Allowed values: `top`, `middle`, `bottom `.
+    type: string
+    nullable: true
+    example: bottom

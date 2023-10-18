@@ -1,0 +1,55 @@
+type: object
+properties:
+  streams:
+    description: Streams statitstics
+    type: object
+    properties:
+      online:
+        type: integer
+        description: Number of online streams
+      offline:
+        type: integer
+        description: Number of offline streams
+      disabled:
+        type: integer
+        description: Number of disabled streams
+      provisioned: 
+        type: integer
+        description: Number of streams provisioned to streamers
+      not_provisioned: 
+        type: integer
+        description: Number of streams not provisioned to streamers
+      total: 
+        type: integer
+        description: Total number of streams
+  streamers:
+    description: Streamers statitstics
+    type: object
+    properties:
+      online:
+        type: integer
+        description: Number of streamers online
+      offline:
+        type: integer
+        description: Number of streamers offline
+      total: 
+        type: integer
+        description: Total number of streamers
+      stats:
+        type: array
+        items:
+          $ref: '../../components/schemas.yml#/server_stats'
+        description: Streamer stats 
+  agents:
+    description: Agents statitstics
+    type: object
+    properties:
+      online:
+        type: integer
+        description: Number of agents online
+      offline:
+        type: integer
+        description: Number of agents offline
+      total: 
+        type: integer
+        description:  Total number of agents

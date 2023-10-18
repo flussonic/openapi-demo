@@ -1,0 +1,31 @@
+get:
+  operationId: jpeg_preview
+  summary: JPEG thumbnail
+  description: |
+    If you configure JPEG thumbnail generation for a stream, 
+    this URL can be used to access the stream's last thumbnail (keyframe) as a JPEG image.
+
+    Note that generating JPEG thumbnails is a resource-intensive operation 
+    because Flussonic takes the first keyframe of each segment, decodes it to raw video, and encodes back to a JPEG image. 
+    Please consider using MP4 video thumbnails instead.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/thumbnails/
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        image/jpeg:
+          schema:
+            type: string
+            format: binary
+      description: Last keyframe as a JPEG file
+  tags:
+    - image

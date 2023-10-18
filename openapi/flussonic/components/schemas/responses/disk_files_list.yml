@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      files:
+        description: The list of VOD files.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/disk_file'

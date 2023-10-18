@@ -1,0 +1,8 @@
+type: object
+properties:
+  port:
+    description: The port used for NTP daemon.
+    type: integer
+  requests_count:
+    description: The number of requests sent.
+    type: integer

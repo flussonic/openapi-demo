@@ -1,0 +1,8 @@
+x-private: true
+type: object
+properties:
+  session:
+    type: string
+    description: |
+      Identify of current session id. Every login with username and password generates a new session.
+    example: '6P1nGOz4pG94xz4h82qqmZTghKA'

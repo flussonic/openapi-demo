@@ -1,0 +1,49 @@
+get:
+  operationId: episodes_list
+  summary: Episodes list
+  description: |
+    Returns the list of episodes registered during operation on your server.
+  parameters:
+    - name: media
+      description: Filter the collection by stream name on which the episode is registered
+      explode: false
+      in: query
+      required: false
+      schema:
+        type: string
+        example: cam-045
+      style: form
+    - name: episode_type
+      in: query
+      description: Request specific episode type
+      required: false
+      explode: false
+      style: form
+      schema:
+        type: string
+        oneOf:
+          - title: Face
+            const: face
+          - title: Vehicle
+            const: vehicle
+    - name: updated_at
+      in: query
+      description: |
+        Filter results by timstamp when episode was updated.  
+        To specify timestamp range these suffixes may be used:  
+          `_gt`: greater than value  
+          `_lt`: less than value  
+          `_gte`: greater than or equal to value  
+          `_lte`: less than or equal to value
+      schema:
+        type: integer
+        format: utc_ms
+  tags:
+  - episodes
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/episodes_list

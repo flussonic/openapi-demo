@@ -1,0 +1,43 @@
+type: object
+properties:
+# SRT
+  srt:
+    description: |
+     A port used for playing SRT streams. Can be set in global settings or for a particular stream. 
+     If it is used in the configuration, Flussonic works as a "Listener" and receives connection requests from a source working as a "Caller".
+     More information [here](https://flussonic.com/doc/video-playback/#srt).
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    x-scope:
+      - flussonic
+    example: 9060
+  srt2:
+    description: |
+     A port used for playing SRT2 streams. Can be set in global settings or for a particular stream.
+     If it is used in the configuration, Flussonic works as a "Listener" and receives connection requests from a source working as a "Caller".
+     More information [here](https://flussonic.com/doc/video-playback/#srt).
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    x-scope:
+      - flussonic
+    example: 9062
+  srt_play:
+    description: SRT play configuration for a stream.
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    x-scope:
+      - flussonic
+  srt2_play:
+    description: SRT2 play configuration for a stream.
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    x-scope:
+      - flussonic
+  srt_publish:
+    description: SRT publishing configuration for a stream.
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+  srt2_publish:
+    description: SRT2 publishing configuration for a stream.
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'

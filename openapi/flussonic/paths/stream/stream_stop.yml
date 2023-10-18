@@ -1,0 +1,33 @@
+post:
+  operationId: stream_stop
+  summary: Stop the stream
+  description: |
+    Stop the stream with a specified name.
+
+    If the stream is static, it will restart according to existing rules.
+
+    This API call is a replacement for both: stop and restart.
+
+    Server cannot restart a stream that was started by user (publish for example),
+    because it cannot ask user to repeat publishing.
+
+    Static stream declared in config will be started automatically as if it failed
+    due to any bug.
+
+    This is why `restart` is actually a `stop` and maybe `start`, while `start` is made
+    by live stream subsystem
+  parameters:
+  - name: name
+    description: |
+      Stream name.
+    in: path
+    required: true
+    schema:
+      example: demo
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Stopped
+  tags:
+  - stream-ops

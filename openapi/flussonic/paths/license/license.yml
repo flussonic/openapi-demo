@@ -1,0 +1,86 @@
+get:
+  x-private: true
+  description: Read current license key
+  operationId: license_get
+  summary: Get the license
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license'
+      description: License information
+    '404':
+      description: License not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          examples:       
+            license_not_found:
+              summary: License not found
+              value:
+                errors:
+                  - code: license_not_found
+                    status: '404'
+                    title: License not found
+  tags:
+  - license
+put:
+  x-private: true
+  description: Upload license
+  operationId: license_save
+  summary: Save the license
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/license'
+    description: Full license body
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license'
+      description: Updated license
+    '400':
+      description: License update failed due to invalid/unknown license or invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          examples:
+            invalid_license_key:
+              summary: License key validation failed
+              value:
+                errors:
+                  - code: invalid_license_key
+                    status: '400'
+                    title: Invalid license key
+            unknown_license_key:
+              summary: License key is not found on license servers
+              value:
+                errors:
+                  - code: unknown_license_key
+                    status: '400'
+                    title: Unknown license key
+            invalid_request:
+              summary: Required properties are not specified
+              value:
+                errors:
+                  - code: invalid_request
+                    status: '400'
+                    title: Invalid request
+  tags:
+  - license
+delete:
+  x-private: true
+  description: Delete license from this server
+  operationId: license_delete
+  summary: Delete the license
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - license

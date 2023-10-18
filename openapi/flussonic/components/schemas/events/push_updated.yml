@@ -1,0 +1,16 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Push updated.
+    url:
+      description: The push URL.
+      type: string
+      format: url
+      nullable: true
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

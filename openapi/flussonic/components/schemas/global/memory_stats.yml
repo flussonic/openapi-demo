@@ -1,0 +1,22 @@
+type: object
+properties:
+  free:
+    type: integer
+    format: bytes
+    nullable: true
+    description: Free RAM available  
+  swap:
+    type: integer
+    format: bytes
+    nullable: true 
+    description: Total swap memory allocated 
+  swap_free:
+    type: integer
+    format: bytes
+    nullable: true 
+    description: Free swap memory available 
+  total:
+    type: integer
+    format: bytes
+    nullable: true  
+    description: Total RAM allocated

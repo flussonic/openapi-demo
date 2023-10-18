@@ -1,0 +1,6 @@
+type: object
+properties:
+  capture_at:
+    description: Preferred server to run the main stream on.
+    type: string
+    nullable: true

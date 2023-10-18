@@ -1,0 +1,73 @@
+type: object
+properties:
+  name:
+    type: string
+    format: media_name
+    description: Globally unique stream name.
+    readOnly: true
+    x-primary-key: true
+    openmetrics_label: name
+    examples:
+      default:
+        value: 'hockey1'
+      mylive/bunny:
+        value: 'mylive/bunny'
+      decklink:
+        value: 'Decklink-Stream'
+      dektec:
+        value: 'Dektec-Stream'
+      test_stream:
+        value: 'test_stream'
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+    - vision-config-external
+  comment:
+    description: |
+      Human-readable description of the stream.
+    type: string
+    example: 'This is a test stream'
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+  title:
+    description: |
+      Human-readable title of the stream. Provided for SDT MPEG-TS table or
+      SDP RTSP title parameter.
+    type: string
+    example: "Hockey channel"
+    x-api-allow:
+    - watcher-client
+    - watcher-core
+  position:
+    type: integer
+    format: sort_index
+    description: Position of the stream in order of streams in the config file, if declared.
+    nullable: true
+    example: 2
+    x-api-deny:
+    - config-external
+  named_by:
+    allOf:
+    - $ref: '../../schemas.yml#/named_by'
+    description: |
+      Where the stream is initialized: config, user play/publication, or remote
+      cluster server.
+    example: config
+    x-api-deny:
+    - config-external
+  srt_port_resolve:
+    type: boolean
+    example: false
+    description: Stream name was resolved via srt_port_resolve call
+    x-api-deny:
+    - config-external
+  template:
+    description: Template of the stream.
+    type: string
+    format: media_name
+    example: sports-hd
+    x-api-deny:
+    - config-external
+required:
+- name

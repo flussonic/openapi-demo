@@ -1,0 +1,21 @@
+oneOf:
+- type: boolean
+  enum: [true, false]
+  description: | 
+    Configures thumbnails behaviour.
+    - true : 
+
+        In case of Stream: 
+          Thumbnails are created and stored in DVR during the recording. If thumbnail is requested then it will be returned from DVR.
+
+        In case of VOD:
+          Thumbnails are created and stored in VOD location at thumbnails folder during the VOD opening if they are not created yet.
+          If VOD location is `readonly` then it will be used only for thumbnails searching. Nothing will be created and stored.  
+
+          If thumbnail is requested then it will be returned from thumbnails folder in VOD location.
+
+    - false : thumbnails are not stored at all. If thumbnail is requested then 403 'Forbidden' error will be returned.
+- type: string
+  enum: [ondemand]
+  description: |
+    - ondemand : thumbnails are not stored at all. If thumbnail is requested then it will be generated from corresponding video frame.

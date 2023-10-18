@@ -1,0 +1,9 @@
+description: Recognized vehicle's license plate number
+type: string
+examples:
+  default:
+    value: A123BC45
+  one:
+    value: B98365H
+  two:
+    value: 7BTK345

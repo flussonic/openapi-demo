@@ -1,0 +1,22 @@
+anyOf:
+- oneOf:
+  - title: Top field first
+    const: tff
+    description: Top field first. This method is used with hw=qsv, nvenc.
+  - title: Bottom field first
+    const: bff
+    description: Bottom field first. This method is used with hw=qsv, nvenc.
+  - title: Top field first separated
+    const: tff_separated
+    description: Top field first, separated fields. This method is used with hw=qsv.
+  - title: Bottom field first separated
+    const: bff_separated
+    description: Bottom field first, separated fields. This method is used with hw=qsv.
+  - title: MBAFF
+    const: mbaff
+    description: Interlaced libx264 MBAFF method. This method is used only with hw=cpu.
+  type: string
+- type: boolean
+  description: |
+      Enables encoding into interlaced video by using the default method for the encoder specified
+      (`mbaff` is the default method for `hw=cpu`, `tff` is the default method for `hw=qsv`, `hw=nvenc`)

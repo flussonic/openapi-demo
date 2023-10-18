@@ -1,0 +1,8 @@
+oneOf:
+  -  $ref: '../../schemas.yml#/file_processor_filter_overlay'
+  -  $ref: '../../schemas.yml#/file_processor_filter_crop'
+  -  $ref: '../../schemas.yml#/file_processor_filter_mute'
+  -  $ref: '../../schemas.yml#/file_processor_filter_mosaic'
+  -  $ref: '../../schemas.yml#/file_processor_filter_transcoder'
+discriminator:
+  propertyName: group

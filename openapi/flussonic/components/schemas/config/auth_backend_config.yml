@@ -1,0 +1,102 @@
+type: object
+properties:
+  name:
+    type: string
+    format: auth_backend_name
+    description: Globally unique [`auth_backend`](https://flussonic.com/doc/authorization/authorization-configurator/) name.
+    x-primary-key: true
+
+  allow_tokens:
+    description: |
+      Explicit list of tokens that give access to the content without any other checks.
+    example: ['test_token1', 'test_token2']
+    type: array
+    items:
+      type: string
+    nullable: true
+  deny_tokens:
+    description: |
+      Explicit list of tokens that deny access to the content and stop any other checks.
+    example: ['test_token3', 'test_token4']
+    type: array
+    items:
+      type: string
+    nullable: true
+  allow_ips:
+    description: |
+      Explicit list of IP-addresses or subnet masks that have access to the content without any other checks.
+    example: ['127.0.0.1', '10.10.0.0/24']
+    type: array
+    items:
+      type: string
+    nullable: true
+  deny_ips:
+    description: |
+      Explicit list of IP-addresses or subnet masks that are banned from accessing the content.      
+    example: ['8.8.8.8', '10.10.0.0/24']
+    type: array
+    items:
+      type: string
+    nullable: true
+  allow_countries:
+    description: |
+      Explicit list of countries (two-letter country codes according to ISO 3166-1) that have access to the content without any other checks.
+      Flussonic uses the MaxMind GeoLite2 Country database to map a country to a block of IP addresses. 
+      New releases of GeoIP2 databases come out more often than the releases of Flussonic server, so sometimes the used database can become outdated.
+      Therefore we recommend you to install a separate GeoIP2 library and set up Flussonic to use it.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/geoip/
+    example: ['RU', 'US']
+    type: array
+    items:
+      type: string
+    nullable: true
+  deny_countries:
+    description: |
+      Explicit list of countries (two-letter country codes according to ISO 3166-1) that are banned from accessing the content.
+      Flussonic uses the MaxMind GeoLite2 Country database to map a country to a block of IP addresses. 
+      New releases of GeoIP2 databases come out more often than the releases of Flussonic server, so sometimes the used database can become outdated.
+      Therefore we recommend you to install a separate GeoIP2 library and set up Flussonic to use it.
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/geoip/
+    example: ['RU', 'GB']
+    type: array
+    items:
+      type: string
+    nullable: true
+  allow_uas:
+    description: |
+      Explicit list of user agents (set-top boxes or browsers) that have access to the content without any other checks.    
+    example: ['AppleWebKit/533.3 (KHTML, like Gecko)', 'VLC/3.0.8 LibVLC/3.0.8']
+    type: array
+    items:
+      type: string
+    nullable: true
+  deny_uas:
+    description: |
+      The list of user agents (set-top boxes or browsers) that are banned from accessing the content.      
+    example: ['Mobile Safari/533.3', 'VLC/3.0.8 LibVLC/3.0.8']
+    type: array
+    items:
+      type: string
+    nullable: true
+  backends:
+    description: URL(s) of the HTTP backend(s).    
+    type: array
+    items:
+      $ref: '../../schemas.yml#/auth_backend_url'
+    nullable: true
+  allow_default:
+    description: |
+      This option defines the default behavior in the case when all backends are not responding (usually, because of errors in HTTP responses) and the session is not started yet.
+      If this option is enabled, all clients or devices except those listed in `deny` option will have access to the content.
+      If this option is disabled, all clients or devices except those listed in `allow` option will not have access to the content. 
+    externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/authorization/authorization-configurator/#the-allow-default-option
+    type: boolean
+    default: false
+required:
+  - name

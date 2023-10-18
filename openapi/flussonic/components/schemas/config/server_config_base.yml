@@ -1,0 +1,216 @@
+type: object
+properties:
+  listeners:
+    allOf:
+    - $ref: '../../schemas.yml#/listeners'
+    nullable: true
+    description: The configuration of network listeners.
+    x-api-deny:
+      - central
+  srt:
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    nullable: true
+    description: Global SRT listening port.
+      It is possible to use a single port for playback and publishing, 
+      but it is not compatible with clients.
+
+      Consider configuring separate ports for playback and publishing for each
+      stream.
+    x-api-deny:
+      - central
+  srt2:
+    x-private: true
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+    nullable: true
+    description: Global SRT2 listening port.
+      It is not possible to use a single port for playback and publishing.
+
+      Configure separate ports for playback and publishing for each
+      stream.
+    x-api-deny:
+     - central
+  srt_play:
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    nullable: true
+    description: SRT play configuration with single-port mode.
+      Not supported by many clients, better use per-stream mode.
+    x-api-deny:
+     - central
+  srt2_play:
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    nullable: true
+    description: SRT2 play configuration with single-port mode.
+      Not supported by many clients, better use per-stream mode.
+    x-api-deny:
+     - central
+  srt_publish:
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    nullable: true
+    description: SRT publish configuration with single-port mode.
+      Not supported by many clients, better use per-stream mode.
+    x-api-deny:
+     - central
+  srt2_publish:
+    allOf:
+    - $ref: '../../schemas.yml#/srt_config'
+    nullable: true
+    description: SRT2 publish configuration with single-port mode.
+      Not supported by many clients, better use per-stream mode.
+    x-api-deny:
+     - central
+
+  geoip:
+    type: string
+    format: disk_path
+    nullable: true
+    description: Use your own GeoIP database.
+    example: '/usr/share/GeoIP/GeoLite2-City.mmdb'
+    x-api-deny:
+     - central
+
+  meta:
+    description: Some additional options of the server.
+    allOf:
+    - $ref: '../../schemas.yml#/server_meta'
+    nullable: true
+    example: '{"role": "transcoder"}'
+    x-api-deny:
+     - central
+  loglevel:
+    allOf:
+    - $ref: '../../schemas.yml#/loglevel'
+    nullable: true
+    description: Raise loglevel to debug if needed.
+    example: error
+    x-api-deny:
+     - central
+  nvidia_monitor:
+    description: Enables saving statistics on Nvidia performance.
+    type: boolean
+    nullable: true
+    example: true
+    x-api-deny:
+     - central
+  total_bandwidth:
+    description: Total server bandwidth.
+    type: integer
+    format: speed
+    nullable: true
+    example: 1000000000
+    x-api-deny:
+     - central
+  log_requests:
+    description: Enables logging of requests for streams (manifests, segments) and API request.
+    type: boolean
+    nullable: true
+    x-api-deny:
+     - central
+  pulsedb:
+    description: Directory to store Pulse statistics.
+    type: string
+    format: disk_path
+    nullable: true
+    example: '/var/run/flussonic/pulsedb'
+    x-api-deny:
+     - central
+  session_log:
+    description: Directory to store the session log.
+    type: string
+    format: disk_path
+    nullable: true
+    example: '/var/run/flussonic/session_log'
+    x-api-deny:
+     - central
+  cluster_key:
+    description: The cluster key to unite several servers with the same key into a cluster.
+    type: string
+    nullable: true
+    example: 'xS6i6Q3DCc5nEvnu'
+  url_prefix:
+    description: |
+      This option applies to HLS and DASH protocols, for all streams on the server. 
+      The addresses of individual segments within a segment-based playlist will start with the specified prefix.
+      This setting is available in the global part of the config file as well as locally for any individual stream. 
+      When specified at the stream level, it is only valid for this particular stream.
+    allOf:
+    - $ref: '../../schemas.yml#/url_prefix'
+    nullable: true
+    x-api-deny:
+     - central
+  view_auth:
+    allOf:
+    - $ref: '../../schemas.yml#/admin_credentials'
+    nullable: true
+    description: |
+      Credentials for access to readonly API functions like getting streams info, status, and statistics.
+    x-api-deny:
+     - central
+  edit_auth:
+    allOf:
+    - $ref: '../../schemas.yml#/admin_credentials'
+    nullable: true
+    description: Credentials for administrator access to the server.
+    x-api-deny:
+     - central
+  api_allowed_from:
+    description: The list of allowed subnets to accept API requests from.
+    type: array
+    items:
+      type: string
+      format: cidr
+    nullable: true
+    x-api-deny:
+     - central
+
+
+  wwwroot:
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true
+    description: |
+      Alternative wwwroot directory
+    x-api-deny:
+     - central
+  
+  auth_token:
+    allOf:
+    - $ref: '../../schemas.yml#/auth_token'
+    description: |
+      Configure key name of query string key-value pair for token authentication
+    x-api-deny:
+     - central
+  
+  max_sessions:
+    type: integer
+    nullable: true
+    x-private: true
+    description: |
+      Maximum allowed sessions for whole streamer
+    x-api-deny:
+     - central
+  
+  aliaser:
+    type: string
+    format: aliaser_url
+    nullable: true
+    x-private: true
+    description: |
+      HTTP url of media name aliaser backend
+    x-api-deny:
+     - central
+  
+  init_script:
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true
+    description: |
+      Path to lua script that will be called on server start
+    x-api-deny:
+     - central

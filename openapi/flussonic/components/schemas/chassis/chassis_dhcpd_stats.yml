@@ -1,0 +1,28 @@
+type: object
+properties:
+  error:
+    description: The error code, if any.
+    type: string
+    enum:
+    - listen_failure
+    - port_busy
+    - no_interface
+  leases:
+    description: The list of leased IP addresses.
+    type: array
+    items:
+      type: object
+      properties:
+        mac:
+          description: MAC address corresponding to the IP address.
+          type: string
+        ip:
+          description: IP address.
+          type: string
+        count:
+          description: The number of uses.
+          type: integer
+        last_seen_at:
+          description: When the IP address was used the last time.
+          type: integer
+    default: []

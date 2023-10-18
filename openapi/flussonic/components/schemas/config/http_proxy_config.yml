@@ -1,0 +1,21 @@
+type: object
+properties:
+  prefix:
+    type: string
+    format: media_name
+    x-primary-key: true
+    description: |
+      HTTP prefix that will be intercepted by this http proxy configuration
+  url:
+    type: string
+    format: url
+    description: |
+      Upstream url
+  mainpage:
+    type: boolean
+    default: false
+    description: |
+      If this flag is set, then streamer will redirect from "/" to this proxy configuration.
+required:
+- prefix
+- url

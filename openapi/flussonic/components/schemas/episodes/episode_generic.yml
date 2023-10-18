@@ -1,0 +1,8 @@
+allOf:
+- $ref: ../../schemas.yml#/episode_base
+- type: object
+  properties:
+    episode_type:
+      type: string
+      description: Generic stream episode
+      const: generic

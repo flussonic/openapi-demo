@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      events:
+        description: The list of available events.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/streamer_event1'

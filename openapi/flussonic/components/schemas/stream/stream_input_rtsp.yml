@@ -1,0 +1,25 @@
+type: object
+properties:
+  rtp:
+    enum:
+    - udp
+    type: string
+    description: Whether to force UDP to capture a video from RTSP cameras.
+    x-api-allow:
+    - watcher-core
+  tracks:
+    x-private: true
+    type: array
+    items:
+      type: integer
+    description: List of track numbers to receive when capturing a stream from an RTSP camera.
+    example: [1]
+    x-api-allow:
+    - watcher-core
+  wait_rtcp:
+    type: boolean
+    # default: false
+    description: |
+      Whether to wait for the full RTP time synchronization before the processing of frames from the RTSP camera.
+    x-api-allow:
+    - watcher-core

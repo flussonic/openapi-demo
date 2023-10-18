@@ -1,0 +1,7 @@
+allOf:
+  - $ref: '../../schemas.yml#/server_config_base'
+  - $ref: '../../schemas.yml#/server_config_full'
+  - $ref: '../../schemas.yml#/server_config_external'
+  - $ref: '../../schemas.yml#/server_config_stats'
+  - $ref: '../../schemas.yml#/openmetrics_labels'
+description: Global server configuration and current runtime status

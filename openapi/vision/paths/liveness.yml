@@ -1,0 +1,14 @@
+get:
+  operationId: liveness_probe
+  summary: Liveness probe
+  description: Liveness probe.
+  responses:
+    '200':
+      description: |
+        Means that server process has started, but doesn't know anything about its readiness
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/vision_server_info'
+  tags:
+  - monitoring

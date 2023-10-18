@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This document is an API for chassis management system
+
+  title: Chassis management API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+paths:
+  /chassis:
+    $ref: './paths/chassis/chassis.yml'
+  /chassis/reboot:
+    $ref: './paths/chassis/chassis_reboot.yml'
+  /chassis/firmwares:
+    $ref: './paths/chassis/chassis_firmwares.yml'
+  /chassis/firmwares/download:
+    $ref: './paths/chassis/chassis_firmware_download.yml'
+  /chassis/firmwares/install:
+    $ref: './paths/chassis/chassis_firmware_install.yml'
+  /chassis/firmwares/{version}:
+    $ref: './paths/chassis/chassis_firmware.yml'
+
+  /chassis/interfaces:
+    $ref: './paths/chassis/chassis_interfaces.yml'
+  /chassis/interfaces/{name}:
+    $ref: './paths/chassis/chassis_interface.yml'
+  /chassis/interfaces/{name}/blink:
+    $ref: './paths/chassis/chassis_interface_blink.yml'
+
+  /chassis/ping:
+    $ref: './paths/chassis/chassis_ping.yml'
+
+
+  /chassis/coders:
+    $ref: './paths/chassis/chassis_coders.yml'
+  /chassis/coders/{coder}/shutdown:
+    $ref: './paths/chassis/chassis_coder_shutdown.yml'
+  /chassis/coders/{coder}/boot:
+    $ref: './paths/chassis/chassis_coder_boot.yml'
+  /chassis/coders/{coder}/reboot:
+    $ref: './paths/chassis/chassis_coder_reboot.yml'
+
+  /chassis/backups:
+    $ref: './paths/chassis/chassis_backups.yml'
+  /chassis/backups/{name}:
+    $ref: './paths/chassis/chassis_backup.yml'
+  /chassis/backups/{name}/restore:
+    $ref: './paths/chassis/chassis_backup_restore.yml'
+
+security:
+- basicAuth: []
+- bearerAuth: []
+servers:
+- description: your local installation
+  url: http://localhost:8080/streamer/api/v3
+tags:
+- name: chassis

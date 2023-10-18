@@ -1,0 +1,10 @@
+type: object
+description: WebPush Notifications subscription
+required:
+  - endpoint
+properties:
+  endpoint:
+    type: string
+    description: Endpoint on which Billing will send Push Messages
+    example: https://fcm.googleapis.com/fcm/send/${token}
+externalDocs: https://developer.mozilla.org/en-US/docs/Web/API/Push_API

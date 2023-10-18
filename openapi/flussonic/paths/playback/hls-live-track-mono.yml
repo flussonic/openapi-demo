@@ -1,0 +1,45 @@
+get:
+  operationId: hls_live_track_mono_manifest
+  summary: HLS live and VOD tracks
+  description: |
+    Use this URL to play specified tracks of a live stream or a VOD file.
+    It results in HLS media playlist as a list of segments. Each segment contains the specified tracks only.
+  parameters:
+  - name: name
+    in: path
+    description: |
+      Media name. It may be multi-segment, i.e. `/part1/part2/part3`.
+      
+      For live stream, it is the name of the stream.
+      For VOD file, it consists of the VOD storage name and a path to the file within the storage.
+    required: true
+    schema:
+      type: string
+    examples:
+        stream:
+          summary: Stream name example
+          value: 'clock'
+        vod:
+          summary: VOD file name example
+          value: 'vod/movies/bunny.mp4'
+  - name: tracks
+    in: path
+    description: |
+      Requested tracks
+    required: true
+    schema:
+      type: string
+      example: v1a1
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/hls_bitrate_playlist'
+      description: HLS bitrate playlist with links to segments
+  tags:
+    - hls
+

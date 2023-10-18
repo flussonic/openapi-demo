@@ -1,0 +1,20 @@
+type: object
+properties:
+  url:
+    description: |
+      *Flussonic* takes a thumbnail from the specified URL on each keyframe.
+      May reduce CPU usage on IP cameras.
+    type: string
+    nullable: true
+    example: 'http://10.115.23.45/isapi/thumbnail.jpg'
+  enabled:
+    description: Whether to generate thumbnails from the video stream.
+    oneOf:
+    - $ref: '../../schemas.yml#/thumbnails_enabled_spec'
+    default: true
+  sizes:
+    description: What sizes will be used for thumbnails generation.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/thumbnails_size_spec'
+    default: []

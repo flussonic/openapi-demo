@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      license_clients:
+        description: The list of license clients.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/license_client'

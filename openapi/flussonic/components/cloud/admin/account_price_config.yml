@@ -1,0 +1,14 @@
+type: object
+properties:
+  actual_from:
+    type: string
+    format: date
+    description: Date the price is actual from 
+  price_id:
+    type: integer
+    format: snowflake_id
+    example: 1479629459169476608
+    description: price id
+required:
+  - actual_from
+  - price_id

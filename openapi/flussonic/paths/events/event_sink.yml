@@ -1,0 +1,62 @@
+parameters:
+- name: name
+  description: event_sink name
+  in: path
+  required: true
+  schema:
+    example: middleware_logger
+    type: string
+  style: simple
+get:
+  operationId: event_sink_get
+  summary: Get one event sink configuration
+  x-api-deny:
+  - watcher-core
+  description: This method allows to get a single event sink configuration.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/event_sink_config'
+      description: Whole event_sink  config
+  tags:
+  - events
+put:
+  operationId: event_sink_save
+  summary: Save a single event sink configuration
+  x-api-deny:
+  - watcher-core
+  description: Create or update an event sink configuration by its name.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/event_sink_config'
+    description: Partial event_sink configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/event_sink_config'
+      description: Updated event sink configuration
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - events
+delete:
+  operationId: event_sink_delete
+  summary: Delete an event sink configuration
+  x-api-deny:
+  - watcher-core
+  description: Delete an event sink configuration by its name.
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - events

@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      logos:
+        description: The array of logo files.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/logo_file'

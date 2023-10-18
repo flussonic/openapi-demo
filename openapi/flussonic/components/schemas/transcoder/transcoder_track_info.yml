@@ -1,0 +1,6 @@
+allOf:
+- $ref: '../../schemas.yml#/track_info_base_configurable'
+- $ref: '../../schemas.yml#/track_info_audio_specific'
+- $ref: '../../schemas.yml#/transcoder_track_info_audio'
+- $ref: '../../schemas.yml#/transcoder_track_info_video'
+

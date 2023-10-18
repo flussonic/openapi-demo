@@ -1,0 +1,44 @@
+type: object
+properties:
+  total_clients:
+    description: The number of clients receiving the streams from the server at the moment of request.
+    type: integer
+    nullable: true
+    openmetrics_metric: server_total_clients
+    x-metric-type: gauge
+    example: 2040
+  total_streams:
+    description: The number of streams created on the server.
+    type: integer
+    nullable: true
+    example: 45
+  online_streams:
+    description: The number of streams that are ready to be served to the clients. 
+    type: integer
+    nullable: true
+    openmetrics_metric: server_online_streams
+    x-metric-type: gauge
+    example: 27
+  opened_files:
+    description: The number of opened files.
+    type: integer
+    nullable: true
+    openmetrics_metric: server_opened_files
+    x-metric-type: gauge
+    example: 5
+  input_kbit:
+    description: Current incoming speed (bitrate) of the data transmission over the network.
+    type: integer
+    format: speed
+    nullable: true
+    openmetrics_metric: server_input_bitrate
+    x-metric-type: gauge
+    example: 400300
+  output_kbit:
+    description: Current outgoing speed (bitrate) of the data transmission over the network.
+    type: integer
+    format: speed
+    nullable: true
+    openmetrics_metric: server_output_bitrate
+    x-metric-type: gauge
+    example: 500400

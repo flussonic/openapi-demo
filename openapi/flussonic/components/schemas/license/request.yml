@@ -1,0 +1,5 @@
+type: object
+properties:
+  payload:
+    description: JSON with license request data.
+    type: string

@@ -1,0 +1,9 @@
+type: string
+oneOf:
+- title: CMAF
+  const: cmaf
+- title: fMP4
+  const: fmp4
+- title: MPEG-TS
+  const: mpegts
+

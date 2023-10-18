@@ -1,0 +1,15 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Motion stopped.
+      example: 'stream_motion_stopped'
+    duration:
+      type: integer
+      description: How long has the movement been active.
+      example: 15
+- $ref: '../../schemas.yml#/motion_base'
+# TODO
+#- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'

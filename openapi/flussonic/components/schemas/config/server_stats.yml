@@ -1,0 +1,7 @@
+allOf:
+  - $ref: '../../schemas.yml#/server_stats_whoami'
+  - $ref: '../../schemas.yml#/server_stats_streamer'
+  - $ref: '../../schemas.yml#/server_stats_network'
+  - $ref: '../../schemas.yml#/cloud_resources'
+  - $ref: '../../schemas.yml#/server_stats_events'
+

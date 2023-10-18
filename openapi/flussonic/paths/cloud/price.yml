@@ -1,0 +1,101 @@
+get:
+  description: Method allows to fetch single price
+  operationId: price_get
+  summary: Get the price
+  parameters:
+  - name: price_id
+    description: price id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 1479629459169476608
+      description: price id
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_price'
+      description: Created price
+  tags:
+  - pricing
+
+put:
+  description: | 
+    Save price.
+    You may save price that hasn't association with any account, or has all
+    existing associations in the future.
+  operationId: price_save
+  summary: Save price
+  parameters:
+  - name: price_id
+    description: price id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 1479629459169476608
+      description: price id
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_price'
+    description: Price
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_price'
+      description: Created price
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_price'
+      description: Updated price
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: |
+        Changing the price which has the association with account in the past
+        is deny.
+  tags:
+  - pricing
+
+delete:
+  description: | 
+    Delete price.
+    You may delete price that hasn't association with any account
+  operationId: price_delete
+  summary: Delete price
+  parameters:
+  - name: price_id
+    description: price id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 1479629459169476608
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+    '400':
+      description: |
+        Delete the price which has the association with account is deny.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - pricing

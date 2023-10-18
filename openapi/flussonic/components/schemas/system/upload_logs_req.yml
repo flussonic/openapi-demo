@@ -1,0 +1,7 @@
+type: object
+properties:
+  comment:
+    type: string
+    nullable: true
+    description: |
+      Comment.

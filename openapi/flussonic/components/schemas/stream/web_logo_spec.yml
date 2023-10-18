@@ -1,0 +1,44 @@
+type: object
+properties:
+  path:
+    description: |
+      Path to the logo file.
+      If specified without the `@` in the beginning, the logo will be served from the webroot (***not recommended***).
+      If specified with the `@` in the beginning, the logo will be served from the special directory and can be
+      managed by the logo API.
+    type: string
+    format: logo_path
+    nullable: true
+    example: '@chan.png'
+    x-scope:
+      - flussonic
+      - central
+      - cloud
+  height:
+    description: Set the specified height for the logo.
+    type: integer
+    nullable: true
+    example: 100
+  width:
+    description: Set the specified width for the logo.
+    type: integer
+    nullable: true
+    example: 200
+  left:
+    description: Change the position of the logo to the left.
+    type: integer
+    nullable: true
+    example: 15
+  top:
+    description: Change the position of the logo to the top.
+    type: integer
+    nullable: true
+    example: 15
+  right:
+    description: Change the position of the logo to the right.
+    type: integer
+    nullable: true
+  bottom:
+    description: Change the position of the logo to the bottom.
+    type: integer
+    nullable: true

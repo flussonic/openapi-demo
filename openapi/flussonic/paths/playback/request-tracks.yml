@@ -1,0 +1,45 @@
+put:
+  x-private: true
+  operationId: request_tracks
+  summary: Request tracks
+  description: |
+    This method requests play session to change playing tracks
+  parameters:
+  - name: name
+    in: path
+    description: Media name
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: id
+    description: Session ID obtained from X-Sid returned
+    in: path
+    required: true
+    schema:
+      example: UUID
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/request_tracks'
+    description: Requested tracks for play session
+  responses:
+    '204':
+      description: Accepted
+    '400':
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+    '404':
+      description: Media not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - api

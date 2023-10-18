@@ -1,0 +1,61 @@
+type: object
+properties:
+  agent_type:
+    type: string
+    enum:
+    - single
+    - router
+    default: single
+    description: |
+      The type of Agent installed on the device: 
+
+      * `single` means "one Agent = one camera", i.e. Agent is installed on a camera itself.
+      * `router` means "one Agent = multiple cameras", i.e. Agent is installed on a router
+      to provision the cameras from LAN to Watcher.
+
+  connections_requested:
+    type: integer
+    default: 0
+    description: The number of connections requested by Agent.
+  connections_established:
+    type: integer
+    default: 0
+    description: The number of successfully established connections.
+
+  serial:
+    type: string
+    nullable: true
+    description: The device (camera or router) serial number.
+  peer_ip:
+    type: string
+    format: ipv4
+    nullable: true
+    description: Public IP address of the device (camera or router) on which the Agent is running.
+    example: 185.134.232.183
+  local_ip:
+    type: string
+    format: ipv4
+    nullable: true
+    description: IP address of the device (camera or router) in the local network.
+    example: 10.10.17.88
+  mac_address:
+    type: string
+    nullable: true
+    example: F0-23-B9-59-20-F1
+    description: MAC-address of the device.
+  version:
+    type: string
+    nullable: true
+    description: Agent version.
+    example: v21.02-8-g535c85d
+
+  endpoint_connection:
+    description: Parameters of the connection between Agent and its endpoint.
+    allOf:
+    - $ref: '../../schemas.yml#/watcher_agent_control_connection'
+    nullable: true
+  streampoint_connection:
+    description: Parameters of the connection between Agent and its streampoint.
+    allOf:
+    - $ref: '../../schemas.yml#/watcher_agent_control_connection'
+    nullable: true

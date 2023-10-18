@@ -1,0 +1,51 @@
+type: object
+properties:
+  jpeg_vector_helper:
+    description: Enables JPEG generation for recognized objects. By default, vision process will generate only text events.
+    type: string
+    nullable: true
+  hw:
+    description: Hardware device type to be used for a vision process.
+    type: string
+    nullable: true
+
+  debug:
+    description: The debug option. Description is not required.
+    type: boolean
+    nullable: true
+    x-private: true
+
+  face_only_detect:
+    description: The debug option. Description is not required.
+    type: boolean
+    nullable: true
+    x-private: true
+
+  face_ssd_net_path:
+    description: The debug option. Description is not required.
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true
+
+  face_recon_net_path:
+    description: The debug option. Description is not required.
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true
+
+
+  ssd_net_path:
+    description: The debug option. Description is not required.
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true
+
+  lp_net_path:
+    description: The debug option. Description is not required.
+    type: string
+    format: disk_path
+    nullable: true
+    x-private: true

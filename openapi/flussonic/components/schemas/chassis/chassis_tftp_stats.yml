@@ -1,0 +1,15 @@
+type: object
+properties:
+  error:
+    description: Error code, if any.
+    type: string
+    enum:
+    - listen_failure
+    - port_busy
+    - no_interface
+  file_count:
+    description: The number of files sent over TFTP.
+    type: integer
+  sent_bytes:
+    description: The number of bytes sent over TFTP.
+    type: integer

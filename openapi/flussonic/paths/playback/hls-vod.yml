@@ -1,0 +1,66 @@
+get:
+  operationId: hls_vod_manifest
+  summary: HLS VOD
+  description: |
+    Main HLS URL that allows to play a VOD file.
+    This URL responds with [master playlist](https://datatracker.ietf.org/doc/html/rfc8216#section-6.2.4).
+
+    Exact version of HLS is not defined here, it may vary according to different settings.
+  parameters:
+  - name: vodname
+    in: path
+    description: |
+      Name of the VOD file. It consists of two segments separated by slash: 
+      
+      1. VOD storage name
+      2. Name of the file within VOD storage. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      
+  - name: separate_audio
+    in: query
+    description: |
+      Whether audio tracks are specified separately in the playlist.
+      
+      This option is used for some players like Samsung TV or browsers supporting MSE that cannot switch between 
+      multiple audio tracks (for instance, for different languages) and, as a result, do not display such audio tracks. 
+      For such cases, Flussonic can create a playlist with separate audio.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  - name: thumbnails
+    in: query
+    description: |
+      If this parameter is specified, the thumbnail playlist is added to the primary playlist.
+
+      Example of the thumbnail playlist:
+      
+      ```
+      #EXT-X-IMAGE-STREAM-INF:BANDWIDTH=10000,RESOLUTION=320x180,CODECS="jpeg",URI="images-320x180/tpl-0-34-100.m3u8"
+      ```
+      
+      This value defines how many thumbnail links will be added to the thumbnail playlist to cover the file duration.
+      The player will add the thumbnail links to the progress bar at regular intervals. 
+      The duration of the interval between thumbnails is the whole duration of the file divided by this value.
+
+      NOTE: This option requires the parameters `thumbnails enabled=ondemand` and `size` included in the VOD location settings. 
+      For example, `thumbnails enabled=ondemand size=320x240;`.
+    schema:
+      type: integer
+      example: 100
+    required: false
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/hls_master_playlist'
+      description: HLS master playlist with links to other manifests
+  tags:
+    - hls
+

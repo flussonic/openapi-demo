@@ -1,0 +1,4 @@
+oneOf:
+ - $ref: '../../schemas.yml#/central_streamer_node'
+ - $ref: '../../schemas.yml#/central_vision_node'
+ - $ref: '../../schemas.yml#/central_identification_node'

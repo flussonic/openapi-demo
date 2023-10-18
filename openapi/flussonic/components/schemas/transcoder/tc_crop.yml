@@ -1,0 +1,19 @@
+type: object
+properties:
+  left: 
+    description: The `x` coordinate of the upper-left corner of the output video withing the input video.
+    type: integer
+  top:
+    description: The `y` coordinate of the upper-left corner of the output video withing the input video.
+    type: integer
+  width:
+    description: The width of the output video.
+    type: integer
+  height:
+    description: The height of the output video.
+    type: integer
+required:
+- left
+- top
+- width
+- height

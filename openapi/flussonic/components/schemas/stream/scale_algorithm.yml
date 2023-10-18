@@ -1,0 +1,13 @@
+enum:
+- fast_bilinear
+- bilinear
+- bicubic
+- experimental
+- neighbor
+- area
+- bicublin
+- gauss
+- sinc
+- lanczos
+- spline
+type: string

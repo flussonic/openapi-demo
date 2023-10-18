@@ -1,0 +1,10 @@
+properties:
+  actual:
+    description: Period for the actual transponder.
+    type: integer
+    nullable: true
+  other:
+    description: Period for the other transponder.
+    type: integer
+    nullable: true
+type: object

@@ -1,0 +1,17 @@
+type: object
+properties:
+  url:
+    type: string
+    description: |
+      The storage (on the disk or on another server) that Flussonic will scan for VOD files.
+      If it is a path on the disk, it should be specified relating to the disk root.
+
+      It is possible to specify multiple storages for one VOD location. When Flussonic gets the URL for playing the file, it finds the prefix in this URL, 
+      cuts the path after it and consequently searches for this path in all specified storages.
+    example: '/storage'
+  extra:
+    additionalProperties:
+      type: string
+    type: object
+    nullable: true
+    description: Some additional options.

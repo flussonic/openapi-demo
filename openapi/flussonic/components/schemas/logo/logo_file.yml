@@ -1,0 +1,22 @@
+type: object
+properties:
+  name:
+    type: string
+    description: The logo name.
+  stream_names:
+    description: List of streams that use this logo
+    type: array
+    items:
+      type: string
+    default: []
+    readOnly: true
+  content:
+    description: Payload of this logo
+    type: string
+    format: byte
+  content_type:
+    description: |
+      Content type of this logo. Calculated from file name extension
+    type: string
+    nullable: true
+    readOnly: true

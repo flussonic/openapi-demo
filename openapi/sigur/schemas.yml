@@ -1,0 +1,27 @@
+channels_list:
+  $ref: './schemas/channels_list.yml'
+channel:
+  $ref: './schemas/channel.yml'
+
+
+persons_list:
+  $ref: './schemas/persons_list.yml'
+person:
+  $ref: './schemas/person.yml'
+
+
+event:
+  $ref: './schemas/event.yml'
+event_keepalive:
+  $ref: './schemas/event_keepalive.yml'
+event_face_detected:
+  $ref: './schemas/event_face_detected.yml'
+event_license_plate_detected:
+  $ref: './schemas/event_license_plate_detected.yml'
+
+ok_response:
+  type: object
+  properties:
+    success:
+      description: The door was successfully opened.
+      type: boolean

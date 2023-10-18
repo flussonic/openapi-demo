@@ -1,0 +1,14 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      usages:
+        items:
+          $ref: '../../schemas.yml#/cloud_usage'
+        type: array
+        description: List of fetched according to query parameters usage reports
+      prices:
+        items:
+          $ref: '../../schemas.yml#/cloud_price'
+        type: array
+        description: List of prices used for reported usages

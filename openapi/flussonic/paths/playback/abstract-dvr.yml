@@ -1,0 +1,71 @@
+get:
+  operationId: abstract_dvr_manifest
+  summary: abstract DVR manifest
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play a specified DVR window, for example,
+    you can play a telecast if you know its beginning and end from EPG.
+
+    This URL works in two modes: file and event. If `duration` is specified as `now`, this
+    url will respond with a growing playlist for playing an event.
+
+    If `duration` is an exact positive number, then the server will respond with playlist, having
+    this requested amount of seconds of video as a file.
+
+    Note the following rules:
+
+      * The first segment in this playlist will not start earlier than `from`.
+      * The last segment in this playlist will not start later than `from + duration`.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name.
+    required: true
+    schema:
+      type: string
+      example: 'clock'
+  - name: from
+    in: path
+    description: The start time of the DVR window in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  - name: duration
+    in: path
+    description: |
+      The duration of the DVR window in seconds. 
+
+      You also can specify `now` for a growing playlist till current time.
+
+      If `from`+`duration` is in the future, the playlist will grow as well until it reaches the specified moment.
+    required: true
+    schema:
+      oneOf:
+        - type: integer
+          example: 7200
+        - type: string
+          enum:
+            - now
+  - name: event
+    in: query
+    description: |
+      By default, if the requested numeric range (`archive-1641045644-5000.json`) ends in the future,
+      the returned manifest has `mutability: event` (segments may be appended).
+      It switches to `mutability: static` when the end of range is in past (after 1641050644 UTC in this case).
+      This transition indicates that no segments are going to be added at the next request.
+
+      You may pass `?event=false` parameter if you want `mutability` to be always `static`
+      (e.g. to workaround some client behaviour).
+    schema:
+      type: boolean
+      example: false
+    required: false
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/abstract_manifest'
+      description: abstract manifest
+  tags:
+    - api

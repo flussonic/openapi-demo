@@ -1,0 +1,79 @@
+get:
+  operationId: usages_list
+  summary: Get usages per stream for an period by step
+  description: |
+    Daily usage reports
+
+    You can pass any CloudUsage options to the query string for filtering,
+    not only those specified in the `select` parameters.
+
+    For example:
+    - `?datetime_gte=1662628754678` - Timestamp metrics will be provided from. (in milliseconds, UTC).
+    - `?datetime_lte=1662628796234` - Timestamp metrics will be provided to. (in milliseconds, UTC).
+    - `?resources.inputs_bytes_gt=1000` - Inputs metrics will be provided greater then (in bytes).
+    - `?title_is=SomeTitle` - Metrics will be provided for source with title.
+    - etc
+
+  parameters:
+  - name: select
+    description: Comma-separated list of fields (including nested) that will be
+      returned.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example:  date, project_id, media
+      type: string
+    style: form
+  - name: limit
+    description: Limit select count in collection to N elements.  Default value is 100.
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      example: 100
+    style: form
+  - name: cursor
+    description: |
+      Properly encoded analog of offset, allowing to read next bunch of items.
+      We do not offer common `offset` fields, use please cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  - name: q
+    description: Search pattern for different fields like project_id, date etc.
+    in: query
+    required: false
+    schema:
+      type: string
+      example: somepattern
+
+  - name: step
+    description: |
+      Query resolution step width in duration in seconds.
+      Current realization used as minimal value 60 secods
+      (it's mean that values less that 60 seconds is valid,
+      but  server will increase this value 60 seconds)
+    in: query
+    required: false
+    schema:
+      type: integer
+      format: seconds
+      example: 60
+      default: 3600
+
+
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_usages_list'
+      description: Response
+  tags:
+  - usage

@@ -1,0 +1,14 @@
+type: object
+required:
+- type
+- subpath
+properties:
+  type:
+    type: string
+    description: Object type
+    format: object_type
+    const: disk_file
+  subpath:
+    type: string
+    description: Subpath to the file or directory in the storage.
+    example: 'bunny.mp4'

@@ -1,0 +1,4 @@
+oneOf:
+- type: integer
+- const: test_fake
+  type: string

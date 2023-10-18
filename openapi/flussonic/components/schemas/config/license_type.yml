@@ -1,0 +1,7 @@
+type: string
+enum:
+- undefined
+- online
+- usb
+- network
+- offline

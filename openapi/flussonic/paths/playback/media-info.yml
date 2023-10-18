@@ -1,0 +1,27 @@
+get:
+  operationId: media_info
+  summary: Get media info
+  description: |
+    Use this method to get technical information about the output media content.
+    This method is applicable for a live stream or a VOD file.
+  parameters:
+  - name: name
+    in: path
+    description: |
+      Media name. It may be multi-segment, i.e., `/part1/part2/part3`.
+      
+      For a live stream, it is the name of the stream.
+      For a VOD file, it is `vod/file_subpath.mp4`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/media_info'
+      description: Media info
+  tags:
+    - api

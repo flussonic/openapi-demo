@@ -1,0 +1,28 @@
+type: object
+description: Rectangle
+required:
+  - top
+  - left
+  - bottom
+  - right
+properties:
+  top:
+    description: Top border of the bounding box. Fraction of full frame height
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+  left:
+    description: Left border of the bounding box. Fraction of full frame width
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+  bottom:
+    description: Bottom border of the bounding box. Fraction of full frame height
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+  right:
+    description: Right border of the bounding box. Fraction of full frame width
+    type: number
+    minimum: 0.0
+    maximum: 1.0

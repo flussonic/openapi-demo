@@ -1,0 +1,8 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Pid is added to the output multiplexed stream
+- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'

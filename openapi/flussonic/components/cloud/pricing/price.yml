@@ -1,0 +1,3 @@
+allOf:
+  - $ref: '../../schemas.yml#/cloud_price_base'
+  - $ref: '../../schemas.yml#/cloud_resources'

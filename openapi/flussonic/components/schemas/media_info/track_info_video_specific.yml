@@ -1,0 +1,40 @@
+type: object
+properties:
+  last_gop:
+    description: |
+      Last GOP size (expressed in number of frames).
+      This parameter is used to monitor the quality of encoding: normally, average GOP size should be equal to the last GOP size.
+      If this value is floating, this means that your transcoder is working in a flexible GOP size mode and some players may have problems.
+      This is not acceptable by most ABR usecases and it will not pass DVB validation protocol.
+    nullable: true
+    type: integer
+    example: 28
+  avg_gop:
+    nullable: true
+    type: integer
+    description: |
+      Average GOP size (expressed in number of frames) of the last 1000-2000 frames.
+      This parameter is used to monitor the quality of encoding: normally, average GOP size should be equal to the last GOP size.
+      If this value is floating, this means that your transcoder is working in flexible GOP size mode and some players may have problems.
+      This is not acceptable by most ABR usecases and it will not pass DVB validation protocol.
+    example: 25
+  length_size:
+    enum:
+      - 2
+      - 4
+    default: 4
+    type: integer
+    x-notice: H264 private option
+    description: The size of the length field for H264 bitstream without start codes.
+  is_progressive:
+    description: |
+      Indicates if progressive scanning method is used for all frames of the track
+    type: boolean
+    default: true
+  closed_captions:
+    description: Parameters of closed captions.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/closed_captions'
+    type: array
+    default: []

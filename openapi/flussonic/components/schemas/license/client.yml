@@ -1,0 +1,8 @@
+type: object
+properties:
+  ip:
+    description: The client API.
+    type: string
+  connected_at:
+    description: Date and time the client connected.
+    type: integer

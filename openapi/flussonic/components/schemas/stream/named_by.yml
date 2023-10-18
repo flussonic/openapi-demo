@@ -1,0 +1,11 @@
+type: string
+oneOf:
+- const: config
+  description: Media is described in file on local disk
+- const: user
+  description: |
+    Media was started and configured by user request: play or publish
+- const: remote
+  description: Media was sourced from another streamer via `source` directive
+- const: external
+  description: Media was configured via config_external backend

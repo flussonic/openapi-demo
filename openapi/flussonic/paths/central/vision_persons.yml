@@ -1,0 +1,47 @@
+parameters:
+- name: select
+  description: Comma-separated list of fields (including nested) that will be returned.
+  explode: false
+  in: query
+  required: false
+  schema:
+    example: person_id,external_id
+    type: string
+  style: form
+- name: limit
+  description: Limit select count in collection to N elements.
+  explode: false
+  in: query
+  required: false
+  schema:
+    type: integer
+    example: 100
+  style: form
+- name: cursor
+  description: |
+    Properly encoded analog of offset, allowing to read next bunch of items. 
+    We do not offer common `offset` fields, use please cursor for predictable
+    fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+  in: query
+  required: false
+  schema:
+    type: string
+    example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+
+get:
+  operationId: persons_list
+  summary: List Persons
+  x-api-deny:
+  - watcher-core
+  description: |
+    The list of registered videoanalytics persons
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vision_persons_list'
+      description: Response
+  tags:
+  - vision

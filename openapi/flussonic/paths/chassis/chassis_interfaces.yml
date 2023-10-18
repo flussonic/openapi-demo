@@ -1,0 +1,13 @@
+get:
+  description: Interfaces list
+  operationId: chassis_interfaces_list
+  summary: List NICs
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_interfaces_list'
+      description: Response
+  tags:
+  - chassis

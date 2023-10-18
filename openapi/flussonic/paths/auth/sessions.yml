@@ -1,0 +1,54 @@
+get:
+  operationId: sessions_list
+  summary: List sessions
+  description: |
+    This method returns list of opened play sessions.
+
+    At this moment sessions are filtered only to `type=play`, however later
+    we may add additional sessions like `publish`, `push`, or `ingest`.
+  parameters:
+  - description: Comma-separated list of fields (including nested) that will be
+      returned
+    explode: false
+    in: query
+    name: select
+    required: false
+    schema:
+      example: name,bytes,created_at
+      type: string
+    style: form
+  - description: Composite sort direction.
+    explode: false
+    in: query
+    name: sort
+    required: false
+    schema:
+      example: -created_at,name
+      type: string
+    style: form
+  - description: Limit select count in collection to N elements.
+    explode: false
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: integer
+      example: 100
+    style: form
+  - description: Properly encoded analog of offset, allowing to read the next bunch of items.
+      of items
+    in: query
+    name: cursor
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/sessions_list'
+      description: Response
+  tags:
+  - session

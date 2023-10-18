@@ -1,0 +1,254 @@
+type: object
+properties:
+  url:
+    description: Target URL to push a video stream to.
+    type: string
+    format: push_url
+    examples:
+      default:
+        value: 'rtmp://192.168.24.25/app1/stream2'
+      test_stream:
+        value: 'udp://example.com'
+      dektec:
+        value: 'dektec://4321:5'
+
+  stats:
+    description: Detailed runtime information about the push.
+    allOf:
+    - $ref: '../../schemas.yml#/push_stats'
+    nullable: true
+    readOnly: true
+
+  multicast_loop:
+    description: |
+      Whether to capture multicast back to the *Flussonic* host. 
+      This option allows you to ingest the sent stream on the sending host by *Flussonic* or other application.
+      Set to `True` for a UDP MPEG-TS push.
+    type: boolean
+    # default: true
+    example: true
+  vb:
+    description: |
+      Average bitrate per second that you can send of a video track, including all the headers and encapsulation in the transport stream. 
+      So, for example, the value of vb=2720 approximately corresponds to the bitrate 2600 specified in the transcoder settings.
+    type: integer
+    format: speed
+    example: 2720
+  bitrate:
+    description: The bitrate of the whole stream.
+    type: integer
+    format: speed
+    example: 3200
+  pnr:
+    description: |
+      Program number in the outgoing MPEG-TS stream. A program may represent a television channel.
+    type: integer
+  pmt:
+    deprecated: true
+    x-alias: pids.pmt
+    x-delete-at: 23.07
+    description: |
+      PID of Program Map Table (PMT) in the outgoing MPEG-TS stream.
+
+      PMT contains the description of each program and lists the PIDs of elementary streams associated with that program.
+      For instance, a transport stream used in digital television might contain three programs, to represent three television channels. 
+      Suppose each channel consists of one video stream, one or two audio streams, and any necessary metadata. 
+      A receiver wishing to decode one of the three channels merely has to decode the payloads of each PID associated with its program. 
+      It can discard the contents of all other PIDs.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'
+  pids:
+    description: |
+      This parameter sets PIDs values for outgoing MPEG-TS streams. 
+      It is possible to set PID values for PMT, STD and video and audio tracks.
+    allOf:
+    - $ref: '../../schemas.yml#/output_mpegts_pids'
+  mpegts_ac3:
+    description: It allows to specify pack information about ac3 for outgoing MPEGTS-TS streams. The default value is `system_b`.
+    allOf:
+    - $ref: '../../schemas.yml#/output_mpegts_ac3'
+  retry_limit:
+    description: The maximum number of times *Flussonic* retries to push the stream.
+    type: integer
+  retry_timeout:
+    description: |
+      How often *Flussonic* should retry attempts to send the stream, e.g., if it has become offline. 
+      It is an interval in seconds, 5 seconds by default. 
+      You can increase this value to reduce server load.
+    type: integer
+    format: seconds
+    example: 7
+  timeout:
+    description: |
+      Time interval, in seconds, after which the pusher is stopped if the source stream or publishing is stopped.
+    type: integer
+    format: seconds
+    example: 10
+
+  # SDI
+  volume:
+    description: |
+      Audio volume coefficient.
+      The output audio volume is given by the relation: `output_volume = volume * input_volume`.
+      The maximum volume value is 1.0 (default value).
+    type: number
+    nullable: true
+    example: 0.5
+  deinterlace:
+    description: |
+      Activate deinterlacing, i.e., converting an interlaced image to a progressive image. 
+      It is necessary for comfortable viewing of legacy TV video on PC/mobile devices.
+    type: boolean
+  fps:
+    deprecated: true
+    x-delete-at: 23.09
+    description: |
+      Frame rate (frames per second) - the speed at which a sequence of images is displayed on a screen.
+      Higher frame rates capture more images per second, which makes for smoother video.
+
+      The standard frame rate for color television in the Phase Alternating Line (PAL) format is 25 fps.
+      The standard frame rate for color television in the National Television System Committee (NTSC) format is 29,97 fps
+      (a little bit lower than the original frame rate of black and white NTSC television, equal to 30 fps.)
+      If interlaced TV is used, two fields of each frame (with odd-numbered lines and with even-numbered lines) are displayed consequently,
+      but the frame rate is actually not doubled (50 half-frames are still equal to 25 original frames).
+    allOf:
+    - $ref: '../../schemas.yml#/binary_value'
+  size:
+    deprecated: true
+    x-delete-at: 23.09
+    description: |
+      The size of output frame in pixels.
+    allOf:
+    - $ref: '../../schemas.yml#/binary_value'
+    example: '720x576'
+  format:
+    deprecated: true
+    x-delete-at: 23.09
+    description: |
+      The Decklink capture mode supported by a card. 
+      Usually a Decklink card supports a limited set of modes. 
+      Each mode is a combination of a frame size and FPS, encoded in Decklink format.
+      For example, `Hp50` is for 1920x1080 size with 50.00 FPS.
+
+      You can set this value manually or set size and FPS, and Flussonic will try to choose the appropriate format.
+    anyOf:
+    - $ref: '../../schemas.yml#/bm_display_mode'
+  video_format:
+    description: Specify SDI/HDMI output format
+    anyOf:
+    - $ref: '../../schemas.yml#/video_format'
+  vbi_lines:
+    description: |
+      Lines of VBI (vertical blanking interval) of an output analog stream that will contain teletext.
+      It is used for passing teletext from MPEG-TS to analog streams.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/live-streaming/passing-teletext-from-mpeg-ts-to-analog-streams/
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/vbi_lines'
+    type: array
+  dthreads:
+    description: |
+      Defines a number of threads in a decoder. 
+      One thread uses one core. 
+      The default value equals 4, but you can set it equal to the number of cores of your CPU.
+    type: integer
+    x-notice: video decoder threads number
+  scale:
+    description: |
+      Defines a scaling algorithm.
+      You can choose only one algorithm at a time. 
+      If a pushing stream has the same video resolution as an ingest stream, the `fast_bilinear` algorithm is used by default. 
+      If a video resolution of a pushing stream does not equal the video resolution of an ingest stream, the bicubic algorithm is used by default. 
+      If the algorithm is specified explicitly, it applies to all the formats.
+    allOf:
+    - $ref: '../../schemas.yml#/scale_algorithm'
+  disabled:
+    description: |
+      Disable pushing the stream.
+
+      Temporary disabling, or pausing, an offline stream eliminates the necessity to remove it from the the configuration in order to stop Flussonic trying to push it. 
+      In this way, the URL and other settings of a disabled stream remain in Flussonic.
+    type: boolean
+  push_audio_tracks:
+    description: Configuration of an audio track push to DekTec SDI.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/push_audio_track'
+    type: array
+    x-private: true
+
+  # srt
+  minversion:
+    description: |
+      The minimum SRT version that is required from the peer for SRT publication.
+      The format is `x.y.z`. 
+      The default value is `1.0.0`.
+    type: string
+    example: '1.0.0'
+  version:
+    description: |
+      Required SRT version. The format is `x.y.z`.
+      The default value is `1.0.0`.
+    type: string
+    example: '1.3.0'
+  enforcedencryption:
+    description: |
+      Whether both connection parties must have the same password set (including empty, in other words, with no encryption). 
+      If the passwords do not match or only one side is unencrypted, the connection is rejected. 
+      The default value is `true`.
+    type: boolean
+  passphrase:
+    description: |
+      The password for the encrypted transmission. 
+      Its length should be not less than 10 and not more than 79 characters. 
+      The default value is an empty string ("").
+    type: string
+    nullable: true
+    example: mytopsecret
+  connect_timeout:
+    description: Connection timeout, in seconds. Equals to 0 by default.
+    type: integer
+    format: seconds
+    example: 2
+  linger:
+    description: |
+      The time, in seconds, that the socket waits for the unsent data before closing. 
+      The default value is 180.
+    type: integer
+    format: seconds
+    example: 60
+  latency:
+    description: |
+      Packet delivery delay. 
+      Used to avoid bursts of missed packet retransmissions. The default value is 120.
+    type: integer
+    format: seconds
+    example: 2
+  streamid:
+    description: |
+      A string of maximum 512 characters set on the socket before the connection. 
+
+      This string is a part of a callback that is sent by the caller and regisered by the listener. 
+      Based on this information the listener can accept or reject the connection, select the desired data stream, or set an appropriate passphrase for the connection.
+
+      Its format is `#!::` optionally followed by the parameters:
+      * `r=` - stream name
+      * `m=` - mode expected for connection: `publish` (if the caller wants to send the stream data) or `request` (if the caller wants to receive the stream).
+ 
+      During SRT sessions the following parameters are automaticly added to `streamid`:
+      * `s=` - the identifier of a session
+      * `a=` - Flussonic verion
+
+      NOTE: you can specify a string in the format you need; to disable this extension, you need specify empty string.
+    type: string
+    example: "#!::r=my-stream,m=publish"
+
+
+  standby:
+    description: Monitoring multicast group and stop pushing if another publisher presented
+    type: boolean
+
+required:
+- url

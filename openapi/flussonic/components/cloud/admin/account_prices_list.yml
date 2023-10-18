@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      prices:
+        items:
+          $ref: '../../schemas.yml#/cloud_account_price'
+        type: array
+        description: List of current and previously assigned prices to account by dates

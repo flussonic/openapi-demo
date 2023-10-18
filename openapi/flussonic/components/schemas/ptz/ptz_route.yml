@@ -1,0 +1,6 @@
+type: object
+properties:
+  commands:
+    type: array
+    items:
+      $ref: ../../schemas.yml#/ptz_move_abs

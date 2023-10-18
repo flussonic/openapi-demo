@@ -1,0 +1,54 @@
+get:
+  operationId: hls_rewind_manifest
+  summary: HLS rewind
+  description: |
+    Nice combination of live and DVR HLS playlists.
+
+    This request gives something like HLS live playlist, but with lot of segments.
+
+    If the player understands that there are too many segments for a plain live playlist,
+    it allows to rewind back into DVR window.
+
+    We recommend to take a look at Clappr player that supports this feature out of the box.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: ago
+    in: path
+    description: |
+      DVR window size in seconds.
+      It is a duration of an HLS manifest in seconds, so your clients will be able to pause the stream up to this period or rewind it, for example, to the start of a TV show.
+    required: true
+    schema:
+      type: integer
+      example: 7200
+  - name: separate_audio
+    in: query
+    description: |
+      Whether audio tracks are specified separately in the playlist.
+      
+      This option is used for some players like Samsung TV or browsers supporting MSE that cannot switch between 
+      multiple audio tracks (for instance, for different languages) and, as a result, do not display such audio tracks. 
+      For such cases, Flussonic can create a playlist with separate audio.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/hls_master_playlist'
+      description: HLS rewind playlist with links to other manifests
+  tags:
+    - hls
+    - dvr

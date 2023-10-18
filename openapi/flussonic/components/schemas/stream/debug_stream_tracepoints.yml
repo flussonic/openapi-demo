@@ -1,0 +1,17 @@
+type: string
+oneOf:
+  - title: Input
+    const: input
+    description: Record raw bytes at stream input. Not all protocols support this.
+  - title: Stream
+    const: stream
+    description: Record frames after all pre-processing, as would be output via push or play.
+  - title: WEBRTC network output data
+    const: webrtc_play_network
+    description: Record webrtc play session rtp packets
+  - title: WEBRTC frames before encoding
+    const: webrtc_play_frame
+    description: Record webrtc play session frames
+  - title: RTSP network output data
+    const: rtsp_play_network
+    description: Record rtsp play session packets

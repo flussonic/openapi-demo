@@ -1,0 +1,10 @@
+oneOf:
+- title: Establishing
+  const: establishing
+- title: Running
+  const: running
+- title: Stalling
+  const: stalling
+- title: Finished
+  const: finished
+type: string

@@ -1,0 +1,11 @@
+type: object
+properties:
+  coder:
+    description: The coder ID.
+    type: integer
+  stats:
+    description: The coder statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/coder_stats'
+required:
+- coder

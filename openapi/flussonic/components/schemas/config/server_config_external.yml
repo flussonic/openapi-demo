@@ -1,0 +1,12 @@
+type: object
+properties:
+  config_external:
+    type: string
+    format: url
+    nullable: true
+    description: Specify stream config backend.
+    example: 'http://central.example.com/streamer/api/v3/streamers'
+    externalDocs:
+      description: "Find more information here"
+      url: https://flussonic.com/doc/devel/external-stream-management
+

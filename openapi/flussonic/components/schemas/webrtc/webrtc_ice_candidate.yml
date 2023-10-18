@@ -1,0 +1,14 @@
+type: object
+properties:
+  transport:
+    description: Transport protocol for the candidate
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_transport'
+  ip:
+    description: Offered IP address
+    type: string
+    format: ip
+  port:
+    description: Offered port
+    type: integer
+  

@@ -1,0 +1,7 @@
+type: object
+properties:
+  stats:
+    allOf:
+    - $ref: '../../schemas.yml#/server_stats'
+    description: Server runtime stats.
+    nullable: true

@@ -1,0 +1,16 @@
+oneOf:
+- $ref: '../../schemas.yml#/track_info_full' # to keep it referenced
+- $ref: '../../schemas.yml#/track_info_video'
+- $ref: '../../schemas.yml#/track_info_audio'
+- $ref: '../../schemas.yml#/track_info_text'
+- $ref: '../../schemas.yml#/track_info_metadata'
+- $ref: '../../schemas.yml#/track_info_application'
+discriminator:
+  propertyName: content
+  mapping:
+    video: '#/components/schemas/track_info_video'
+    audio: '#/components/schemas/track_info_audio'
+    text: '#/components/schemas/track_info_text'
+    metadata: '#/components/schemas/track_info_metadata'
+    application: '#/components/schemas/track_info_application'
+x-record-definition: '#/components/schemas/track_info_full'

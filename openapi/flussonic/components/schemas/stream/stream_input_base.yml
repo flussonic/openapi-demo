@@ -1,0 +1,188 @@
+type: object
+properties:
+  url:
+    description: |
+      Unified URL to connect to the source and get the stream.
+      However, not all protocols use URLs to describe the peer-to-peer connection.
+
+      For instance, WebRTC, SRT, and RTMP. 
+      
+      WebRTC uses SDP (Session Description Protocol) to describe the negotiation between the peers.
+
+      SRT requires IP and port, so we create an artificial URL to specify the options to manage the data interchange.
+
+      RTMP uses a special URL consisting of at least two segments. *Flussonic* parses the URL and splits it into parts, 
+      using the first segment as an RTMP application name.
+    type: string
+    format: input_url
+    x-api-allow:
+    - watcher-core
+    - vision-config-external
+    examples:
+      default:
+        value: 'udp://239.0.0.1:1234'
+      mylive/bunny:
+        value: 'publish://'
+      decklink:
+        value: 'decklink://0'
+      dektec:
+        value: 'dektec://12345:1'
+      test_stream:
+        value: 'udp://239.0.0.1:4321'
+      srt_via_bind_ip:
+        value: 'srt://remote.host.com:1234?bind_ip=10.77.0.100'
+
+  source_timeout:
+    description: The period of time, in seconds, for which Flussonic will wait for new frames until it considers the source as lost.
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/live-streaming/source-failover/#source_timeout
+    anyOf:
+    - type: integer
+      format: seconds
+    - enum:
+      - false
+      type: boolean
+    example: 20
+    x-api-allow:
+    - watcher-core
+  timeout:
+    description: |
+      The time, in seconds, for Flussonic to switch to the fallback source if the main source stops sending frames (video or audio). 
+      The important thing here is that the source remains active (connected), allowing for a client-publisher to stay on the socket.
+    type: integer
+    example: 10
+    x-api-allow:
+    - watcher-core
+  frames_timeout:
+    description: |
+      Specifies the period of time, in seconds, for which Flussonic Media Server waits for new frames to come from the data source before it generates the `frames_timed_out` event that informs you that the source might soon be lost. 
+      This period of time must be smaller than `source_timeout`. 
+      If frames come again from this source, before `source_timeout` has passed, Flussonic issues the `frames_restored` event.
+    type: integer
+    example: 3
+    x-api-allow:
+    - watcher-core
+  priority:
+    description: |
+      The priority that Flussonic takes into account when switching to another source.
+      The source with `priority=1` has the first priority, the source with `priority=2` has the second priority, and so on.
+
+      By default, the first source in the list has the highest priority and the last source in the list has the lowest priority. 
+      If priority is not specified for some sources, or if some sources have equal priorities, then the default order is applied. 
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/live-streaming/source-failover/#priority
+    type: integer
+    example: 1
+    x-api-allow:
+    - watcher-core
+  stats:
+    description: Detailed runtime information about the input.
+    allOf:
+    - $ref: '../../schemas.yml#/input_stats'
+    readOnly: true
+    x-api-allow:
+    - watcher-core
+  user_agent:
+    type: string
+    description: User agent. Can be modified if a protocol allows it.
+    x-api-allow:
+    - watcher-core
+  cluster_key:
+    type: string
+    description: Authorization key used to fetch the stream from another streamer in a cluster.
+    x-scope:
+    - flussonic
+  via:
+    type: string
+    format: agent_url
+    description: Agent ID. Used as a proxy to connect to the input server.
+    x-api-allow:
+    - watcher-core
+  max_bitrate:
+    description: Maximum bitrate value. *Flussonic* checks the input bitrate value, and if it overflows this value, the input will be disconnected.
+    type: integer
+    format: speed
+    x-scope:
+    - flussonic
+    - cloud
+  remote_dvr:
+    enum:
+    - nochain
+    - chain
+    - none
+    type: string
+    description: |
+      Mode to describe the interconnection with a DVR on a remote server.
+      Allows to chain requests to other servers or read-only from a peer.
+    x-scope:
+    - flussonic
+  output_dts_shift:
+    x-private: true
+    type: integer
+    description: |
+      Allow to hardcode some additional DTS shift to the stream. Required for mixing
+      inside transponder and forcing DTS jump.
+    x-scope:
+    - flussonic
+
+  output_audio:
+    description: |
+      Enables transcoding of the published audio to another codec.
+      The option is useful when you want to get an AAC audio track from WebRTC publish with OPUS or RTSP camera with PCMU.
+    allOf:
+    - $ref: '../../schemas.yml#/output_audio'
+
+  headers:
+    additionalProperties:
+      type: string
+    type: object
+    description: Request headers as key-value pairs.
+    example: {"User-Agent":"curl/7.85.0","Authorization":"Basic dXNlcjpwYXNzd29yZA=="}
+    x-api-allow:
+    - watcher-core
+
+
+  no_clients_reconnect_delay:
+    # FIXME: for refactoring
+    type: integer
+    description: Skip input start if the stream has no clients.
+
+
+  # switcher
+  allow_if:
+    # FIXME: for refactoring
+    type: string
+    description: |
+      Path to a file. The input will be allowed if you put `1` in the file, or denied if `0` (reverse logic to `deny_if`).
+      This option allows you to manage inputs without API requests.
+
+      For example, your stream has two inputs and you set `allow_if = /path/to/file` for the first input.
+      The `/path/to/file` file contains only the digit `1`. That means that the first input is used when you play the stream.
+      When you put `0` to the `/path/to/file` file, the first input is denied, so the second one is played.
+
+      If no such file, the input is allowed.
+  deny_if:
+    # FIXME: for refactoring
+    type: string
+    description: |
+      Path to a file. The input will be denied if you put `1` in the file, or allowed if `0` (reverse logic to `allow_if`).
+      This option allows you to manage inputs without API requests.
+
+      For example, your stream has two inputs and you set `deny_if = /path/to/file` for the first input.
+      The `/path/to/file` file contains only the digit `1`. 
+      That means that the first input will not be used when you play the stream, so the second one will.
+      When you put `0` to the `/path/to/file` file, the first input is allowed to be played.
+
+      If no such file, the input is allowed.
+
+  bind_ip:
+    type: string
+    x-private: true
+    description:
+      Interface ip address, to bind socket to.
+
+required:
+- url
+

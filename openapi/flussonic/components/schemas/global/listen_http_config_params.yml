@@ -1,0 +1,18 @@
+type: object
+properties:
+  api:
+    type: boolean
+    default: true
+    description: If false, listener do not serve api calls.
+  read_timeout:
+    type: integer
+    description: Time from when the connection is accepted to when the request body is fully read
+    example: 5
+    x-scope:
+      - central
+  write_timeout:
+    type: integer
+    description: Time from the end of the request header read to the end of the response write
+    example: 5
+    x-scope:
+      - central

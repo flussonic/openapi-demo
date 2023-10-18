@@ -1,0 +1,85 @@
+get:
+  operationId: streams_list
+  summary: List streams
+  description: |
+    This API method is one of the most important in whole API, because it gives the list of all streams,
+    including:
+
+    * configured (maybe not running at the moment)
+    * running (including those that are created via template and do not have own disk configuration)
+    * remote (available from other servers)
+    * only recorded
+    
+    You can pass any stream configuration options to the `q` query string for filtering, 
+    not only those specified in the `select` parameters.
+
+    This method, as well as `stream_get`, will return the **effective stream configuration** with all templates, defaults
+    included into the response. It is not exactly what you can see in your disk config. If you have configured
+    this stream in disk file, then the original disk configuration can be found in the `config_on_disk` field.
+
+    Thus, what you get from this API call may differ from what you write to `stream_save`
+    which is another important method for managing streams.
+
+  parameters:
+  - name: select
+    description: |
+      Comma-separated list of fields (including nested) that will be returned.
+
+      Use `parent.child` notation to mention nested (child) fields.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: name,inputs,stats,dvr.root
+      type: string
+    style: form
+  - name: sort
+    description: |
+      Composite sort direction. Specify field name(s) using comma `,` as a separator.
+        
+      Default sorting order is alphabetical by `name`. 
+      
+      Place `-` before the field name to sort in reverse alphabetical order or descending.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: -stats.bitrate,name
+      type: string
+    style: form
+  - name: limit
+    description: |
+      Limit the number of records in the selected collection to N elements. Default value is 100
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      example: 100
+    style: form
+  - name: cursor
+    description: |
+      A properly encoded equivalent of offset allowing you to read the next bunch of items. 
+      We do not offer common `offset` fields, so please use cursor for predictable
+      fetching of quickly changing list of items.
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  - name: q
+    description: Search pattern for text fields like name, title, urls, etc.
+    in: query
+    required: false
+    schema:
+      type: string
+      example: somepattern
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/central_streams_list'
+      description: Response
+  tags:
+  - stream

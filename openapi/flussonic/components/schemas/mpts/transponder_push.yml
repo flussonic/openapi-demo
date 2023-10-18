@@ -1,0 +1,37 @@
+properties:
+  url:
+    description: |
+      Push URL for the MPTS stream. Usually it is a `udp://` multicast address and port.
+    type: string
+  multicast_loop:
+    description: |
+      The multicast socket option that enables ingesting the sent data back to the transponder.
+      Use for test purposes, e.g. if the same server creates MTPS and splits MPTS to separate programs.
+    type: boolean
+    default: true
+  tos:
+    description: ToS byte in the IP packages of the multicasted data.
+    type: integer
+    default: 0
+  depth_limit:
+    description: Maximum allowable duration of the file. For push to `file://` only.
+    type: integer
+    nullable: true
+    x-private: true
+  pkt_limit:
+    description: Maximum allowable number of 188-byte TS packages in the file. For push to `file://` only.
+    type: integer
+    nullable: true
+    x-private: true
+  standby:
+    description: Monitoring multicast group and stop pushing if another publisher presented
+    nullable: true
+    type: boolean
+  stats:
+    description: Detailed runtime information about the push.
+    allOf:
+    - $ref: '../../schemas.yml#/push_stats'
+    readOnly: true
+required:
+  - url
+type: object

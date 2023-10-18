@@ -1,0 +1,5 @@
+anyOf:
+- allOf:
+  - $ref: '../../schemas.yml#/network_port'
+- type: string
+  format: host_with_port

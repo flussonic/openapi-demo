@@ -1,0 +1,10 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - $ref: '../../schemas.yml#/openmetrics_labels'
+  - type: object
+    properties:
+      transponders:
+        description: The list of multiplexers.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/transponder_config'

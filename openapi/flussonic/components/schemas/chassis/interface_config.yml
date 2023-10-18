@@ -1,0 +1,56 @@
+type: object
+properties:
+  name:
+    description: Interface name.
+    type: string
+    format: interface_name
+    example: 'streaming'
+  ip:
+    description: IP address assigned to the interface.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+    example: "10.10.10.9"
+  mask:
+    description: Subnet mask.
+    allOf:
+    - $ref: '../../schemas.yml#/network_mask'
+    example: 24
+  gw:
+    description: Primary gateway address.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+    example: "10.10.10.10"
+  dns:
+    description: IP address of the DNS server.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/network_addr'
+  mode:
+    description: The way of assigning network settings to the interface.
+    allOf:
+    - $ref: '../../schemas.yml#/interface_mode'
+  running:
+    description: Shows if the interface is currently active.
+    type: boolean
+  rp_filter:
+    description: Shows if reverse path filtering is enabled.
+    type: boolean
+  default_gateway:
+    description: |
+      Default gateway where the traffic will be sent to
+      in response to requests (API, HLS, etc.) received on this interface.
+
+      If not set, the `default_gateway_interface` is used.
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+  disk_config_error:
+    description: Indicates if there are any errors in the interface configuration.
+    type: boolean
+  disk_config_path:
+    description: Path to the interface config file.
+    type: string
+  stats:
+    description: Interface statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/interface_stats'
+    readOnly: true

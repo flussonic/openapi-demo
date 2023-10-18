@@ -1,0 +1,9 @@
+allOf:
+#
+# Stream stats  
+#
+- $ref: '../../schemas.yml#/stream_stats_base'
+#
+# Stream stats for cloud resources 
+#
+- $ref: '../../schemas.yml#/cloud_resources'

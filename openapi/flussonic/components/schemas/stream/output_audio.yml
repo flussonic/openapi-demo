@@ -1,0 +1,11 @@
+type: string
+oneOf:
+- title: Keep 
+  const: keep
+  description: Keep the original audio codec.
+- title: AAC
+  const: aac
+  description: Keep AAC if available or transcode to AAC; delete other tracks if any.
+- title: Add_AAC
+  const: add_aac
+  description: Add AAC if it was not available already while keeping the original track.

@@ -1,0 +1,25 @@
+type: object
+properties:
+  path:
+    description: |
+      The path to a mounted disk. 
+    example: volume1
+    type: string
+    format: disk_path
+    x-primary-key: true    
+  mode:
+    description: |
+      The mode of using the disk.
+    example: keep
+    allOf:
+    - $ref: '../../schemas.yml#/raid_disk_mode'
+  stats:
+    description: |
+      The runtime statistics about RAID. The statistics shows the state of disks.
+      More information can be found [here](https://flussonic.com/doc/digital-video-recording-dvr/flussonic-raid-for-dvr/#reading-runtime-statistics)
+    allOf:
+    - $ref: '../../schemas.yml#/raid_disk_stats'
+    readOnly: true
+required:
+- path
+

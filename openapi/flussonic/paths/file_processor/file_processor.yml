@@ -1,0 +1,55 @@
+get:
+  operationId: file_processor_get
+  description: Get the file processor config
+  summary: Get the file processor config
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/file_processor_config'
+      description: Returns file_processor config
+    '404':
+      content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas.yml#/error_response'
+      description: File processor is not configured
+  tags:
+  - file_processor
+
+put:
+  operationId: file_processor_save
+  description: Update the file processor config
+  summary: Save the file processor
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/file_processor_config'
+    description: file_processor config
+  responses:
+    '200':
+      description: Updated file_processor config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/file_processor_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - file_processor
+
+delete:
+  operationId: file_processor_delete
+  description: Delete the file processor config
+  summary: Delete the file processor
+  responses:
+    '204':
+      description: Deleted file_processor config
+  tags:
+  - file_processor

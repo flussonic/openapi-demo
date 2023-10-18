@@ -1,0 +1,18 @@
+type: string
+oneOf:
+- title: TTXT
+  const: ttxt
+- title: Text
+  const: text
+- title: WVTT
+  const: wvtt
+- title: TTML
+  const: ttml
+- title: Subtitle
+  const: subtitle
+- title: ID3T
+  const: id3t
+- title: ONVIF
+  const: onvif
+- title: TX3G
+  const: tx3g

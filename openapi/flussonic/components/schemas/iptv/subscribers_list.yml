@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      subscribers:
+        items:
+          $ref: '../../schemas.yml#/subscriber_config'
+        type: array
+        description: List of fetched subscribers according to query parameters.

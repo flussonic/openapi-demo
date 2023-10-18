@@ -1,0 +1,30 @@
+type: object
+required:
+  - detected_at
+  - object_class
+
+properties:
+  detected_at:
+    description: Timestamp when the object was detected
+    type: integer
+    format: utc_ms
+  object_class:
+    description: Class of the detected object
+    allOf:
+    - $ref: ../../schemas.yml#/vision_object_class
+  appearance:
+    description: Appearance attributes of the detected object
+    allOf:
+    - $ref: ../../schemas.yml#/vision_appearance
+  confidence:
+    description: Confidence level of object detection
+    allOf:
+    - $ref: ../../schemas.yml#/vision_confidence
+  thumbnail_quality:
+    description: Quality of the thumbnail
+    allOf:
+    - $ref: ../../schemas.yml#/vision_confidence
+  thumbnail:
+    description: Preview of the detected object
+    allOf:
+    - $ref: ../../schemas.yml#/vision_image_attributes

@@ -1,0 +1,5 @@
+allOf:
+- $ref: ../../schemas.yml#/vision_detected_object_base
+- $ref: ../../schemas.yml#/vision_face_attributes
+- type: object
+  description: Detected face

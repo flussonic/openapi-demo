@@ -1,0 +1,12 @@
+type: object
+properties:
+  cache:
+    description: Cache configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/cache_spec'
+    nullable: true
+  transcoder:
+    description: Transcoder configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_opts'
+    nullable: true

@@ -1,0 +1,75 @@
+put:
+  operationId: account_price_save
+  description: Associate an price to account from an date
+  summary: Associate price to account from an date
+  x-private: true
+  parameters:
+  - name: account_id
+    description: Account Id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  - description: |
+      Actual from
+    in: path
+    name: actual_from
+    required: true
+    schema:
+      example: "2021-01-30"
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_account_price'
+  responses:
+    '204':
+      description: Associated
+    '400':
+      description: It's not possible to update price for an date in the past
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - accounts
+delete:
+  operationId: account_price_delete
+  summary: Delete association between price and account on date
+  description: Delete association between price and account. Valid only for a date in the future.
+  x-private: true
+  parameters:
+  - name: account_id
+    description: Account Id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  - description: |
+      Actual from
+    in: path
+    name: actual_from
+    required: true
+    schema:
+      example: "2021-01-30"
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Associate an price to account from an date deleted successfully.
+    '400':
+      description: It's not possible to deleted price association for an date in the past
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - accounts

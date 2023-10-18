@@ -1,0 +1,13 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      usage:
+        items:
+          $ref: '../../schemas.yml#/cloud_account_usage'
+        type: array
+        description: List of usage resources and spent carrots
+      total:
+        type: integer
+        example: 10000
+        description: Total amount for current interval

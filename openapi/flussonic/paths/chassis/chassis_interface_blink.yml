@@ -1,0 +1,41 @@
+parameters:
+- description: interface name
+  in: path
+  name: name
+  required: true
+  schema:
+    example: coder1
+    type: string
+  style: simple
+
+get:
+  operationId: chassis_interface_blink_get
+  description: Get the status of interface blinking.
+  summary: Get blink status
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_blink'
+      description: Response
+  tags:
+  - chassis
+put:
+  operationId: chassis_interface_blink_save
+  description: Setup interface blinking.
+  summary: Set blink status
+  responses:
+    '204':
+      description: Response
+  tags:
+  - chassis
+delete:
+  description: Disable interface blinking.
+  operationId: chassis_interface_blink_delete
+  summary: Disable blink
+  responses:
+    '204':
+      description: Response
+  tags:
+  - chassis

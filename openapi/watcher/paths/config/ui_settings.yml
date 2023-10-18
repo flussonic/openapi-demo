@@ -1,0 +1,16 @@
+get:
+  operationId: ui_settings_get
+  summary: Get UI settings
+  x-private: true
+  description: |
+    The method allows you to fetch UI settings including branding colors, logos, etc.
+    It can work without authorization for the login page to be loaded.
+  responses:
+    '200':
+      description: UI settings
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/ui_settings_config'
+  tags:
+  - config

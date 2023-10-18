@@ -1,0 +1,26 @@
+type: object
+properties:
+  type:
+    x-private: true
+    enum:
+    - motion
+    type: string
+    description: The type of detected motion.
+  subtype:
+    x-private: true
+    enum:
+    - range
+    type: string
+    description: The subtype of detected motion.
+  start:
+    x-private: true
+    description: The start time of detected motion in UTC seconds.
+    type: integer
+    format: utc
+    example: 1429960179
+  duration:
+    x-private: true
+    description: The duration of detected motion in seconds.
+    type: integer
+    format: seconds
+    example: 3542

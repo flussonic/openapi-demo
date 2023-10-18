@@ -1,0 +1,12 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Play session opened.
+- $ref: '../../schemas.yml#/event_play'
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'
+

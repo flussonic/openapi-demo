@@ -1,0 +1,22 @@
+type: object
+properties:
+  hw:
+    description: Hardware device type to be used for a vision process.
+    allOf:
+    - $ref: ../../schemas.yml#/vision_inference_device
+  device_id:
+    description: Identifier of the hardware device used for videoanalytics inference (if applicable)
+    type: integer
+    example: 0
+  device_title:
+    description: Vendor-defined title of the device
+    type: string
+    examples:
+      default:
+        value: "NVIDIA GeForce RTX 2070"
+      one:
+        value: "AMD Ryzen 7 3700X"
+  stats:
+    description: Runtime statistics for a vision process.
+    allOf:
+    - $ref: ../../schemas.yml#/vision_device_stats

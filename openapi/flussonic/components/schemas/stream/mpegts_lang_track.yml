@@ -1,0 +1,5 @@
+anyOf:
+- enum:
+  - default
+  type: string
+- type: string

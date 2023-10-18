@@ -1,0 +1,4 @@
+ui_settings_config:
+  $ref: ../../flussonic/components/schemas/config/ui_settings_config.yml
+manifest_config:
+  $ref: ./manifest_config.yml

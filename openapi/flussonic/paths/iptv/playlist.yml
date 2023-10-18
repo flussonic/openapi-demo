@@ -1,0 +1,29 @@
+parameters:
+- name: name
+  in: path
+  required: true
+  description: the name of the user which is subscribed to receive some stream package 
+  schema:
+    example: client01
+    type: string
+  style: simple
+get:
+  operationId: playlist_get
+  summary: Get m3u playlist
+  description: Get m3u playlist for existing user which is subscribed to receive some stream package
+  responses:
+    '200':
+      description: Media playlist file
+      content:
+        application/x-mpegurl:
+          schema:
+            type: string
+            format: binary
+      headers:
+        Content-Disposition:
+          schema:
+            type: string
+            description: Media playlist file
+            example: attachment; filename="client01.m3u"
+  tags:
+  - iptv

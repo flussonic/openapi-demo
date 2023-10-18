@@ -1,0 +1,64 @@
+parameters:
+- description: Authorization backend name.
+  in: path
+  name: name
+  required: true
+  schema:
+    example: middleware_auth
+    type: string
+  style: simple
+get:
+  operationId: auth_backend_get
+  x-api-deny:
+  - watcher-core
+  summary: Get the auth backend
+  description: This method allows to get a single authorization backend.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/auth_backend_config'
+      description: The authorization backend configuration.
+  tags:
+  - auth
+put:
+  operationId: auth_backend_save
+  x-api-deny:
+  - watcher-core
+  summary: Save the auth backend
+  description: |
+    Create or update an authorization backend. 
+    If you pass only a partial configuration, only the passed fields will be updated.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/auth_backend_config'
+    description: Partial authorization backend configuration.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/auth_backend_config'
+      description: Updated auth_backend
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - auth
+delete:
+  operationId: auth_backend_delete
+  x-api-deny:
+  - watcher-core
+  summary: Delete the auth backend
+  description: Delete the authorization backend by its name.
+  responses:
+    '204':
+      description: The authorization backend is deleted.
+  tags:
+  - auth

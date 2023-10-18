@@ -1,0 +1,14 @@
+oneOf:
+- title: MPEG-TS
+  const: mpegts
+- title: Object
+  const: object
+- title: EIT
+  const: eit
+- title: SCTE-27
+  const: scte27
+- title: SCTE-35
+  const: scte35
+- title: Empty
+  const: empty
+type: string

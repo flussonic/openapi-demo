@@ -1,0 +1,78 @@
+post:
+  x-private: true
+  operationId: agents_endpoint_auth
+  summary: Agent auth
+  description: Agent auth on endpoint
+
+  parameters:
+  - name: X-Peeklio-Id
+    in: header
+    description: agent id
+    schema:
+      type: string
+      example: '9324'
+    required: true
+  - name: Authorization2
+    in: header
+    example: 'Peeklio 3ad2769f5af8ec79e77a8f4d9eeecca5dfc50bf5ba52497c464df91970de9ed8bb43d265ffc40b658609a19062242a2c6efffe529e59555da23fd4544d3ea5b5'
+    description: |
+      WE HAD TO USE NAME Authorization2 INSTEAD OF JUST Authorization DUE SPECIFICATION LIMITATIONS \
+      Peeklio sha512_hex("{nonce}:{sha512_hex({"{salt}:{agent_key}"})}")
+    schema:
+      type: string
+    required: true
+  - name: X-Nonce
+    description: The server will return generated string from secure random number generator.
+    in: header
+    schema:
+      type: string
+      example: '1b20658790'
+    required: true
+  responses:
+    # only status code matters, agent don't look at response body
+    '403':
+      description: agent rejected (X-Peeklio-Id is not provided or agent not found)
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+    '401':
+      description: need to authorize (Authorization or X-Nonce not provided)
+      headers:
+        X-Nonce:
+          schema:
+            type: string
+            example: '1b20658790'
+        X-Salt:
+          schema:
+            type: string
+            example: 'b66aa5'
+        X-Agentauth:
+          schema:
+            type: string
+            example: 6c35edb0c24bfce71c1b546625dabecb0ebad9dca97f246521919aa7bae023df89d9f1ed9bec8bc393982c43ad7ad2f8bf7a987c7058b31f399fcfbc7980becb
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+    '200':
+      description: success auth
+      content:
+        text/html:
+          schema:
+            type: string
+            example: "authorized"
+      headers:
+        X-Force-Reset:
+          schema:
+            type: string
+            description: Agent was deleted, it should be reset
+            example: "true"
+        X-Streampoint-Url:
+          schema:
+            type: string
+            description: Agent streampoint url
+            example: http://flussonic-master:8080/?streampoint_key=1e7399174f
+
+  tags:
+  - agent

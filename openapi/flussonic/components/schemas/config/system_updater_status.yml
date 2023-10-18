@@ -1,0 +1,69 @@
+type: object
+properties:
+  status:
+    description: Indicates the current status of upgrade.
+    type: string
+    oneOf:
+    - title: Running
+      const: running
+      description: Indicates the upgrade is in progress.
+    - title: Not running
+      const: not_running
+      description: |
+        Indicates the upgrade is not in progress and not required.
+        Installed version is the last available version.
+    - title: Error
+      const: error
+      description: Something wrong and Flussonic is not able to get the upgrade status.
+    - title: Upgrade available
+      const: upgrade_available
+      description: | 
+        The installed version is not the last. 
+        It is possible to upgrade to the next version.
+    - title: Restart required
+      const: restart_required
+      description: |
+        The running version is older than installed version.
+        Restart is required to run the installed version.
+  target_version:
+    type: string
+    description: |
+      Indicates target version for upgrading, if status is "running".
+    nullable: true
+  repo_uri:
+    type: string
+    description: |
+      Path to repository with upgrade packages.
+    nullable: true
+  repository:
+    type: string
+    description: |
+      Indicates the type of repository.
+    nullable: true
+  running_version:
+    type: string
+    description: |
+      Currently launched streamer version.
+  installed_version:
+    type: string
+    description: |
+      Version installed on disk.
+      Can differ from running_version if just installed.
+  next_version:
+    type: string
+    nullable: true
+    description: |
+      The latest version in repository which is available for installing.
+      Can be null if network error doesn't allow to fetch it.
+  previous_version:
+    type: string
+    nullable: true
+    description: |
+      The version in repository which is previous for the installed version.
+      Can be null if network error doesn't allow to fetch it.
+  last_update_error:
+    description: |
+      The text of the error that occurred the last time an action was performed by the updater. 
+      Resets to null when another action is performed.
+    type: string
+    nullable: true

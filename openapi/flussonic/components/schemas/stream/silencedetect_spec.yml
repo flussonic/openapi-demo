@@ -1,0 +1,22 @@
+type: object
+properties:
+  duration:
+    description: The duration, in seconds, of a continuous time interval during which silence must last for Flussonic to generate the `audio_silence_detected` event.
+    type: integer
+    format: seconds
+    nullable: true
+    example: 20
+  interval:
+    description: Flussonic will keep sending the `audio_silence_detected` event once upon the specified time interval until the sound reappears in the source.
+    type: integer
+    nullable: true
+    example: 10
+  noise:
+    description: |
+      The threshold value of the sound level, in dB. 
+      Sound of this and lower level will be considered by Flussonic as silence.
+    type: number
+    format: decibels
+    example: -30
+required:
+- noise

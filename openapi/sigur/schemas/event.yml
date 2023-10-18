@@ -1,0 +1,11 @@
+oneOf:
+- $ref: '../schemas.yml#/event_face_detected'
+- $ref: '../schemas.yml#/event_license_plate_detected'
+- $ref: '../schemas.yml#/event_keepalive'
+
+discriminator:
+  propertyName: type
+  mapping:
+    4bc30612-dc33-41ce-83c1-ba82b33f72d0: '#/components/schemas/event_face_detected'
+    9183e0da-8ab7-4d86-a6d7-5745cb514032: '#/components/schemas/event_license_plate_detected'
+    0ab0a061-12ec-4092-831d-33afe4f8a5f7: '#/components/schemas/event_keepalive'

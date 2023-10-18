@@ -1,0 +1,43 @@
+type: object
+properties:
+  name:
+    description: DVR configuration name.
+    type: string
+    format: dvr_name
+    x-primary-key: true
+  root:
+    description: A path where the DVR archive is stored.
+    type: string
+    format: dvr_url
+  raid:
+    description: |
+      This value is present if RAID (redundant array of independent disks) is enabled. More information can be found [here](https://flussonic.com/doc/digital-video-recording-dvr/flussonic-raid-for-dvr/). 
+      The allowed value is 0.
+    type: integer
+    x-api-deny:
+    - watcher
+  check_mount:
+    description: |
+      If this parameter is set to 'true' (by default), 
+      Flussonic will check if the disks were mounted properly before writing to them.
+    type: boolean
+    x-api-deny:
+    - watcher
+  active:
+    description: The number of disks to write the archive.
+    type: integer
+    nullable: true
+  index:
+    description: A directory on an SSD disk where the data will be cached.
+    type: string
+    format: disk_path
+    nullable: true
+  disks:
+    description: RAID disks mounted on the server.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/raid_disk_config'
+    nullable: true
+required:
+- name
+- root

@@ -1,0 +1,48 @@
+type: object
+properties:
+  dhcp:
+    description: DHCP statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_dhcpd_stats'
+    x-private: true
+  tftp:
+    description: TFTP statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_tftp_stats'
+    x-private: true
+  ntpd:
+    description: NTP daemon statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_ntpd_stats'
+    x-private: true
+  model:
+    description: The chassis model name.
+    type: string
+    example: 'chassis_model'
+  version:
+    description: Full version number of the firmware.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_version'
+    example: "21.09.1-234"
+  next_version:
+    description: The latest available version of the firmware, if any.
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_version'
+  serial_number:
+    description: The serial number of the chassis.
+    type: string
+    example: '2174220024'
+  hardware_id:
+    description: MAC address of the manage0 interface.
+    type: string
+  hostname:
+    type: string
+    description: Hostname of the server.
+    example: coder1.local
+  ntp_clock_synchronized:
+    type: boolean
+    description: Whether a system clock synchronized with NTP server
+  system_time:
+    type: number
+    format: utc_ms
+    description: Chassis system time (in UTC milliseconds)

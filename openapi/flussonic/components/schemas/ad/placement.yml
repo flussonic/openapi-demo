@@ -1,0 +1,9 @@
+type: string
+oneOf:
+  - title: Preroll
+    const: preroll
+    description: Path to the pre-roll video file (in VOD) to be shown before the main video. 
+  - title: Midroll
+    const: midroll
+    description: Path to the mid-roll video file (in VOD) to be shown during the video according to the ad markers.
+description: The advertising placement type.

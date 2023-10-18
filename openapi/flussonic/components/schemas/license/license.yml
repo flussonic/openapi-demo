@@ -1,0 +1,8 @@
+type: object
+properties:
+  key:
+    type: string
+    description: License key
+    example: 'l4|QSBkdW1teSBsaWNlbnNlIGtleQ==|eWVrIGVzbmVjaWwgeW1tdWQgQQ=='
+required:
+  - key

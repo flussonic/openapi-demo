@@ -1,0 +1,6 @@
+type: string
+format: auth_token
+default: "token"
+example: "token"
+description: |
+      Configure key name of query string key-value pair for token authentication

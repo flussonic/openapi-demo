@@ -1,0 +1,6 @@
+anyOf:
+- oneOf:
+  - title: Copy the input track as-is without any processing.
+    const: copy
+    type: string
+- type: integer

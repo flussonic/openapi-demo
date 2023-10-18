@@ -1,0 +1,6 @@
+type: string
+enum:
+- sendonly
+- recvonly
+- sendrecv
+- inactive

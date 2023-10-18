@@ -1,0 +1,74 @@
+get:
+  description: Method allows to fetch single balancer
+  operationId: balancer_get
+  summary: Get the balancer
+  parameters:
+  - description: balancer name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/balancer_config'
+      description: Whole balancer
+  tags:
+  - cluster
+put:
+  description: Create or update balancer
+  operationId: balancer_save
+  summary: Save the balancer
+  parameters:
+  - description: balancer name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/balancer_config'
+    description: Partial balancer configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/balancer_config'
+      description: Updated balancer
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - cluster
+delete:
+  description: Delete the balancer by its name
+  operationId: balancer_delete
+  summary: Delete the balancer
+  parameters:
+  - description: balancer name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - cluster

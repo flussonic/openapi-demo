@@ -1,0 +1,41 @@
+get:
+  operationId: camera_alarm_get
+  description: Get the configuration of the `camera_alarm` plugin.
+  summary: Get camera alarm
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/camera_alarm_config'
+      description: Returns camera_alarm config
+  tags:
+  - vsaas
+put:
+  operationId: camera_alarm_save
+  description: Update the configuration of the `camera_alarm` plugin.
+  summary: Save camera alarm
+  responses:
+    '200':
+      description: Updated camera_alarm config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/camera_alarm_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - vsaas
+delete:
+  operationId: camera_alarm_delete
+  description: Delete the configuration of the `camera_alarm` plugin.
+  summary: Delete camera alarm
+  responses:
+    '204':
+      description: Deleted camera_alarm config
+  tags:
+  - vsaas

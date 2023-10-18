@@ -1,0 +1,21 @@
+allOf:
+- $ref: '../../schemas.yml#/peer_config'
+- type: object
+  properties:
+    dvrs:
+      type: array
+      items:
+        allOf:
+        - $ref: '../../schemas.yml#/dvr_config'
+      description: The configuration of the DVRs
+    role:
+      $ref: '../../schemas.yml#/central_node_role'
+    config:
+      allOf:
+        - $ref: '../../schemas.yml#/server_config_base'
+        - $ref: '../../schemas.yml#/server_config_full'
+      description: Flussonic Media Server configuration which will be provided to Streamer
+required:
+ - cluster_key
+ - role
+ - hostname

@@ -1,0 +1,6 @@
+oneOf:
+- title: VIC
+  const: vic
+- title: CUDA
+  const: cuda
+type: string

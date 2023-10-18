@@ -1,0 +1,14 @@
+type: object
+properties:
+  name:
+    description: The backup name.
+    type: string
+  size:
+    description: The backup size.
+    type: integer
+  data:
+    description: The backup data.
+    type: string
+    format: byte
+required:
+  - name

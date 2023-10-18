@@ -1,0 +1,39 @@
+type: string
+oneOf:
+- title: Play
+  const: play
+  description: Some external app plays video from Media Server.
+- title: Publish
+  const: publish
+  description: Some external app publishes video to Media Server.
+- title: Ingest
+  const: ingest
+  description: Media Server ingests video from some external source like IPTV, IP camera, etc.
+- title: Push
+  const: push
+  description: Media Server pushes video to some external app.
+- title: Stream
+  const: stream
+  description: |
+    The session that can be parent to any number of `play`, `publish`, `push`, or `ingest` sessions.
+    It is designed to group several sessions each corresponding to one input. 
+
+    The `stream` session doesn't have `parent_id`.
+- title: Muxer
+  const: muxer
+  description: |
+    The session for video pushed as part of MPTS (Multi Program Transport Stream). 
+    Several inputs are monitored in one session.
+- title: API
+  const: api
+  description: Session initiated via API.
+- title: Player
+  const: player
+  description: The session opened in addition to `play` when Flussonic Player plays video from Media Server.
+- title: Publisher
+  const: publisher
+  description: The session opened in addition to `publish` when the video is published to Media Server by Flussonic Publisher.
+- title: Admin
+  const: admin
+  description: The admin UI session
+  x-private: true

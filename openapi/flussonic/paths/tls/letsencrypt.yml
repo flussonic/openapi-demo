@@ -1,0 +1,28 @@
+post:
+  x-private: true
+  operationId: letsencrypt_issue
+  summary: Issue letsencrypt certificate
+  description: |
+    Private and unsupported method for issuing letsencrypt certificates.
+  requestBody:
+    description: Letsencrypt cert request parameters
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/letsencrypt_request'  
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/tls_certificate'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - tls
+

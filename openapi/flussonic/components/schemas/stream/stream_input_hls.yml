@@ -1,0 +1,9 @@
+type: object
+properties:
+# HLS
+  skip_stalled_check:
+    description: |
+      By default Flussonic will wait for at least 2-3 new segments before making stream available.
+
+      This parameter allows to disable this protection. Use it at your own risk - with it enabled, old content might be repeated over and over.
+    type: boolean

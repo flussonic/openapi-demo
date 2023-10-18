@@ -1,0 +1,5 @@
+type: string
+oneOf:
+  - title: Timeout
+    description: Episode was closed because of no activity was detected in it.
+    const: timeout

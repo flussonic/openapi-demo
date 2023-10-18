@@ -1,0 +1,14 @@
+type: object
+properties:
+  latitude:
+    description: Geographic latitude.
+    type: number
+    example: 55.7512
+  longitude:
+    description: Geographic longitude.
+    type: number
+    example: 37.6184
+
+required:
+- latitude
+- longitude

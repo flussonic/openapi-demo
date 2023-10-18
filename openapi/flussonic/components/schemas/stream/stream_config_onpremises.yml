@@ -1,0 +1,70 @@
+type: object
+properties:
+  record_input:
+    x-private: true
+    description: Configuration of recording the stream input as-is. Recommended for debugging needs **only**.
+    allOf:
+    - $ref: '../../schemas.yml#/debug_stream_spec'
+    x-scope:
+      - flussonic
+    deprecated: true
+    x-delete-at: 23.12
+    x-alias: debug_stream
+  debug_stream:
+    x-private: true
+    description: Configuration of recording the stream sessions data. Recommended for debugging needs **only**.
+    allOf:
+    - $ref: '../../schemas.yml#/debug_stream_spec'
+    x-scope:
+      - flussonic
+  cluster_ingest:
+    description: |
+      Server configuration for a cluster ingest group.
+      Used to connect several servers between each other to capture the stream(s) and prevent the failover when one of the servers (peers) fails.
+      More information about the cluster ingest [here](https://flussonic.com/doc/cluster/video-ingest-in-a-cluster/#cluster-ingest-page).
+
+    allOf:
+    - $ref: '../../schemas.yml#/cluster_ingest_config'
+    x-scope:
+      - flussonic
+
+  cache:
+    description: Configuration of DVR cache.
+    allOf:
+    - $ref: '../../schemas.yml#/cache_spec'
+    x-scope:
+      - flussonic
+      - config-external
+
+  meta:
+    additionalProperties:
+      type: string
+    type: object
+    description: The param is deprecated and now used only for onvif_url and onvif_profile options.
+    x-scope:
+      - flussonic
+      - central
+    deprecated: true
+    x-delete-at: 23.12
+
+  pulse_off:
+    description: If this option is enabled, the data about playing the stream is not collected for the Pulse tab in Flussonic UI.
+    x-private: true
+    type: boolean
+    x-notice: Do not collect pulse data for this stream.
+    x-scope:
+      - flussonic
+    
+
+  vision:
+    allOf:
+    - $ref: '../../schemas.yml#/vision_spec'
+    description: Video analytics parameters.
+    x-scope:
+      - vision-config-external
+      - flussonic
+      - central
+      - config-external
+
+    x-api-allow:
+    - vision-config-external

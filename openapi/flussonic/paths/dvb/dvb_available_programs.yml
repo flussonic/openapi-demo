@@ -1,0 +1,22 @@
+get:
+  operationId: dvb_card_available_programs_get
+  description: Fetch the list of `media_info` for each program transmitted via the DVB card. 
+  parameters:
+  - description: dvb_card name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/media_info_list'
+      description: Response
+  summary: Get the media_info for each dvb_card program 
+  tags:
+  - dvb

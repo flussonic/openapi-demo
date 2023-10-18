@@ -1,0 +1,29 @@
+type: object
+properties:
+  token:
+    type: string
+    format: session_token
+    nullable: true
+    description: Token provided by the client.
+    example: 'zGAFxLkoWluO1pG7_nJmQAbCnM5'
+  duration:
+    description: Duration of the session.
+    type: integer
+    format: seconds
+    nullable: true
+  referer:
+    type: string
+    format: url
+    nullable: true
+    description: Referer HTTP header or its analog for other protocols.
+    example: 'http://my-tv-portal.local/hockey1'
+  user_agent:
+    type: string
+    format: user_agent
+    nullable: true
+    description: Client's user agent for selected protocol.
+    example: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML. like Gecko) Chrome/90.0.4430.72 Safari/537.36'
+  query_string:
+    type: string
+    nullable: true
+    description: Full query string of initial request of the session.

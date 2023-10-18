@@ -1,0 +1,6 @@
+type: string
+description: | 
+  The language of the teletext received from an SDI card. 
+  Specified according to the ISO 639-2 standard.
+pattern: '^[a-zA-Z]{2,3}'
+example: ita

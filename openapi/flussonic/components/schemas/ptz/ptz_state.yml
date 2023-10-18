@@ -1,0 +1,36 @@
+type: object
+properties:
+  is_calibrating:
+    type: boolean
+    nullable: true
+    description: |
+      After turning on IP camera with PTZ motor needs to calibrate: move far to each direction
+      and after this, it is possible to predict position and enable absolute positioning.
+
+      During this process, it is not possible to execute PTZ commands and current state is `calibrating`.
+
+      This value can be `NULL` when ONVIF camera doesn't tell about such state or we haven't asked it yet.
+  is_moving:
+    type: boolean
+    nullable: true
+    description: |
+      Sometimes it is possible to tell that camera is not still and it is moving right now.
+
+      This value can be `NULL` when ONVIF camera doesn't tell this information.
+  current_position:
+    description: Current position of the camera.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/ptz_position'
+  target_position:
+    description: Target position of the camera.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/ptz_position'
+  route_index:
+    x-private: true
+    description: |
+      This is applicable when camera is moving according to PTZ route.
+    type: integer
+    nullable: true
+    minimum: 0

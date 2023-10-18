@@ -1,0 +1,11 @@
+# reduced config for dvr using in central only. Returns single required field "name"
+allOf:
+- type: object
+  properties:
+    name:
+      description: DVR configuration name.
+      type: string
+      format: dvr_name
+      x-primary-key: true
+      x-scope:
+      - central

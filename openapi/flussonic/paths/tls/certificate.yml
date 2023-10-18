@@ -1,0 +1,56 @@
+get:
+  operationId: tls_certificate_get
+  summary: Get certificate
+  x-private: true
+  description: |
+    Get current certificate
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/tls_certificate'
+      description: Response
+  tags:
+  - tls
+delete:
+  operationId: tls_certificate_delete
+  summary: Delete certificate
+  x-private: true
+  description: |
+    Delete current certificate
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - tls
+put:
+  operationId: tls_certificate_save
+  summary: Save certificate
+  x-private: true
+  description: |
+    Upload new certificate
+  requestBody:
+    description: Certificates
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/certificate_save_request'  
+  responses:
+    '200':
+      description: Saved certificate
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/tls_certificate'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - tls
+
+
+

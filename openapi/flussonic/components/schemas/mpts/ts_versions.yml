@@ -1,0 +1,32 @@
+properties:
+  psi:
+    description: Global version for all PSI tables.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+  pat:
+    description: The version of PAT table.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+  pmt:
+    description: The version of PMT table.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+  nit:
+    description: The version of NIT table.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+  sdt:
+    description: The version of SDT table.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+  cat:
+    description: The version of CAT table.
+    allOf:
+    - $ref: '../../schemas.yml#/psi_version'
+    nullable: true
+type: object

@@ -1,0 +1,11 @@
+type: string
+oneOf:
+- title: NVIDIA Jetson
+  const: jetson
+  description: NVIDIA Jetson board
+- title: NVIDIA CUDA
+  const: cuda
+  description: CUDA-capable NVIDIA graphic card
+- title: Generic CPU
+  const: cpu
+  description: Generic CPU

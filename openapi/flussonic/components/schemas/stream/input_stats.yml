@@ -1,0 +1,63 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Runtime input instance ID.
+    example: 61fa2d68-75e4-433b-8c82-f2ce5444bf23
+  opened_at:
+    type: integer
+    format: utc
+    description: The time this input instance was created (in UTC seconds).
+    example: 1643789953
+  connected_at:
+    description: The time network connection was established (in UTC milliseconds).
+    type: number
+    format: utc_ms
+    example: 1643789899794
+  started_at:
+    description: The time the first frames appeared (in UTC milliseconds).
+    type: number
+    format: utc_ms
+    example: 1643789899794
+  ip:
+    allOf:
+    - $ref: '../../schemas.yml#/network_addr'
+    description: Peer's IP address.
+    example: '192.168.0.100'
+  bytes:
+    type: integer
+    description: Total amount of bytes sent since the input was created.
+    example: 1698183
+  error:
+    type: string
+    description: Information about the last source error.
+    deprecated: true
+    x-delete-at: 23.09
+  media_info:
+    allOf:
+    - $ref: '../../schemas.yml#/media_info'
+    description: Technical description of the input content.
+  last_dts:
+    type: number
+    format: ticks
+    description: Last frame timestamp coming from this input.
+    example: 1284
+  last_dts_at:
+    type: number
+    format: utc_ms
+    description: Last time a frame was processed from this input (in UTC).
+    example: 1643789899794
+  url:
+    type: string
+    format: url
+    description: Final URL after redirects.
+    example: 'udp://239.0.0.1:1234'
+  active:
+    description: Whether this input is selected as active for the stream.
+    type: boolean
+    example: true
+  dvr_info:
+    description: Information about DVR stored on disk.
+    allOf:
+    - $ref: '../../schemas.yml#/dvr_info'

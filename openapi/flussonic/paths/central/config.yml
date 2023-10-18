@@ -1,0 +1,14 @@
+get:
+  operationId: config_get
+  summary: Get configuration and stats of Central
+  description: |
+    This method allows you to fetch Central configuration and stats
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/central_config'
+      description: Configuration and stats of Central
+  tags:
+  - config

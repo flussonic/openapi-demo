@@ -1,0 +1,6 @@
+allOf:
+  - $ref: '../../schemas.yml#/template_config_specific'
+  - $ref: '../../schemas.yml#/stream_config_base'
+  - $ref: '../../schemas.yml#/stream_config_media'
+  - $ref: '../../schemas.yml#/stream_config_onpremises'
+  - $ref: '../../schemas.yml#/stream_config_deprecated'

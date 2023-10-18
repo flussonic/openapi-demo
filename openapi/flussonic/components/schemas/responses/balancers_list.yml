@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      balancers:
+        description: The list of balancers.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/balancer_config'

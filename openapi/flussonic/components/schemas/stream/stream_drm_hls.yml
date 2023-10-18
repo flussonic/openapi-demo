@@ -1,0 +1,34 @@
+description: HLS-specific DRM info
+nullable: true
+type: object
+properties:
+  format:
+    description: Period format.
+    const: "hls"
+  method:
+    description: |
+      Encryption method.
+      Note: instead of specifying method=none, the whole hls object is omitted
+    type: string
+    enum:
+    - aes_128
+    - sample_aes
+  uri:
+    description: A URI that specifies how to obtain the key
+    type: string
+    example: "http://keyserver.example.com/file.key"
+  keyformat:
+    description: Specifies how the key is represented in the resource identified by the URI
+    type: string
+    default: "identity"
+    enum:
+    - "identity"
+    - "com.apple.streamingkeydelivery"
+  keyformatversions:
+    description: |
+      This attribute can be used to indicate which version(s) of a keyformat this instance complies with.
+    nullable: true
+    type: array
+    items:
+      type: integer
+      minimum: 1

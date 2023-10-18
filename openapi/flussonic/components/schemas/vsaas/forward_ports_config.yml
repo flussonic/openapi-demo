@@ -1,0 +1,11 @@
+type: object
+properties:
+  handler:
+    description: The handler name.
+    type: string
+    nullable: true
+    x-atom: true
+  options:
+    description: The handler options.
+    type: object
+    nullable: true

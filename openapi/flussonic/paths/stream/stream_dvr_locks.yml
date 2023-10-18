@@ -1,0 +1,58 @@
+parameters:
+- description: Stream name.
+  in: path
+  name: name
+  required: true
+  schema:
+    example: abc
+    type: string
+  style: simple
+get:
+  description: This method allows to get the list of locked DVR ranges for a stream.
+  operationId: stream_dvr_locks_list
+  deprecated: true
+  x-delete-at: 23.12
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/stream_dvr_locks_list'
+      description: Response
+  summary: Get stream locked dvr ranges
+  tags:
+  - stream-dvr
+post:
+  description: |
+    This method allows to lock a DVR range for a stream.
+    Locking can be useful for the nPVR (Network Personal Video Recorder) service or just for keeping important recordings.
+  operationId: stream_dvr_locks_save
+  deprecated: true
+  x-delete-at: 23.12
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/dvr_range'
+  responses:
+    '204':
+      description: The specified DVR range is locked.
+  summary: Lock stream recorded DVR range
+  tags:
+  - stream-dvr
+delete:
+  description: This method allows to unlock a DVR range for a stream.
+  operationId: stream_dvr_locks_delete
+  deprecated: true
+  x-delete-at: 23.12
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/dvr_range'
+  responses:
+    '204':
+      description: The specified DVR range is unlocked.
+  summary: Unlock stream recorded DVR range
+  tags:
+  - stream-dvr

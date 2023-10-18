@@ -1,0 +1,11 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Motion started.
+      example: 'stream_motion_started'
+- $ref: '../../schemas.yml#/motion_base'
+# TODO
+#- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'

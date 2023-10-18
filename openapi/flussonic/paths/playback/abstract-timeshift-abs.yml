@@ -1,0 +1,30 @@
+get:
+  operationId: abstract_timeshift_abs_manifest
+  summary: abstract absolute timeshift manifest
+  description: |
+    If your stream is already recorded on the server with DVR, you can use this URL to play the recorded stream starting at the specified moment of time.
+    For example, you can use it for old STBs or viewing recorded shows with EPG.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name.
+    required: true
+    schema:
+      type: string
+      example: 'clock'
+  - name: from
+    in: path
+    description: Start time of playing the DVR archive in UTC seconds.
+    required: true
+    schema:
+      type: integer
+      example: 1641045644
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/abstract_manifest'
+      description: abstract manifest
+  tags:
+    - api

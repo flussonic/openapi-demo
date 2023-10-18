@@ -1,0 +1,25 @@
+type: object
+properties:
+  watcher_url:
+    type: string
+    description: |
+      All requests to /vsaas and /watcher will be proxied to this url.
+      Watcher will not be launched by flussonic with this option.
+  database:
+    description: DB connection string.
+    type: string
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+  mode:
+    description: The option is deprecated and no longer makes sense.
+    type: string
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+  endpoint:
+    description: The option is deprecated and no longer makes sense.
+    type: string
+    deprecated: true
+    x-private: true
+    x-delete-at: 23.09

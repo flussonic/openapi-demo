@@ -1,0 +1,25 @@
+get:
+  operationId: available_events_list
+  summary: Get events from sink configuration
+  description: |
+    This method allows to get the batch of events from an event sink configuration.
+    Currenly this method is not implemented yet.
+    However, its schema can be used for getting the list of events with descriptions (see the `event` parameter in the response.)
+  parameters:
+  - name: name
+    description: Globally unique event sink name.
+    in: path
+    required: true
+    schema:
+      example: 'middleware_logger'
+      type: string
+    style: simple
+  responses:
+    '200':
+      description: List of events
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/available_events_list'
+  tags:
+  - events

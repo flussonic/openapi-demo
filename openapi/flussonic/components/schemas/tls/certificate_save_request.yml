@@ -1,0 +1,28 @@
+type: object
+properties:
+  cert:
+    description: |
+      Server certificate file. 
+      Clients check this certificate to make sure the server is trusted.
+    type: string
+    format: byte
+    nullable: true
+  cacert:
+    description: |
+      CA certificate file. 
+      The server uses the CA certificate to check that 
+      all connecting clients are trusted by the CA (Certification Authority).
+    type: string
+    format: byte
+    nullable: true
+  private_key:
+    description: |
+      Server private key file. 
+      The private key is used for encryption/decryption of data sent between the server and clients.
+    type: string
+    format: byte
+    nullable: true
+required:
+  - cert
+  - cacert
+  - private_key

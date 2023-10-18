@@ -1,0 +1,3 @@
+allOf:
+- $ref: '../../schemas.yml#/dvr_storage_config'
+- $ref: '../../schemas.yml#/dvr_base_config'

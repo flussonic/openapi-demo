@@ -1,0 +1,27 @@
+description: |
+  Stream segment, typical data block for segmented protocols (HLS, DASH, MSS, M4F).
+  Usually contains few seconds of media, starting with a video keyframe.
+type: object
+properties:
+  dts:
+    description: first frame's DTS
+    type: integer
+    format: utc_ms
+    example: 1653316321820
+  duration:
+    description: segment duration
+    type: integer
+    format: milliseconds
+    example: 5000
+  ad:
+    description: Advertisement relevant to this segment
+    nullable: true
+    x-private: true # TODO: рефакторинг #24417
+    type: array
+    items:
+      $ref: '../../schemas.yml#/ad_splice_legacy'
+  drm_iv:
+    description: Initialization Vector for DRM
+    nullable: true
+    type: string
+    format: hexbinary

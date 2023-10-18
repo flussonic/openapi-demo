@@ -1,0 +1,18 @@
+type: object
+properties:
+  events:
+    type: object
+    description: Events statistics
+    properties:
+      resent_events:
+        description: | 
+          Number of events, which have been retransmitted due to network issues.
+          The counter relates with events sinks `resend_timeout` parameter.
+        type: integer
+        example: 100
+      dropped_events:
+        description: | 
+          Number of events, which have been dropped due to buffer limitation
+          configured by events sinks `resend_limit` parameter.
+        type: integer
+        example: 100

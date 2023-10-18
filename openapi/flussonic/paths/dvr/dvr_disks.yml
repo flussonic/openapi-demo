@@ -1,0 +1,24 @@
+get:
+  operationId: dvr_disks_list
+  summary: List the DVR disks
+  description: |
+    This method allows to get the whole list of disks for a DVR configuration with RAID enabled. 
+    More information can be found [here](https://flussonic.com/doc/digital-video-recording-dvr/flussonic-raid-for-dvr/). 
+  parameters:
+  - description: DVR configuration name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/dvr_disks_list'
+      description: Response
+  tags:
+  - dvr

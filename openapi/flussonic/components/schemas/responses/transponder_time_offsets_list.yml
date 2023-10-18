@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      time_offsets:
+        description: The list of time offsets.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/transponder_time_offset'

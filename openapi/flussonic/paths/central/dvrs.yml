@@ -1,0 +1,13 @@
+get:
+  operationId: dvrs_list
+  summary: List of DVR configurations
+  description: This method allows to get the whole list of global DVR congifurations.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/central_dvrs_list'
+      description: Response
+  tags:
+  - dvr

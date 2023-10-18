@@ -1,0 +1,46 @@
+type: object
+properties:
+  pid:
+    description: |
+      This parameter sets PID to specify which track to include into output MPTS stream. 
+      Transponder will include only the tracks with specified PIDs.
+
+      It is possible to set PID values for video and audio tracks, as well as for PMT and SDT.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/video-playback/udp-multicast-with-constant-bitrate/#creating-an-output-mpts-stream
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'
+    x-primary-key: true
+    openmetrics_label: pid
+  content:
+    description: Content of the track.
+    enum:
+    - system
+    - video
+    - audio
+    - application
+    - metadata
+    type: string
+    example: audio
+  track:
+    description: |
+      Number of the track set by Flussonic (usually, all video tracks and then all audio tracks are numbered starting from 1).
+    type: integer
+    example:  1
+  bitrate:
+    description: Bitrate of the track.
+    type: integer
+    format: speed
+    nullable: true
+    example: 2543
+  stats:
+    description: Detailed runtime information about the transponder pid.
+    allOf:
+    - $ref: '../../schemas.yml#/transponder_pid_stats'
+    readOnly: true
+required:
+- pid
+- content
+- track
+

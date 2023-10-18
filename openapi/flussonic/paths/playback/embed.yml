@@ -1,0 +1,175 @@
+get:
+  operationId: embed_html
+  summary: Embed HTML
+  description: 
+    Use this URL to play a stream or a VOD file in a special `embed.html` player provided by Flussonic Media Server.
+    It allows to play video in a browser or to insert video into a website. 
+    This player is supported by any client device (browser, smartphone).
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/video-playback/adding-video-to-websites-embed-html/
+  parameters:
+  - name: name
+    in: path
+    description: |
+      Media name. It may be multi-segment, i.e., `/part1/part2/part3`.
+
+      For a live stream, it is the name of the stream.
+      For a VOD file, it is `vod/file_subpath.mp4`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: dvr
+    in: query
+    description: |
+      Opens the DVR player for a stream with DVR enabled.
+    schema:
+      type: boolean
+      example: true
+      default: false
+    required: false
+  - name: realtime
+    in: query
+    description: |
+      Enables broadcasts via low latency protocols. Automatically selects from MSE-LD or WebRTC.
+    schema:
+      type: boolean
+      example: true
+      default: false
+    required: false
+  - name: autoplay
+    in: query
+    description: |
+      Autostarts playing video once the page is opened. Displays screenshots before viewing. 
+      Sound availability is defined by the browser policy.
+    schema:
+      type: boolean
+      example: false
+      default: true
+    required: false
+  - name: mute
+    in: query
+    description: Mute the sound.
+    schema:
+      type: boolean
+      example: true
+    required: false
+  - name: localtime
+    in: query
+    description: |
+      The option controls timezone in the player's UI. 
+
+      When the option is set to `true`, the timeline shows time in local timezone of your browser.
+      
+      When set to `false`, the timeline shows time in UTC+0 timezone. 
+      This way may be useful, for example, when your cameras are installed in different timezones 
+      and you need a unified reference to view the archive.
+
+    schema:
+      type: boolean
+      default: true
+      example: false
+  - name: export_limit
+    in: query
+    description: |
+      The option controls user timeline selection and limits his possibility of selection large export ranges.
+    schema:
+      type: integer
+      format: seconds
+      default: 86400
+      example: 3600
+  - name: volume
+    in: query
+    description: Initial player sound volume level on a scale from 0 to 100.
+    schema:
+      type: integer
+      example: 50
+    required: false
+  - name: proto
+    x-private: true
+    in: query
+    description: |
+      A protocol used by the player.
+    schema:
+      type: string
+      enum:
+      - hls
+      - dash
+      - webrtc
+      example: webrtc
+      default: hls
+    required: false
+  - name: play_duration
+    in: query
+    description: |
+      The number of seconds until video playback stops. Useful for saving traffic.
+    schema:
+      type: integer
+      format: seconds
+      example: 3600
+    required: false
+  - name: streams
+    x-private: true
+    in: query
+    description: |
+      The names of the streams to be played in DVR player in multiwindow mode with one timeline.
+      The names should be separated by comma.
+      Used only with `dvr` parameter.
+    schema:
+      type: string
+      example: 'cam01,cam02'
+    required: false
+  - name: start_track
+    x-private: true
+    in: query
+    description: |
+      Starting video track for playback.
+      Can be exact track name, like v1 or lowest/best.
+      Used only with `dvr` parameter.
+    schema:
+      type: string
+      example: 'lowest'
+    required: false
+  - name: ago
+    in: query
+    description: |
+      Allows users to rewind back. The value is specified in seconds. 
+      It's more convenient than DVR player for viewing video in the last few minutes or hours. 
+      Ideal for pausing and rewinding live video on the site. 
+    schema:
+      type: integer
+      format: seconds
+      example: 3600
+    required: false
+  - name: from
+    in: query
+    description: |
+      The Unix timestamp from where to start playing. 
+      If this option is specified, the player will play the playlist with absolute timeshift starting from the specified time.
+    schema:
+      type: integer
+      format: utc
+      example: 1641045644
+    required: false
+  - name: to
+    in: query
+    description: |
+      The Unix timestamp where to end playing. 
+      Used only together with `from`. 
+      The player will open HLS VOD, and rewinding will be available within the specified time interval.
+    schema:
+      type: integer
+      format: utc
+      example: 1641045852
+    required: false
+  responses:
+    '200':
+      content:
+        text/html:
+          schema:
+            type: string
+      description: HTML with player
+  tags:
+    - player
+

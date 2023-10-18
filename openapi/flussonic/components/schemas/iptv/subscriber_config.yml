@@ -1,0 +1,36 @@
+type: object
+properties:
+  name:
+    type: string
+    description: |
+      Unique identifier of the subscriber.
+    example: client01
+  token:
+    type: string
+    description: |
+      Simple static unique token that will be automatically created for the
+      subscriber if not provided.
+
+      This token can be used in play URLs.
+
+      Should be URL-friendly.
+    nullable: true
+    example: ybBb5CFLqSFYc2
+  max_sessions:
+    type: integer
+    description: |
+      Limit of simulateously played sessions for this subscriber.
+    nullable: true
+    example: 3
+  packages:
+    type: array
+    items:
+      type: string
+      format: package_name
+    default: []
+    description: |
+      List of available packages of channels for this subscriber.
+
+      Channels (streams) are not added directly, only via packages.
+required:
+  - name

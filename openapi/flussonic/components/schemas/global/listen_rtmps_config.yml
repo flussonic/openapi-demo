@@ -1,0 +1,3 @@
+allOf:
+  - $ref: '../../schemas.yml#/listen_config'
+  - $ref: '../../schemas.yml#/listen_ssl_config'

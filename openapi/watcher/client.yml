@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This document is an API specification for the public UI of Watcher VMS 
+
+  title: Watcher Client API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+      description: |
+        To use Basic Auth to authorize API calls, you need a token.
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      description: |
+        To use Bearer Token to authorize API calls, you need a token.
+paths:
+  /login:
+    $ref: './paths/login.yml'
+  /streams:
+    $ref: './paths/client-stream/streams.yml'
+  /streams/{name}:
+    $ref: './paths/client-stream/stream.yml'
+  /episodes:
+    $ref: './paths/episodes/episodes.yml'
+  /profile:
+    $ref: './paths/profile/profile.yml'
+
+  /jwt_payload_info:
+    $ref: './paths/jwt_payload_info.yml'
+  /ui_settings:
+    $ref: './paths/config/ui_settings.yml'
+
+  /web_push/subscription:
+    $ref: './paths/web_push/subscription.yml'
+  /web_push/subscribe:
+    $ref: './paths/web_push/subscribe.yml'
+  /web_push/unsubscribe:
+    $ref: './paths/web_push/unsubscribe.yml'
+security:
+- basicAuth: []
+- bearerAuth: []
+servers:
+- description: your local installation
+  url: http://localhost:80/watcher-client/api/v3
+tags:
+- name: stream
+- name: auth
+- name: episode
+- name: profile
+- name: config
+- name: web_push
+- name: JWT

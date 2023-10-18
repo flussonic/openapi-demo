@@ -1,0 +1,7 @@
+type: string
+enum:
+- mseld_player
+- live_player
+- dvr_player
+- webrtc_player
+- webrtc_publisher

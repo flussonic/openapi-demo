@@ -1,0 +1,5 @@
+type: object
+properties:
+  blinking:
+    description: Enables the interface blinking.
+    type: boolean

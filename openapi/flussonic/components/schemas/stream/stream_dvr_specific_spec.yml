@@ -1,0 +1,23 @@
+type: object
+properties:
+  reference:
+    description: Stream can refer to the globally declared DVR. This option referres to a single DVR entry.
+    type: string
+    format: dvr_name
+    nullable: true
+    example: 'localdvr0'
+  root:
+    description: If no `reference` specified, then `root` must be specified.
+      Video recording will be made to `root/name` directory.
+
+      This option works only in media server and should be used only as a
+      quickstart mechanism. Should be avoided in large installations, because
+      it mixes infrastructure and content setup and lacks configurability.
+    type: string
+    format: dvr_url
+    nullable: true
+    examples:
+      default:
+        value: '/storage'
+    x-scope:
+    - flussonic

@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    Это внутренний API для личного кабинета (Client area).
+    
+    Client area является интерфейсом для работы с биллинг-клиентом, retroview, обращениями, Cloud-ом.
+    Поскольку есть методы и данные, которые имеют отношение не к одному из этих проектов, а ко всему личному кабинету,
+    то был выделен этот API.
+    
+    Обслуживает API личного кабинета прокси-сервер.
+  title: Client Area API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: './components/schemas.yml'
+
+paths:
+  /ui_settings:
+    $ref: '../flussonic/paths/config/ui_settings.yml'
+  /logo:
+    $ref: './paths/logo.yml'
+  /manifest:
+    $ref: './paths/manifest.yml'
+
+servers:
+  - description: Your client area
+    url: https://my.flussonic.com/client-area/api/v1
+tags:
+  - name: config

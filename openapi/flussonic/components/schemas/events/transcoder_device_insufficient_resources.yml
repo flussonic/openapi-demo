@@ -1,0 +1,31 @@
+allOf:
+- type: object
+  properties:
+    event:
+      description: No resources to autodistribute
+      type: string
+    deviceid:
+      description: Transcoder module ID in Flussonic Coder.
+      type: integer
+    reason:
+      description: |
+        One of the two reasons for the event: `manual_resource_allocation` or `auto_resource_allocation`.
+        The first one is a warning, the second one is an error.
+      type: string
+    decoder:
+      type: boolean
+      description: Decoder overload indicator
+      x-private: true
+    encoder:
+      type: boolean
+      description: Encoder overload indicator
+      x-private: true
+    resize:
+      type: boolean
+      description: Resize overload indicator
+      x-private: true
+    audio:
+      type: boolean
+      description: Audio transcoder overload indicator
+      x-private: true
+- $ref: '../../schemas.yml#/event_default'

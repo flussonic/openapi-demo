@@ -1,0 +1,28 @@
+allOf:
+- description: Metrics collected by Flussonic Vision per-stream
+  properties:
+    media:
+      description: Unique stream name.
+      type: string
+      format: media_name
+      example: cam-1
+    source_id:
+      description: Hashed name of the media
+      type: string
+      format: uuid
+      example: '61942420-1b2e-4614-8871-a4c6345da31f'
+    detector:
+      description: Configure the objects that should be detected.
+      allOf:
+      - $ref: ../../schemas.yml#/vision_detector
+    hardware:
+      description: Type of the hardware device used for videoanalytics inference
+      allOf:
+      - $ref: ../../schemas.yml#/vision_inference_device
+    device_id:
+      description: Identifier of the hardware device used for videoanalytics inference (if applicable)
+      type: integer
+
+- $ref: ../../schemas.yml#/vision_metrics_generic
+- $ref: ../../schemas.yml#/vision_metrics_inference
+- $ref: ../../schemas.yml#/vision_metrics_episode

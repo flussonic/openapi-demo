@@ -1,0 +1,64 @@
+get:
+  operationId: opened_files_list
+  summary: List files in VOD locations which are played by the clients
+  description: This method allows to get the list of files in VOD locations which are played by the clients.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/disk_files_list'
+      description: List of files in the VOD storage
+  parameters:
+  - name: prefix
+    in: query
+    required: false
+    description: |
+      The unique name of VOD location. 
+      It is used as a prefix for displaying opened VOD files in this location.
+    schema:
+      example: 'vod'
+      type: string
+    style: form
+  - name: storage_index
+    in: query
+    required: false
+    description: |
+      Index of the storage in the VOD location.
+      It is used as a storage_index for displaying opened VOD files in this storage.
+    schema:
+      example: 0
+      type: integer
+    style: form
+  - name: sort
+    description: |
+      Composite sort direction.
+      Default sort order is `name`.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: -stats.bytes_out
+      type: string
+    style: form
+  - name: limit
+    description: Limit select count in collection to N elements.  Default value is 100.
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      example: 100
+    style: form
+  - name: cursor
+    description: |
+      A properly encoded equivalent of offset allowing you to read the next bunch of items. 
+      We do not offer common `offset` fields, so please use cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  tags:
+  - vod

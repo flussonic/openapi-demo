@@ -1,0 +1,48 @@
+get:
+  operationId: subscribers_list
+  summary: List all subscribers
+  description: List existing subscribers from database
+  parameters:
+  - description: Comma-separated list of fields (including nested) that will be
+      returned
+    explode: false
+    in: query
+    name: select
+    required: false
+    schema:
+      example: name,inputs,stats
+      type: string
+    style: form
+  - description: Composite sort direction
+    explode: false
+    in: query
+    name: sort
+    required: false
+    schema:
+      example: -stats.bitrate,name,position
+      type: string
+    style: form
+  - description: Limit select count in collection to N elements
+    explode: false
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: integer
+    style: form
+  - description: Properly encoded analog of offset, allowing to read next bunch
+      of items
+    in: query
+    name: cursor
+    required: false
+    schema:
+      type: string
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/subscribers_list'
+      description: Response
+  tags:
+  - iptv

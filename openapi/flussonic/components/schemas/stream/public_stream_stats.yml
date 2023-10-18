@@ -1,0 +1,20 @@
+type: object
+properties:
+  status:
+    description: | 
+      Indicates the status of the stream.
+    allOf:
+    - $ref: '../../schemas.yml#/stream_status'
+  dvr_info:
+    description: The information about the recorded DVR archive.
+    allOf:
+    - $ref: '../../schemas.yml#/dvr_info'
+  last_dts_at:
+    type: number
+    format: utc_ms
+    description: The time when the last time frame was sent to the stream output (in UTC).
+    example: 1636383841974
+  media_info:
+    allOf:
+    - $ref: '../../schemas.yml#/media_info'
+    description: Technical information about the output media content.

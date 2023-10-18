@@ -1,0 +1,24 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Hostname of the peer. Can refer to globally defined peer.
+    x-primary-key: true
+  max_bitrate:
+    type: integer
+    format: speed
+    nullable: true
+    description: Maximum allowed bitrate, request is redirecting if current bitrate is lower.
+  countries:
+    type: array
+    items:
+      type: string
+      format: iso3166
+    nullable: true
+    description: Client will be redirected to the peer if its IP belongs to one of these countries.
+  countries_default:
+    type: boolean
+    nullable: true
+    default: false
+    description: This flag allows to redirect a request to this peer if "countries" list not matched.
+

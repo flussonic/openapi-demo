@@ -1,0 +1,15 @@
+get:
+  operationId: manifest_get
+  summary: Get the PWA manifest of the product
+  x-private: true
+  description: |
+    The method allows you to fetch the PWA manifest of the product.
+  responses:
+    '200':
+      description: Manifest
+      content:
+        application/json:
+          schema:
+            $ref: './components/schemas.yml#/manifest_config'
+  tags:
+    - config

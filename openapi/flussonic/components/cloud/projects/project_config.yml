@@ -1,0 +1,18 @@
+properties:
+  project_id:
+    type: string
+    format: base62
+    example: aBc
+    description: Project ID
+  is_default:
+    title: is_default
+    type: boolean
+    readOnly: true
+    description: |
+      True if this project is default for account.
+      All new streams without specified project_id will be create in this project.
+  allow_streams_named_by_user:
+    type: boolean
+    description: Cloud will allow publisher to use own name for publishing streams`/{project_id}_{user_provided_name}?{params}`
+required:
+  - allow_streams_named_by_user

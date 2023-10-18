@@ -1,0 +1,21 @@
+type: object
+properties:
+  url:
+    description: Segment url
+    type: string
+  discontinuity:
+    description: |
+      Indicate playback gap
+    type: boolean
+    nullable: true
+
+  key_details:
+    description: DRM key details for the segment.
+    type: string
+    nullable: true
+
+  duration:
+    description: |
+      This segment duration in seconds
+    type: number
+    nullable: true

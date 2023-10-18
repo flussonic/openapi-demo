@@ -1,0 +1,44 @@
+type: object
+properties:
+  independent_segments:
+    description: |
+      Signalization of independent segments
+    type: boolean
+    nullable: true
+  alternative_renditions:
+    description: |
+      The EXT-X-MEDIA tag is used to relate Media Playlists that contain
+      alternative Renditions of the same content.  For
+      example, three EXT-X-MEDIA tags can be used to identify audio-only
+      Media Playlists that contain English, French and Spanish Renditions
+      of the same presentation.  Or two EXT-X-MEDIA tags can be used to
+      identify video-only Media Playlists that show two different camera
+      angles.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/hls_playlist_media_link'
+    default: []
+  variant_streams:
+    description: |
+      The EXT-X-STREAM-INF tag specifies a Variant Stream, which is a set
+      of Renditions which can be combined to play the presentation.  The
+      attributes of the tag provide information about the Variant Stream.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/hls_playlist_stream_inf_link'
+    default: []
+  image_streams:
+    description: |
+      The EXT-X-I-FRAME-STREAM-INF tag identifies a Media Playlist file
+      containing the I-frames of a multimedia presentation.
+      The EXT-X-IMAGE-STREAM-INF tag identifies an Image Media Playlist file
+      containing Images in a compressed graphic image format.
+      It stands alone, in that it does not apply to a particular URI in the
+      Multivariant Playlist.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/hls_playlist_image_stream_inf_link'
+    default: []

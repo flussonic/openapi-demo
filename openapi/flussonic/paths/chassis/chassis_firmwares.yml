@@ -1,0 +1,22 @@
+get:
+  description: Downloaded firmwares list
+  operationId: chassis_firmwares_list
+  summary: List available firmwares
+  parameters:
+  - description: Check in repository
+    in: query
+    name: force_update
+    required: false
+    schema:
+      example: false
+      type: boolean
+    style: form
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_firmwares_list'
+      description: Response
+  tags:
+  - chassis

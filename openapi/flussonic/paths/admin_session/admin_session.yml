@@ -1,0 +1,37 @@
+put:
+  x-private: true
+  operationId: admin_session_save
+  summary: Save the telemetry data
+  description: |
+    Save the session for telemetry
+  parameters:
+    - name: session_id
+      description: The unique id of a session
+      in: path
+      required: true
+      schema:
+        example: '05cec7ee-fbd0-11ed-be56-0242ac120002'
+        type: string
+        format: uuid
+      style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/admin_session'
+    description: Telemetry data
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/admin_session'
+      description: Saved telemetry data
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+    - telemetry

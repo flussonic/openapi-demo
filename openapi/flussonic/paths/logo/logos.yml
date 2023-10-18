@@ -1,0 +1,13 @@
+get:
+  operationId: logos_list
+  summary: List logos
+  description: List logo files
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/logos_list'
+      description: Response
+  tags:
+  - logo

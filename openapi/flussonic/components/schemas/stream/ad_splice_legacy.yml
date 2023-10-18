@@ -1,0 +1,66 @@
+description: |
+  Advertisement info. Legacy, to be rewritten
+type: object
+properties:
+  cue_id:
+    description: CUE ID as received from source
+    type: integer
+    example: 123545
+  type:
+    description: SCTE-35 message type.
+    type: string
+    enum:
+    - splice_insert
+    - private_command
+  at:
+    description: PTS of the keyframe which switches to or from the advertisement
+    type: integer
+    format: utc_ms
+    example: 1653316321820
+  time_shift:
+    description: A constant added to `at` (maybe for more readable values)
+    type: integer
+    format: utc_ms
+    example: 1653316300000
+    default: 0
+  out:
+    description: |
+      `out=true` This segment contains a signal to begin ad insertion
+      `out=false` This segment contains only a signal to stop replacing content
+    type: boolean
+  in:
+    description: |
+      If `out=true` and this field is defined, the segment contains both signals (begin and stop ad insertion).
+      `before_out` means the current ad stops (`in`), then a new one begins (`out`),
+      `after_out` means a new ad begins (`out`) then ends (`in`).
+    type: string
+    enum:
+    - before_out
+    - after_out
+    nullable: true
+  duration:
+    description: advertisement duration (valid when `out=true`)
+    type: integer
+    format: milliseconds
+    example: 17000
+    nullable: true
+  auto_return:
+    description: this is set to true if there will be no `in` splice (valid when `out=true`)
+    type: boolean
+    nullable: true
+  cont:
+    description: |
+      `true` if this is a continuation of an already started advertisement
+    type: boolean
+    nullable: true
+  elapsed:
+    description: If an ad is started before, this field indicates time since ad start till this segment
+    type: integer
+    format: milliseconds
+    example: 4000
+    nullable: true
+  scte35:
+    description: A raw SCTE35 binary
+    type: string
+    format: base64
+    nullable: true

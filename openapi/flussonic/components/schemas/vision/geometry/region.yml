@@ -1,0 +1,5 @@
+type: array
+description: region
+items:
+  $ref: ../../../schemas.yml#/vision_point
+minItems: 3

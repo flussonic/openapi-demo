@@ -1,0 +1,15 @@
+type: object
+properties:
+  first:
+    allOf:
+    - $ref: '../../schemas.yml#/network_port'
+    description: First port in the range
+    example: 10001
+  last:
+    allOf:
+    - $ref: '../../schemas.yml#/network_port'
+    description: Last port in the range
+    example: 10099
+required:
+- first
+- last

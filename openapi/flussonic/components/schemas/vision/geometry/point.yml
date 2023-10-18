@@ -1,0 +1,26 @@
+type: object
+description: 2D point
+required:
+  - x
+  - y
+properties:
+  x:
+    description: X coordinate of the center of heatpoint. Fraction of full frame width
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+    examples:
+      default:
+        value: 0.54
+      one:
+        value: 0.78
+  y:
+    description: Y coordinate of the center of heatpoint. Fraction of full frame height
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+    examples:
+      default:
+        value: 0.38
+      one:
+        value: 0.12

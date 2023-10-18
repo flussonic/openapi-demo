@@ -1,0 +1,17 @@
+type: object
+properties:
+  cert:
+    description: Information about the server certificate.
+    allOf:
+    - $ref: '../../schemas.yml#/certificate_info'
+    nullable: true
+  cacert:
+    description: Information about the CA certificate applied on the server.
+    allOf:
+    - $ref: '../../schemas.yml#/certificate_info'
+    nullable: true
+  private_key_match_certificate:
+    description: Shows if the server private key matches the server certificate.
+    type: boolean
+    nullable: true
+      

@@ -1,0 +1,17 @@
+get:
+  operationId: jwt_payload_info_get
+  summary: JWT payload info
+  x-private: true
+  description: |
+    It isn't a real endpoint, it's a just description of our JWT payload.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas.yml#/jwt_payload_base'
+              - $ref: '../components/schemas.yml#/jwt_payload'
+      description: Response
+  tags:
+  - JWT

@@ -1,0 +1,12 @@
+type: object
+properties:
+  quantity:
+    type: integer
+    example: 100
+    description: Quantity of this resource
+  amount:
+    type: integer
+    example: 10000
+    description: Amount of this resource
+x-scope:
+  - cloud

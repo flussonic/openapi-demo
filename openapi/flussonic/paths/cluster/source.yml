@@ -1,0 +1,74 @@
+get:
+  description: Method allows to fetch single source
+  operationId: source_get
+  summary: Get the source
+  parameters:
+  - description: source name
+    in: path
+    name: url
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/source_config'
+      description: Whole source
+  tags:
+  - cluster
+put:
+  description: Create or update source
+  operationId: source_save
+  summary: Save the source
+  parameters:
+  - description: source name
+    in: path
+    name: url
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/source_config'
+    description: Partial source configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/source_config'
+      description: Updated source
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - cluster
+delete:
+  description: Delete the source by its name
+  operationId: source_delete
+  summary: Delete the source
+  parameters:
+  - description: source name
+    in: path
+    name: url
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - cluster

@@ -1,0 +1,70 @@
+get:
+  operationId: api_keys_list
+  summary: List API keys
+  description: |
+    Get the list of all API keys in your account.
+
+    Note that you will not see the tokens as they are only returned once at the key creation.
+    However, you will see the key names, IDs, and other information allowing you to identify the key. 
+  parameters:
+  - name: limit
+    description: Limit select count in collection to N elements.  Default value is 100.
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      default: 100
+      example: 500
+    style: form
+  - name: cursor
+    description: |
+      A properly encoded equivalent of offset allowing you to read the next bunch of items.
+      We do not offer common `offset` fields, so please use the cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_api_keys_list'
+      description: Response
+  tags:
+  - keys
+post:
+  description: |
+    Create a new API key for the specified `project_ids` and `scope`. 
+
+    The first API key is available in the Flussonic Cloud web UI.
+
+    Note: the `key_id` property in the request body is not required and will be ignored,
+    but will be auto generated and returned in the response. 
+    
+    You will use the `bearer` value to authenticate your API requests. 
+    It is only returned once in response to this POST request so make sure to save it.
+
+    If the `project_ids`parameter is not specified, it will be set to the default project for your account.
+
+    If `scope` is not selected, it will be `admin`.
+  operationId: api_key_create
+  summary: Create API key
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_api_key'
+    description: API key configuration
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_api_key'
+      description: Created API key
+  tags:
+  - keys

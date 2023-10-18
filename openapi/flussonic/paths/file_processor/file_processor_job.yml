@@ -1,0 +1,43 @@
+parameters:
+- name: id
+  description: The job ID.
+  in: path
+  required: true
+  schema:
+    type: string
+
+get:
+  operationId: file_processor_job_check
+  description: Get the status of the file processor job.
+  summary: Get the job status
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/file_processor_job'
+      description: Job status
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - file_processor
+
+delete:
+  operationId: file_processor_job_delete
+  description: Cancel the file processor job.
+  summary: Cancel the job
+  responses:
+    '204':
+      description: Deleted
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+  - file_processor

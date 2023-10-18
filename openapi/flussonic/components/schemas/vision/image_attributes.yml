@@ -1,0 +1,17 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    description: Base64-encoded image data
+    type: string
+    format: byte
+  sha256:
+    type: string
+    description: Checksum of this image
+    minLength: 64
+    maxLength: 64
+  mime_type:
+    description: MIME type of the image
+    allOf:
+    - $ref: ../../schemas.yml#/vision_image_mimetype

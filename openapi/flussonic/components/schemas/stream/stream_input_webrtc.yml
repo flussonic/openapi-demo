@@ -1,0 +1,72 @@
+type: object
+properties:
+  prefer_codec:
+    description: |
+      Choose one of the listed video codecs at the start of the publication via WebRTC.
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_prefer_codec'
+    example: av1
+  transport:
+    description: |
+      Choose the prefered transport of the publication via WebRTC: UDP or TCP.
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_transport'
+    example: udp
+  min_bitrate:
+    description: The minimum bitrate threshold, in kbit/s. The default value is 100 kbit/s.
+    type: integer
+    example: 150
+  webrtc_abr:
+    description: Whether the adaptive bitrate mechanism is used for WebRTC publications.
+    type: boolean
+    example: true
+  abr_stepup:
+    description: |
+      Increment step for raising the bitrate to the maximum, in percent. The default step is 30%. 
+      If the loss is less than `abr_loss_lower`, Flussonic makes the publisher to step up from the current bitrate to the maximum one with the rate of `abr_stepup percent`.
+    type: integer
+  abr_correction:
+    description: |
+      The correction between the target bitrate (Receiver Estimated Maximum Bitrate, calculated in Flussonic) and browser bitrate, in kbit/s.
+      Flussonic sends the target bitrate to the browser from which the publication is carried out so that the browser adjusts the bitrate of the publication by this value.
+      The default value is 300 kbit/s.
+    type: integer
+    example: 200
+  abr_loss_lower:
+    type: number
+    description: |
+      The lower limit of packet loss. When it is reached, Flussonic raises the bitrate. 
+      That is, if packet loss is less than `abr_loss_lower`, Flussonic makes the publisher to step up from the current bitrate to the maximum one with the rate of `abr_stepup` percent.
+    example: 2
+  abr_loss_upper:
+    description: |
+      The upper limit of packet loss. When it is reached, Flussonic reduces the bitrate. 
+      That is, if packet loss is greater than `abr_loss_upper`, Flussonic makes the publisher to reduce the current bitrate in steps with the maximum rate of `abr_stepdown` percent.
+    type: number
+    example: 10
+  abr_stepdown:
+    description: |
+      A step of reducing the bitrate to the minimum. 
+      If packet losses are greater than `abr_loss_upper`, Flussonic makes the publisher to reduce the current bitrate in steps with the maximum rate of `abr_stepdown` percent.
+    type: number
+  abr_mode:
+    description: |
+      The algorithm for determining the need to change the bitrate of the published stream and for calculating the target bitrate. 
+      Two options are possible:
+
+      * `abr_mode=0` - This mode takes into account the packet losses, target bitrate, browser bitrate and the number of auto-adjustment cycles.
+      * `abr_mode=1` - This mode considers only packet losses and target bitrate.
+    type: integer
+    example: 1
+  abr_debug:
+    description: Whether adaptive bitrate process is logged.
+    type: integer
+    example: 1
+  abr_cycles:
+    description: |
+      The number of cycles of bitrate auto-adjustment.
+      After the specified number of auto-adjustment cycles passes, Flussonic considers the bitrate to be optimal, and it is no longer analyzed. 
+      By default, `abr_cycles`=5. 
+      If `abr_cycles`=0, the adjustment process takes place all the time while the publication lasts.
+    type: integer
+    example: 3

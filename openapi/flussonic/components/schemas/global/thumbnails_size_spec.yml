@@ -1,0 +1,10 @@
+type: object
+properties:
+  width:
+    nullable: true
+    type: integer
+    description: The thumbnail width.
+  height:
+    nullable: true
+    type: integer
+    description: The thumbnail height.

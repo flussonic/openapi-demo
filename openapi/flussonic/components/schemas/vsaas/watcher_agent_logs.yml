@@ -1,0 +1,53 @@
+type: object
+properties:
+  status:
+    type: string
+    description: Agent status
+    example: "ok"
+  version:
+    type: string
+    description: Agent version
+    example: "version"
+  agent_id:
+    type: string
+    description: Agent version
+    example: "1234567"
+  cid:
+    description: Agent client ID.
+    type: string
+    nullable: true
+    example: "42195"
+  mid:
+    description: Agent model ID.
+    type: string
+    nullable: true
+    example: "3059"
+  serial:
+    type: string
+    description: Agent serial
+    example: "a3dccd69f53deb79723a2a7a5f2037e1"
+  main_url:
+    type: string
+    description: Main endpoint URL (Central or Watcher host)
+    example: "http://example.com"
+  meminfo:
+    description: Physical memory size available on the device.
+    type: string
+    nullable: true
+    example: "806400"
+  buffer_limit:
+    description: Shows agent's buffer limit.
+    type: integer
+    example: 0
+  buffer_size:
+    description: Shows agent's buffer size.
+    type: integer
+    example: 0
+  a:
+    type: string
+    description: Encoded log data for security purposes. Only the support team can decrypt it.
+    example: "VDEVSvaNZZWeNOXqi7tA5Hm+KAqBjfHQKMzMl5aqRdYxHZkSnJ"
+  b:
+    type: string
+    description: Encoded log data for security purposes. Only the support team can decrypt it.
+    example: "xglytWCTztsbTAUVBIhQymqik7nvzXi5VbJWEQNBHFCxw/NdvY6hdknh87/3gslKpER0hIaymR67Qo8zGKICFN=="

@@ -1,0 +1,78 @@
+get:
+  operationId: agent_get
+  summary: Get one Agent
+  description: |
+    The method allows you to fetch a single Agent. 
+    The returned data are the same as for `agents_list` operation.
+  parameters:
+  - name: id
+    description: Agent identifier
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/watcher_agent_config'
+      description: Whole agent
+  tags:
+  - agent
+put:
+  operationId: agent_update
+  summary: Update Agent
+  description: |
+    Update the Agent parameters by the Agent ID.
+  parameters:
+  - name: id
+    description: Agent identifier
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    description: Partial agent configuration
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/watcher_agent_config'
+  responses:
+    '200':
+      description: Updated Agent
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/watcher_agent_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - agent
+delete:
+  operationId: agent_delete
+  summary: Delete Agent
+  description: |
+    Agent and corresponding camera(s) will be permanently deleted from the system.
+  parameters:
+  - name: id
+    description: Agent identifier
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Agent deleted successfully.
+  tags:
+  - agent

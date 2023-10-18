@@ -1,0 +1,4 @@
+allOf:
+  - $ref: "../../schemas.yml#/session_generic"
+  - $ref: "../../schemas.yml#/session_details"
+  - $ref: "../../schemas.yml#/session_player"

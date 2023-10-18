@@ -1,0 +1,15 @@
+get:
+  x-private: true
+  operationId: config_stats_get
+  summary: Get cloud stats
+  description: |
+    Get usage stats
+  responses:
+    '200':
+      description: backend stats
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/server_stats_network'
+  tags:
+  - config

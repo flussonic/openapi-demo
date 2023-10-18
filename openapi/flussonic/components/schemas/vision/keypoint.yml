@@ -1,0 +1,7 @@
+allOf:
+- $ref: ../../schemas.yml#/vision_point
+- type: object
+  description: Detected keypoint coordinate with confidence level
+  properties:
+    v:
+      $ref: ../../schemas.yml#/vision_confidence

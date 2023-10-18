@@ -1,0 +1,18 @@
+oneOf:
+- title: VBR
+  const: vbr
+  description: |
+    The encoder will not encode a stream to be DVB compliant.
+    However, VBR (Variable Bit Rate) produces better compression compared to CBR at about the same quality.
+- title: CBR
+  const: cbr
+  description: |
+    The encoder will produce a DVB compliant stream.
+    The bitrate of the output stream will be stable to fit the fixed-bandwidth channel. 
+    In other words, we guarantee that the bitrate has a certain upper bound in a sliding window.
+- title: CBR2pass
+  const: cbr2pass
+  description: |
+    The encoder will encode the video once in CBR, 
+    then it will encode it second time in CBR but using the information from the previous pass to improve quality.
+type: string

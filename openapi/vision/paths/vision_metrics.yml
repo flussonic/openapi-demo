@@ -1,0 +1,23 @@
+get:
+  operationId: metrics_get
+  summary: Prometheus metrics
+  description: |
+    Provides endpoint for Prometheus scraper. Each record represents per-stream metrics.  
+    Additionally there is a bunch of per-worker records containing aggregation of metrics of streams served by this worker.  
+    Per-worker metrics are marked with `media=all` attribute.
+
+    JSON representation of metrics: currenly this variant of content-type is not implemented.  
+    Its schema can be used for getting the list of metrics with descriptions for reference
+  tags:
+    - monitoring
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_metrics
+        text/plain:
+          schema:
+            description: Prometheus metrics
+            type: string

@@ -1,0 +1,20 @@
+type: object
+required:
+- type
+- project_id
+- name
+properties:
+  type:
+    type: string
+    description: Object type
+    format: object_type
+    const: project
+  project_id:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886000
+      description: Project Id
+  name:
+    type: string
+    description: Encoded ID, used as Project ID for external requests.
+    example: "aBc"

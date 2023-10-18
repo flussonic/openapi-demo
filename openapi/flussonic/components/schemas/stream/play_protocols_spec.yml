@@ -1,0 +1,74 @@
+type: object
+properties:
+  whitelist:
+    description: | 
+      - If set to `True`, server **allows** a playback only for listed protocols;
+      - If set to `False`, server **forbids** a playback only for listed protocols;
+    default: false
+    type: boolean
+  hls:
+    description: Whether to allow or deny an HLS stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  dash:
+    description: Whether to allow or deny a DASH stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  player:
+    description: Whether to allow or deny playback in embed.html, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  mss:
+    description: Whether to allow or deny an MSS stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  rtmp:
+    description: Whether to allow or deny an RTMP stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  rtsp:
+    description: Whether to allow or deny an RTSP stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  m4f:
+    description: Whether to allow or deny an M4F stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  m4s:
+    description: Whether to allow or deny an M4S stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  mseld:
+    description: Whether to allow or deny an MSE-LD stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  tshttp:
+    description: Whether to allow or deny an MPEG-TS stream playback over HTTP(S), depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  webrtc:
+    description: Whether to allow or deny an WebRTC stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  srt:
+    description: Whether to allow or deny an SRT stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  shoutcast:
+    description: Whether to allow or deny a SHOUTcast/Icecast stream playback, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  mp4:
+    description: |
+      Whether to allow or deny an MP4 file download over HTTP(S), depending on the `whitelist` properties.
+      Used to export DVR segment(s) in MP4 file.
+    type: boolean
+    nullable: true
+  jpeg:
+    description: Whether to allow or deny delivering JPEG thumbnails over HTTP(S), depending on the `whitelist` properties.
+    type: boolean
+    nullable: true
+  api:
+    description: Whether to allow or deny API requests, depending on the `whitelist` properties.
+    type: boolean
+    nullable: true

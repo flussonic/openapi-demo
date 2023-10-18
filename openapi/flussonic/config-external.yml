@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    <h2>Intro</h2>
+
+    This API describes how Flussonic streaming server fetches runtime stream configuration
+    from backend written by user. So, this it not an API to Flussonic, this is an API,
+    that Flussonic is using to connect to other system.
+
+    Permanent [download link](https://flussonic.com/doc/api/config-external.json) to JSON schema file.
+
+    <h2>What can you do with this API?</h2>
+
+    You can make full control over streams in Flussonic without modifying config file.
+    This is a preferrable way to integrate streaming server into complex systems.
+
+    You can launch static streams that will work without client requests and you can
+    dynamically control each request to the stream that is not known to server.
+
+    This API was designed with the idea in mind that you may have hundreds and thousands of
+    streaming server and have millions of streams in your database. None of the streaming servers
+    can even know the full amount of streams, but each of them can have access to any stream if
+    required.
+
+    <h2>How does it work?</h2>
+
+    1. You implement your own configuration backend that responds with a list of streams that 
+    must be launched on Flussonic Media Server with their configuration.
+    2. Flussonic each several seconds make a request to get all streams that must be running
+    on this server in static mode, i.e. without any user requests
+    3. After this Flussonic will take all streams that were not listed in #2 and will send
+    another several requests with `name` query string (comma-joined stream names) to
+    check streams. If you do not respond with their configuration, they will be closed.
+    4. When user requests to play or publish to an unknown stream, Flussonic will make
+    another request with `name` in query string.
+
+
+    <h2>Scenarios examples</h2>
+
+    <h3>Transcoder load balancing</h3>
+
+    You can monitor server load and store it in centralized database. This information cancan 
+    be used to distribute streams across streaming servers.
+
+    <h3>Publish transcoding load balancing</h3>
+
+    You have several servers that can be used for accepting incoming publishing.
+
+    Use transcoder usage statistics to push incoming published streams to least loaded transcoder.
+
+    <h2>Failover configuration</h2>
+
+    Use some fault-tolerant system like etcd for keeping streams information and launch
+    copy of your backend near each Flussonic.
+
+    It is impossible to configure more than one configuration backend to Flussonic and
+    will not be. Use local copy of database for failure resistency.
+
+    <h2>Performatnce requirements</h2>
+
+    Your configuration backend must be fast, consider targeting 100 ms on whole response.
+    Use ram database, optimized JSON generation, etc.
+    
+    If you have 10 flussonic instances and you have configured single configuration backend,
+    then you will have more than 3 requests per second. If you have configured single core for
+    this responses and you use more than 300 ms (real life examples), then Flussonics will start
+    delaying in receiving new updates.
+
+
+  title: Flussonic Configuration Backend API
+  version: 22.12.1
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /streams:
+    $ref: './paths/config/external-streams.yml'
+  /update-streams:
+    $ref: './paths/config/external-update-streams.yml'
+  /dynamic-streams:
+    $ref: './paths/config/external-dynamic-streams.yml'
+  /srt_port_resolve/{port}:
+    $ref: './paths/config/external-srt-port-resolve.yml'
+  /episodes:
+    $ref: './paths/config/external-episodes.yml'
+
+security:
+- bearerAuth: []
+servers:
+- description: Your local installation.
+  url: http://localhost:8080/streamer/api/v3
+tags:
+- name: stream
+- name: srt
+- name: dvr

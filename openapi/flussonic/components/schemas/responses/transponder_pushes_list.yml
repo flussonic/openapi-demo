@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      pushes:
+        description: The list of pushes configured for the multiplexer.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/transponder_push'

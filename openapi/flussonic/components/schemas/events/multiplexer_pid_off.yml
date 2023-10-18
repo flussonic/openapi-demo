@@ -1,0 +1,13 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Pid is dropped from the output multiplexed stream
+    reason:
+      description: Reason for dropping the PID.
+      type: string
+      nullable: true
+      x-atom: true
+- $ref: '../../schemas.yml#/event_default'
+- $ref: '../../schemas.yml#/event_media'

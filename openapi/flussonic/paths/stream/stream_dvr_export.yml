@@ -1,0 +1,54 @@
+parameters:
+- description: Stream name.
+  in: path
+  name: name
+  required: true
+  schema:
+    example: 'abc'
+    type: string
+- description: Start time in Unix timestamp (seconds).
+  in: query
+  name: from
+  required: true
+  schema:
+    example: 1675159800
+    type: integer
+- description: Duration in seconds.
+  in: query
+  name: duration
+  required: true
+  schema:
+    example: 4200
+    type: integer
+- description: The recording path.
+  in: query
+  name: path
+  required: true
+  schema:
+    example:
+    - '/home/example/file.mp4'
+    - 's3://example.com/bucket/path/to/file.mp4'
+    type: string
+- description: |
+    The necessity to save the metadata with the MP4 file.
+    If true, the metadata will be stored in the udta.meta.ilst.data atom.
+  in: query
+  name: meta
+  required: false
+  schema:
+    example: true
+    type: boolean
+post:
+  description: This method allows to export MP4 files from DVR and save them on the server disk or to the S3 bucket.
+  operationId: stream_save_mp4
+  responses:
+    '200':
+      content:
+        video/mp4:
+          schema:
+            type: string
+      description: MP4 file containing DVR content
+  summary: Export DVR as MP4 file
+  tags:
+  - stream-dvr
+

@@ -1,0 +1,40 @@
+collection_response:
+  $ref: '../../flussonic/components/schemas.yml#/collection_response'
+error_response:
+  $ref: '../../flussonic/components/schemas.yml#/error_response'
+
+ui_settings_config:
+  $ref: '../../flussonic/components/schemas.yml#/ui_settings_config'
+
+streams_list:
+  $ref: '../../flussonic/components/schemas.yml#/streams_list'
+stream_config:
+  $ref: '../../flussonic/components/schemas.yml#/stream_config'
+
+streamers_list:
+  $ref: '../../flussonic/components/schemas.yml#/streamers_list'
+streamer_config:
+  $ref: '../../flussonic/components/schemas.yml#/streamer_config'
+
+map_spec:
+  $ref: '../../flussonic/components/schemas.yml#/map_spec'
+
+login_info:
+  $ref: './login_info.yml'
+
+jwt_payload_base:
+  $ref: './jwt_payload_base.yml'
+jwt_payload:
+  $ref: './jwt_payload.yml'
+
+
+episodes_list:
+  $ref: '../../flussonic/components/schemas.yml#/episodes_list'
+
+profile:
+  $ref: './profile/profile.yml'
+
+web_push_subscription:
+  $ref: './subscription.yml'
+web_push_subscription_create:
+  $ref: './subscription_create.yml'

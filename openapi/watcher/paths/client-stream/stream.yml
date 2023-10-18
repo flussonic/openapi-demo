@@ -1,0 +1,108 @@
+get:
+  operationId: stream_get
+  summary: Get one stream
+  description: This method allows to fetch a single stream. Refer to the `streams_list` operation to find out
+    what data will be returned in this method.
+  parameters:
+  - description: Stream name.
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/stream_config'
+      description: Whole stream
+  tags:
+  - stream
+put:
+  operationId: stream_save
+  summary: Save stream
+  description: |
+    Create or update a stream by its name.
+    If the stream doesn't exists in the disk config, it will be created.
+
+    If you try to update a stream that is started from a template by a user request
+    having `named_by=user`, a new stream will be created in the disk config.
+
+    If you pass only a partial stream configuration, this field will be updated, not the whole stream.
+    
+    To create a new stream the property `name` is required.
+
+    Pass the `"$reset": true` option to replace the stream configuration with the provided one.
+  parameters:
+  - name: name
+    description: stream name
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - name: part
+    description: |
+      The stream is configured by several origins of configuration. It may be `config_on_disk`
+      or temporary runtime `config_override` that can be provided via `on_play` or `on_publish`
+      backend, or edited via this API call if you pass `config_override` to this parameter.
+    in: query
+    schema:
+      default: config_on_disk
+      type: string
+      enum: [config_override, config_on_disk]
+  requestBody:
+    description: Partial stream configuration
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/stream_config'
+  responses:
+    '200':
+      description: Updated stream
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/stream_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - stream
+delete:
+  operationId: stream_delete
+  summary: Delete the stream
+  description: |
+    This method allows to delete a single stream. You can delete `config_override` by this API call if you want
+    to remove all runtime overrides.
+
+    If you do not specify any `part` parameter, this stream will be deleted from `config_on_disk`
+    and if it was `named_by: config`, then it will immediately stop.
+  parameters:
+  - name: name
+    description: stream name
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  - name: part
+    description: part of config to delete
+    in: query
+    schema:
+      default: config_on_disk
+      type: string
+      enum: [config_override, config_on_disk]
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - stream

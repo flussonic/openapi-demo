@@ -1,0 +1,33 @@
+allOf:
+- $ref: '../../schemas.yml#/server_stats_whoami'
+- $ref: '../../schemas.yml#/server_stats_streamer'
+- $ref: '../../schemas.yml#/server_stats_network'
+- type: object
+  properties:
+    client_count:
+      description: This option is deprecated. Please use `total_clients` instead.
+      type: integer
+      format: client_count
+      nullable: true
+      deprecated: true
+      x-delete-at: 23.09
+      # same as total_clients from server_stats_network
+    output_bitrate:
+      description: This option is deprecated. Please use `output_kbit` instead.
+      type: integer
+      format: speed
+      nullable: true
+      deprecated: true
+      x-delete-at: 23.09
+      # same as output_kbit from server_stats_network
+    stream_count:
+      description: This option is deprecated. Please use `total_streams` instead.
+      type: integer
+      nullable: true
+      deprecated: true
+      x-delete-at: 23.09
+      # same as total_streams from server_stats_network
+    error:
+      description: Description of an error, if any.
+      type: string
+      nullable: true

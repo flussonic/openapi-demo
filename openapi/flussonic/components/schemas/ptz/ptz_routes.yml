@@ -1,0 +1,6 @@
+type: object
+properties:
+  routes:
+    type: array
+    items:
+      $ref: './ptz_route.yml'

@@ -1,0 +1,16 @@
+type: object
+properties:
+  transaction_id:
+    type: integer
+    format: snowflake_id
+    example: 6902558627475886087
+    description: |
+      Uniq ID of balance increment transaction to write increment once. Transaction id must be in snowflake id format.
+  amount:
+    type: integer
+    description: |
+      Amount of balance increment. It might be positive or negative.
+      The balance is not expressed in any real currency, these are internal conventional units.
+required:
+  - transaction_id
+  - amount

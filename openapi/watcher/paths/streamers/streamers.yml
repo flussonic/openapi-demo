@@ -1,0 +1,14 @@
+get:
+  operationId: streamers_list
+  summary: List streamers
+  description: |
+    Returns the list of all streamers with main parameters and current metric values.
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/streamers_list'
+      description: Response
+  tags:
+  - streamer

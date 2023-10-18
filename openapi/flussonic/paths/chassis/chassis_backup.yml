@@ -1,0 +1,58 @@
+parameters:
+- name: name
+  description: backup name
+  in: path
+  required: true
+  schema:
+    example: '20210915-231745'
+    type: string
+  style: simple
+
+get:
+  operationId: chassis_backup_get
+  description: Download a specific chassis backup. 
+  summary: Download backup
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_backup'
+      description: Response
+  tags:
+  - chassis
+put:
+  operationId: chassis_backup_save
+  description: Upload the chassis backup.
+  summary: Upload backup
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/chassis_backup'
+    description: Request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_backup'
+      description: Response
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - chassis
+delete:
+  operationId: chassis_backup_delete
+  description: Delete a backup by its name.
+  summary: Delete backup
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - chassis
+

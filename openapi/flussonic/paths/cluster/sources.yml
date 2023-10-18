@@ -1,0 +1,13 @@
+get:
+  description: Fetch all sources
+  operationId: sources_list
+  summary: List sources
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/sources_list'
+      description: Response
+  tags:
+  - cluster

@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+  description: |
+    Сервис идентификации
+    - хранит базу данных персон (их атрибутов и фингерпринтов)
+    - идентифицирует лица (их фингерпринты), используя базу данных персон
+    - дообогащает эпизоды сервиса аналитики данными идентификации лиц сопоставленными персонами из базы
+
+    # Конфигурация
+
+    Для запуска идентификационного сервиса требуется указать в переменных окружения:
+      - `HTTP_PORT`: HTTP порт, на котором будут обрабатываться API запросы
+      - `DATABASE_URL`: адрес базы данных
+
+    Запуск с Central требует указать его url
+      - `CENTRAL_URL`: адрес Central
+
+    Самостоятельный запуск - нужен url источника эпизодов
+      - `VISION_URL`: адрес сервера аналитики
+
+  title: Flussonic Vision Identification API
+  version: 22.01.1
+
+components:
+  schemas:
+    $ref: ./components/schemas.yml
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /persons/identify:
+    $ref: './paths/person_identify.yml'
+  /persons:
+    $ref: './paths/persons.yml'
+  /persons/{person_id}:
+    $ref: './paths/person.yml'
+  /episodes:
+    $ref: './paths/episodes.yml'
+  /config:
+    $ref: './paths/config_identification.yml'
+  /stats:
+    $ref: './paths/stats.yml'
+  /monitoring/liveness:
+    $ref: './paths/liveness.yml'
+
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: persons
+  description: Persons
+- name: episodes
+  description: Episode updates
+- name: monitoring
+  description: Server metrics and status
+- name: config
+  description: Service configuration
+- name: environment
+  description: |
+    Environment variables  
+    **This is not an actual HTTP method** and only used to describe available env variables used for configuration
+
+servers:
+- description: your local installation
+  url: https://api3.flussonic.cloud/vision/api/v3

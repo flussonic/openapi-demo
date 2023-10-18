@@ -1,0 +1,31 @@
+type: object
+properties:
+  name:
+    description: The stream name.
+    type: string
+    format: media_name
+  bitstream_err_count:
+    description: The number of input stream errors.
+    type: integer
+  dec_err_count:
+    description: The number of decoding errors.
+    type: integer
+  dec_timing:
+    description: Raw image decoding time.
+    type: integer
+  enc_timing:
+    description: Raw image encoding time, including the time of sending the image to the encoder.
+    type: integer
+  encoders:
+    description: The number of encoders.
+    type: integer
+  fps_in:
+    description: Actual input fps.
+    type: integer
+  fps_out:
+    description: Actual output fps.
+    type: integer
+    example: 25
+  mqlen:
+    description: Transcoder process queue length.
+    type: integer

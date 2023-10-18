@@ -1,0 +1,23 @@
+get:
+  operationId: agent_logs_get
+  summary: Get logs from Agent
+  description: |
+    The method allows you to fetch logs from online Agent. 
+  parameters:
+  - name: id
+    description: Agent identifier
+    in: path
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/watcher_agent_logs'
+      description: Agent logs
+  tags:
+  - agent

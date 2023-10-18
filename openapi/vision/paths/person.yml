@@ -1,0 +1,65 @@
+parameters:
+- name: person_id
+  in: path
+  description: Identifier of the person
+  required: true
+  style: simple
+  schema:
+    type: string
+get:
+  operationId: person_get
+  summary: Get person
+  description: Returns the person by its identifier
+  tags:
+  - persons
+  responses:
+    '200':
+      description: Response
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/vision_person
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas.yml#/error_response
+
+put:
+  operationId: person_save
+  summary: Save person
+  description: |
+    Create or update existing person by its identifier
+  tags:
+  - persons
+  requestBody:
+    description: person attributes
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas.yml#/vision_person'
+  responses:
+    '200':
+      description: Updated person
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/vision_person'
+    '400':
+      description: Couldn't save
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas.yml#/error_response'
+
+
+delete:
+  operationId: person_delete
+  summary: Delete person
+  description: Delete a person with the supplied identifier
+  tags:
+  - persons
+  responses:
+    '204':
+      description: Person deleted successfully.

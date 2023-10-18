@@ -1,0 +1,11 @@
+post:
+  operationId: system_restart
+  summary: Restart flussonic
+  x-private: true
+  description: |
+    Restart flussonic
+  responses:
+    '204':
+      description: Restarting
+  tags:
+    - system

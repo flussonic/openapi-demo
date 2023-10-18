@@ -1,0 +1,54 @@
+get:
+  operationId: dynamic_streams_list
+  summary: Dynamic streams
+  description: |
+    This API method will be called to fetch list of streams configurations for
+    newly requested by user streams.
+
+    If you do not send a configuration of any stream named in `name` query parameter,
+    it will be considered as an unknown and terminated immediately
+
+  parameters:
+  - name: host
+    description: |
+      Hostname of the streamer server that is requesting the config.
+      This parameter is mandatory, because streamer will send it and you can rely on it,
+      but it is absolutely ok to create several paths for different servers and 
+      ignore this query string.
+    explode: false
+    required: true
+    in: query
+    schema:
+      example: streamer03.my.cdn
+      type: string
+    style: form
+  - name: name
+    description: |
+      Comma-separated expicitly passed list of stream names. Used to get configuration
+      for the streams that were not listed in previous request without `name` field
+    explode: false
+    in: query
+    required: true
+    schema:
+      example: s01,s02,s03
+      type: string
+    style: form
+  - name: cursor
+    description: |
+      Properly encoded analog of offset, allowing to read next bunch of items. 
+      We do not offer common `offset` fields, use please cursor for predictable
+      fetching of quickly changing list of items. More information can be found [here](https://flussonic.com/doc/api/flussonic-http-api/#limited-collections-access-cursors)
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/streams_list'
+      description: Response
+  tags:
+  - stream

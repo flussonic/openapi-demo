@@ -1,0 +1,16 @@
+type: object
+properties:
+  url:
+    description: |
+      The URL of an HTTP backend.      
+    example: 'http://stalker-1.iptv.net/auth.php'
+    type: string
+  extra:
+    x-private: true
+    type: object
+    additionalProperties:
+      type: string
+    nullable: true
+    description: Some additional options.
+required:
+  - url

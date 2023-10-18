@@ -1,0 +1,43 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Session id.
+    example: '05cec7ee-fbd0-11ed-be56-0242ac120002'
+  ui:
+    description: The using UI type.
+    type: string
+    oneOf:
+      - const: mobile
+      - const: tablet
+      - const: desktop
+    example: 'mobile'
+  opened_at:
+    type: integer
+    format: utc
+    description: The time when the admin session started.
+    example: 1643789953
+  duration:
+    type: integer
+    format: milliseconds
+    description: The session duration.
+  pages_sessions:
+    type: array
+    items:
+      type: object
+      properties:
+        page:
+          type: string
+          description: The path to the page from the address line.
+          example: '/streams'
+        id:
+          type: string
+          format: uuid
+          description: Page session id.
+          example: '05cec7ee-fbd0-11ed-be56-0242ac120002'
+        visit_count:
+          type: integer
+          description: The number of visits to the page.
+          example: 5
+    description: The sessions of the pages.

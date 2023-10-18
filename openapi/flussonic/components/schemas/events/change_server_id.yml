@@ -1,0 +1,16 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Change the server ID.
+    old:
+      description: The previous server ID.
+      type: string
+      # format: server_id
+    instance_id:
+      description: The instance ID.
+      type: string
+      # format: instance_id
+- $ref: '../../schemas.yml#/event_default'
+

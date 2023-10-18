@@ -1,0 +1,6 @@
+type: string
+oneOf:
+- title: Face detector
+  const: faces
+- title: Vehicle and license plate detector
+  const: vehicles

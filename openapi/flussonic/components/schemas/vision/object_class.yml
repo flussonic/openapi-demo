@@ -1,0 +1,9 @@
+type: string
+description: Object class
+oneOf:
+- title: Face
+  const: face
+- title: License plate
+  const: license_plate
+- title: Vehicle
+  const: vehicle

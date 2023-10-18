@@ -1,0 +1,7 @@
+type: object
+properties:
+  tracks:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/requested_track_info'

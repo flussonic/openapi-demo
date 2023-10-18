@@ -1,0 +1,18 @@
+type: object
+properties:
+  # mosaic2
+  disable_video:
+    # FIXME: for refactoring
+    x-private: true
+    type: boolean
+    description: Whether to show video from streams included into the mosaic.
+  samples:
+    # FIXME: for refactoring
+    x-private: true
+    type: integer
+    description: The input samples.
+  sample_rate:
+    # FIXME: for refactoring
+    x-private: true
+    type: integer
+    description: The input sample rate.

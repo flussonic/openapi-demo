@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Support team
+    url: https://flussonic.com/
+  description: |
+    This document describes possible URLs that can be accessed by a player for playing video streams and files by various protocols.
+
+    Permanent [download link](https://flussonic.com/doc/api/streaming.json) to JSON schema file.
+    
+    It is worth noting that parameter `{name}` used in this schema may be multi-segment, i.e.: 
+    `/part1/part2/part3/index.m3u8` and `name` here will be `/part1/part2/part3`.
+
+
+  title: Flussonic Streaming API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./components/schemas.yml"
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      description: |
+        Token in query string just as defined in https://flussonic.com/doc/authorization/
+      in: query
+      name: token
+
+paths:
+  /{name}/index.json:
+    $ref: './paths/playback/abstract-live-vod.yml'
+  /{name}/archive-{from}-{duration}.json:
+    $ref: './paths/playback/abstract-dvr.yml'
+  /{name}/rewind-{ago}.json:
+    $ref: './paths/playback/abstract-rewind.yml'
+  /{name}/timeshift_abs-{from}.json:
+    $ref: './paths/playback/abstract-timeshift-abs.yml'
+  /{name}/timeshift_rel-{ago}.json:
+    $ref: './paths/playback/abstract-timeshift-rel.yml'
+
+  /{name}/index.m3u8:
+    $ref: './paths/playback/hls-live-vod.yml'
+  /{name}/rewind-{ago}.m3u8:
+    $ref: './paths/playback/hls-rewind.yml'
+  /{name}/archive-{from}-{duration}.m3u8:
+    $ref: './paths/playback/hls-dvr.yml'
+  /{name}/timeshift_abs-{from}.m3u8:
+    $ref: './paths/playback/hls-timeshift-abs.yml'
+  /{name}/timeshift_rel-{ago}.m3u8:
+    $ref: './paths/playback/hls-timeshift-rel.yml'
+  /{name}/tracks-{tracks}/mono.m3u8:
+    $ref: './paths/playback/hls-live-track-mono.yml'
+  /{name}/images-{dimensions}/seg-{from}-{offset}.hls.jpg:
+    $ref: './paths/playback/hls-jpeg-thumbnail.yml'
+
+  /{name}/index.ll.m3u8:
+    $ref: './paths/playback/llhls-live.yml'
+
+  /{name}/Manifest.mpd:
+    $ref: './paths/playback/dash-live-vod.yml'
+  /{name}/rewind-{ago}.mpd:
+    $ref: './paths/playback/dash-rewind.yml'
+  /{name}/archive-{from}-{duration}.mpd:
+    $ref: './paths/playback/dash-dvr.yml'
+  /{name}/timeshift_abs-{from}.mpd:
+    $ref: './paths/playback/dash-timeshift-abs.yml'
+  /{name}/images-{dimensions}/dvr-{from}-{offset}.m4v.jpg:
+    $ref: './paths/playback/dash-jpeg-thumbnail.yml'
+
+  /{name}/whip:
+    $ref: './paths/playback/webrtc-whip.yml'
+  /{name}/whep:
+    $ref: './paths/playback/webrtc-whep.yml'
+
+  /{name}/mpegts:
+    $ref: './paths/playback/mpegts-live.yml'
+  /{name}/timeshift_abs-{from}.ts:
+    $ref: './paths/playback/mpegts-timeshift-abs.yml'
+  /{name}/timeshift_rel-{ago}.ts:
+    $ref: './paths/playback/mpegts-timeshift-rel.yml'
+
+  /{name}/shoutcast:
+    $ref: './paths/playback/shoutcast-live.yml'
+
+  /{name}.ism/manifest:
+    $ref: './paths/playback/mss-live.yml'
+  /{name}(archive={from}-{duration}).isml/manifest:
+    $ref: './paths/playback/mss-dvr.yml'
+
+  /{name}/archive-{from}-{duration}.mp4:
+    $ref: './paths/playback/mp4-export.yml'
+  /{name}/archive-{from}-{duration}.ts:
+    $ref: './paths/playback/ts-export.yml'
+
+  /{name}/preview.jpg:
+    $ref: './paths/playback/jpeg-live.yml'
+  /{name}/{from}.jpg:
+    $ref: './paths/playback/jpeg-dvr.yml'
+  /{name}/{from}-preview.jpg:
+    $ref: './paths/playback/jpeg-ondemand.yml'
+  /{name}/preview.mp4:
+    $ref: './paths/playback/mp4-live.yml'
+  /{name}/{from}-preview.mp4:
+    $ref: './paths/playback/mp4-dvr.yml'
+  /{name}/preview-{from}.mp4:
+    $ref: './paths/playback/mp4-vod.yml'
+  /{name}/logo:
+    $ref: './paths/playback/logo.yml'
+
+  /{name}/embed.html:
+    $ref: './paths/playback/embed.yml'
+  /{name}/recording_status.json:
+    $ref: './paths/playback/recording-status.yml'
+  /{name}/media_info.json:
+    $ref: './paths/playback/media-info.yml'
+  /{name}/info.json:
+    $ref: './paths/playback/public-stream.yml'
+
+  /{name}/sessions/{id}:
+    $ref: './paths/playback/session.yml'
+  /{name}/sessions/{id}/request_tracks:
+    $ref: './paths/playback/request-tracks.yml'
+
+  /tv/playlists/{name}:
+    $ref: './paths/iptv/playlist.yml'
+
+  /-/streams:
+    $ref: './paths/playback/public-streams.yml'
+
+security:
+- tokenAuth: []
+servers:
+- description: your local installation
+  url: http://localhost:8080
+tags:
+- name: hls
+  description: HLS playback
+- name: dash
+  description: DASH playback
+- name: ll-hls
+  description: Apple Low-Latency HLS playback
+- name: webrtc
+  description: Playing and publishing video via WebRTC
+- name: radio
+  description: Playing audio streams
+- name: mpegts
+  description: Playing and publishing HTTP MPEG-TS video
+- name: mss
+  description: Playing MSS video
+- name: image
+  description: Managing images during playback
+- name: api
+  description: Getting information about played video
+- name: player
+  description: Playing video in `embed.html` player in a browser or on a website.
+- name: mp4
+  description: Getting content in MP4 video container.
+- name: session
+- name: iptv
+- name: streams
+- name: dvr
+  description: Methods that could be used to play recorded data.

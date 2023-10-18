@@ -1,0 +1,20 @@
+type: object
+properties:
+  width:
+    type: integer
+    # default: 320
+    description: | 
+      Width of an artificially created test video stream. 
+      Applicable to the `fake://fake` URL.
+  height:
+    type: integer
+    # default: 240
+    description: |
+      Height of an artificially created test video stream. 
+      Applicable to the `fake://fake` URL.
+  bitrate:
+    type: integer
+    format: speed
+    description: |
+      Bitrate of an artificially created test video stream. 
+      Applicable to the `fake://fake` URL.

@@ -1,0 +1,6 @@
+type: object
+properties:
+  id:
+    description: Uploaded logs identifier
+    type: string
+    format: uuid

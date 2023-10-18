@@ -1,0 +1,86 @@
+type: object
+properties:
+  instance_id:
+    description: Instance ID generated on each coder restart.
+    type: string
+    format: uuid
+  boot_at:
+    description: The date and time the device was booted.
+    type: number
+    format: utc_ms
+  powered_at:
+    description: The date and time the device was powered.
+    type: number
+    format: utc_ms
+  dhcp_at:
+    description: The date and time the device received network settings over DHCP.
+    type: number
+    format: utc_ms
+  nfs_at:
+    description: The date and time the device connected to NFS.
+    type: number
+    format: utc_ms
+  connected_at:
+    description: The date and time when the coder connected to the chassis.
+    type: number
+    format: utc_ms
+  updated_at:
+    description: The date and time when any data was last received from the coder.
+    type: number
+    format: utc_ms
+  scheduler:
+    description: Scheduler statistics.
+    allOf:
+    - $ref: '../../schemas.yml#/scheduler_stats'
+  cpu_usage:
+    description: CPU usage on the coder.
+    type: integer
+    format: percents
+  load:
+    description: The coder system load.
+    type: number
+    example: 74
+  mc_all:
+    description: Memory controller throughput.
+    type: integer
+  memory:
+    description: Memory consumption on the coder.
+    allOf:
+    - $ref: '../../schemas.yml#/memory_stats'
+  power:
+    description: Power consumption on the coder.
+    type: integer
+    example: 70000
+  serial_number:
+    description: Serial number of the coder.
+    type: string
+    example: '2174220024'
+  temperature:
+    description: Temperature on the coder.
+    type: integer
+    format: celsius
+    example: 20
+  uptime:
+    description: Period of time since the last restart of the coder.
+    type: number
+    format: milliseconds
+  streams:
+    description: The list of streams on the coder.
+    type: array
+    items:
+      $ref: '../../schemas.yml#/coder_stream_stats'
+    default: [] 
+  status:
+    description: The coder status.
+    type: string
+    enum:
+    - unknown
+    - offline
+    - rebooting
+    - booting
+    - working
+    example: "working"
+  reboot_allowed:
+    description: Shows if restart button is available for the coder in the UI.
+    default: true
+    type: boolean

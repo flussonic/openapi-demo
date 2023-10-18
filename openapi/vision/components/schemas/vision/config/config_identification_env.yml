@@ -1,0 +1,25 @@
+type: object
+properties:
+  HTTP_PORT:
+    description: Port that will be used for listening for HTTP requests.
+    type: integer
+    format: network_port
+  DATABASE_URL:
+    description: DB connection string.
+    type: string
+  VISION_URL:
+    description: Vision server URL to fetch episodes from
+    type: string
+    format: url
+    nullable: true
+    example: 'http://vision.example.com/'
+  CENTRAL_URL:
+    type: string
+    format: url
+    nullable: true
+    description: Central URL
+    example: 'http://central.example.com/'
+
+required:
+- HTTP_PORT
+- DATABASE_URL

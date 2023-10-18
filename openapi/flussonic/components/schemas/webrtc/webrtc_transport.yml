@@ -1,0 +1,6 @@
+type: string
+oneOf:
+- title: UDP
+  const: udp
+- title: TCP
+  const: tcp

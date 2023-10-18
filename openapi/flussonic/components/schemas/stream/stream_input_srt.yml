@@ -1,0 +1,65 @@
+type: object
+properties:
+  # srt
+  minversion:
+    description: |
+      The minimum SRT version that is required from the peer for SRT publication.
+      The format is `x.y.z`. 
+      The default value is `1.0.0`.
+    type: string
+    example: '1.1.0'
+  version:
+    description: |
+      Required SRT version. The format is `x.y.z`.
+      The default value is `1.0.0`.
+    type: string
+    example: '1.3.0'
+  enforcedencryption:
+    description: |
+      Whether both connection parties must have the same password set (including empty, in other words, with no encryption). 
+      If the passwords do not match or only one side is unencrypted, the connection is rejected. 
+      The default value is `true`.
+    type: boolean
+    example: true
+  passphrase:
+    description: |
+      The password for the encrypted transmission. 
+      Its length should be not less than 10 and not more than 79 characters. 
+      The default value is an empty string ("").
+    type: string
+    example: "9876543210"
+  connect_timeout:
+    description: Connection timeout, in seconds. Equals to 0 by default.
+    type: integer
+    example: 100
+  linger:
+    description: |
+      The time, in seconds, that the socket waits for the unsent data before closing. 
+      The default value is 180.
+    type: integer
+    example: 60
+  latency:
+    description: |
+      Packet delivery delay. 
+      Used to avoid bursts of missed packet retransmissions. The default value is 120.
+    type: integer
+    example: 100
+  streamid:
+    description: |
+      A string of maximum 512 characters set on the socket before the connection. 
+
+      This string is a part of a callback that is sent by the caller and regisered by the listener. 
+      Based on this information the listener can accept or reject the connection, select the desired data stream, or set an appropriate passphrase for the connection.
+
+      Its format is `#!::` optionally followed by the parameters:
+      * `r=` - stream name
+      * `m=` - mode expected for the connection: `publish` (if the caller wants to send the stream data) or `request` (if the caller wants to receive the stream).
+      * `password=` - a password for the authorization in a publish session (not recommended, better use `passphrase` option instead)
+ 
+      During SRT sessions the following parameters are automaticly added to streamid:
+      * `s=` - the identifier of a session
+      * `a=` - Flussonic version
+
+      NOTE: you can specify a string in the format you need; to disable this extension, you need specify empty string.
+    type: string
+    example: "#!::r=my-stream,m=publish"

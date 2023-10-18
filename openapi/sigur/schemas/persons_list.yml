@@ -1,0 +1,8 @@
+type: object
+properties:
+  persons:
+    type: array
+    items:
+      $ref: './schemas.yml#/person'
+    description: |
+      Список доступных для идентификации персон

@@ -1,0 +1,50 @@
+put:
+  x-private: true
+  description: |
+    Activate Flussonic by providing license and credentials.
+    This is the same as entering them manually on the start page (see [the documentation](https://flussonic.com/doc/admin/installation/#installation-password) for more info).
+  operationId: license_activate
+  summary: Activate Flussonic
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/activate'
+    description: Activation request
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/license'
+      description: Activation succeeded
+    '400':
+      description: Activation failed due to invalid/unknown license or invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+          examples:
+            invalid_key:
+              summary: License key validation failed
+              value:
+                errors:
+                  - code: invalid_license_key
+                    status: '400'
+                    title: Invalid license key
+            unknown_key:
+              summary: License key is not found on license servers
+              value:
+                errors:
+                  - code: unknown_license_key
+                    status: '400'
+                    title: Unknown license key
+            invalid_request:
+              summary: Required properties are not specified
+              value:
+                errors:
+                  - code: invalid_request
+                    status: '400'
+                    title: Invalid request
+  tags:
+  - license

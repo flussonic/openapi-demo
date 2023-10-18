@@ -1,0 +1,13 @@
+type: object
+properties:
+  listen:
+    description: The `smtp://` link to get camera alarms from.
+    allOf:
+    - $ref: '../../schemas.yml#/listen_spec'
+  catch:
+    description: The list of keywords in the e-mails that are considered alarms.
+    type: array
+    items: 
+      type: string
+    nullable: true
+

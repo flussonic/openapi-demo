@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@flussonic.com
+    name: Flussonic
+    url: https://flussonic.com/
+  description: |
+    Данный документ предназначен для разработчиков систем видеонаблюдения и
+    видеоаналитики (далее, Система Охранного Телевидения = СОТ).
+
+    Он описывает то API, которое должен реализовывать Flussonic Watcher для интеграции с Sigur.
+
+  title: Sigur adapter API
+  version: 1.2.3
+
+components:
+  schemas:
+    $ref: "./schemas.yml"
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
+paths:
+  /getchannels:
+    get:
+      operationId: channels_list
+      summary: List channels
+      description: |
+        Запрос к getchannels инициируется СКУД при необходимости выяснить какие каналы есть на
+        стороне СОТ, какие у них ID и названия. Данная информация позволяет СКУД показать
+        оператору список каналов с их человеко-читаемыми названиям, для дальнейшей работы же
+        СКУД сохранит и будет использовать соответствующий ID канала.
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './schemas.yml#/channels_list'
+      tags:
+      - channels
+
+  /getpersons:
+    get:
+      operationId: persons_list
+      summary: List persons
+      description: |
+        Запрос выполняется при старте сервера СКУД и при изменении каких либо
+        синхронизируемых данных на стороне СКУД. В случае если запрос или последующие за ним
+        запросы updateperson и removeperson (см. ниже) завершается неудачно, СКУД будет пытаться
+        раз в 5 секунд повторить запрос до тех пор пока синхронизация не пройдет без ошибок.
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './schemas.yml#/persons_list'
+      tags:
+      - persons
+
+  /updateperson:
+    post:
+      operationId: person_save
+      summary: Save person
+      description: |
+        Запрос к updateperson инициируется СКУД при необходимости изменить данные человека в
+        СОТ или создать нового человека. Необходимость передачи фотографий и номеров
+        пропусков определяется установкой одноимённых опций в окне настройки взаимодействия.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './schemas.yml#/person'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './schemas.yml#/person'
+      tags:
+      - persons
+
+  /removeperson:
+    get:
+      operationId: person_delete
+      summary: Delete person
+      description: |
+        Запрос к removeperson инициируется СКУД при необходимости удалить человека в СОТ.
+
+        По получению запроса СОТ должна найти в своей базе человека с указанным id и удалить
+        его. Если такого человека уже не было, то СОТ должны ничего не делать, но все равно
+        вернуть позитивный исход.
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './schemas.yml#/ok_response'
+      tags:
+      - persons
+
+  /event:
+    get:
+      operationId: event_get
+      summary: Poll event
+      description: |
+        Запрос к event инициируется СКУД для получения событий от СОТ.
+
+        Запрос должен не завершаться "никогда" по инициативе СОТ, т.е. соединение остается
+        открытым, в него СОТ присылает новые события по мере возникновения.
+
+        Даже если ничего не происходит СОТ раз в 5 секунд присылает искусственное "Keep alive"
+        событие, чтобы обе стороны соединения были уверены, что соединение все еще в порядке.        
+
+        По инициативе СКУД соединение тоже не должно никогда закрываться за исключением
+        ситуации, когда СКУД 30 секунд по нему ничего не получал - это нужно для выявления
+        ситуаций повисших соединений, когда из-за сети между СОТ и СКУД соединение по факту
+        уже перестало работать, но СКУД об этом могла не узнать. Keep alive-ы каждые 5 секунд
+        обеспечивают чтобы это не происходило в нормальной ситуации.
+
+        СОТ должна высылать в соединение события по мере того как они происходят. События
+        высылаются в форме json объектов. Разделителем событий служит пустая строка. 
+
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: './schemas.yml#/event'
+      tags:
+      - events
+
+security:
+- bearerAuth: []
+servers:
+- description: your local installation
+  url: https://api.flussonic.cloud/api/v3/sigur
+tags:
+- name: channels
+- name: persons
+  description: |
+    Управление сохраненными на стороне СОТ лицами
+- name: events

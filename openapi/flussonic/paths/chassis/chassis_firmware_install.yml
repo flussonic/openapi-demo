@@ -1,0 +1,28 @@
+post:
+  x-private: true
+  operationId: chassis_firmware_install
+  summary: Install firmware
+  description: Install firmware for specific version
+  parameters:
+  - description: firmware version
+    in: query
+    name: version
+    required: true
+    schema:
+      example: '21.09-204'
+      type: string
+  - description: download channel
+    in: query
+    name: channel
+    schema:
+      example: lanner/master
+      type: string
+  responses:
+    '200':
+      description: Downloaded and installed firmware
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_firmware'
+  tags:
+  - chassis

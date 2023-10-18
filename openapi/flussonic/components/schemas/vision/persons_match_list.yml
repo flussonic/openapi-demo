@@ -1,0 +1,3 @@
+allOf:
+- $ref: '../../schemas.yml#/collection_response'
+- $ref: '../../schemas.yml#/vision_person_matches'

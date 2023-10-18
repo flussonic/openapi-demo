@@ -1,0 +1,39 @@
+type: object
+properties:
+  width:
+    description: |
+      The picture width in pixels on the display where it will be played by a player.
+      If you need to insert a web-player into a web page, use this value for choosing the player size.
+    nullable: true
+    type: integer
+  height:
+    description: |
+      The picture height in pixels on the display where it will be played by a player.
+      If you need to insert a web-player into a web page, use this value for choosing the player size.
+    nullable: true
+    type: integer
+  strategy:
+    description: |
+      The algorithm of the picture resizing: crop, scale, or fit.
+    default: fit
+    oneOf:
+    - title: Crop
+      const: crop
+    - title: Scale
+      const: scale
+    - title: Fit
+      const: fit
+    type: string
+    example: crop
+  background:
+    description: |
+      The color of the area in the player that is not occupied by the video after resizing. 
+      It is used only with the 'fit' strategy.
+    nullable: true
+    anyOf:
+    - oneOf:
+      - title: Blur
+        const: blur
+      type: string
+    - type: string
+      format: hexcolor

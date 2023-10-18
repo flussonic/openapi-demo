@@ -1,0 +1,5 @@
+anyOf:
+- enum:
+  - false
+  type: boolean
+- type: string

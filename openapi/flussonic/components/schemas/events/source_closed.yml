@@ -1,0 +1,40 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Source closed.
+    url:
+      description: The input (source) URL.
+      type: string
+      format: url
+      nullable: true
+    priority:
+      description: The input priority.
+      type: integer
+      nullable: true
+    bitrate:
+      description: The input bitrate.
+      type: number
+      format: speed
+      nullable: true
+    reason:
+      description: Reason for closing the source.
+      type: object
+      nullable: true
+    limit:
+      description: Retry limit.
+      type: integer
+      nullable: true
+    count:
+      description: Retry count.
+      type: integer
+      nullable: true
+    client_count:
+      description: The number of clients.
+      type: integer
+      nullable: true
+- $ref: '../../schemas.yml#/event_session'
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'

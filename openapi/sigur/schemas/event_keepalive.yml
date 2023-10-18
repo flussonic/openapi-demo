@@ -1,0 +1,7 @@
+type: object
+properties:
+  type:
+    type: string
+    const: '0ab0a061-12ec-4092-831d-33afe4f8a5f7'
+    description: |
+       Keep alive событие

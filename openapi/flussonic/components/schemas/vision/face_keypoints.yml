@@ -1,0 +1,23 @@
+type: object
+description: Detected face keypoints
+properties:
+  left_eye:
+    description: Left eye position
+    allOf:
+    - $ref: ../../schemas.yml#/vision_keypoint
+  right_eye:
+    description: Right eye position
+    allOf:
+    - $ref: ../../schemas.yml#/vision_keypoint
+  nose:
+    description: Nose position
+    allOf:
+    - $ref: ../../schemas.yml#/vision_keypoint
+  left_lip_corner:
+    description: Left lip corner position
+    allOf:
+    - $ref: ../../schemas.yml#/vision_keypoint
+  right_lip_corner:
+    description: Right lip corner position
+    allOf:
+    - $ref: ../../schemas.yml#/vision_keypoint

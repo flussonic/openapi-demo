@@ -1,0 +1,52 @@
+type: object
+properties:
+  pmt:
+    description: |
+      PID  of the elementary stream that contains Program Map Table (PMT) in the outgoing MPEG-TS stream.
+
+      PMT contains the description of each program and lists the PIDs of elementary streams associated with that program.
+      For instance, a transport stream used in digital television might contain three programs, to represent three television channels. 
+      Suppose each channel consists of one video stream, one or two audio streams, and any necessary metadata. 
+      A receiver wishing to decode one of the three channels merely has to decode the payloads of each PID associated with its program. 
+      It can discard the contents of all other PIDs.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'
+    nullable: true
+  pcr:
+    description: |
+      PID of the elementary stream that contains PCR (Program Clock Reference) in the outgoing MPEG-TS stream.
+
+      PCR is the time label used for synchronization of a stream playback with real time. 
+      Additionally, for DVB streams it is used for managing a decoder and its buffer. 
+      In this case, PCR gives a signal to the frames with DTS<PCR to be sent to the decoder from the buffer. 
+      This mechanism allows to compensate different sizes of frames: if a frame is too big to be played in time with a specified FPS, the frames from the buffer are played.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'
+    nullable: true
+  sdt:
+    description: |
+      PID  of the elementary stream that contains Service Description Table (SDT) in the outgoing MPEG-TS stream.
+      SDT provides information about services contained in MPEG-TS stream.
+    allOf:
+    - $ref: '../../schemas.yml#/ts_pid'
+    nullable: true
+  media:
+    description: Information about a particular media track.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_pid'
+    type: array
+    nullable: true
+  default:
+    description: |
+      The default algorithm of selecting PID for a track.
+
+      * `auto`: track PID = PMT PID + track ID, 
+      where PMT PID is the PID of Program Map Table and track ID is a number of the track set by Flussonic 
+      (usually, all video tracks and then all audio tracks are numbered starting from 1).
+      * `increment`: track PID = previous track PID + 1.
+    enum:
+    - auto
+    - increment
+    type: string
+    nullable: true

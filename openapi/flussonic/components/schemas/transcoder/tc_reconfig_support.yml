@@ -1,0 +1,13 @@
+anyOf:
+- type: string
+  oneOf:
+  - title: Full
+    const: full
+  - title: Decoder
+    const: decoder
+  - title: Encoder
+    const: encoder
+- type: boolean
+  oneOf:
+  - title: False
+    const: false

@@ -1,0 +1,89 @@
+get:
+  operationId: streamer_streams_list
+  summary: Get streams for streamer
+  description: |
+    Return list of configured streams for the streamer
+
+  parameters:
+  - description: Streamer hostname
+    in: path
+    name: hostname
+    required: true
+    schema:
+      example: flussonic.example.com
+      type: string
+    style: simple
+  - name: select
+    description: |
+      Comma-separated list of fields (including nested) that will be returned.
+      Use `parent.child` notation to mention nested (child) fields.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: name,inputs,dvr.root
+      type: string
+    style: form
+  - name: sort
+    description: |
+      Composite sort direction. Specify field name(s) using comma `,` as a separator.
+
+      Default sorting order is alphabetical by `name`.
+
+      Place `-` before the field name to sort in reverse alphabetical order or descending.
+    explode: false
+    in: query
+    required: false
+    schema:
+      example: -dvr.root,name
+      type: string
+    style: form
+  - name: limit
+    description: |
+      Limit the number of records in the selected collection to N elements. Default value is 100
+    explode: false
+    in: query
+    required: false
+    schema:
+      type: integer
+      example: 100
+    style: form
+  - name: cursor
+    description: |
+      A properly encoded equivalent of offset allowing you to read the next bunch of items.
+      We do not offer common `offset` fields, so please use cursor for predictable
+      fetching of quickly changing list of items.
+    in: query
+    required: false
+    schema:
+      type: string
+      example: 'JTI0cG9zaXRpb25fZ3Q9MQ=='
+  - name: q
+    description: Search pattern for text fields like name, title, urls, etc.
+    in: query
+    required: false
+    schema:
+      type: string
+      example: somepattern
+
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/streams_list'
+      description: Response
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Streamer not found in Central configuration
+    '403':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Streamer unathorized
+  tags:
+  - config-external

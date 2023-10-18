@@ -1,0 +1,21 @@
+post:
+  operationId: web_push_unsubscribe
+  summary: Delete subscription
+  description: |
+    Deletes the subscription, so the client will no longer receive Push Messages on it
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/web_push_subscription'
+  responses:
+    '204':
+      description: Subscription was deleted
+    '404':
+      description: Subscription was not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+    - web_push

@@ -1,0 +1,48 @@
+type: object
+required:
+  - name
+  - display
+  - start_url
+  - id
+  - icons
+properties:
+  name:
+    description: "The product name."
+    type: string
+    example: "My_awesome_product"
+  display:
+    oneOf:
+      - const: "fullscreen"
+        description: "Opens the web application without any browser UI and takes up the entirety of the available display area."
+      - const: "standalone"
+        description: "Opens the web app to look and feel like a standalone app. The app runs in its own window, separate from the browser, and hides standard browser UI elements such as the URL bar."
+      - const: "minimal-ui"
+        description: "This mode is similar to standalone, but provides the user a minimal set of UI elements for controlling navigation (such as back and reload)."
+    example: "standalone"
+    default: "standalone"
+  start_url:
+    type: string
+    description: "The start_url tells the browser where your application should start when it is launched, and prevents the app from starting on whatever page the user was on when they added your app to their home screen."
+    example: "https://www.example.com/"
+  id:
+    type: string
+    description: "The id property allows you to explicitly define the identifier used for your application. Adding the id property to the manifest removes the dependency on the start_url or the location of the manifest, and makes it possible for them to be updated in the future."
+    example: "https://www.example.com/"
+  icons:
+    type: array
+    description: "The list of icons of the PWA."
+    items:
+      type: object
+      properties:
+        src:
+          type: string
+          description: "The path to an icon."
+          example: "images/icon.svg"
+        sizes:
+          type: string
+          description: "The sizes of an icon."
+          example: "192x192"
+        type:
+          type: string
+          description: "The type of an icon"
+          example: "image/svg+xml"

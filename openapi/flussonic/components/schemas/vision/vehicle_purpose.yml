@@ -1,0 +1,10 @@
+description: The purpose of the vehicle, e.g. emergency or regular.
+type: string
+oneOf:
+- title: Regular
+  const: regular
+  description: Regular
+
+- title: Emergency
+  const: emergency
+  description: Emergency

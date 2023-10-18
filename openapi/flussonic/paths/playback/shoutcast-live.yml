@@ -1,0 +1,25 @@
+get:
+  operationId: shoutcast_live
+  summary: SHOUTcast playlist
+  description: Use this URL to play audio streams via SHOUTcast protocol which is used for streaming audio over an HTTP connection.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/video-playback/#shoutcast
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        audio/mpeg:
+          schema:
+            type: string
+      description: SHOUTcast stream
+  tags:
+    - radio
+

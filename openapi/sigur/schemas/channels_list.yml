@@ -1,0 +1,8 @@
+type: object
+properties:
+  channels:
+    type: array
+    items:
+      $ref: './schemas.yml#/channel'
+    description: |
+      Список доступных для пользователя каналов

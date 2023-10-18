@@ -1,0 +1,45 @@
+type: object
+properties:
+  sync:
+    # TODO: deprecate realtime method after 23.09
+    description: |
+      This parameter is used for a mixer stream that uses other streams as its video and audio sources.
+
+      If the parameter is set to `realtime`, audio frames will be played in sync with video frames: 
+      if the difference between timestamps of an audio frame and a corresponding video frame is more than 2 seconds, 
+      the audio frame will be played at the timestamp of the video frame. 
+
+      If this parameter is set to `dts`, no synchronization is performed.
+    enum:
+    - dts
+    - realtime
+    type: string
+    example: dts
+    default: dts
+    x-api-allow:
+    - watcher-core
+  audio_add:
+    # FIXME: for refactoring
+    type: integer
+    description: Moves audio timestamp forwards or backwards on a specified number of milliseconds.
+    deprecated: true
+    x-delete-at: 23.09  # also check KROK and MGS and protocolium template
+    format: milliseconds
+    x-alias: audio_offset
+    x-api-allow:
+    - watcher-core
+  audio_offset:
+    type: integer
+    description: Rename audio_add, worked only for dts sync method
+    x-private: true
+    format: milliseconds
+  mixer_strategy:
+    description: |
+      The mixing mode for the `mixer://` input type.
+    oneOf:
+      - const: all
+        description: Mix all input tracks.
+      - const: first_video_audio
+        description: Mix only a first video track of the first input with a first audio track of the second input.
+    default: first_video_audio
+    type: string

@@ -1,0 +1,165 @@
+type: object
+properties:
+  preset:
+    description: |
+      A set of values that determine a certain encoding speed, which influences a compression ratio. 
+      A slower preset will provide better compression (compression is quality per file size).
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/transcoder/#transcoder-preset
+    nullable: true
+    default: veryfast
+    allOf:
+    - $ref: '../../schemas.yml#/tc_preset'
+    example: medium
+  profile:
+    description: Limits the output to a specific H.264 profile.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_profile'
+  level:
+    description: |
+      A set of constraints that indicate a degree of required decoder performance.
+      This parameter is used for compatibility with old devices.
+    nullable: true
+    anyOf:
+    - allOf:
+      - $ref: '../../schemas.yml#/h264_level'
+    - allOf:
+      - $ref: '../../schemas.yml#/hevc_level'
+    - allOf:
+      - $ref: '../../schemas.yml#/mp2v_level'
+  size:
+    description: Target size of the image and the strategy to achieve it.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_size'
+  sar:
+    description: Target aspect ratio.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_sar'
+  logo:
+    description: |
+      The configuration of a logo "burned" into the video track.
+      The transcoder adds the logo before the video is resized as specified in the `size` option. 
+      This means that the logo can be visibly stretched if the size was changed significantly.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_logo'  
+  alogo:
+    description: |
+      The configuration of a logo added to the video track after the video was resized as specified in the `size` option.
+
+      This prevents the logo picture from stretching that might occur when the `logo` option is used. 
+      You will need to prepare and specify a separate file with a logo for each size of the resulting video track.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_logo'
+  fps:
+    description: |
+      Frame rate (frames per second) - the speed at which a sequence of images is displayed on a screen.
+
+      Higher frame rates capture more images per second, which makes for smoother video.
+      The standard frame rate for color television in the Phase Alternating Line (PAL) format is 25 fps.
+      The standard frame rate for color television in the National Television System Committee (NTSC) format is 29,97 fps
+      (a little bit lower than the original frame rate of black and white NTSC television, equal to 30 fps.)
+      If interlaced TV is used, two fields of each frame (with odd-numbered lines and with even-numbered lines) are displayed consequently,
+      but the frame rate is actually not doubled (50 half-frames are still equal to 25 original frames).
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_fps'
+  refs:
+    description: |
+      The number of reference frames in a GOP.
+      Reference frames are frames of a compressed video that are used to define other frames (P-frames and B-frames).
+    nullable: true
+    maximum: 6
+    minimum: 1
+    type: integer
+  gop:
+    description: |
+      Sets the number of frames in a GOP.
+      The encoder will create all GOPs of an exactly identical size - as specified in this option.
+    nullable: true
+    type: integer
+    example: 150
+  qp_range:
+    description: |
+      The ranges of the quantization parameter for different types of frames in a GOP.
+
+      Quantization is an algorithm used for video compression. It is based on fragmentation of video frames.
+      Increasing this parameter allows to improve the compression but may lower the picture quality.
+      Usually, these ranges are defined automatically by the transcoder, but for some types of transcoders it makes sense to set them manually.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_qp_range'
+  threads:
+    description: |
+      Number of threads used by the encoder when transcoding with CPU (it is not used for other types of transcoder).
+      This parameter allows to increase performance by adding new threads. By default, it is autodetected.
+    nullable: true
+    type: integer
+  open_gop:
+    description: |
+      Whether open GOP is used. Open GOP contains P-frames that refer to the frames before the keyframe.
+      It allows to decrease bitrate to 5-7%, but can result in breaking the picture.
+
+      Do not enable this option if the track will be played over segment-based protocols (HLS, DASH, etc.) because 
+      absence of keyframes or IDR frames in the same segment with P-frames may prevent playback. 
+      [Read more about tracks, GOP and segments](https://flussonic.com/doc/data-model/).
+    default: false
+    type: boolean
+  interlace:
+    description: |
+      This parameter is used to get an interlaced stream from a progressive one.
+      The allowed values are `true` (interlaced video), `false` (progressive video), or one of the methods for producing interlaced video supported for the selected type of transcoder.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/interlace_settings'
+  rc_method:
+    description: |
+      A method for creating output video with constant bitrate suitable for broadcasting to television networks.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/transcoder/#video-options
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/rc_method'
+  temporal_tradeoff:
+    description: |
+      Drop some frames in dynamic scenes when the transcoder does not have time to code all frames.
+      The allowed values are: 
+      
+      * `15` - drop 1 from 5
+      * `13` - drop 1 from 3
+      * `12` - drop 1 from 2
+      * `23` - drop 2 from 3
+      * `0` - do not drop frames
+    nullable: true
+    type: integer
+  vbv_bufsize:
+    description: |
+      Virtual buffer size, it bits. The default value is `gop / fps * bitrate`.
+    nullable: true
+    type: integer
+  resize_mode:
+    description: |
+      The mode to be used for resizing video tracks. It is one of the computing platforms for Flussonic Coder:
+
+      * vic -  Video Image Converter, specific for Jetson Nvidia
+      * cuda - CUDA (or Compute Unified Device Architecture)
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/transcoder_resize_mode'
+  burn:
+    description: Configuration of burn-in text, timestamp, or subtitles to video frames.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_burn'
+  extra:
+    additionalProperties:
+      type: string
+    type: object
+    nullable: true
+    description: Some additional options.

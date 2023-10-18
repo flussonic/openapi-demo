@@ -1,0 +1,11 @@
+type: object
+properties:
+  url:
+    description: |
+      URL of the epg source.
+    type: string
+# Если указать format, то ломается http_api_tests в флюссонике, потому что вместо урла передаётся "string"
+#   format: input_url
+    examples:
+      stream:
+        value: 'copy://local_stream_name'

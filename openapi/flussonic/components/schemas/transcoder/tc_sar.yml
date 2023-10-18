@@ -1,0 +1,18 @@
+type: object
+properties:
+  x:
+    description: |
+      The first number in SAR - the ratio of the width of the display video representation to the width of the pixel representation.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/transcoder/#video-options
+    nullable: true
+    type: integer
+  y:
+    description: |
+      The second number in SAR - the ratio of the width of the display video representation to the width of the pixel representation.
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/transcoder/#video-options
+    nullable: true
+    type: integer

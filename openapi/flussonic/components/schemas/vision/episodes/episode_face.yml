@@ -1,0 +1,25 @@
+allOf:
+- $ref: ../../../schemas.yml#/episode_base
+- type: object
+  properties:
+    episode_type:
+      type: string
+      description: Face is detected
+      const: face
+    detections:
+      type: array
+      description: Detections associated with this episode
+      items:
+        $ref: ../../../schemas.yml#/vision_detected_face
+    fingerprint:
+      description: The fingerprint of the detected face
+      allOf:
+      - $ref: ../../../schemas.yml#/vision_face_fingerprint
+    matched_persons:
+      description: |
+        List of matched persons with similarity metric.  
+        Videoanalytics identification service enriches episode's data and fills this field
+        with the list of persons that are similar to the face detected in this episode.
+      type: array
+      items:
+        $ref: ../../../schemas.yml#/vision_person_match

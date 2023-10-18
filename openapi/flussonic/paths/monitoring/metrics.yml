@@ -1,0 +1,58 @@
+get:
+  operationId: monitoring_metrics
+  summary: Metrics
+  description: |
+    Prometheus metrics for server
+  parameters:
+  - name: request
+    in: query
+    required: false
+    style: form
+    description: |
+      Details on requested metrics.
+    schema:
+      oneOf:
+      - const: server
+        description: Only server metrics
+      - const: streams
+        description: Only stream metrics
+      - const: pusher
+        description: |
+          Metrics from stream pusher. If this is provided then
+          `name` and `pusher` options are mandatory
+      - const: tp
+        description: |
+          Transponder metrics. If this is provided, then
+          `name` is mandatory
+      example: "pusher"
+  - name: name
+    in: query
+    required: false
+    style: form
+    description: |
+      Object for metrics (stream or transponder)
+    schema:
+      type: string
+  - name: pusher
+    in: query
+    required: false
+    style: form
+    description: |
+      Pusher ID of the stream to show metrics
+    schema:
+      type: integer
+      minimum: 1
+  responses:
+    '200':
+      description: |
+        Metrics
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas.yml#/prometheus_metrics'
+        text/plain:
+          schema:
+            type: string
+  tags:
+  - monitoring
+

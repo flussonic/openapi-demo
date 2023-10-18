@@ -1,0 +1,67 @@
+type: object
+properties:
+  payload_type:
+    description: |
+      The value used in `m=audio 9 RTP/SAVPF 111 103 104 9 0 8 106 105 13 126` and
+      `a=rtpmap:9 G722/8000`
+    type: integer
+  codec:
+    description: This payload codec.
+    allOf:
+    - $ref: '../../schemas.yml#/frame_codec'
+  timescale:
+    type: integer
+    description: Divider of RTP timestamps.
+  channels:
+    type: integer
+    description: How many audio channels are used.
+    nullable: true
+  feedbacks:
+    description: The list of supported feedback options.
+    allOf:
+    - $ref: '../../schemas.yml#/webrtc_rtcp_feedbacks'
+  retransmit_payload_type:
+    description: |
+      `a=rtpmap:102 H264/90000
+      a=rtpmap:121 rtx/90000
+      a=fmtp:121 apt=102`
+
+      According to https://tools.ietf.org/html/rfc4588 codec rtx means
+      that it is possible to request retransmit of packets.
+      `apt` (associated payload type) points at this payload that is retransmitable.
+
+    nullable: true
+  h264_packing:
+    type: string
+    enum:
+    - fua
+    default: 'fua'
+    description: |
+      `packetization-mode=1` in SDP means that H264 can be packed with FU-A.
+      `packetization-mode=0` is not practically used.
+    nullable: true
+
+  codec_specific:
+    description: |
+      `a=fmtp:111 minptime=10; useinbandfec=1
+      a=fmtp:98 profile-id=2
+      a=fmtp:102 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f
+      a=fmtp:120 max-fs=12288;max-fr=60
+      a=fmtp:111 minptime=10`
+
+      This attribute allows parameters that are specific to a
+      particular format to be conveyed in a way that SDP does not
+      have to understand them.
+
+      https://datatracker.ietf.org/doc/html/rfc3264:
+        The interpretation of fmtp parameters in an offer depends on the
+      parameters. In many cases, those parameters describe specific
+      configurations of the media format, and should therefore be processed
+      as the media format value itself would be.  This means that the same
+      fmtp parameters with the same values MUST be present in the answer if
+      the media format they describe is present in the answer.
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/rfc4566#section-6
+    type: string
+    nullable: true

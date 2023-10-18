@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+    description: H323 input ID.
+  video_bitrate:
+    type: integer
+    format: speed
+    description: H323 input bitrate.
+  audio_bitrate:
+    type: integer
+    format: speed
+    description: H323 audio bitrate.
+  connections:
+    type: integer
+    description: H323 connections.
+
+  

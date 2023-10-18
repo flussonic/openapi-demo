@@ -1,0 +1,11 @@
+allOf:
+- $ref: '../../schemas.yml#/collection_response'
+- type: object
+  required:
+    - persons
+  properties:
+    persons:
+      description: List of fetched persons according to the query parameters.
+      type: array
+      items:
+        $ref: '../../schemas.yml#/vision_person'

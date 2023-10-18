@@ -1,0 +1,7 @@
+type: object
+properties:
+  devices:
+    description: Devices list available for running vision.
+    type: array
+    items:
+      $ref: ../../schemas.yml#/vision_device_info

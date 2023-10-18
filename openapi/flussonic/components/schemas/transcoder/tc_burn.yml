@@ -1,0 +1,23 @@
+type: object
+properties:
+  text:
+    description: |
+      Configuration of burn-in text to video frames. 
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_label'
+  time:
+    description: |
+      Configuration of burn-in timestamp to video frames. 
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/tc_label'
+  sub:
+    description: |
+      Configuration of burn-in subtitles to video frames. 
+    nullable: true
+    x-scope:
+    - flussonic
+    - cloud
+    allOf:
+    - $ref: '../../schemas.yml#/tc_label'

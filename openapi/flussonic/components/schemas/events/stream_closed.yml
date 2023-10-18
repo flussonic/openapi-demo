@@ -1,0 +1,19 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: Stream closed.
+    reason:
+      description: Reason for closing the stream.
+      type: string
+      nullable: true
+      x-atom: true
+    bytes_out:
+      description: The number of bytes transmitted.
+      type: integer
+      format: bytes
+      nullable: true
+- $ref: '../../schemas.yml#/session_generic'
+- $ref: '../../schemas.yml#/event_media'
+- $ref: '../../schemas.yml#/event_default'

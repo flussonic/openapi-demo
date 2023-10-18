@@ -1,0 +1,185 @@
+type: object
+properties:
+
+# decklink
+
+  mode:
+    description: |
+      Mode of the input stream captured from the Decklink card. It is composed of the size and FPS of the captured video. 
+
+      Usually, it is autodetected, but for some Decklink models that you'll need to specify it manually.
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/live-streaming/decklink-sdi/#capturing-video-from-decklink-sdi-or-hdmi-cards
+    anyOf:
+    - $ref: '../../schemas.yml#/bm_display_mode'
+    example: 4d30
+  ainput:
+    description: |
+      Audio interface for capturing from the Decklink card.
+
+      Usually, it is autodetected, but for some Decklink models you should specify it manually.
+    anyOf:
+    - type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+    - enum:
+      - embedded
+      - aes_ebu
+      - analog
+      - analog_xlr
+      - analog_rca
+      - microphone
+      - headphones
+      type: string
+    example: microphone
+  vinput:
+    description: |
+      Video interface for capturing from the Decklink card.
+
+      Usually, it is autodetected, but for some Decklink models you should specify it manually.
+    anyOf:
+    - type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    - enum:
+      - sdi
+      - hdmi
+      - optical_sdi
+      - component
+      - composite
+      - s_video
+      type: string
+    example: hdmi
+  vpts:
+    description: |
+      Synchronization mode for video captured from the Decklink card.
+    oneOf:
+      - const: audio
+        description: Synchronization by audio.
+      - const: ref
+        description: Synchronization according to the timing reference signal.
+      - const: 2
+        description: Equivalent of 'audio'.
+      - const: 3
+        description: Equivalent of 'ref'.
+  apts:
+    description: |
+      Synchronization mode for audio captured from the Decklink card.
+    oneOf:
+      - const: video
+        description: Synchronization by video.
+      - const: ref
+        description: Synchronization according to the timing reference signal.
+      - const: 1
+        description: Equivalent of 'video'.
+      - const: 3
+        description: Equivalent of 'ref'.
+  pixel:
+    description: Preferred pixel format for captured video.
+    oneOf:
+      - const: rgb8
+        description: rgb color model and 8 bits per pixel.
+      - const: rgb10
+        description: rgb color model and 10 bits per pixel.
+      - const: rgb12
+        description: rgb color model and 12 bits per pixel.
+      - const: yuv8
+        description: YUV color model and 8 bits per pixel.
+      - const: yuv10
+        description: YUV color model and 10 bits per pixel.
+      - const: '8'
+        description: equivalent of `yuv8`.
+      - const: '10'
+        description: equivalent of `yuv10`.
+
+  # aja
+  channel:
+    description: If an AJA SDI card has multiple output channels, specify the number of the channel to ingest video from.
+    type: integer
+    example: 2
+  sar:
+    # FIXME: for refactoring
+    description: |
+      The ratio of the width of the display representation to the width of the pixel representation of video.
+
+      This parameter is used for creating non-anamorphic video from anamorphic video.
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/transcoder/#video-options
+    type: string
+    example: '16:9'
+
+
+
+  # v4l
+  audio_device:
+    # FIXME: for refactoring
+    description: |
+      The audio device to capture audio from Stream Labs SDI cards.
+
+      This parameter is specified for ALSA devices in the following format `interface:card,device`. 
+    type: string
+    example: 'plughw:1,0'
+  video_device:
+    # FIXME: for refactoring
+    description: |
+      The video device to capture video from Stream Labs SDI cards.
+      It is actually a path to a device file created on the disk by Video4Linux.
+    type: string
+    example: '/dev/video0'
+  vbi_device:
+    # FIXME: for refactoring
+    description: |
+      The VBI device to capture raw VBI data from Stream Labs SDI cards. VBI data can contain information about teletext or closed captions.
+      It is actually a path to a VBI device file created on the disk by Video4Linux.
+    type: string
+    example: '/dev/vbi'
+
+  # teletext
+  ttxt_descriptors:
+    description: This information is necessary for adding into the PMT table to identify streams which carry teletext data in the resulting MPEG-TS stream.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/ttxt_descriptors'
+    type: array
+
+  # vbi
+  vbi_threshold:
+    description: |
+      This parameter is used for debugging when reading teletext from VBI.
+      This is a threshold, in seconds, for turning on the decoder.
+    type: integer
+  vbi_debug:
+    description: This parameter allows logging the decoded data when reading teletext from VBI.
+    type: boolean
+  vbi_decoder:
+    description: |
+      This parameter is used for debugging when reading teletext from VBI. 
+      It allows to specify which decoder is used.
+    x-private: true
+    oneOf:
+      - const: erl
+        description: The decoder in Erlang is used.
+      - const: nif
+        description: The decoder in C is used.
+
+  # audio
+  audio_tracks:
+    description: The configuration of an audio track received from DekTec SDI.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/audio_track'
+    type: array
+    x-private: true

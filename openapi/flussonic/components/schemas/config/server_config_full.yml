@@ -1,0 +1,194 @@
+type: object
+properties:
+  chassis:
+    allOf:
+    - $ref: '../../schemas.yml#/chassis_config'
+    nullable: true
+    description: The configuration of the chassis.
+    x-api-deny:
+      - central
+  event_sinks:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/event_sink_config'
+    nullable: true
+    description: The configuration of event notifications
+  auth_backends:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/auth_backend_config'
+    nullable: true
+    description: The configuration of auth backends
+    x-api-deny:
+      - central
+  vods:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/vod_config'
+    nullable: true
+    description: The configuration of VODs
+    x-api-deny:
+      - central
+  dvrs:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvr_config'
+    nullable: true
+    description: The configuration of the DVRs
+    x-api-deny:
+      - central
+  peers:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/peer_config'
+    nullable: true
+    description: The configuration of peers in the cluster.
+    x-api-deny:
+      - central
+  sources:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/source_config'
+    nullable: true
+    description: The configuration of the video sources.
+    x-api-deny:
+      - central
+  transponders:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/transponder_config'
+    nullable: true
+    description: The configuration of the transponders.
+    x-api-deny:
+      - central
+  templates:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/template_config'
+    nullable: true
+    description: The configuration of the templates.
+    x-api-deny:
+      - central
+
+  streams:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/stream_config'
+    default: []
+    description: The configuration of the streams.
+    x-api-deny:
+      - central
+  caches:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/cache_config'
+    nullable: true
+    description: The configuration of the cache.
+    x-api-deny:
+      - central
+  dvb_cards:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/dvb_card_config'
+    nullable: true
+    description: The configuration of the DVB cards.
+    x-api-deny:
+      - central
+  balancers:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/balancer_config'
+    nullable: true
+    description: The configuration of the balancers.
+    x-api-deny:
+      - central
+
+
+
+
+
+  camera_alarm:
+    allOf:
+    - $ref: '../../schemas.yml#/camera_alarm_config'
+    nullable: true
+    description: The configuration of the camera alarms.
+    x-api-deny:
+      - central
+  rproxy:
+    allOf:
+    - $ref: '../../schemas.yml#/rproxy_config'
+    nullable: true
+    description: The configuration of the port forwarding.
+  vsaas:
+    allOf:
+    - $ref: '../../schemas.yml#/vsaas_config'
+    nullable: true
+    description: The configuration of the video surveillance subsystem.
+    x-api-deny:
+      - central
+  vision:
+    allOf:
+    - $ref: '../../schemas.yml#/vision_config'
+    nullable: true
+    description: The configuration of the AI analytics subsystem.
+    x-api-deny:
+      - central
+
+  file_processor:
+    allOf:
+    - $ref: '../../schemas.yml#/file_processor_config'
+    nullable: true
+    description: The configuration of the file processor.
+    x-api-deny:
+      - central
+  iptv:
+    allOf:
+    - $ref: '../../schemas.yml#/iptv_config'
+    nullable: true
+    description: The configuration of the IPTV
+    x-api-deny:
+      - central
+
+  decklinks:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/decklink_config'
+    nullable: true
+    description: |
+      Configuration of decklink SDI capture cards
+    x-api-deny:
+      - central
+
+  web_scripts:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/web_script_config'
+    nullable: true
+    x-private: true
+    description: |
+      Prefixed lua handlers that can handle simple web requests
+    x-api-deny:
+      - central
+
+  http_proxies:
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/http_proxy_config'
+    nullable: true
+    description: |
+      List of HTTP prefixes that can be handled via call to remote http server

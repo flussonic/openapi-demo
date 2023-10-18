@@ -1,0 +1,37 @@
+type: object
+properties:
+# Stream general properties
+  static:
+    default: true
+    description: |
+      Whether a stream is `static` or not. 
+      If set to `True` the server will try to keep this stream running even if
+      there are no viewers or errors encountered.
+
+      Streamer restarts *all* `static` streams even if any internal errors occur
+      and the `static` streams crash.
+    type: boolean
+    example: true
+    x-api-allow:
+    - watcher-core
+  disabled:
+    description: |
+      Whether a stream is disabled. Disabled streams are inactive and do not run. 
+      Displayed only with the API calls.
+    type: boolean
+    example: false
+    x-api-deny:
+    - config-external
+
+  inputs:
+    description: | 
+      List of stream inputs. 
+      ***Important:*** A stream without any inputs can receive video frames **only** if backup file is specified.
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/stream_input'
+    type: array
+    x-api-allow:
+    - watcher-core
+    - vision-config-external
+

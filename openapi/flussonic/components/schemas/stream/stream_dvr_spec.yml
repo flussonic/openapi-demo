@@ -1,0 +1,3 @@
+allOf:
+- $ref: '../../schemas.yml#/stream_dvr_specific_spec'
+- $ref: '../../schemas.yml#/dvr_base_config'

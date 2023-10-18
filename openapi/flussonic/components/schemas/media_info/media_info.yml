@@ -1,0 +1,42 @@
+type: object
+properties:
+  flow_type:
+    description: Whether it is a file with a finite start and end time or a live stream.
+    nullable: true
+    allOf:
+    - $ref: '../../schemas.yml#/flow_type'
+    example: stream
+  stream_id:
+    nullable: true
+    type: integer
+    x-notice: Will be used as ts_stream_id in mpegts
+    example: 253
+    description: The identifier of the transport stream for MPEG TS streams.
+  program_id:
+    nullable: true
+    type: integer
+    x-notice: Will be used as program id
+    example: 110
+    description: The program ID for MPEG TS streams.
+  tracks:
+    description: Information about available tracks (video, audio, or text).
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/track_info'
+    type: array
+    default: []
+  duration:
+    type: number
+    format: ticks
+    description: Duration of the media, if applicable.
+    nullable: true
+  provider:
+    description: The media provider.
+    nullable: true
+    type: string
+    example: Netflix
+  title:
+    description: Human-readable title of the media.
+    nullable: true
+    type: string
+    example: Bunny

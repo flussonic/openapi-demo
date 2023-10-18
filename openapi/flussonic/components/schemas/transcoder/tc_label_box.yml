@@ -1,0 +1,27 @@
+type: object
+properties:
+  borderw:
+    description: The width, in pixel, of the border to be drawn around the text, timestamp, or subtitles.
+    nullable: true
+    type: integer
+    example: 10
+  color:
+    description: Box color.
+    nullable: true
+    anyOf:
+    - type: string
+      examples:
+        default:
+          value: "black"
+        mylive/bunny:
+          value: "white"
+    - type: string
+      format: hexcolor
+      example: '#d62d20'
+  alpha:
+    description: Box opacity (use values from 0.1 to 1.0, 0.0 - completely transparent, 1.0 - completely opaque).
+    nullable: true
+    maximum: 1
+    minimum: 0
+    type: number
+    example: 0

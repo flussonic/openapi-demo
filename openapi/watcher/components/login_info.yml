@@ -1,0 +1,12 @@
+type: object
+properties:
+  access_token:
+    type: string
+    description: |
+      A JWT token with a limited lifetime duration. JWT algorithm is RS256.
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+  refresh_token:
+    type: string
+    description: |
+      A token used to get a new access_token after expiration.
+    example: '3637e790-5530-11ed-bdc3-0242ac120002'

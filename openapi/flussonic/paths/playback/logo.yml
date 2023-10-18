@@ -1,0 +1,23 @@
+get:
+  operationId: media_logo
+  summary: Media logo
+  description: This URL returns the logo image in PNG format, configured for a stream.
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        image/png:
+          schema:
+            type: string
+            format: binary
+      description: Logo image in PNG format
+  tags:
+    - image
+

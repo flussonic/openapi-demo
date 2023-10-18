@@ -1,0 +1,62 @@
+type: object
+properties:
+  name:
+    type: string
+    format: cache_name
+    description: Globally unique cache name.
+    externalDocs:
+      description: Find more information here.
+      url: https://flussonic.com/doc/vod-file-broadcasting/cache/
+    x-primary-key: true
+    example: 'cache1'
+  path:
+    description: The path where the files from the cloud or HTTP are cached to speed up broadcasting.
+    type: string
+    format: disk_path
+    nullable: true
+    example: '/storage/cache'
+  misses:
+    description: The number of requests necessary for a file to be cached.
+    type: integer
+    nullable: true
+    example: 3
+  storage_limit:
+    description: |
+      Maximum disk consumption in bytes. 
+      When this limit is reached, the oldest files will be overridden by later files.
+    type: integer
+    format: bytes
+    nullable: true
+    example: 400000
+  expiration:
+    description: |
+      A period (in seconds) back from the current moment during which the files are stored.
+      As time goes, the files which are older than this period are being overridden by the later files.
+    type: integer
+    format: seconds
+    nullable: true 
+    example: 604800
+
+  disk_limit:
+    description: |
+      Maximum disk consumption in bytes. 
+      When this limit is reached, the oldest files will be overridden by later files.
+    type: integer
+    format: bytes
+    nullable: true
+    deprecated: true
+    x-alias: storage_limit
+    x-delete-at: "21.12"
+  time_limit:
+    description: |
+      A period (in seconds) back from the current moment during which the files are stored.
+      As time goes, the files which are older than this period are being overridden by the later files.
+    type: integer
+    format: seconds
+    nullable: true
+    deprecated: true
+    x-alias: expiration
+    x-delete-at: "21.12"
+
+required:
+  - name

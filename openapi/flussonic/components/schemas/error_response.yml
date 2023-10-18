@@ -1,0 +1,19 @@
+# According to JSON API spec
+
+type: object
+properties:
+  errors:
+    description: List of structured errors
+    type: array
+    items:
+      $ref: '../schemas.yml#/error'
+    nullable: true # FIXME: this is required only while we have `error` code in this object
+
+  error:
+    type: string
+    deprecated: true
+    x-delete-at: 23.09
+    x-private: true
+    nullable: true
+    description: |
+      This is how flussonic serves errors right now. To be removed as we migrate to new format

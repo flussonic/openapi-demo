@@ -1,0 +1,37 @@
+type: object
+properties:
+  name:
+    description: Tha name of the source group.
+    type: string
+    format: group_name
+    nullable: true    
+  auth:
+    description: Configuration of the authorization backend (play session **only**).
+      To be replaced with `on_play` configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: on_play
+  on_play:
+    description: Path to auth backend, either HTTP URL or path to script on disk. Play sessions only.
+    allOf:
+    - $ref: '../../schemas.yml#/auth_spec'
+    nullable: true
+  cache:
+    description: Cache configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/cache_spec'
+    nullable: true
+  segment_duration:
+    description: |
+      The time, in seconds, of the segment duration. Used for the protocols like HLS or DASH. 
+    allOf:
+    - $ref: '../../schemas.yml#/segment_duration'
+    nullable: true
+  dvr:
+    description: DVR configuration.
+    allOf:
+    - $ref: '../../schemas.yml#/stream_dvr_spec'
+    nullable: true

@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    description: |
+      Extension ID which is using for mapping. Must be in range 1..14
+      Each ID in this range MUST be used only once for each media
+      (or only once if the mappings are session level)
+    type: integer
+    minimum: 1
+    maximum: 14
+  name:
+    description: |
+      Each extension has unique internal name which is internaly mapped
+      to the extension URI one to one.
+      Extension URI precisely identifies the format and meaning of the extension.
+    type: string

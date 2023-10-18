@@ -1,0 +1,92 @@
+type: object
+properties:
+  width:
+    description: |
+      The picture width in pixels on the display where it will be played by a player.
+      If you need to insert a web-player into a web page, use this value for choosing the player size.
+    type: integer
+    format: pixels
+    nullable: true
+  height:
+    description: |
+      The picture height in pixels on the display where it will be played by a player.
+      If you need to insert a web-player into a web page, use this value for choosing the player size.
+    type: integer
+    format: pixels
+    nullable: true
+  fps:
+    description: |
+      Frame rate (frames per second) - the speed at which a sequence of images is displayed on a screen.
+      Higher frame rates capture more images per second, which makes for smoother video.
+      The standard frame rate for color television in the Phase Alternating Line (PAL) format is 25 fps.
+      The standard frame rate for color television in the National Television System Committee (NTSC) format is 29,97 fps
+      (a little bit lower than the original frame rate of black and white NTSC television, equal to 30 fps.)
+      If interlaced TV is used, two fields of each frame (with odd-numbered lines and with even-numbered lines) are displayed consequently,
+      but the frame rate is actually not doubled (50 half-frames are still equal to 25 original frames). 
+    nullable: true
+    type: number
+  pix_fmt:
+    allOf:
+    - $ref: '../../schemas.yml#/frame_video_pix_fmt'
+    default: yuv420p
+    description: The color model of the video.
+  num_refs_frames:
+    type: integer
+    maximum: 32
+    minimum: 0
+    nullable: true
+    description: The number of I-frames to be used for encoding.
+  sar_width:
+    description: |
+      The first number in SAR - the ratio of the width of the display video representation to the width of the pixel representation.
+    default: 1
+    type: integer
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/transcoder/#video-options
+  sar_height:
+    description: |
+      The second number in SAR - the ratio of the width of the display video representation to the width of the pixel representation.
+    default: 1
+    type: integer
+    externalDocs:
+      description: Find more information here
+      url: https://flussonic.com/doc/transcoder/#video-options
+  pixel_width:
+    description: The picture width in pixels of the original video before transcoding.
+    type: integer
+    format: pixels
+    nullable: true
+  pixel_height: 
+    description: The picture width in pixels of the original video before transcoding.
+    type: integer
+    format: pixels
+    nullable: true
+  level:
+    type: string
+    nullable: true
+    description: |
+      A set of constraints that indicate a degree of required decoder performance.
+      This parameter is used for compatibility with old devices.
+  profile:
+    description: |
+      A specific codec-dependent profile of the output video.
+      The profile allows to assume if the track can be played on a particular device.
+    type: string
+    nullable: true
+  bframes:
+    description: |
+      Average number of B-frames in a GOP. B-frames contain links to keyframes and P-frames before and after themselves.
+      B-frames help to compress the video. However, some players impose limitations on this number: usually no more than 2 B-frames are used.
+      This value also defines the GOP structure - the repeated pattern of frames after the keyframe: P, BP, BBP, BBBP, or BBBBP.
+    nullable: true
+    type: integer
+    x-notice: calculated number of bframes for statistic
+    example: 3
+  gop_size:
+    description: | 
+      The number of frames in a group of pictures (GOP). 
+      The encoder will create all GOPs of an exactly identical size - as specified in this option.
+      A bigger GOP can be good for video compression but it can result in big zap-time (the duration of time between changing a channel and displaying a new channel.)
+    nullable: true
+    type: integer

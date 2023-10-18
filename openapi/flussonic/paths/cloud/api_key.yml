@@ -1,0 +1,43 @@
+get:
+  description: |
+    This method allows you to fetch a single API key by its ID.
+  operationId: api_key_get
+  summary: Get one API key
+  parameters:
+  - name: key_id
+    description: API key id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_api_key'
+      description: Whole API key
+  tags:
+  - keys
+delete:
+  description: Delete the API key by its ID
+  operationId: api_key_delete
+  summary: Delete API key
+  parameters:
+  - name: key_id
+    description: API key id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  tags:
+  - keys

@@ -1,0 +1,20 @@
+allOf:
+  - $ref: './schemas.yml#/web_push_subscription'
+  - type: object
+    required:
+      - keys
+    properties:
+      keys:
+        type: object
+        description: Keys that are used to encrypt the payload
+        required:
+          - p256dh
+          - auth
+        writeOnly: true
+        properties:
+          p256dh:
+            type: string
+            description: Public key
+          auth:
+            type: string
+            description: Authentication secret

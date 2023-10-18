@@ -1,0 +1,16 @@
+type: object
+properties:
+  http_port:
+    description: Port that will be used for listening for HTTP requests.
+    type: integer
+    format: network_port
+  config_external:
+    type: string
+    format: url
+    nullable: true
+    description: Specify stream config backend (Central)
+    example: 'http://central.example.com/'
+  hw:
+    allOf:
+    - description: Device type used for inference
+    - $ref: ../../schemas.yml#/vision_inference_device

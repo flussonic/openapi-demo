@@ -1,0 +1,20 @@
+type: object
+required:
+- type
+- key_id
+- name
+properties:
+  type:
+    type: string
+    description: Object type
+    format: object_type
+    const: api_key
+  key_id:
+    type: integer
+    format: snowflake_id
+    example: 6902558627475886000
+    description: Key Id
+  name:
+    type: string
+    description: User provided name, e.g. the name of your application.
+    example: "middleware deploy key"

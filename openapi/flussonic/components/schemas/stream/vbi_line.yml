@@ -1,0 +1,7 @@
+anyOf:
+- maximum: 23
+  minimum: 6
+  type: integer
+- maximum: 335
+  minimum: 318
+  type: integer

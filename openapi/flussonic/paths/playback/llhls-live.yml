@@ -1,0 +1,29 @@
+get:
+  operationId: llhls_live_manifest
+  summary: LL-HLS live manifest
+  description: |
+    Use this URL to play a stream via Apple Low-Latency HLS.
+
+    To play a stream via this protocol, you should enable CMAF in the stream settings.
+    CMAF is a standard that is used to create MP4 fragments compliant with the Low-Latency HLS specification.
+  externalDocs:
+      description: "Find more information here."
+      url: https://flussonic.com/doc/video-playback/hls-playback/#how-to-configure-ll-hls
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  responses:
+    '200':
+      content:
+        application/vnd.apple.mpegurl:
+          schema:
+            type: string
+      description: LL-HLS Live manifest with links to other manifests
+  tags:
+    - ll-hls
+

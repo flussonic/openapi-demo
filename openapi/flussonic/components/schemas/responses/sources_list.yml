@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      sources:
+        description: The list of sources.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/source_config'

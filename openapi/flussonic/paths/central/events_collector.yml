@@ -1,0 +1,17 @@
+post:
+  operationId: events_collector
+  summary: Collect batch of events and make episodes
+  x-private: true
+  description: |
+       This method allows to generate episodes from the batch of events pushed from streamer
+  requestBody:
+    description: Batch of events
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/central_events_batch'
+  responses:
+    '204':
+      description: Processed
+  tags:
+  - events

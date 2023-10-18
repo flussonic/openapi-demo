@@ -1,0 +1,46 @@
+get:
+  operationId: jpeg_preview_dvr
+  summary: JPEG thumbnail from DVR
+  description: |
+    If you configure JPEG thumbnail generation and DVR for a stream, 
+    this URL can be used to access the stream's recorded thumbnail (keyframe) which is the closest to the specified time as a JPEG image.
+
+    If no thumbnails are recorded then `404 Not Found` will be returned.
+
+    Note that generating JPEG thumbnails is a resource-intensive operation 
+    because Flussonic takes the first keyframe of each segment, decodes it to raw video, and encodes back to a JPEG image. 
+    Please consider using MP4 video thumbnails instead.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/jpeg-thumbnails/
+  parameters:
+  - name: name
+    in: path
+    description: Stream name. It may be multi-segment, i.e. `/part1/part2/part3`.
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: from
+    in: path
+    description: The UTC moment after which Flussonic will search for the recorded JPEG.
+    required: true
+    schema:
+      type: string
+      example: 1644216248
+  responses:
+    '200':
+      content:
+        image/jpeg:
+          schema:
+            type: string
+            format: binary
+      description: Recorded JPEG file closest to the requested UTC moment.
+    '404':
+      description: No recorded JPEG was found at requested UTC.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+  tags:
+    - image

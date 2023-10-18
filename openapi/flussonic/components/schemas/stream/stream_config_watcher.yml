@@ -1,0 +1,24 @@
+type: object
+properties:
+  is_favourite:
+    description: The stream is added to favorites list.
+    type: boolean
+    x-api-allow:
+      - watcher-client
+    x-scope:
+      - watcher-client
+  notifications_enabled:
+    description: Notifications are enabled for the camera.
+    type: boolean
+    x-api-allow:
+      - watcher-client
+    x-scope:
+      - watcher-client
+  map_coordinates:
+    description: Camera coordinates on a map or a floor plan.
+    allOf:
+    - $ref: '../../schemas.yml#/map_spec'
+    x-api-allow:
+      - watcher-client
+    x-scope:
+      - watcher-client

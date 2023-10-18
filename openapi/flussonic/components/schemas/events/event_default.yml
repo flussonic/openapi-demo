@@ -1,0 +1,13 @@
+type: object
+properties:
+  utc_ms:
+    type: integer
+    format: milliseconds
+    nullable: true
+    description: |
+      The time of the event registration on the server.
+  event_id:
+    type: integer
+    nullable: true
+    description: |
+      Event identifier.

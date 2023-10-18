@@ -1,0 +1,84 @@
+type: object
+properties:
+  application_name:
+    allOf:
+      - $ref: "../../schemas.yml#/application_name"
+    description: Application name
+    example: "mseld_player"
+    x-telemetry-mapping: "Session/fApplicationName"
+    x-private: true
+  application_version:
+    type: string
+    nullable: true
+    description: Application version
+    example: "21.10.3"
+    x-telemetry-mapping: "Session/fApplicationVersion"
+    x-private: true
+
+  # Counts player got
+  stall_count:
+    type: integer
+    nullable: true
+    x-telemetry-mapping: "Session/fPlayerStallCount"
+    x-private: true
+    description: The number of stalls during the playback in the player.
+  pause_count:
+    type: integer
+    nullable: true
+    x-telemetry-mapping: "Session/fPlayerPauseCount"
+    description: The number of times the user paused the playback in the player.
+  error_count:
+    type: integer
+    nullable: true
+    x-telemetry-mapping: "Session/fPlayerErrorCount"
+    x-private: true
+    description: The number of errors during the playback in the player.
+  reconnect_count:
+    type: integer
+    nullable: true
+    x-telemetry-mapping: "Session/fPlayerReconnectCount"
+    x-private: true
+    description: The number of reconnects during the playback in the player.
+  bitrate_change_count:
+    type: integer
+    nullable: true
+    x-telemetry-mapping: "Session/fPlayerBitrateChangeCount"
+    x-private: true
+    description: Number of bitrate changes during playback of the player.
+
+  # Action times player got
+  live_duration:
+    type: integer
+    format: milliseconds
+    nullable: true
+    x-telemetry-mapping: "Session/fLiveDuration"
+    x-private: true
+    description: The time during which the player was in the playback state.
+  stall_duration:
+    type: integer
+    format: milliseconds
+    nullable: true
+    x-telemetry-mapping: "Session/fStallDuration"
+    x-private: true
+    description: Duration of stall the live broadcast.
+  pause_duration:
+    type: integer
+    format: milliseconds
+    nullable: true
+    x-telemetry-mapping: "Session/fPauseDuration"
+    x-private: true
+    description: Duration of pause the live broadcast by user initiation.
+
+  #VideoPlaybackQuality stats
+  total_video_frames:
+    type: integer
+    nullable: true
+    description: The number of video frames played during the session.
+  dropped_video_frames:
+    type: integer
+    nullable: true
+    description: The number of dropped video frames in the session.
+  corrupted_video_frames:
+    type: integer
+    nullable: true
+    description: The number of corrupted video frames in the session.

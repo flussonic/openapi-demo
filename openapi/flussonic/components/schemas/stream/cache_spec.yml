@@ -1,0 +1,53 @@
+type: object
+properties:
+  path:
+    description: The path where the files from the cloud or HTTP are cached to speed up broadcasting.
+    type: string
+    format: disk_path
+    nullable: true
+    example: '/storage/cache'
+    x-scope:
+      - flussonic
+  reference:
+    description: The name of the cache.
+    type: string
+    format: cache_name
+    nullable: true
+    example: 'cache1'
+  misses:
+    description: The number of requests necessary for a file to be cached.
+    type: integer
+    nullable: true
+    example: 3
+  storage_limit:
+    description: |
+      Maximum disk consumption in bytes. 
+      When this limit is reached, the oldest files will be overridden by later files.
+    type: integer
+    format: bytes
+    nullable: true
+    example: 400000
+  expiration:
+    description: |
+     A period (in seconds) back from the current moment during which the files are stored.
+     As time goes, the files which are older than this period are being overridden by the later files.
+    type: integer
+    format: seconds
+    nullable: true
+    example: 3600
+  disk_limit:
+    type: integer
+    format: bytes
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: storage_limit
+    description: Maximum disk consumption. Replaced by `storage_limit` in newer versions.
+  time_limit:
+    type: integer
+    format: seconds
+    nullable: true
+    deprecated: true
+    x-delete-at: 23.09
+    x-alias: expiration
+    description: Segment expiration period. Replaced by `expiration` in newer versions.

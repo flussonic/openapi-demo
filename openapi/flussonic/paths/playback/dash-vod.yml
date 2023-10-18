@@ -1,0 +1,56 @@
+get:
+  operationId: dash_vod_manifest
+  summary: DASH VOD
+  description: |
+    Main DASH URL that allows to play a VOD file.
+  parameters:
+  - name: name
+    in: path
+    description: |
+      Name of the VOD storage.
+    required: true
+    schema:
+      type: string
+      example: vod
+  - name: file
+    in: path
+    description: |
+      Name of the file in the VOD storage.
+    required: true
+    schema:
+      type: string
+      example: bunny.mp4
+  - name: thumbnails
+    in: query
+    description: |
+      If this parameter is specified, the thumbnail playlist is added to the primary playlist.
+
+      Example of the thumbnail playlist:
+      ```
+        <AdaptationSet id="3" mimeType="image/jpeg" contentType="image">
+               <SegmentTemplate media="$RepresentationID$/seg-0-$Time$.m4v.jpg" duration="8"></SegmentTemplate>
+               <Representation bandwidth="10000" id="images-320x180" width="320" height="180">
+                  <EssentialProperty schemeIdUri="http://dashif.org/guidelines/thumbnail_tile" value="1x1"/>
+               </Representation>
+        </AdaptationSet>
+      ```      
+      This value defines how many thumbnail links will be added to the thumbnail playlist to cover the file duration.
+      The player will add the thumbnail links to the progress bar at regular intervals. 
+      The duration of the interval between thumbnails is the whole duration of the file divided by this value.
+
+      NOTE: This option requires the parameters `thumbnails enabled=ondemand` and `size` included in the VOD location settings. 
+      For example, `thumbnails enabled=ondemand size=320x240;`.
+    schema:
+      type: integer
+      example: 100
+    required: false
+  responses:
+    '200':
+      content:
+        application/dash+xml:
+          schema:
+            type: string
+      description: DASH vod manifest
+  tags:
+    - dash
+

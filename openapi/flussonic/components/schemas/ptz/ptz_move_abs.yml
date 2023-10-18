@@ -1,0 +1,20 @@
+type: object
+required:
+  - command
+properties:
+  command:
+    type: string
+    example: move_abs
+  target:
+    $ref: ../../schemas.yml#/ptz_position
+  speed:
+    type: integer
+    minimum: 0
+    maximum: 100
+  delay:
+    summary: Delay execution of the next command
+    description: Delay execution of the next command, when this command is used as a part of a route.
+    nullable: true
+    type: integer
+    format: milliseconds
+    minimum: 0

@@ -1,0 +1,20 @@
+type: object
+properties:
+  enabled:
+    type: string
+    description: Enables collecting and sending traces to jaeger collector or agent
+    example: 'false'
+    default: 'false'
+  url:
+    type: string
+    description: URL (agent or collector) which used to collect traces and spans
+    example: http://jaeger.service.ru:19934/api/traces
+  service:
+    type: string
+    description: Name of service which used to identificate traces in Jaeger
+    example: my-central
+    default: central
+  export_timeout:
+    type: string
+    description: Configures the amount of time Central waits for an exporter to export before abandoning the export
+    example: 10s

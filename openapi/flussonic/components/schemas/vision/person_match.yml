@@ -1,0 +1,14 @@
+type: object
+description: Person matching information
+required:
+  - person
+  - match_score
+properties:
+  person:
+    description: Matched person
+    allOf:
+    - $ref: ../../schemas.yml#/vision_person
+  match_score:
+    description: Score of the match with person. 1.0 means absolute match
+    allOf:
+    - $ref: ../../schemas.yml#/vision_confidence

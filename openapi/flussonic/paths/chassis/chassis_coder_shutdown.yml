@@ -1,0 +1,18 @@
+post:
+  operationId: chassis_coder_shutdown
+  description: Turn off a specific coder module.
+  summary: Turn off coder module
+  parameters:
+  - description: coder number
+    in: path
+    name: coder
+    required: true
+    schema:
+      example: 1
+      type: integer
+    style: simple
+  responses:
+    '204':
+      description: Turned off
+  tags:
+  - chassis

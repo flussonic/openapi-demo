@@ -1,0 +1,38 @@
+get:
+  operationId: mp4_vod
+  summary: MP4 VOD thumbnail
+  description: |
+    In case of video file placed in VOD storage you can use this URL to get a video thumbnail in MP4 format
+    as the first keyframe after a specified moment of time.
+  externalDocs:
+    description: Find more information here.
+    url: https://flussonic.com/doc/jpeg-thumbnails/video-thumbnails/#video-thumbnails-of-files-in-vod
+  parameters:
+  - name: name
+    in: path
+    description: |
+      VOD file name. 
+      It is multisegment and consists of the VOD storage name and a path to the file within the storage.
+    required: true
+    schema:
+      type: string
+      example: 'vod/movies/bunny.mp4'
+  - name: from
+    in: path
+    description: |
+      The moment after which Flussonic will search for the first keyframe to generate MP4 file from.
+
+      The time is specified in the format: `hh-mm-ss` relatively to beginning of the file.
+    required: true
+    schema:
+      type: string
+      example: '01-23-55'
+  responses:
+    '200':
+      content:
+        video/mp4:
+          schema:
+            type: string
+      description: The first keyframe after the specified moment as an MP4 file
+  tags:
+    - image

@@ -1,0 +1,44 @@
+allOf:
+- type: object
+  properties:
+    event:
+      type: string
+      description: External config is not valid.
+    reason:
+      description: Reason of the error.
+      type: string
+      oneOf:
+        - const: validation_error
+          description: New configuration does not match reference.
+        - const: network_error
+          description: Streamer could not get reply from the configuration server.
+        - const: malformed_json
+          description: Configuration server returned an malformed json body.
+        - const: invalid_request
+          description: Configuration server received an invalid request, e.g. required headers is missing or invalid authorization.
+        - const: unknown
+          description: Configuration server returned an error for an unknown reason.
+    while:
+      description: Conditions of the error occurrence.
+      type: string
+      nullable: true
+      oneOf:
+        - const: refresh
+          description: Configuration server returned an error while while performing a background batch refresh.
+        - const: request
+          description: Configuration server returned an error while while requesting a stream configuration for the first time.
+    code:
+      nullable: true
+      type: integer
+      description: HTTP response code
+    error:
+      type: string
+      nullable: true
+      description: Error description (optional)
+      example: invalid_authorization
+    detail:
+      type: string
+      nullable: true
+      description: Detailed error description (optional)
+- $ref: '../../schemas.yml#/event_default'
+

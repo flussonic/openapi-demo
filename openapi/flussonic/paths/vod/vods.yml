@@ -1,0 +1,18 @@
+get:
+  operationId: vods_list
+  summary: List VOD locations
+  description: |
+    This method allows to get the list of all VOD locations configured in Flussonic.
+    VOD location is a virtual filepath used to place files for VOD (Video on Demand) broadcasting.
+  externalDocs:
+    description: "Find more information here."
+    url: https://flussonic.com/doc/vod-file-broadcasting/
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/vods_list'
+      description: Response
+  tags:
+  - vod

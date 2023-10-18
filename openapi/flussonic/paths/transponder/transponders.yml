@@ -1,0 +1,52 @@
+get:
+  description: Fetch the multiplexers list.
+  operationId: transponders_list
+  parameters:
+  - name: format
+    description: This parameter is used instead of the Accept header to select of non-JSON response content format.
+    in: query
+    required: false
+    schema:
+      type: string
+      oneOf:
+        - title: Openmetrics
+          const: openmetrics
+          description: The openmetrics-text content format will be used in response.
+      example: openmetrics
+  - name: Accept
+    description: |
+      Ask for 'application/openmetrics-text' to get response with openmetrics-text content.
+      Ask for 'text/plain' to get response with text content; applicable only for text view of Prometheus openmetrics and can be used only with appropriate 'format' option.
+      By default it will be `application/json`.
+    in: header
+    schema:
+      type: string
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/transponders_list'
+        application/openmetrics-text:
+          schema:
+            type: string
+            description: |
+              Responses content format used for Prometheus application.
+              Additional information about it can be found at:
+              - https://github.com/Prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md#openmetrics-text-format
+              - https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md
+            examples:
+              default:
+                summary: 'General example'
+                description: The example describes the rule how the response string forms. 
+                value: 'metric{label="value"} VALUE'
+              stuffing:
+                value: 'pusher_stuffing{server_id="123e4567-e89b-12d3-a456-426614174000",id=1,name="multiplexer"} 128'
+        text/plain:
+          schema:
+            type: string
+            description: Responses content format used for receiving openmetrics for Prometheus application as a text.
+      description: Response
+  summary: Get multiplexers
+  tags:
+  - multiplexer

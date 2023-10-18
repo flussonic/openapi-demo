@@ -1,0 +1,24 @@
+allOf:
+- $ref: ../../../schemas.yml#/episode_base
+- type: object
+  properties:
+    episode_type:
+      type: string
+      description: Vehicle is detected
+      const: vehicle
+    detections:
+      type: array
+      description: Detections associated with this episode
+      items:
+        oneOf:
+          - $ref: ../../../schemas.yml#/vision_detected_vehicle
+          - $ref: ../../../schemas.yml#/vision_detected_license_plate
+    vehicle_purpose:
+      allOf:
+      - $ref: ../../../schemas.yml#/vision_vehicle_purpose
+    license_plate_text:
+      allOf:
+        - $ref: ../../../schemas.yml#/vision_license_plate_text
+    license_plate_missing:
+      type: boolean
+      description: Indicates if no license plate is detected on this vehicle

@@ -1,0 +1,137 @@
+vision_inference_device:
+  $ref: ./schemas/vision/inference_device.yml
+
+vision_server_devices:
+  $ref: ./schemas/vision/server_devices.yml
+vision_device_info:
+  $ref: ./schemas/vision/device_info.yml
+vision_device_stats:
+  $ref: ./schemas/vision/device_stats.yml
+
+vision_process_result:
+  $ref: ./schemas/vision/process_result.yml
+
+
+vision_episodes_source:
+  $ref: ./schemas/vision/episodes_source.yml
+
+vision_metrics_generic:
+  $ref: ./schemas/vision/metrics_generic.yml
+vision_metrics_episode:
+  $ref: ./schemas/vision/metrics_episode.yml
+vision_metrics_inference:
+  $ref: ./schemas/vision/metrics_inference.yml
+vision_metrics:
+  $ref: ./schemas/vision/vision_metrics.yml
+
+
+vision_stream:
+  $ref: ./schemas/vision/stream.yml
+
+vision_server_info:
+  $ref: ./schemas/vision/server_info.yml
+
+vision_config_vision:
+  $ref: ./schemas/vision/config/config_vision.yml
+vision_config_vision_env:
+  $ref: ./schemas/vision/config/config_vision_env.yml
+vision_config_identification:
+  $ref: ./schemas/vision/config/config_identification.yml
+vision_config_identification_env:
+  $ref: ./schemas/vision/config/config_identification_env.yml
+
+
+
+# exports from flussonic schema
+
+error_response:
+  $ref: ../../flussonic/components/schemas.yml#/error_response
+collection_response:
+  $ref: ../../flussonic/components/schemas.yml#/collection_response
+streams_list:
+  $ref: ../../flussonic/components/schemas.yml#/streams_list
+
+stream_config:
+  $ref: ../../flussonic/components/schemas.yml#/stream_config
+
+vision_confidence:
+  $ref: ../../flussonic/components/schemas.yml#/vision_confidence
+vision_region:
+  $ref: ../../flussonic/components/schemas.yml#/vision_region
+vision_box:
+  $ref: ../../flussonic/components/schemas.yml#/vision_box
+vision_point:
+  $ref: ../../flussonic/components/schemas.yml#/vision_point
+vision_keypoint:
+  $ref: ../../flussonic/components/schemas.yml#/vision_keypoint
+
+episode:
+  $ref: ../../flussonic/components/schemas.yml#/episode
+episode_base:
+  $ref: ../../flussonic/components/schemas.yml#/episode_base
+episodes_list:
+  $ref: ../../flussonic/components/schemas.yml#/episodes_list
+episode_type:
+  $ref: ../../flussonic/components/schemas.yml#/episode_type
+episode_close_reason:
+  $ref: ../../flussonic/components/schemas.yml#/episode_close_reason
+
+
+vision_episode_face:
+  $ref: ../../flussonic/components/schemas.yml#/vision_episode_face
+vision_episode_vehicle:
+  $ref: ../../flussonic/components/schemas.yml#/vision_episode_vehicle
+
+
+vision_detected_object_base:
+  $ref: ../../flussonic/components/schemas.yml#/vision_detected_object_base
+vision_detected_face:
+  $ref: ../../flussonic/components/schemas.yml#/vision_detected_face
+vision_detected_vehicle:
+  $ref: ../../flussonic/components/schemas.yml#/vision_detected_vehicle
+vision_detected_license_plate:
+  $ref: ../../flussonic/components/schemas.yml#/vision_detected_license_plate
+
+vision_face_attributes:
+  $ref: ../../flussonic/components/schemas.yml#/vision_face_attributes
+vision_face_fingerprint:
+  $ref: ../../flussonic/components/schemas.yml#/vision_face_fingerprint
+
+vision_vehicle_attributes:
+  $ref: ../../flussonic/components/schemas.yml#/vision_vehicle_attributes
+vision_vehicle_purpose:
+  $ref: ../../flussonic/components/schemas.yml#/vision_vehicle_purpose
+
+vision_license_plate_attributes:
+  $ref: ../../flussonic/components/schemas.yml#/vision_license_plate_attributes
+vision_license_plate_text:
+  $ref: ../../flussonic/components/schemas.yml#/vision_license_plate_text
+
+
+vision_object_class:
+  $ref: ../../flussonic/components/schemas.yml#/vision_object_class
+vision_detector:
+  $ref: ../../flussonic/components/schemas.yml#/vision_detector
+vision_appearance:
+  $ref: ../../flussonic/components/schemas.yml#/vision_appearance
+
+vision_image_mimetype:
+  $ref: ../../flussonic/components/schemas.yml#/vision_image_mimetype
+vision_image_attributes:
+  $ref: ../../flussonic/components/schemas.yml#/vision_image_attributes
+
+
+vision_person:
+  $ref: ../../flussonic/components/schemas.yml#/vision_person
+vision_person_match:
+  $ref: ../../flussonic/components/schemas.yml#/vision_person_match
+vision_person_matches:
+  $ref: ../../flussonic/components/schemas.yml#/vision_person_matches
+vision_persons_list:
+  $ref: ../../flussonic/components/schemas.yml#/vision_persons_list
+vision_persons_match_list:
+  $ref: ../../flussonic/components/schemas.yml#/vision_persons_match_list
+
+
+# responses
+

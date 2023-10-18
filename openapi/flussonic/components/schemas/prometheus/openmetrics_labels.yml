@@ -1,0 +1,9 @@
+type: object
+properties:
+  server_id:
+    type: string
+    format: UUID
+    openmetrics_label: server_id
+    description: |
+      Unique server ID generated on a first start or license change.
+      Should not changing until running on the same hardware.

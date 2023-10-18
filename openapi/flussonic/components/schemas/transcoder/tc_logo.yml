@@ -1,0 +1,31 @@
+type: object
+properties:
+  path:
+    description: Path to the logo image.
+    nullable: true
+    type: string
+  x:
+    description: The offset of the logo position, in pixel, to the right or left to the center of the screen.
+    nullable: true
+    type: integer
+  y:
+    description: The offset of the logo position, in pixel, up or down to the center of the screen.
+    nullable: true
+    type: integer
+  position:
+    description: |
+      Position to place the logo.
+    nullable: true
+    oneOf:
+    - title: Top left
+      const: tl
+    - title: Top right
+      const: tr
+    - title: Bottom left
+      const: bl
+    - title: Bottom right
+      const: br
+    - title: Center
+      const: c
+    type: string
+

@@ -1,0 +1,64 @@
+parameters:
+- name: name
+  description: stream name
+  in: path
+  required: true
+  schema:
+    example: "1"
+    type: string
+  style: simple
+get:
+  operationId: stream_ptz_get
+  summary: Get current PTZ state
+  x-api-deny:
+  - watcher-core
+  description: |
+    Get current PTZ state
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/ptz_state'
+      description: PTZ state
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Camera doesn't support PTZ
+  tags:
+  - ptz
+
+# Here we use POST request instead of PUT, because this method doesn't
+# accept PTZ state, it accepts commands
+post:
+  operationId: stream_ptz_execute
+  summary: Execute a PTZ command
+  x-api-deny:
+  - watcher-core
+  description: |
+    Execute a PTZ command
+  requestBody:
+    description: PTZ command
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/ptz_command'
+  responses:
+    '204':
+      description: Command is being executed
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Camera cannot execute requested PTZ command
+    '404':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Camera doesn't support PTZ
+  tags:
+  - ptz

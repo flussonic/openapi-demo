@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      coders:
+        description: The list of coders.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/coder_config'

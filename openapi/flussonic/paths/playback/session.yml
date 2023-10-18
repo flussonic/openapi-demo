@@ -1,0 +1,36 @@
+put:
+  x-private: true
+  operationId: session_save
+  summary: Session update
+  description: |
+    This method saves metrics for play and publish sessions.
+
+    At this moment sessions works only to `type=play` and `type=publish` however later
+    we may add additional sessions like `push` or `ingest`
+  parameters:
+  - name: name
+    in: path
+    description: Media name
+    required: true
+    schema:
+      type: string
+      example: clock
+  - name: id
+    description: Session ID obtained from X-Sid returned
+    in: path
+    required: true
+    schema:
+      example: UUID
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/session'
+    description: Playload of session_metrics
+  responses:
+    '204':
+      description: Accepted
+  tags:
+  - session

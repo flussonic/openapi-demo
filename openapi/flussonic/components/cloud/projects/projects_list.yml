@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      projects:
+        items:
+          $ref: '../../schemas.yml#/cloud_project'
+        type: array
+        description: List of fetched according to query parameters projects

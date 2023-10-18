@@ -1,0 +1,59 @@
+type: object
+properties:
+  candidates:
+    description: |
+      ICE candidates for delivering content. 
+      ICE candidate is a part of SDP that contains information about the network connection.
+      A peer should check all of them to understand, which of them is working.
+    externalDocs:
+      description: Read more about ICE candidates
+      url: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity#ice_candidates
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/webrtc_ice_candidate'
+
+  ice_username:
+    description: |
+      ICE username that uniquely identifies a single ICE interaction session.
+      It is specified in the `a=ice-ufrag:` attribute.
+    type: string
+    nullable: true
+    externalDocs:
+      description: Find more information here.
+      url: https://datatracker.ietf.org/doc/html/rfc5245
+  ice_password:
+    description: |
+      ICE password that uniquely identifies a single ICE interaction session.
+      It is specified in the `a=ice-pwd:` attribute.
+    type: string
+    nullable: true
+    externalDocs:
+      description: ICE candidates
+      url: https://datatracker.ietf.org/doc/html/rfc5245
+
+  fingerprint:
+    description: |
+      ICE fingerprint. 
+      This attribute identifies the certificate that will be presented for the TLS session.
+    type: string
+    nullable: true
+    externalDocs:
+      description: DTLS Connection fingerprint
+      url: https://datatracker.ietf.org/doc/html/rfc4572
+  fingerprint_digest:
+    description: ICE fingerprint digest method. Usually, `sha-256`.
+    type: string
+    enum:
+      - sha256
+    nullable: true
+
+  tracks:
+    description: |
+      List of the objects in Flussonic structure that are used to built media parts of SDP (starting with `m` command).
+      Here we call them tracks, because of Flussonic naming.
+    type: array
+    items:
+      allOf:
+      - $ref: '../../schemas.yml#/webrtc_sdp_track'
+    default: []

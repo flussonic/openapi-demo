@@ -1,0 +1,21 @@
+type: object
+properties:
+  http_port:
+    description: Port that will be used for listening for HTTP requests.
+    type: integer
+    format: network_port
+  database_url:
+    description: DB connection string.
+    type: string
+    nullable: true
+  episode_sources:
+    description: List of sources of episode events to be enriched with person identification
+    type: array
+    items:
+      $ref: ../../schemas.yml#/vision_episodes_source
+  central_url:
+    type: string
+    format: url
+    nullable: true
+    description: Specify stream config backend (Central)
+    example: 'http://central.example.com/'

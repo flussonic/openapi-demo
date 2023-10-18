@@ -1,0 +1,19 @@
+type: object
+required:
+- group
+- start
+- stop
+properties:
+  group:
+    type: string
+    title: Mute
+    const: mute
+    description: Mute audio on interval [start, stop]
+  start:
+    description: Filter start time
+    type: integer
+    format: milliseconds
+  stop:
+    description: Filter end time
+    type: integer
+    format: milliseconds

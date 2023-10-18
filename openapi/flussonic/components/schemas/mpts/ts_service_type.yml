@@ -1,0 +1,31 @@
+anyOf:
+  - type: integer
+  - type: string
+    enum:
+    - none
+    - digital_tv
+    - digital_radio
+    - teletext
+    - nvod_reference
+    - nvod_shifted
+    - mosaic
+    - fm_radio
+    - dvb_srm
+    - digital_radio_aac
+    - mosaic_avc
+    - data
+    - common_interface
+    - rcs_map
+    - rcs_fls
+    - dvb_mhp
+    - digital_tv_mpeg2_hd
+    - digital_tv_avc_sd
+    - nvod_shifted_avc_sd
+    - nvod_reference_avc_sd
+    - digital_tv_avc_hd
+    - digital_tv_avc_stereo_hd
+    - nvod_shifted_avc_stereo_hd
+    - nvod_reference_avc_stereo_hd
+    - digital_tv_hevc
+    - digital_tv_hevc_uhd
+

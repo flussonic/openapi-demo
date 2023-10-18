@@ -1,0 +1,15 @@
+get:
+  operationId: auth_backends_list
+  summary: List auth backends
+  description: This method allows to get the list of all authorization backends configured in Flussonic.
+  x-api-deny:
+  - watcher-core
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/auth_backends_list'
+      description: Response
+  tags:
+  - auth

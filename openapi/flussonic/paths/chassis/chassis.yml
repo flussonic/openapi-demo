@@ -1,0 +1,38 @@
+get:
+  operationId: chassis_get
+  description: Get chassis config.
+  summary: Get chassis config
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_config'
+      description: Returns chassis config
+  tags:
+  - chassis
+put:
+  x-private: true
+  operationId: chassis_save
+  summary: Save chassis config
+  description: Partial chassis configuration
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/chassis_config'
+  responses:
+    '200':
+      description: Updated chassis config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/chassis_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Specified default interface not found or not configured
+  tags:
+  - chassis

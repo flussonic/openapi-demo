@@ -1,0 +1,74 @@
+get:
+  description: Method allows to fetch single cache
+  operationId: cache_get
+  parameters:
+  - description: cache name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cache_config'
+      description: Whole cache
+  summary: Get the cache
+  tags:
+  - cache
+put:
+  description: Create or update cache
+  operationId: cache_save
+  parameters:
+  - description: cache name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cache_config'
+    description: Partial cache configuration
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cache_config'
+      description: Updated cache
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  summary: Save cache
+  tags:
+  - cache
+delete:
+  description: Delete the cache by its name
+  operationId: cache_delete
+  parameters:
+  - description: cache name
+    in: path
+    name: name
+    required: true
+    schema:
+      example: abc
+      type: string
+    style: simple
+  responses:
+    '204':
+      description: Deleted
+  summary: Delete the cache
+  tags:
+  - cache

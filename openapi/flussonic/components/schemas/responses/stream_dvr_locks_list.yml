@@ -1,0 +1,9 @@
+allOf:
+  - $ref: '../../schemas.yml#/collection_response'
+  - type: object
+    properties:
+      locks:
+        description: List of locked DVR ranges.
+        type: array
+        items:
+          $ref: '../../schemas.yml#/dvr_range'

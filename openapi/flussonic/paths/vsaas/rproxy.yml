@@ -1,0 +1,46 @@
+get:
+  operationId: rproxy_get
+  description: Get rproxy configuration.
+  summary: Get rproxy
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/rproxy_config'
+      description: Returns rproxy config
+  tags:
+  - vsaas
+put:
+  operationId: rproxy_save
+  description: Update rproxy configuration.
+  summary: Save rproxy
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/rproxy_config'
+  responses:
+    '200':
+      description: Updated rproxy config
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/rproxy_config'
+    '400':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/error_response'
+      description: Couldn't save
+  tags:
+  - vsaas
+delete:
+  operationId: rproxy_delete
+  description: Delete rproxy configuration.
+  summary: Delete rproxy
+  responses:
+    '204':
+      description: Deleted rproxy config
+  tags:
+  - vsaas

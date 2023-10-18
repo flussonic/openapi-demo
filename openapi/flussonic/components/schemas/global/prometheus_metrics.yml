@@ -1,0 +1,6 @@
+allOf:
+- $ref: '../../schemas.yml#/server_stats_streamer'
+- $ref: '../../schemas.yml#/server_stats_network'
+# - $ref: '../../schemas.yml#/prometheus_streams_metrics'
+# - $ref: '../../schemas.yml#/prometheus_udp_pusher_metrics'
+

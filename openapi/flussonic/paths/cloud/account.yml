@@ -1,0 +1,57 @@
+get:
+  description: Method allows to fetch single account
+  operationId: account_get
+  summary: Get the account
+  parameters:
+  - name: account_id
+    description: Account Id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_account'
+      description: Whole account
+  tags:
+  - accounts
+put:
+  description: Method allows to upsert account
+  operationId: account_save
+  summary: Create or update account
+  parameters:
+  - name: account_id
+    description: Account Id
+    in: path
+    required: true
+    schema:
+      type: integer
+      format: snowflake_id
+      example: 6902558627475886087
+    style: simple
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yml#/cloud_account'
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_account'
+      description: Created account
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yml#/cloud_account'
+      description: Updated account
+  tags:
+  - accounts
